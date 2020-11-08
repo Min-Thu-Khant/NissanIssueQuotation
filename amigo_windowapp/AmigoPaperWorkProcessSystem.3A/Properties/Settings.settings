@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AmigoPaperWorkProcessSystem._3A.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ImportBankData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://ncs-srv80:50000/AmigoProcessManagement/opt_3A.asmx/do_3A</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

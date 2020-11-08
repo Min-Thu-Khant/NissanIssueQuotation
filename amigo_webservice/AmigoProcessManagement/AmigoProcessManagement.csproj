@@ -1,0 +1,325 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{216EAA83-E6DF-442C-86B5-9A33ECBCC3E4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AmigoProcessManagement</RootNamespace>
+    <AssemblyName>AmigoProcessManagement</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DotNetZip, Version=1.14.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.14.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Newtonsoft.Json.DLL</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.8.40, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.10.10.0\lib\net40\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=6.10.0.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.10.10.0\lib\net40\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.XLS, Version=10.10.1.0, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.XLS.10.10.0\lib\net40\Spire.XLS.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Jimugo\opt_ClientCertificateList.asmx" />
+    <Content Include="Jimugo\opt_CompanyCodeList.asmx" />
+    <Content Include="Jimugo\opt_IssueQuotation.asmx" />
+    <Content Include="Jimugo\opt_jimugo.asmx" />
+    <Content Include="Jimugo\opt_PurchaseOrder.asmx" />
+    <Content Include="Jimugo\opt_RegisterCompleteNotificationSending.asmx" />
+    <Content Include="Jimugo\opt_UsageApplicationList.asmx" />
+    <Content Include="Jimugo\opt_UsageChargeMaster.asmx" />
+    <Content Include="Jimugo\opt_UsageInfoRegistrationList.asmx" />
+    <Content Include="opt_CheckLogin.asmx" />
+    <Content Include="default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="opt_38.asmx" />
+    <Content Include="opt_37.asmx" />
+    <Content Include="opt_3B.asmx" />
+    <Content Include="opt_31.asmx" />
+    <Content Include="opt_32.asmx" />
+    <Content Include="opt_33.asmx" />
+    <Content Include="opt_34.asmx" />
+    <Content Include="opt_35.asmx" />
+    <Content Include="opt_36.asmx" />
+    <Content Include="opt_3A.asmx" />
+    <Content Include="Templates\Mail\CTS010_CompanyCode.txt" />
+    <Content Include="Templates\Mail\CTS020_GdChecked.txt" />
+    <Content Include="Templates\Mail\CTS020_GdCheckReq.txt" />
+    <Content Include="Templates\Mail\CTS040_SendForms.txt" />
+    <Content Include="Templates\Mail\CTS050_SystemRegistrationReq.txt" />
+    <Content Include="Templates\Mail\CTS060_CompletionNoticePW.txt" />
+    <Content Include="Templates\Mail\CTS070_RegOfUsageInfo.txt" />
+    <Content Include="Templates\Mail\CTS080_ClientCertificate.txt" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\Controller31.cs" />
+    <Compile Include="Controller\Controller32.cs" />
+    <Compile Include="Controller\Controller33.cs" />
+    <Compile Include="Controller\Controller34.cs" />
+    <Compile Include="Controller\Controller35.cs" />
+    <Compile Include="Controller\Controller36.cs" />
+    <Compile Include="Controller\Controller37.cs" />
+    <Compile Include="Controller\Jimugo\ControllerClientCertificateList.cs" />
+    <Compile Include="Controller\Jimugo\ControllerCompanyCodeList.cs" />
+    <Compile Include="Controller\Jimugo\ControllerEDICandicate.cs" />
+    <Compile Include="Controller\Jimugo\ControllerIssueQuotation.cs" />
+    <Compile Include="Controller\Jimugo\ControllerJimugo.cs" />
+    <Compile Include="Controller\Jimugo\ControllerJimugoMenu.cs" />
+    <Compile Include="Controller\Jimugo\ControllerPurchaseOrder.cs" />
+    <Compile Include="Controller\Jimugo\ControllerRegisterCompleteNotificationSending.cs" />
+    <Compile Include="Controller\Jimugo\ControllerUsageApplicationList.cs" />
+    <Compile Include="Controller\Jimugo\ControllerUsageChargeMaster.cs" />
+    <Compile Include="Controller\Jimugo\ControllerUsageInfoRegistrationList.cs" />
+    <Compile Include="Jimugo\opt_ClientCertificateList.asmx.cs">
+      <DependentUpon>opt_ClientCertificateList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_CompanyCodeList.asmx.cs">
+      <DependentUpon>opt_CompanyCodeList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_IssueQuotation.asmx.cs">
+      <DependentUpon>opt_IssueQuotation.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_jimugo.asmx.cs">
+      <DependentUpon>opt_jimugo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_PurchaseOrder.asmx.cs">
+      <DependentUpon>opt_PurchaseOrder.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_RegisterCompleteNotificationSending.asmx.cs">
+      <DependentUpon>opt_RegisterCompleteNotificationSending.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_UsageApplicationList.asmx.cs">
+      <DependentUpon>opt_UsageApplicationList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_UsageChargeMaster.asmx.cs">
+      <DependentUpon>opt_UsageChargeMaster.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_UsageInfoRegistrationList.asmx.cs">
+      <DependentUpon>opt_UsageInfoRegistrationList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_CheckLogin.asmx.cs">
+      <DependentUpon>opt_CheckLogin.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controller\Controller38.cs" />
+    <Compile Include="Controller\Controller3A.cs" />
+    <Compile Include="Controller\Controller3B.cs" />
+    <Compile Include="Controller\ControllerCheckIn.cs" />
+    <Compile Include="Properties\Jimugo.Messages.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Jimugo.Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Utility\Crypto.cs" />
+    <Compile Include="Utility\Jimugo.Messages.cs" />
+    <Compile Include="Utility\Mail.cs" />
+    <Compile Include="Utility\Meta.cs" />
+    <Compile Include="Utility\MetaResponse.cs" />
+    <Compile Include="Utility\Response.cs" />
+    <Compile Include="Utility\ResponseUtility.cs" />
+    <Compile Include="Utility\Utility_Component.cs" />
+    <Compile Include="default.aspx.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="default.aspx.designer.cs">
+      <DependentUpon>default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="opt_38.asmx.cs">
+      <DependentUpon>opt_38.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_37.asmx.cs">
+      <DependentUpon>opt_37.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_3B.asmx.cs">
+      <DependentUpon>opt_3B.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_31.asmx.cs">
+      <DependentUpon>opt_31.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_32.asmx.cs">
+      <DependentUpon>opt_32.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_33.asmx.cs">
+      <DependentUpon>opt_33.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_34.asmx.cs">
+      <DependentUpon>opt_34.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_35.asmx.cs">
+      <DependentUpon>opt_35.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_36.asmx.cs">
+      <DependentUpon>opt_36.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="opt_3A.asmx.cs">
+      <DependentUpon>opt_3A.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Templates\Excel\CompletionNotice_Template.xlsx" />
+    <Content Include="Templates\Excel\InitialQuotation_Template.xlsx" />
+    <Content Include="Templates\Excel\MonthlyQuotation_Template.xlsx" />
+    <Content Include="Templates\Excel\PurchaseOrder_Template.xlsx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Storage\PDF\CompleteNoti\Save\" />
+    <Folder Include="Storage\PDF\CompleteNoti\Temp\" />
+    <Folder Include="Storage\PDF\PurchaseOrder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL_Amigo\DAL_Amigo.csproj">
+      <Project>{70d44f10-c29b-4dc6-92ab-a518e06eb8ab}</Project>
+      <Name>DAL_Amigo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Jimugo.Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Jimugo.Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>6077</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:6077/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BatchProcessInp.w0003" xml:space="preserve">
+    <value>入力フォルダにデータがありません</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="check_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\check-all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ChkUmiCmp.i0006" xml:space="preserve">
+    <value>返金処理が完了しました。</value>
+  </data>
+  <data name="ChkUmiCnf.i0005" xml:space="preserve">
+    <value>返金処理を実行してもよいですか。</value>
+  </data>
+  <data name="ChkUmiInp.w0001" xml:space="preserve">
+    <value>引当日はYYYY/MM/DDで入力して下さい。</value>
+  </data>
+  <data name="ChkUmiInp.w0002" xml:space="preserve">
+    <value>引当日を入力して下さい。</value>
+  </data>
+  <data name="ChkUmiInp.w0003" xml:space="preserve">
+    <value>引当日(FROM)を入力して下さい。</value>
+  </data>
+  <data name="ChkUmiInp.w0004" xml:space="preserve">
+    <value>引当日(FROM)と引当日(TO)を確認して下さい。</value>
+  </data>
+  <data name="ChkUmiInp.w0007" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="ChkUmiInp.w0008" xml:space="preserve">
+    <value>複数行が選択されています。1行のみを選択して下さい。</value>
+  </data>
+  <data name="CnfAmiCmp.i0001" xml:space="preserve">
+    <value>Amigo外データに移動しました。</value>
+  </data>
+  <data name="CnfAmiInp.w0004" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="CnfAmiInp.w0005" xml:space="preserve">
+    <value>複数行が選択されています。1行のみを選択して下さい。</value>
+  </data>
+  <data name="CnfAmiRpt.w0002" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="CnfAmiRpt.w0003" xml:space="preserve">
+    <value>データが0件の行が選択されています。</value>
+  </data>
+  <data name="CnfBtiInp.w0001" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0002" xml:space="preserve">
+    <value>複数行が選択されています。1行のみを選択して下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0003" xml:space="preserve">
+    <value>取込日はYYYY/MM/DDで入力して下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0004" xml:space="preserve">
+    <value>取込日を入力して下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0005" xml:space="preserve">
+    <value>取込日(FROM)を入力して下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0006" xml:space="preserve">
+    <value>取込日(FROM)と取込日(TO)を確認して下さい。</value>
+  </data>
+  <data name="CnfBtiInp.w0008" xml:space="preserve">
+    <value>データが0件の行が選択されています。</value>
+  </data>
+  <data name="CnfBtiRpt.w0007" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="CnfCmpInp.w0001" xml:space="preserve">
+    <value>引当日はYYYY/MM/DDで入力して下さい。</value>
+  </data>
+  <data name="CnfCmpInp.w0002" xml:space="preserve">
+    <value>引当日を入力して下さい。</value>
+  </data>
+  <data name="CnfCmpInp.w0003" xml:space="preserve">
+    <value>引当日(FROM)を入力して下さい。</value>
+  </data>
+  <data name="CnfCmpInp.w0004" xml:space="preserve">
+    <value>引当日(FROM)と引当日(TO)を確認して下さい。</value>
+  </data>
+  <data name="CnfCmpRpt.w0005" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="CnfDtlCmp.i0005" xml:space="preserve">
+    <value>経理CSVの出力が完了しました。</value>
+  </data>
+  <data name="CnfDtlCmp.i0007" xml:space="preserve">
+    <value>引当をキャンセルしました。</value>
+  </data>
+  <data name="CnfDtlInp.w0001" xml:space="preserve">
+    <value>引当日はYYYY/MM/DDで入力して下さい。</value>
+  </data>
+  <data name="CnfDtlInp.w0002" xml:space="preserve">
+    <value>引当日を入力して下さい。</value>
+  </data>
+  <data name="CnfDtlInp.w0003" xml:space="preserve">
+    <value>引当日(FROM)を入力して下さい。</value>
+  </data>
+  <data name="CnfDtlInp.w0004" xml:space="preserve">
+    <value>引当日(FROM)と引当日(TO)を確認して下さい。</value>
+  </data>
+  <data name="CnfDtlInp.w0006" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="CnfDtlRpt.w0008" xml:space="preserve">
+    <value>ダウンロードするデータが見つかりません。</value>
+  </data>
+  <data name="CnfNoaCmp.i0005" xml:space="preserve">
+    <value>Amigoデータに移動しました。</value>
+  </data>
+  <data name="CnfNoaInp.w0001" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="CnfNoaInp.w0002" xml:space="preserve">
+    <value>複数行が選択されています。1行のみを選択して下さい。</value>
+  </data>
+  <data name="CnfNoaRpt.w0003" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="CnfNoaRpt.w0004" xml:space="preserve">
+    <value>顧客マスタに取引先会社名が存在しません。</value>
+  </data>
+  <data name="CnfNoaRpt.w0006" xml:space="preserve">
+    <value>データが0件の行が選択されています。</value>
+  </data>
+  <data name="CnfNoaRpt.w0007" xml:space="preserve">
+    <value>のうちだけが移動されます。</value>
+  </data>
+  <data name="DpMenuInp.w0002" xml:space="preserve">
+    <value>ユーザID又はパスワードが正しくありません</value>
+  </data>
+  <data name="DpMenuInp.w0003" xml:space="preserve">
+    <value>User-ID / Password を入力して下さい。</value>
+  </data>
+  <data name="DpMenuRpt.w0001" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="GnmsgRpt.i0005" xml:space="preserve">
+    <value>プログラムは既に実行されています。</value>
+  </data>
+  <data name="GnmsgRpt.s0001" xml:space="preserve">
+    <value>問題が発生しました。</value>
+  </data>
+  <data name="GnmsgRpt.s0002" xml:space="preserve">
+    <value>サーバー接続タイムアウト。</value>
+  </data>
+  <data name="GnmsgRpt.s0003" xml:space="preserve">
+    <value>インターネットに接続されていません。</value>
+  </data>
+  <data name="GnmsgRpt.s0004" xml:space="preserve">
+    <value>プログラムが見つかりません。</value>
+  </data>
+  <data name="ImpDepCmp.i0003" xml:space="preserve">
+    <value>銀行振込情報取込処理が完了しました。</value>
+  </data>
+  <data name="ImpDepRpt.w0001" xml:space="preserve">
+    <value>振込入金明細が存在しません。</value>
+  </data>
+  <data name="ImpDepRpt.w0002" xml:space="preserve">
+    <value>振込入金明細の移動に失敗しました。</value>
+  </data>
+  <data name="MtcInvCmp.i0003" xml:space="preserve">
+    <value>突合せ処理が完了しました。</value>
+  </data>
+  <data name="RstDepCmp.i0003" xml:space="preserve">
+    <value>登録が完了しました。</value>
+  </data>
+  <data name="RstDepCmp.i0004" xml:space="preserve">
+    <value>を出力しました。</value>
+  </data>
+  <data name="RstDepInp.w0001" xml:space="preserve">
+    <value>検索条件を入力して下さい。</value>
+  </data>
+  <data name="RstDepInp.w0002" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="RstDepInp.w0005" xml:space="preserve">
+    <value>入力する年月は1か所にして下さい。</value>
+  </data>
+  <data name="RstDepInp.w0006" xml:space="preserve">
+    <value>必ず1か所の年月を入力して下さい。</value>
+  </data>
+  <data name="RstDepInp.w0008" xml:space="preserve">
+    <value>日付フィールドをYYYY / MMの形式で入力してください。</value>
+  </data>
+  <data name="RstDepInp.w0011" xml:space="preserve">
+    <value>引当日はYYYY/MM/DDで入力して下さい。</value>
+  </data>
+  <data name="RstDepInp.w0016" xml:space="preserve">
+    <value>複数行が選択されています。1行のみを選択して下さい。</value>
+  </data>
+  <data name="RstDepRpt.i0013" xml:space="preserve">
+    <value>このデータは手動引当出来ません。</value>
+  </data>
+  <data name="RstDepRpt.i0014" xml:space="preserve">
+    <value>このデータは引当完了出来ません。</value>
+  </data>
+  <data name="RstDepRpt.i0015" xml:space="preserve">
+    <value>このデータは引当完了の取消は出来ません。</value>
+  </data>
+  <data name="RstDepRpt.w0009" xml:space="preserve">
+    <value>ダウンロードするデータが見つかりません。</value>
+  </data>
+  <data name="RstDepRpt.w0010" xml:space="preserve">
+    <value>有効なデータを入力してください。</value>
+  </data>
+  <data name="uncheck_all" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\uncheck-all.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="UpdCumCmp.i0003" xml:space="preserve">
+    <value>変更が完了しました。</value>
+  </data>
+  <data name="UpdCumInp.w0001" xml:space="preserve">
+    <value>検索条件を入力して下さい。</value>
+  </data>
+  <data name="UpdCumInp.w0002" xml:space="preserve">
+    <value>行選択をして下さい。</value>
+  </data>
+  <data name="UpdCumRpt.w0004" xml:space="preserve">
+    <value>既に起動中です。</value>
+  </data>
+  <data name="UpdCumRpt.w0005" xml:space="preserve">
+    <value>有効なデータを入力してください。</value>
+  </data>
+  <data name="UpdCumRpt.w0006" xml:space="preserve">
+    <value>銀行口座名が一意ではありません。</value>
+  </data>
+  <data name="RstDepInp.w0012" xml:space="preserve">
+    <value>検索日付を正しく入力して下さい。</value>
+  </data>
+</root>

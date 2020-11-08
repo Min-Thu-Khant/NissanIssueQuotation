@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AmigoPapaerWorkProcessSystem.Core.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="InputFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\\Amigo\\Transfer_receipt_details\\Input</Value>
+    </Setting>
+    <Setting Name="ProcessedFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\\Amigo\\Transfer_receipt_details\\Input\\Processed</Value>
+    </Setting>
+    <Setting Name="CheckLogIn" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_CheckLogin.asmx/CheckAuth</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

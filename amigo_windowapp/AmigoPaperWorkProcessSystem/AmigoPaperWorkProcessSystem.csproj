@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BFB39145-9439-4B55-A3CF-26ACAD4A6E6D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>AmigoPaperWorkProcessSystem</RootNamespace>
+    <AssemblyName>AmigoPaperWorkProcessSystem</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>preview</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.0.5022.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.1.0\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Design, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="MetroFramework.Fonts, Version=1.4.0.0, Culture=neutral, PublicKeyToken=5f91a84759bf584a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MetroModernUI.1.4.0.0\lib\net\MetroFramework.Fonts.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.46, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.4.1.0\lib\net46\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=5.1.20.20046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.4.1.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.PdfViewer.Forms, Version=4.1.8.30046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.PDFViewer.4.1.0\lib\net46\Spire.PdfViewer.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\frm31Controller.cs" />
+    <Compile Include="Controllers\frm32Controller.cs" />
+    <Compile Include="Controllers\frm33Controller.cs" />
+    <Compile Include="Controllers\frm34Controller.cs" />
+    <Compile Include="Controllers\frm35Controller.cs" />
+    <Compile Include="Controllers\frm36Controller.cs" />
+    <Compile Include="Controllers\frm37Controller.cs" />
+    <Compile Include="Controllers\frm38Controller.cs" />
+    <Compile Include="Controllers\Jimugo\frmClientCertificateListController.cs" />
+    <Compile Include="Controllers\Jimugo\frmCompanyCodeListController.cs" />
+    <Compile Include="Controllers\Jimugo\frmJimugoMenuController.cs" />
+    <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssueQuotationController.cs" />
+    <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssuQuotationPreviewController.cs" />
+    <Compile Include="Controllers\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationPreviewController.cs" />
+    <Compile Include="Controllers\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationController.cs" />
+    <Compile Include="Controllers\Jimugo\frmUsageChargeMasterController.cs" />
+    <Compile Include="Controllers\Jimugo\PurchaseOrder\frmPruchaseOrderController.cs" />
+    <Compile Include="Controllers\Jimugo\PurchaseOrder\frmPurchaseOrderPreviewController.cs" />
+    <Compile Include="Controllers\Jimugo\frmUsageApplicationListController.cs" />
+    <Compile Include="Controllers\Jimugo\frmUsageInfoRegistrationListController.cs" />
+    <Compile Include="Forms\frmMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMenu.Designer.cs">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm31.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm31.Designer.cs">
+      <DependentUpon>frm31.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm32.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm32.Designer.cs">
+      <DependentUpon>frm32.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm33.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm33.Designer.cs">
+      <DependentUpon>frm33.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm34.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm34.Designer.cs">
+      <DependentUpon>frm34.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm35.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm35.Designer.cs">
+      <DependentUpon>frm35.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm36.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm36.Designer.cs">
+      <DependentUpon>frm36.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm37.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm37.Designer.cs">
+      <DependentUpon>frm37.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frm38.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frm38.Designer.cs">
+      <DependentUpon>frm38.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmClientCertificateList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmClientCertificateList.designer.cs">
+      <DependentUpon>frmClientCertificateList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmCommonBatch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmCommonBatch.designer.cs">
+      <DependentUpon>frmCommonBatch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmCompanyCodeList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmCompanyCodeList.designer.cs">
+      <DependentUpon>frmCompanyCodeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmJimugo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmJimugo.designer.cs">
+      <DependentUpon>frmJimugo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmMailLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmMailLoading.designer.cs">
+      <DependentUpon>frmMailLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageChargeMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageChargeMaster.designer.cs">
+      <DependentUpon>frmUsageChargeMaster.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\IssueQuotation\frmIssueQuotation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\IssueQuotation\frmIssueQuotation.designer.cs">
+      <DependentUpon>frmIssueQuotation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\IssueQuotation\frmIssueQuotationPrevew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\IssueQuotation\frmIssueQuotationPrevew.designer.cs">
+      <DependentUpon>frmIssueQuotationPrevew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationPreview.designer.cs">
+      <DependentUpon>frmRegisterCompleteNotificationPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotification.designer.cs">
+      <DependentUpon>frmRegisterCompleteNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageApplicationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageApplicationList.designer.cs">
+      <DependentUpon>frmUsageApplicationList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageInfoRegistrationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmUsageInfoRegistrationList.designer.cs">
+      <DependentUpon>frmUsageInfoRegistrationList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrder.designer.cs">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrderPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrderPreview.designer.cs">
+      <DependentUpon>frmPurchaseOrderPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DisplayItemAsteriskLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UserControls\DisplayItemLabel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\DisplayItemLabel.designer.cs">
+      <DependentUpon>DisplayItemLabel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DisplayItemTextLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Forms\frmMenu.resx">
+      <DependentUpon>frmMenu.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm31.resx">
+      <DependentUpon>frm31.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm32.resx">
+      <DependentUpon>frm32.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm33.resx">
+      <DependentUpon>frm33.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm34.resx">
+      <DependentUpon>frm34.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm35.resx">
+      <DependentUpon>frm35.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm36.resx">
+      <DependentUpon>frm36.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm37.resx">
+      <DependentUpon>frm37.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frm38.resx">
+      <DependentUpon>frm38.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmClientCertificateList.resx">
+      <DependentUpon>frmClientCertificateList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmCommonBatch.resx">
+      <DependentUpon>frmCommonBatch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmCompanyCodeList.resx">
+      <DependentUpon>frmCompanyCodeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmJimugo.resx">
+      <DependentUpon>frmJimugo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmMailLoading.resx">
+      <DependentUpon>frmMailLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmUsageChargeMaster.resx">
+      <DependentUpon>frmUsageChargeMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\IssueQuotation\frmIssueQuotation.resx">
+      <DependentUpon>frmIssueQuotation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\IssueQuotation\frmIssueQuotationPrevew.resx">
+      <DependentUpon>frmIssueQuotationPrevew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationPreview.resx">
+      <DependentUpon>frmRegisterCompleteNotificationPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotification.resx">
+      <DependentUpon>frmRegisterCompleteNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmUsageApplicationList.resx">
+      <DependentUpon>frmUsageApplicationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmUsageInfoRegistrationList.resx">
+      <DependentUpon>frmUsageInfoRegistrationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrder.resx">
+      <DependentUpon>frmPurchaseOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\PruchaseOrder\frmPurchaseOrderPreview.resx">
+      <DependentUpon>frmPurchaseOrderPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\DisplayItemLabel.resx">
+      <DependentUpon>DisplayItemLabel.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AmigoPapaerWorkProcessSystem.Core\AmigoPaperWorkProcessSystem.Core.csproj">
+      <Project>{ce9581dd-fb85-4ad8-abc6-c62322056fab}</Project>
+      <Name>AmigoPaperWorkProcessSystem.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\left-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\right-arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\uncheck-all.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

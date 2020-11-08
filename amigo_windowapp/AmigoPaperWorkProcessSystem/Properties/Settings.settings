@@ -1,0 +1,177 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AmigoPaperWorkProcessSystem.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Theme" Type="MetroFramework.MetroThemeStyle" Scope="User">
+      <Value Profile="(Default)">Light</Value>
+    </Setting>
+    <Setting Name="Style" Type="MetroFramework.MetroColorStyle" Scope="User">
+      <Value Profile="(Default)">Silver</Value>
+    </Setting>
+    <Setting Name="GridHeaderColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">64, 64, 64</Value>
+    </Setting>
+    <Setting Name="GridHeaderFontColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Silver</Value>
+    </Setting>
+    <Setting Name="CustomerList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_38.asmx/getCustomerList?COMPANY_NAME=@COMPANY_NAME&amp;COMPANY_NAME_READING=@COMPANY_READING&amp;BILL_COMPANY_NAME=@BILL_COMPANY_NAME&amp;COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;ACCOUNT_NAME=@ACCOUNT_NAME</Value>
+    </Setting>
+    <Setting Name="CustomerUpdate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_38.asmx/UpdateCustomer</Value>
+    </Setting>
+    <Setting Name="GetBankTR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_31.asmx/ConfirmationOfTransfer?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+    </Setting>
+    <Setting Name="NonAmigo_BankTR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_33.asmx/ConfirmationOfTransfer_NonAmigo?strDTMID=@DTMID</Value>
+    </Setting>
+    <Setting Name="Amigo_BankTR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_32.asmx/ConfirmationOfTransfer_Amigo?strDTMID=@DTMID</Value>
+    </Setting>
+    <Setting Name="AmigoToNonAmigo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_32.asmx/ConvertAmigoToNonAmigo</Value>
+    </Setting>
+    <Setting Name="NonAmigoToAmigo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_33.asmx/ConvertNonAmigoToAmigo</Value>
+    </Setting>
+    <Setting Name="ConfirmOfComparisonResult" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_34.asmx/ConfirmOfComparisonResult?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+    </Setting>
+    <Setting Name="GetUnmatchInvoice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_36.asmx/GetUnmatchInvoice?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+    </Setting>
+    <Setting Name="GetMatchInvoice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/GetMatchInvoice?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+    </Setting>
+    <Setting Name="CancelAllocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/CancelAllocation</Value>
+    </Setting>
+    <Setting Name="RefundProcess" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_36.asmx/RefundProcess?SEQID=@SEQID</Value>
+    </Setting>
+    <Setting Name="GetDataForGrid37" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/GetDataFor37?TRANSACTION_TYPE=@TRANSACTION_TYPE&amp;FROM_YEAR_MONTH=@FROM_YEAR_MONTH&amp;TO_YEAR_MONTH=@TO_YEAR_MONTH&amp;FROM_STATUS_PLAN_DEPOSIT_YYMM=@FROM_STATUS_PLAN_DEPOSIT_YYMM&amp;TO_STATUS_PLAN_DEPOSIT_YYMM=@TO_STATUS_PLAN_DEPOSIT_YYMM&amp;FROM_STATUS_ACTUAL_DEPOSIT_DATE=@FROM_STATUS_ACTUAL_DEPOSIT_DATE&amp;TO_STATUS_ACTUAL_DEPOSIT_DATE=@TO_STATUS_ACTUAL_DEPOSIT_DATE&amp;DEPOSIT_RULE=@DEPOSIT_RULE&amp;WITH_OR_WITHOUT_PAYMENT=@WITH_OR_WITHOUT_PAYMENT&amp;BILL_SUPPLIER_NAME=@BILL_SUPPLIER_NAME</Value>
+    </Setting>
+    <Setting Name="UpdateInvoice" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/UpdateInvoice</Value>
+    </Setting>
+    <Setting Name="Get35_AccountingCSV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/GetAccountingCSV?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+    </Setting>
+    <Setting Name="Schedule_Payment" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/Scheduled_Payment?TRANSACTION_TYPE=@TRANSACTION_TYPE&amp;FROM_YEAR_MONTH=@FROM_YEAR_MONTH&amp;TO_YEAR_MONTH=@TO_YEAR_MONTH&amp;FROM_STATUS_PLAN_DEPOSIT_YYMM=@FROM_STATUS_PLAN_DEPOSIT_YYMM&amp;TO_STATUS_PLAN_DEPOSIT_YYMM=@TO_STATUS_PLAN_DEPOSIT_YYMM&amp;FROM_STATUS_ACTUAL_DEPOSIT_DATE=@FROM_STATUS_ACTUAL_DEPOSIT_DATE&amp;TO_STATUS_ACTUAL_DEPOSIT_DATE=@TO_STATUS_ACTUAL_DEPOSIT_DATE&amp;DEPOSIT_RULE=@DEPOSIT_RULE&amp;WITH_OR_WITHOUT_PAYMENT=@WITH_OR_WITHOUT_PAYMENT&amp;BILL_SUPPLIER_NAME=@BILL_SUPPLIER_NAME</Value>
+    </Setting>
+    <Setting Name="Account_Receivable" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/Account_Receivable?TRANSACTION_TYPE=@TRANSACTION_TYPE&amp;FROM_YEAR_MONTH=@FROM_YEAR_MONTH&amp;TO_YEAR_MONTH=@TO_YEAR_MONTH&amp;FROM_STATUS_PLAN_DEPOSIT_YYMM=@FROM_STATUS_PLAN_DEPOSIT_YYMM&amp;TO_STATUS_PLAN_DEPOSIT_YYMM=@TO_STATUS_PLAN_DEPOSIT_YYMM&amp;FROM_STATUS_ACTUAL_DEPOSIT_DATE=@FROM_STATUS_ACTUAL_DEPOSIT_DATE&amp;TO_STATUS_ACTUAL_DEPOSIT_DATE=@TO_STATUS_ACTUAL_DEPOSIT_DATE&amp;DEPOSIT_RULE=@DEPOSIT_RULE&amp;WITH_OR_WITHOUT_PAYMENT=@WITH_OR_WITHOUT_PAYMENT&amp;BILL_SUPPLIER_NAME=@BILL_SUPPLIER_NAME</Value>
+    </Setting>
+    <Setting Name="DefaultDimentions" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">1300, 640</Value>
+    </Setting>
+    <Setting Name="ManualAllocation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_3B.asmx/do_ManualAllocation?COMPANY_NO_BOX=@COMPANY_NO_BOX</Value>
+    </Setting>
+    <Setting Name="ManualAllocationComplete" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/AllocationManualCompletion?ALLOCATE=@ALLOCATE&amp;SEQ_NO=@SEQ_NO&amp;COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;YEAR_MONTH=@YEAR_MONTH&amp;RECEIPT_ALLOCATION_DATE=@RECEIPT_ALLOCATION_DATE&amp;INVOICE_ALLOCATION_DATE=@INVOICE_ALLOCATION_DATE</Value>
+    </Setting>
+    <Setting Name="getJimugoMenu" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_jimugo.asmx/getJimugoMenu</Value>
+    </Setting>
+    <Setting Name="JimugoBgColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">RoyalBlue</Value>
+    </Setting>
+    <Setting Name="jimugoForeColor" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="GetCompanyCodeList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CompanyCodeList.asmx/GetCompanyCodeList?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;COMPANY_NAME=@COMPANY_NAME&amp;EMAIL=@EMAIL&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="UpdateCompanyCodeList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CompanyCodeList.asmx/UpdateList</Value>
+    </Setting>
+    <Setting Name="GetPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CompanyCodeList.asmx/GetPassword</Value>
+    </Setting>
+    <Setting Name="SendMail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CompanyCodeList.asmx/SendMail</Value>
+    </Setting>
+    <Setting Name="GetUsageRegList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/getUsageInformationRegistrationList?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;COMPANY_NAME=@COMPANY_NAME&amp;EDI_ACCOUNT=@EDI_ACCOUNT&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="UpdateUsageRegList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/UpdateList</Value>
+    </Setting>
+    <Setting Name="SettingCompleteMail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/SettingCompleteMail</Value>
+    </Setting>
+    <Setting Name="GetIssueQuotationInitialData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/GetInitialData?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;REQ_SEQ=@REQ_SEQ</Value>
+    </Setting>
+    <Setting Name="jimugoFont" Type="System.Drawing.Font" Scope="User">
+      <Value Profile="(Default)">Meiryo UI, 8.25pt</Value>
+    </Setting>
+    <Setting Name="GetClientCertificateList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ClientCertificateList.asmx/GetClientCertificateList?FY=@FY&amp;COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;CLIENT_CERTIFICATE_NO=@CLIENT_CERTIFICATE_NO&amp;DISTRIBUTION_STATUS=@DISTRIBUTION_STATUS&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="UpdateClientCertificateList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ClientCertificateList.asmx/UpdateList</Value>
+    </Setting>
+    <Setting Name="SendMailClientCertificate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ClientCertificateList.asmx/SendMail</Value>
+    </Setting>
+    <Setting Name="GetEDICandidates" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/GetEDICandidates</Value>
+    </Setting>
+    <Setting Name="GetEDIAccountDetail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/ExtractEDIAutoInfo?COMPANY_NO_BOX=@COMPANY_NO_BOX</Value>
+    </Setting>
+    <Setting Name="GetCustomerMasterMaintenance" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetMaintenance?OFFSET=0&amp;LIMIT=30</Value>
+    </Setting>
+    <Setting Name="GetPurchaseOrdertem" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_PurchaseOrder.asmx/Search?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;REQ_SEQ=@REQ_SEQ</Value>
+    </Setting>
+    <Setting Name="SubmitPurchaseOrder" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_PurchaseOrder.asmx/SubmitOrderRegister</Value>
+    </Setting>
+    <Setting Name="GetUsageApplicationList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/Search?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;COMPANY_NAME=@COMPANY_NAME&amp;CLOSE_FLG=@CLOSE_FLG&amp;GD=@GD&amp;REQUEST_STATUS=@REQUEST_STATUS&amp;REQ_DATE_FROM=@REQ_DATE_FROM&amp;REQ_DATE_TO=@REQ_DATE_TO&amp;QUOTATION_DATE_FROM=@QUOTATION_DATE_FROM&amp;QUOTATION_DATE_TO=@QUOTATION_DATE_TO&amp;ORDER_DATE_FROM=@ORDER_DATE_FROM&amp;ORDER_DATE_TO=@ORDER_DATE_TO&amp;SYSTEM_SETTING_STATUS=@SYSTEM_SETTING_STATUS&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="UpdateUsageApplicationList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/Update</Value>
+    </Setting>
+    <Setting Name="UpdateApplicationCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/UpdateApplicationCancel</Value>
+    </Setting>
+    <Setting Name="UpdateConfirmationRequest" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/ConfirmationRequest</Value>
+    </Setting>
+    <Setting Name="UpdateConfirmationComplete" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/ConfirmationComplete</Value>
+    </Setting>
+    <Setting Name="GetSubProgramLists" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageApplicationList.asmx/GetSubProgramLists</Value>
+    </Setting>
+    <Setting Name="GetScreenDataNotificatoinSending" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_RegisterCompleteNotificationSending.asmx/Search?COMPANY_NO_BOX=@COMPANY_NO_BOX</Value>
+    </Setting>
+    <Setting Name="PreviewNotification" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_RegisterCompleteNotificationSending.asmx/PreviewProcessNotiSending</Value>
+    </Setting>
+    <Setting Name="UpdateUsageChargeMaster" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageChargeMaster.asmx/UpdateList</Value>
+    </Setting>
+    <Setting Name="GetUsageChargeMaster" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageChargeMaster.asmx/GetUsageChargeMasterList?CONTRACT_CODE=@CONTRACT_CODE&amp;CONTRACT_NAME=@CONTRACT_NAME&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="SendMailNotification" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_RegisterCompleteNotificationSending.asmx/SendMailNotification</Value>
+    </Setting>
+    <Setting Name="PreviewQuotation" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/DoPreview</Value>
+    </Setting>
+    <Setting Name="SendQuotationMail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/SendMailNotification</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

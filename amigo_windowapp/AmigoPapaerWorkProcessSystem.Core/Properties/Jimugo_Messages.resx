@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="E000WA001" xml:space="preserve">
+    <value>ユーザIDもしくはパスワードが正しくありません。</value>
+    <comment>The user ID or password is incorrect.</comment>
+  </data>
+  <data name="E000WA002" xml:space="preserve">
+    <value>ログイン失敗回数が上限に達しました。{0}分待ってから再度ログインしてください。</value>
+    <comment>The number of login failures has reached the upper limit. Please wait {0} minutes and then log in again.</comment>
+  </data>
+  <data name="E000WA003" xml:space="preserve">
+    <value>当システムに登録されていないユーザーIDです。\nユーザーIDが不明な場合は、\nお手数ですがサポートまでお問い合わせください。</value>
+    <comment>This is a user ID that is not registered in this system. \ nIf you don't know your user ID, \ ns sorry to trouble you, but please contact support.</comment>
+  </data>
+  <data name="E000WA004" xml:space="preserve">
+    <value>{0}は 8～100文字で設定してください。</value>
+    <comment>Set {0} with 8 to 100 characters.</comment>
+  </data>
+  <data name="E000WA005" xml:space="preserve">
+    <value>{0}は半角の英字・数字・記号で入力してください。</value>
+    <comment>Enter {0} in half-width letters, numbers, and symbols.</comment>
+  </data>
+  <data name="E000WA006" xml:space="preserve">
+    <value>ユーザーIDと同一のパスワードは設定できません。</value>
+    <comment>You cannot set the same password as the user ID.</comment>
+  </data>
+  <data name="E000WA007" xml:space="preserve">
+    <value>{0}に同じ文字を連続3回含めることはできません。</value>
+    <comment>{0} cannot contain the same character three times in a row.</comment>
+  </data>
+  <data name="E000WA008" xml:space="preserve">
+    <value>{0}は「アルファベット大文字」「アルファベット小文字」「数字」「記号」の4種類のうち、3種類を利用してください。</value>
+    <comment>For {0}, use 3 of the 4 types of "uppercase alphabet", "lowercase alphabet", "numbers", and "symbols".</comment>
+  </data>
+  <data name="E000WA009" xml:space="preserve">
+    <value>パスワードの有効期限が過ぎています。パスワードを変更してください。</value>
+    <comment>The password has expired. Please change your password.</comment>
+  </data>
+  <data name="E000WA010" xml:space="preserve">
+    <value>現在のパスワードが正しくありません。</value>
+    <comment>The current password is incorrect.</comment>
+  </data>
+  <data name="E000WA011" xml:space="preserve">
+    <value>初回のログインです。パスワードを変更してください。</value>
+    <comment>This is the first login. Please change your password.</comment>
+  </data>
+  <data name="E000WA012" xml:space="preserve">
+    <value>パスワードが確認用欄と一致しません。</value>
+    <comment>The password does not match the confirmation field.</comment>
+  </data>
+  <data name="E000WA013" xml:space="preserve">
+    <value>現在のパスワードと同じパスワードには変更できません。</value>
+    <comment>It cannot be changed to the same password as the current password.</comment>
+  </data>
+  <data name="E000WA014" xml:space="preserve">
+    <value>会社番号+BOXまたはパスワードが正しくありません。</value>
+    <comment>The company number + BOX or password is incorrect.</comment>
+  </data>
+  <data name="E000WB001" xml:space="preserve">
+    <value>ファイルの保存に失敗しました。ファイル名：{0}</value>
+    <comment>Failed to save the file. File name: {0}</comment>
+  </data>
+  <data name="E000WB002" xml:space="preserve">
+    <value>利用申請の更新が失敗しました。</value>
+    <comment>The update of the usage application has failed.</comment>
+  </data>
+  <data name="E000WB003" xml:space="preserve">
+    <value>帳票履歴の登録が失敗しました。</value>
+    <comment>The registration of the report history has failed.</comment>
+  </data>
+  <data name="E000WB004" xml:space="preserve">
+    <value>異常終了。会社番号+BOXを紐づけるクライアント証明書が取得できません。</value>
+    <comment>Abnormal termination. You cannot get the client certificate that links the company number + BOX.</comment>
+  </data>
+  <data name="E000WB005" xml:space="preserve">
+    <value>異常終了。クライアント証明書の更新が失敗しました。</value>
+    <comment>Abnormal termination. Client certificate update failed.</comment>
+  </data>
+  <data name="E000WB006" xml:space="preserve">
+    <value>完了通知ファイルのバックアップが失敗しました。</value>
+    <comment>Completion notification file backup failed.</comment>
+  </data>
+  <data name="E000WB007" xml:space="preserve">
+    <value>ファイルの圧縮が失敗しました。</value>
+    <comment>File compression failed.</comment>
+  </data>
+  <data name="E000WB008" xml:space="preserve">
+    <value>完了通知メールの送信が失敗しました。</value>
+    <comment>Failed to send the completion notification email.</comment>
+  </data>
+  <data name="E000WB009" xml:space="preserve">
+    <value>完了通知PWメールの送信が失敗しました。</value>
+    <comment>Failed to send the completion notification PW email.</comment>
+  </data>
+  <data name="E000WB010" xml:space="preserve">
+    <value>登録完了通知が済んでいないため、覚書データのダウンロードは出来ません。</value>
+    <comment>The memorandum data cannot be downloaded because the registration completion notification has not been completed.</comment>
+  </data>
+  <data name="E000WB011" xml:space="preserve">
+    <value>システム設定状況が依頼中以降の場合は、利用申請書の取消が出来ません。</value>
+    <comment>If the system setting status is requesting or later, the usage application cannot be canceled.</comment>
+  </data>
+  <data name="E000WB012" xml:space="preserve">
+    <value>数量初期値には選択/数量が数量の場合に設定できます。</value>
+    <comment>The initial quantity can be set when the selection / quantity is a quantity.</comment>
+  </data>
+  <data name="E000WB013" xml:space="preserve">
+    <value>EDIアカウントは、既に使用されています。</value>
+    <comment>The EDI account is already in use.</comment>
+  </data>
+  <data name="E000WB014" xml:space="preserve">
+    <value>編集状態の行が存在します。設定完了が出来ません。</value>
+    <comment>There is a row in the edit state. The setting cannot be completed.</comment>
+  </data>
+  <data name="E000WB015" xml:space="preserve">
+    <value>システム設定状況が依頼中以降の場合は、承認解除が出来ません。</value>
+    <comment>If the system setting status is after requesting, approval cannot be canceled.</comment>
+  </data>
+  <data name="E000WB016" xml:space="preserve">
+    <value>PDF形式のファイルのみ登録が可能です。\nPDFファイルを選択して下さい。</value>
+    <comment>Only PDF format files can be registered. \ nPlease select a PDF file.</comment>
+  </data>
+  <data name="E000WB017" xml:space="preserve">
+    <value>利用申請見積の更新が失敗しました。</value>
+    <comment>The update of the usage application quotation has failed.</comment>
+  </data>
+  <data name="E000WB018" xml:space="preserve">
+    <value>メールの作成が失敗しました。</value>
+    <comment>Email composition failed.</comment>
+  </data>
+  <data name="E000WB019" xml:space="preserve">
+    <value>顧客マスタの登録が失敗しました。</value>
+    <comment>Customer master registration failed.</comment>
+  </data>
+  <data name="E000ZZ001" xml:space="preserve">
+    <value>必須入力です。</value>
+    <comment>Mandatory input</comment>
+  </data>
+  <data name="E000ZZ002" xml:space="preserve">
+    <value>データの型が間違っています。</value>
+    <comment>The data type is incorrect.</comment>
+  </data>
+  <data name="E000ZZ003" xml:space="preserve">
+    <value>青色の箇所のいずれかに入力が必要です。</value>
+    <comment>You need to enter one of the blue areas.</comment>
+  </data>
+  <data name="E000ZZ004" xml:space="preserve">
+    <value>ラインを選択してください。</value>
+    <comment>Please select line.</comment>
+  </data>
+  <data name="E000ZZ005" xml:space="preserve">
+    <value>桁数オーバーです。</value>
+    <comment>The number of digits is over.</comment>
+  </data>
+  <data name="E000ZZ006" xml:space="preserve">
+    <value>桁数が足りません。</value>
+    <comment>There are not enough digits.</comment>
+  </data>
+  <data name="E000ZZ007" xml:space="preserve">
+    <value>数値を入力してください。</value>
+    <comment>Please enter a number.</comment>
+  </data>
+  <data name="E000ZZ008" xml:space="preserve">
+    <value>部品番号は10桁または12桁で入力して下さい。</value>
+    <comment>Enter the part number in 10 or 12 digits.</comment>
+  </data>
+  <data name="E000ZZ009" xml:space="preserve">
+    <value>{0}には、YYYYMMDDで設定して下さい。</value>
+    <comment>Set {0} with YYYYMMDD.</comment>
+  </data>
+  <data name="E000ZZ010" xml:space="preserve">
+    <value>{0}に年月日が入力されていません。</value>
+    <comment>The date has not been entered in {0}.</comment>
+  </data>
+  <data name="E000ZZ013" xml:space="preserve">
+    <value>{0}の入力値が不正です。</value>
+    <comment>The input value of {0} is invalid.</comment>
+  </data>
+  <data name="E000ZZ014" xml:space="preserve">
+    <value>権限がないため更新できません。</value>
+    <comment>You cannot update because you do not have permission.</comment>
+  </data>
+  <data name="E000ZZ015" xml:space="preserve">
+    <value>要求の形式が正しくありません。</value>
+    <comment>Bad request.</comment>
+  </data>
+  <data name="E000ZZ016" xml:space="preserve">
+    <value>この操作を実行する権限がありません。</value>
+    <comment>You do not have permission to perform this operation.</comment>
+  </data>
+  <data name="E000ZZ017" xml:space="preserve">
+    <value>保守機能の編集権限がありません。</value>
+    <comment>You do not have edit permission for the maintenance function.</comment>
+  </data>
+  <data name="E000ZZ018" xml:space="preserve">
+    <value>ページの有効期限が切れました。お手数ですが、ホーム画面からやり直してください。</value>
+    <comment>The page has expired. Sorry to trouble you, but please try again from the home screen.</comment>
+  </data>
+  <data name="E000ZZ019" xml:space="preserve">
+    <value>アップロードに失敗しました。</value>
+    <comment>Upload failed.</comment>
+  </data>
+  <data name="E000ZZ020" xml:space="preserve">
+    <value>ダウンロードに失敗しました。</value>
+    <comment>Download failed.</comment>
+  </data>
+  <data name="E000ZZ021" xml:space="preserve">
+    <value>セッションがタイムアウトしました。お手数ですが、再度ログインしてください。</value>
+    <comment>The session has timed out. Sorry to trouble you, but please log in again.</comment>
+  </data>
+  <data name="E000ZZ022" xml:space="preserve">
+    <value>システムエラーが発生しました。</value>
+    <comment>A system error has occurred.</comment>
+  </data>
+  <data name="E000ZZ024" xml:space="preserve">
+    <value>選択されたファイルは{0}MBを超えています。アップロードできません。</value>
+    <comment>The selected file is larger than {0} MB. You can't upload.</comment>
+  </data>
+  <data name="E000ZZ026" xml:space="preserve">
+    <value>バッチ連携中のため編集はできません。しばらく経ってからやり直してください。発行No={0}</value>
+    <comment>Editing is not possible because batch linkage is in progress. Please try again after a while. Issue No = {0}</comment>
+  </data>
+  <data name="E000ZZ027" xml:space="preserve">
+    <value>バッチ連携中のため編集はできません。しばらく経ってからやり直してください。納品チケットNo={0}</value>
+    <comment>Editing is not possible because batch linkage is in progress. Please try again after a while.Delivery ticket No = {0}</comment>
+  </data>
+  <data name="E000ZZ028" xml:space="preserve">
+    <value>登録できません。同じ{0}は使用できません。</value>
+    <comment>You can't register. The same {0} cannot be used.</comment>
+  </data>
+  <data name="E000ZZ029" xml:space="preserve">
+    <value>{0}が登録されていない為、メール送信できません。</value>
+    <comment>Email cannot be sent because {0} is not registered.</comment>
+  </data>
+  <data name="E000ZZ030" xml:space="preserve">
+    <value>登録できません。{0}が{1}より過去日になっています。</value>
+    <comment>You can't register. {0} is a past date than {1}.</comment>
+  </data>
+  <data name="E000ZZ031" xml:space="preserve">
+    <value>登録できません。同じ{0}の期間が重複しています。</value>
+    <comment>You can't register. The same {0} period is duplicated.</comment>
+  </data>
+  <data name="E000ZZ032" xml:space="preserve">
+    <value>削除できません。廃止されているデータのみ削除できます。</value>
+    <comment>It cannot be deleted. Only obsolete data can be deleted.</comment>
+  </data>
+  <data name="E000ZZ033" xml:space="preserve">
+    <value>削除できません。同じ{0}は利用申請テーブルで既に使用されています。</value>
+    <comment>It cannot be deleted. The same {0} is already used in the usage application table.</comment>
+  </data>
+  <data name="E000ZZ034" xml:space="preserve">
+    <value>複数行チェックされています。</value>
+    <comment>Multiple lines are checked.</comment>
+  </data>
+  <data name="E000ZZ035" xml:space="preserve">
+    <value>承認できません。申請状況が申請中ではありません。</value>
+    <comment>You can't approve it. The application status is not pending.</comment>
+  </data>
+  <data name="E000ZZ036" xml:space="preserve">
+    <value>承認解除できません。申請状況が承認済ではありません。</value>
+    <comment>The approval cannot be canceled. The application status has not been approved.</comment>
+  </data>
+  <data name="E000ZZ037" xml:space="preserve">
+    <value>承認解除できません。既に見積発行済です。</value>
+    <comment>The approval cannot be canceled. A quote has already been issued.</comment>
+  </data>
+  <data name="E000ZZ038" xml:space="preserve">
+    <value>登録できません。既に同じ{0}が登録されています。</value>
+    <comment>You can't register. The same {0} has already been registered.</comment>
+  </data>
+  <data name="E000ZZ039" xml:space="preserve">
+    <value>{0}にはスペース、または*を設定する必要があります。</value>
+    <comment>You must set {0} to a space or *.</comment>
+  </data>
+  <data name="E000ZZ040" xml:space="preserve">
+    <value>ログインタイプにはA,B,C,D,E,Gのいずれかを設定する必要があります。</value>
+    <comment>The login type must be set to A, B, C, D, E, or G.</comment>
+  </data>
+  <data name="E000ZZ041" xml:space="preserve">
+    <value>メール送信処理が異常終了しました。</value>
+    <comment>The email sending process has terminated abnormally.</comment>
+  </data>
+  <data name="E000ZZ042" xml:space="preserve">
+    <value>EDIアカウント候補テーブルに未使用のレコードがありません。</value>
+    <comment>There are no unused records in the EDI account candidate table.</comment>
+  </data>
+  <data name="E000ZZ043" xml:space="preserve">
+    <value>以前に使用されたことがあるEDIアカウントのため、使用できません。</value>
+    <comment>It cannot be used because it is an EDI account that has been used before.</comment>
+  </data>
+  <data name="E000ZZ044" xml:space="preserve">
+    <value>バッチ処理が異常終了しました。</value>
+    <comment>Batch processing ended abnormally.</comment>
+  </data>
+  <data name="E000ZZ045" xml:space="preserve">
+    <value>{0}が{1}より過去日になっています。</value>
+    <comment>{0} is a past date than {1}.</comment>
+  </data>
+  <data name="E000ZZ046" xml:space="preserve">
+    <value>{0}には{1}以上を設定する必要があります。</value>
+    <comment>{0} must be set to {1} or higher.</comment>
+  </data>
+  <data name="E000ZZ047" xml:space="preserve">
+    <value>同じ担当者、メールアドレス、電話番号は既に使用されています。</value>
+    <comment>The same contact, email address, and phone number are already in use.</comment>
+  </data>
+  <data name="E000ZZ048" xml:space="preserve">
+    <value>請求先_銀行振込手数料は0以下の値を設定する必要があります。</value>
+    <comment>Billing_Bank Transfer Fee must be set to a value less than or equal to 0.</comment>
+  </data>
+  <data name="E000ZZ049" xml:space="preserve">
+    <value>請求先_諸経費は0以上の値を設定する必要があります。</value>
+    <comment>Billing _ Expenses must be set to a value greater than or equal to 0.</comment>
+  </data>
+  <data name="E000ZZ050" xml:space="preserve">
+    <value>同じ「会社番号+BOX, 取引区分, 発効日」は使用できません。</value>
+    <comment>The same 「company number + BOX, transaction classification, effective date」cannot be used.</comment>
+  </data>
+  <data name="E000ZZ051" xml:space="preserve">
+    <value>{0}は必須入力です。</value>
+    <comment>{0} is a required entry.</comment>
+  </data>
+  <data name="E000ZZ052" xml:space="preserve">
+    <value>メールアドレス、電話番号のどちらかは必須入力です。</value>
+    <comment>Either your email address or phone number is required.</comment>
+  </data>
+  <data name="E000ZZ053" xml:space="preserve">
+    <value>{0}は@を含む半角英数字で入力してください。（メールアドレス形式）</value>
+    <comment>nter {0} in single-byte alphanumeric characters including @. (Email address format)</comment>
+  </data>
+  <data name="I000WB001" xml:space="preserve">
+    <value>会社番号+BOXをクライアント証明書と紐づけました。クライアント証明書一覧画面でご確認ください。</value>
+    <comment>The company number + BOX is linked with the client certificate. Please check on the client certificate list screen.</comment>
+  </data>
+  <data name="I000WB002" xml:space="preserve">
+    <value>前回プレビュー時から以下の項目が変更されています。\n再度プレビューボタンを押下し、内容を確認してください。\n項目：{0}</value>
+    <comment>The following items have been changed since the last preview. \ nPress the preview button again and check the contents. \ n Item: {0}</comment>
+  </data>
+  <data name="I000WB003" xml:space="preserve">
+    <value>メールを作成しますか？</value>
+    <comment>Do you want to compose an email?</comment>
+  </data>
+  <data name="I000WB004" xml:space="preserve">
+    <value>「クライアント証明書の有効期限(To)」は「クライアント証明書の有効期限(From)」より未来の日付にして下さい。</value>
+    <comment>Client certificate expiration date (To) should be a date later than "Client certificate expiration date (From)".</comment>
+  </data>
+  <data name="I000WB005" xml:space="preserve">
+    <value>顧客マスタが同一利用申請連番で2行以上取得されました。</value>
+    <comment>Two or more lines of the customer master have been acquired with the same usage application serial number.</comment>
+  </data>
+  <data name="I000ZZ001" xml:space="preserve">
+    <value>登録しますか？</value>
+    <comment>Do you want to register?</comment>
+  </data>
+  <data name="I000ZZ002" xml:space="preserve">
+    <value>変更内容が破棄されます。宜しいですか？</value>
+    <comment>Your changes will be discarded. Is it OK?</comment>
+  </data>
+  <data name="I000ZZ003" xml:space="preserve">
+    <value>該当データは既に登録されています。</value>
+    <comment>The corresponding data has already been registered.</comment>
+  </data>
+  <data name="I000ZZ004" xml:space="preserve">
+    <value>該当データが存在しません。</value>
+    <comment>The corresponding data does not exist.</comment>
+  </data>
+  <data name="I000ZZ005" xml:space="preserve">
+    <value>該当データは他ユーザーにより更新されました。最初からやり直してください。</value>
+    <comment>The corresponding data has been updated by another user. Please start over.</comment>
+  </data>
+  <data name="I000ZZ006" xml:space="preserve">
+    <value>該当データは他ユーザーにより削除されました。</value>
+    <comment>The corresponding data has been deleted by another user.</comment>
+  </data>
+  <data name="I000ZZ007" xml:space="preserve">
+    <value>更新処理が正常に終了しました。</value>
+    <comment>The update process was completed normally.</comment>
+  </data>
+  <data name="I000ZZ008" xml:space="preserve">
+    <value>削除しますか？</value>
+    <comment>Do you want to delete it?</comment>
+  </data>
+  <data name="I000ZZ009" xml:space="preserve">
+    <value>削除しました。</value>
+    <comment>Deleted.</comment>
+  </data>
+  <data name="I000ZZ010" xml:space="preserve">
+    <value>更新しますか?</value>
+    <comment>Do you want to update?</comment>
+  </data>
+  <data name="I000ZZ011" xml:space="preserve">
+    <value>登録しました。</value>
+    <comment>Registered.</comment>
+  </data>
+  <data name="I000ZZ012" xml:space="preserve">
+    <value>送信に成功しました。</value>
+    <comment>The transmission was successful.</comment>
+  </data>
+  <data name="I000ZZ013" xml:space="preserve">
+    <value>ワンタイムパスワードの再発行を行いますか？</value>
+    <comment>Would you like to reissue a one-time password?</comment>
+  </data>
+  <data name="I000ZZ014" xml:space="preserve">
+    <value>他のユーザーにより更新されました。</value>
+    <comment>Updated by another user.</comment>
+  </data>
+  <data name="I000ZZ015" xml:space="preserve">
+    <value>メール送信処理が正常に終了しました。</value>
+    <comment>The mail sending process was completed normally.</comment>
+  </data>
+  <data name="I000ZZ016" xml:space="preserve">
+    <value>{0}処理が正常に終了しました。</value>
+    <comment>{0} Processing completed normally.</comment>
+  </data>
+  <data name="I000ZZ017" xml:space="preserve">
+    <value>バッチ処理が完了しました。</value>
+    <comment>Batch processing is complete.</comment>
+  </data>
+  <data name="I000ZZ018" xml:space="preserve">
+    <value>既に起動中です。</value>
+    <comment>It is already running.</comment>
+  </data>
+  <data name="I000ZZ019" xml:space="preserve">
+    <value>メール送信しますか？</value>
+    <comment>Do you want to send an email?</comment>
+  </data>
+  <data name="I000ZZ020" xml:space="preserve">
+    <value>メール送信中です。</value>
+    <comment>Email is being sent.</comment>
+  </data>
+  <data name="I000ZZ021" xml:space="preserve">
+    <value>編集行が存在している場合は編集状態が破棄されます。よろしいですか？</value>
+    <comment>If the edit line exists, the edit state is discarded. Is it OK?</comment>
+  </data>
+  <data name="I000ZZ022" xml:space="preserve">
+    <value>メール作成処理が正常に終了しました。</value>
+    <comment>The mail composition process was completed normally.</comment>
+  </data>
+  <data name="I199WA001" xml:space="preserve">
+    <value>ログインしました。会社番号＋BOX={0}</value>
+    <comment>You are now logged. Company number + BOX = {0}</comment>
+  </data>
+  <data name="I199WA002" xml:space="preserve">
+    <value>ログイン失敗回数が上限に達しました。</value>
+    <comment>The number of login failures has reached the upper limit.</comment>
+  </data>
+  <data name="I199WA006" xml:space="preserve">
+    <value>クライアント端末情報 - 会社番号＋BOX={0},ユーザーエージェント={1}</value>
+    <comment>Client terminal information - Company number + BOX = {0}, User agent = {1}</comment>
+  </data>
+</root>

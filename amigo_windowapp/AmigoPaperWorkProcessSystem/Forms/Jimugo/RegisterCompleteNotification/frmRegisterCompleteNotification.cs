@@ -1,0 +1,214 @@
+﻿using AmigoPapaerWorkProcessSystem.Core;
+using AmigoPaperWorkProcessSystem.Controllers;
+using AmigoPaperWorkProcessSystem.Controllers.RegisterCompleteNotification;
+using AmigoPaperWorkProcessSystem.Core;
+using MetroFramework;
+using System;
+using System.Data;
+using System.IO;
+using System.Windows.Forms;
+
+namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
+{
+    public partial class frmRegisterCompleteNotification : Form
+    {
+
+        private UIUtility uIUtility;
+        private string programID = "";
+        private string programName = "";
+        private string COMPANY_NO_BOX = "";
+        private string REQ_SEQ = "";
+        private string QUOTATION_DATE = "";
+        private string ORDER_DATE = "";
+        private string COMPLETION_NOTIFICATION_DATE = "";
+        private string COMPANY_NAME = "";
+        private string pdfLink = "";
+
+        #region Constructor
+        public frmRegisterCompleteNotification()
+        {
+            InitializeComponent();
+            txtDestinationMailAddress.Enabled = true;
+        }
+
+        public frmRegisterCompleteNotification(string programID, string programName) : this()
+        {
+            this.programID = programID;
+            this.programName = programName;
+        }
+
+        public frmRegisterCompleteNotification(string programID, string programName, string company_no_box,string req_seq,string quotation_date,string order_date,string completion_notification_date,string company_name):this()
+        {
+            this.programID = programID;
+            this.programName = programName;
+
+            this.COMPANY_NO_BOX = company_no_box;
+            this.REQ_SEQ = req_seq;
+            this.QUOTATION_DATE = quotation_date;
+            this.ORDER_DATE = order_date;
+            this.COMPLETION_NOTIFICATION_DATE = completion_notification_date;
+            this.COMPANY_NAME = company_name;
+        }
+        #endregion
+
+        #region BindGrid
+        private void BindGrid()
+        {
+            try
+            {
+                //assign search keywords
+                txtCompanyNoBox.Text =COMPANY_NO_BOX;
+                txtCompanyName.Text =COMPANY_NAME;
+                txtQuotationIssueDate.Text = QUOTATION_DATE;
+                txtOrderDate.Text = ORDER_DATE;
+                txtRegisterCompleteNotificationDate.Text = COMPLETION_NOTIFICATION_DATE;
+
+                frmRegisterCompleteNotificationController oController = new frmRegisterCompleteNotificationController();
+
+                DataTable dt = oController.GetScreenData(COMPANY_NO_BOX, out uIUtility.MetaData);
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        txtEDIAccount.Text = row["EDI_ACCOUNT"].ToString();
+                        txtDestinationMailAddress.Text = row["EMAIL_ADDRESS"].ToString();
+                    }
+                }
+            }
+            catch (System.TimeoutException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Search Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Search Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Search Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region FormLoad
+        private void FrmRegisterCompleteNotification_Load(object sender, EventArgs e)
+        {
+
+            //set title
+            lblMenu.Text = this.programName;
+
+            //Theme
+            this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
+            this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
+            try
+            {
+
+                this.Font = Properties.Settings.Default.jimugoFont;
+            }
+            catch (Exception)
+            {
+            }
+
+            uIUtility = new UIUtility();
+            BindGrid();
+        }
+        #endregion
+
+        #region PreviewButton
+        private async void BtnPreview_Click(object sender, EventArgs e)
+        {
+           
+            if(CheckUtility.SearchConditionCheck(this, txtDestinationMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
+            {
+                frmRegisterCompleteNotificationController oController = new frmRegisterCompleteNotificationController();
+                try
+                {
+                    DataTable result = oController.PreviewFunction(txtCompanyName.Text, txtCompanyNoBox.Text, REQ_SEQ, txtEDIAccount.Text);
+
+                    string message = Convert.ToString(result.Rows[0]["Message"]);
+                    string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
+
+                    if (!string.IsNullOrEmpty(result.Rows[0]["Message"].ToString()))
+                    {
+                        MetroMessageBox.Show(this, "\n" + message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    if (!string.IsNullOrEmpty(result.Rows[0]["Error Message"].ToString()))
+                    {
+                        MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, pdfLink);
+
+                    #region CallPreviewScreen
+                    string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp";
+
+                    if (!Directory.Exists(temp_deirectory))
+                    {
+                        Directory.CreateDirectory(temp_deirectory);
+                    }
+
+                    //delete temp files
+                    Utility.DeleteFiles(temp_deirectory);
+
+                    string destinationpath = temp_deirectory + "/temp.pdf";
+                    btnPreview.Enabled = false;
+                    bool success = await Core.WebUtility.Download(pdfLink, destinationpath);
+                    if (success)
+                    {
+                        frmRegisterCompleteNotificationPreview frm = new frmRegisterCompleteNotificationPreview(dt);
+                        frm.ShowDialog();
+                        this.Show();
+                        //BindGrid(fromDate, toDate);
+                        this.BringToFront();
+                    }
+                    btnPreview.Enabled = true;
+                    #endregion
+
+                }
+                catch (Exception ex)
+                {
+                    Utility.WriteErrorLog(ex.Message, ex, false);
+                }
+
+            }
+                
+                
+        }
+        #endregion
+
+        #region AddToDataTable
+        public DataTable DTParameter(string companyNoBox, string reqSeq, string quotationDate, string orderDate, string completionNotificationDate, string companyName, string emailAddress, string ediAccount, string downloadLink)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("COMPANY_NO_BOX");
+            dt.Columns.Add("REQ_SEQ");
+            dt.Columns.Add("QUOTATION_DATE");
+            dt.Columns.Add("ORDER_DATE");
+            dt.Columns.Add("COMPLETION_NOTIFICATION_DATE");
+            dt.Columns.Add("COMPANY_NAME");
+            dt.Columns.Add("EMAIL_ADDRESS");
+            dt.Columns.Add("EDI_ACCOUNT");
+            dt.Columns.Add("DOWNLOAD_LINK");
+
+            dt.Rows.Add(companyNoBox,reqSeq,quotationDate, orderDate, completionNotificationDate, companyName, emailAddress, ediAccount, downloadLink);
+
+            return dt;
+        }
+        #endregion
+
+        #region ClientCertificateButton
+        private void BtnClientCertificate_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmClientCertificateList frm = new frmClientCertificateList(txtCompanyNoBox.Text, "CTS080", "クライアント証明書一覧");
+            frm.ShowDialog();
+            this.Show();
+            //BindGrid(fromDate, toDate);
+            this.BringToFront();
+        }
+        #endregion
+    }
+}

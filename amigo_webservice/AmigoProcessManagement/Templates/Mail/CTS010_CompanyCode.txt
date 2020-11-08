@@ -1,0 +1,27 @@
+﻿                        　Amigo利用申請システムURLのご案内
+
+平素は、Amigo利用申請システムをご利用頂きありがとうございます。
+
+Amigo利用申請システムURLをご案内します。
+
+https://intra2.ncs-net.co.jp/
+※上記 URL は ${limitDate} まで有効です。
+
+Amigo利用申請システムでは、セキュリティの関係より２段階認証を行っております。
+
+お手数ですが、Aventailのユーザー情報でログイン後、Amigo利用申請システムアカウント情報でログインお願いします。
+
+○Aventailのユーザー情報
+		ユーザー名  ：${aventailUserName}
+		パスワード   ：${aventailPassword}
+
+○Amigo利用申請システムアカウント情報
+		会社番号＋BOX ：${companyNoBox}
+		パスワード          ：${password}
+
+本件についての操作方法・技術的問い合わせは、Amigoサービスデスク迄お願いします。
+
+   Amigoサービスデスク　：　amigo_servicedesk@ncs-net.co.jp
+
+日産車体コンピュータサービス株式会社
+Amigo営業担当：${updUserId}
