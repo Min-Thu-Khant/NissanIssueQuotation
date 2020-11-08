@@ -23,7 +23,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private string Reg_Complete_Date;
         private string CompanyName;
         private string pdfLink = "";
-        private string strCONTRACT_CODE = "";
+        private string CONTRACT_PLAN = "";
         #endregion
 
         #region Constructor
@@ -113,15 +113,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             txtDestinationMail.Text = dr["EMAIL_ADDRESS"].ToString();
 
             //check for contract code and manupulate controls
-            CheckEditableRegions(dr["CONTRACT_PLAN"].ToString().Trim());
-            strCONTRACT_CODE = dr["CONTRACT_PLAN"].ToString().Trim();
+            CONTRACT_PLAN = dr["CONTRACT_PLAN"].ToString().Trim();
+            CheckEditableRegions();
+            
         }
         #endregion
 
         #region CheckEditableRegions
-        private void CheckEditableRegions(string CONTRACT_CODE)
+        private void CheckEditableRegions()
         {
-            switch (CONTRACT_CODE)
+            switch (CONTRACT_PLAN)
             {
                 case "PRODUCT":
                     ChangeEditableDependingOnContractCode(true);
@@ -146,145 +147,265 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             txtInitialSpecialDiscount.Enabled = isproduct;
             txtPeriodFrom.Enabled = !isproduct;
             txtPeriodTo.Enabled = !isproduct;
+            txtMonthlySpecialDiscount.Enabled = isproduct;
+            txtYearlySpecialDiscount.Enabled = !isproduct;
+        }
+        #endregion
+
+        #region Validate Inputs
+        private bool ValidateInputs()
+        {
+            //validate
+
+            if (!CheckUtility.SearchConditionCheck(this, txtCompanyNoBox.Text, true, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 10))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtIssueDate.Text, false, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderDate.Text, false, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtNotificationDate.Text, false, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtTax.Text, true, Utility.DataType.HALF_NUMBER, 2, 1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text, chkMonthlyQuote.Checked, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtQuotationExpireDay.Text, true, Utility.DataType.HALF_NUMBER, 3, 1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtInitialSpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtMonthlySpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtYearlySpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtDestinationMail.Text, true, Utility.DataType.EMAIL, 255, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text, CONTRACT_PLAN=="PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtPeriodTo.Text, CONTRACT_PLAN == "PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
+            {
+                return false;
+            }
+            if (!CheckUtility.DateRationalCheck(txtPeriodFrom.Text.Trim(), txtPeriodTo.Text.Trim()))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtInitialRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtMonthlyRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            {
+                return false;
+            }
+
+            //checkboxes check message?
+            //bool atLeastOneChecked = false;
+            //if (chkMonthlyQuote.Checked)
+            //{
+            //    atLeastOneChecked = true;
+            //}
+
+            //if (chkInitialQuot.Checked)
+            //{
+            //    atLeastOneChecked = true;
+            //}
+
+            //if (chkProductionInfo.Checked)
+            //{
+            //    atLeastOneChecked = true;
+            //}
+            //if (!atLeastOneChecked)
+            //{
+            //    MetroMessageBox.Show(this, "\n" + JimugoMessages., "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false;
+            //}
+            return true;
         }
         #endregion
 
         private async void BtnPreview_Click(object sender, EventArgs e)
         {
-            
-            //string COMPANY_NAME, string COMPANY_NO_BOX, string REQ_SEQ, string EDI_ACCOUNT,string strExporType,string strFileHeader;
-            frmIssueQuotationController oController = new frmIssueQuotationController();
             try
             {
-                string strExportType = "";
-                decimal decSpecialAmt = 0;
-                if (chkInitialQuot.Checked)
+                if (ValidateInputs())
                 {
-                    strExportType = "1";
-                    decimal.TryParse(txtInitialSpecialDiscount.Text, out decSpecialAmt);
-                    decSpecialAmt = decSpecialAmt * -1;
-                }
-                else if (chkMonthlyQuote.Checked)
-                {
-                    strExportType = "2";
-                    decimal.TryParse(txtMonthlySpecialDiscount.Text, out decSpecialAmt);
-                    decSpecialAmt = decSpecialAmt * -1;
-                }
-                else if (chkProductionInfo.Checked)
-                {
-                    decimal IntialDiscount = 0;
-                    decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
-                    decimal MonthlyDiscount = 0;
-                    decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
-                    decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
-                    strExportType = "3";
-                }
-                else if (chkOrderForm.Checked)
-                {
-                    if (strCONTRACT_CODE == "PRODUCT")
+                    frmIssueQuotationController oController = new frmIssueQuotationController();
+                    string strExportType = "";
+                    decimal decSpecialAmt = 0;
+                    if (chkInitialQuot.Checked)
                     {
+                        strExportType = "1";
                         decimal.TryParse(txtInitialSpecialDiscount.Text, out decSpecialAmt);
                         decSpecialAmt = decSpecialAmt * -1;
                     }
-                    else if (strCONTRACT_CODE != "PRODUCT")
+                    else if (chkMonthlyQuote.Checked)
+                    {
+                        strExportType = "2";
+                        decimal.TryParse(txtMonthlySpecialDiscount.Text, out decSpecialAmt);
+                        decSpecialAmt = decSpecialAmt * -1;
+                    }
+                    else if (chkProductionInfo.Checked)
                     {
                         decimal IntialDiscount = 0;
                         decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
                         decimal MonthlyDiscount = 0;
                         decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
                         decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
+                        strExportType = "3";
                     }
-                    strExportType = "4";
+                    else if (chkOrderForm.Checked)
+                    {
+                        if (CONTRACT_PLAN == "PRODUCT")
+                        {
+                            decimal.TryParse(txtInitialSpecialDiscount.Text, out decSpecialAmt);
+                            decSpecialAmt = decSpecialAmt * -1;
+                        }
+                        else if (CONTRACT_PLAN != "PRODUCT")
+                        {
+                            decimal IntialDiscount = 0;
+                            decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
+                            decimal MonthlyDiscount = 0;
+                            decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
+                            decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
+                        }
+                        strExportType = "4";
+                    }
+
+                    decimal decTaxAmount = (decimal)0;
+                    string strStartDate = "";
+                    int ExpireDay = 0;
+                    string strFromCertificate = "";
+                    string strToCertificate = "";
+
+                    decimal.TryParse(txtTax.Text, out decTaxAmount);
+                    if (CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text, false, Utility.DataType.DATE, 255, 0))
+                    {
+                        strStartDate = DateConverter(txtQuotationStartDate.Text).ToString("yyyyMMdd");
+                    }
+                    else
+                    {
+                        strStartDate = DateTime.Now.ToString("yyyyMMdd");
+                    }
+
+                    ExpireDay = Convert.ToInt32(txtQuotationExpireDay.Text.Trim());
+
+                    if (CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text, false, Utility.DataType.DATE, 255, 0))
+                    {
+                        strFromCertificate = DateConverter(txtPeriodFrom.Text).ToString("yyyyMMdd");
+                    }
+                    else
+                    {
+                        strFromCertificate = DateTime.Now.ToString("yyyyMMdd");
+                    }
+
+                    if (CheckUtility.SearchConditionCheck(this, txtPeriodTo.Text, false, Utility.DataType.DATE, 255, 0))
+                    {
+                        strToCertificate = DateConverter(txtPeriodTo.Text).ToString("yyyyMMdd");
+                    }
+                    else
+                    {
+                        strToCertificate = DateTime.Now.ToString("yyyyMMdd");
+                    }
+
+                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, txtEDIAccount.Text, decTaxAmount, strStartDate, ExpireDay, "", strFromCertificate, strToCertificate, strExportType, DateTime.Now.ToString("yyyyMMddHHmmss"), CONTRACT_PLAN, decSpecialAmt);
+                    
+                    string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
+
+
+                    if (!string.IsNullOrEmpty(error_message))
+                    {
+                        MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    else
+                    {
+                        pdfLink = Convert.ToString(result.Rows[0]["DownloadLink"]);
+                    }
+
+                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), txtCompanyName.Text, txtDestinationMail.Text, txtEDIAccount.Text, pdfLink, strExportType);
+
+                    #region CallPreviewScreen
+                    string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp";
+
+                    if (!Directory.Exists(temp_deirectory))
+                    {
+                        Directory.CreateDirectory(temp_deirectory);
+                    }
+
+                    //delete temp files
+                    Utility.DeleteFiles(temp_deirectory);
+
+                    string destinationpath = temp_deirectory + @"\Quotation_temp.pdf";
+                    btnPreview.Enabled = false;
+                    bool success = await Core.WebUtility.Download(pdfLink, destinationpath);
+                    if (success)
+                    {
+                        frmIssueQuotationPrevew frm = new frmIssueQuotationPrevew(dt);
+                        frm.ShowDialog();
+                        this.Show();
+                        this.BringToFront();
+                    }
+                    btnPreview.Enabled = true;
+                    #endregion
                 }
-
-                decimal decTaxAmount = (decimal)0;
-                string strStartDate = "";
-                string strExpireDate = "";
-                string strFromCertificate = "";
-                string strToCertificate = "";
-
-                decimal.TryParse(txtTax.Text, out decTaxAmount);
-                if (CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text, false, Utility.DataType.DATE, 255, 0))
-                {
-                    strStartDate = DateConverter(txtQuotationStartDate.Text).ToString("yyyyMMdd");
-                }
-                else
-                {
-                    strStartDate = DateTime.Now.ToString("yyyyMMdd");
-                }
-
-                if (CheckUtility.SearchConditionCheck(this, txtQuotationEndDate.Text, false, Utility.DataType.DATE, 255, 0))
-                {
-                    strExpireDate = DateConverter(txtQuotationEndDate.Text).ToString("yyyyMMdd");
-                }
-                else
-                {
-                    strExpireDate = DateTime.Now.ToString("yyyyMMdd");
-                }
-
-                if (CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text, false, Utility.DataType.DATE, 255, 0))
-                {
-                    strFromCertificate = DateConverter(txtPeriodFrom.Text).ToString("yyyyMMdd");
-                }
-                else
-                {
-                    strFromCertificate = DateTime.Now.ToString("yyyyMMdd");
-                }
-
-                if (CheckUtility.SearchConditionCheck(this, txtPeriodTo.Text, false, Utility.DataType.DATE, 255, 0))
-                {
-                    strToCertificate = DateConverter(txtPeriodTo.Text).ToString("yyyyMMdd");
-                }
-                else
-                {
-                    strToCertificate = DateTime.Now.ToString("yyyyMMdd");
-                }
-
-                
-
-                DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, txtEDIAccount.Text, decTaxAmount,strStartDate,strExpireDate,"", strFromCertificate,strToCertificate, strExportType, DateTime.Now.ToString("yyyyMMddHHmmss"), strCONTRACT_CODE, decSpecialAmt);
-
-                string message = Convert.ToString(result.Rows[0]["Message"]);
-                string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
-
-                if (!string.IsNullOrEmpty(message))
-                {
-                    pdfLink = Convert.ToString(result.Rows[0]["DownloadLink"]);
-                    MetroMessageBox.Show(this, "\n" + message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
-                if (!string.IsNullOrEmpty(error_message))
-                {
-                    MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-
-                DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), txtCompanyName.Text, txtDestinationMail.Text, txtEDIAccount.Text, pdfLink, strExportType);
-                
-                #region CallPreviewScreen
-                string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp";
-
-                if (!Directory.Exists(temp_deirectory))
-                {
-                    Directory.CreateDirectory(temp_deirectory);
-                }
-
-                //delete temp files
-                Utility.DeleteFiles(temp_deirectory);
-
-                string destinationpath = temp_deirectory + @"\Quotation_temp.pdf";
-                btnPreview.Enabled = false;
-                bool success = await Core.WebUtility.Download(pdfLink, destinationpath);
-                if (success)
-                {
-                    frmIssueQuotationPrevew frm = new frmIssueQuotationPrevew(dt);
-                    frm.ShowDialog();
-                    this.Show();                   
-                    this.BringToFront();
-                }
-                btnPreview.Enabled = true;
-                #endregion
 
             }
             catch (Exception ex)

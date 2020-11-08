@@ -50,7 +50,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtQuotationStartDate = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txtQuotationEndDate = new System.Windows.Forms.TextBox();
+            this.txtQuotationExpireDay = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtInitialSpecialDiscount = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -72,6 +72,8 @@
             this.txtOrderRemark = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtTax = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtYearlySpecialDiscount = new System.Windows.Forms.TextBox();
             this.pTitle.SuspendLayout();
             this.tbParent.SuspendLayout();
             this.tbInitialRemark.SuspendLayout();
@@ -313,14 +315,14 @@
             this.label8.Text = "見積有効期限(日)";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // txtQuotationEndDate
+            // txtQuotationExpireDay
             // 
-            this.txtQuotationEndDate.Location = new System.Drawing.Point(1126, 189);
-            this.txtQuotationEndDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtQuotationEndDate.Name = "txtQuotationEndDate";
-            this.txtQuotationEndDate.Size = new System.Drawing.Size(130, 21);
-            this.txtQuotationEndDate.TabIndex = 36;
-            this.txtQuotationEndDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtQuotationExpireDay.Location = new System.Drawing.Point(1126, 189);
+            this.txtQuotationExpireDay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtQuotationExpireDay.Name = "txtQuotationExpireDay";
+            this.txtQuotationExpireDay.Size = new System.Drawing.Size(130, 21);
+            this.txtQuotationExpireDay.TabIndex = 36;
+            this.txtQuotationExpireDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label9
             // 
@@ -533,11 +535,33 @@
             this.txtTax.Size = new System.Drawing.Size(130, 21);
             this.txtTax.TabIndex = 49;
             // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label15.Location = new System.Drawing.Point(513, 231);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(109, 21);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "特別値引き額(年額)";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // txtYearlySpecialDiscount
+            // 
+            this.txtYearlySpecialDiscount.Location = new System.Drawing.Point(621, 231);
+            this.txtYearlySpecialDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtYearlySpecialDiscount.Name = "txtYearlySpecialDiscount";
+            this.txtYearlySpecialDiscount.Size = new System.Drawing.Size(102, 21);
+            this.txtYearlySpecialDiscount.TabIndex = 51;
+            this.txtYearlySpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // frmIssueQuotation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 681);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.txtYearlySpecialDiscount);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.txtTax);
             this.Controls.Add(this.tbParent);
@@ -552,7 +576,7 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtInitialSpecialDiscount);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.txtQuotationEndDate);
+            this.Controls.Add(this.txtQuotationExpireDay);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtQuotationStartDate);
             this.Controls.Add(this.chkOrderForm);
@@ -618,7 +642,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox txtQuotationStartDate;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txtQuotationEndDate;
+        private System.Windows.Forms.TextBox txtQuotationExpireDay;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtInitialSpecialDiscount;
         private System.Windows.Forms.Label label10;
@@ -640,5 +664,7 @@
         private System.Windows.Forms.TextBox txtMonthlyRemark;
         private System.Windows.Forms.TextBox txtProductionInfoRemark;
         private System.Windows.Forms.TextBox txtOrderRemark;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtYearlySpecialDiscount;
     }
 }

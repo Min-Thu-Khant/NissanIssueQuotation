@@ -247,11 +247,11 @@ namespace AmigoPaperWorkProcessSystem.Core
             return dt;
         }
 
-        public static DataTable PostQuotation(string url, string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string strRemark , string strFromCertificate, string strToCertificate, string strExporType,string strFileHeader,string strContractPlan, decimal decDiscount)
+        public static DataTable PostQuotation(string url, string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, int expireDay, string strRemark , string strFromCertificate, string strToCertificate, string strExporType,string strFileHeader,string strContractPlan, decimal decDiscount)
         {
             //convert list to json object
             String json = JsonConvert.SerializeObject(new { COMPANY_NAME = COMPANY_NAME, COMPANY_NO_BOX = COMPANY_NO_BOX, REQ_SEQ = REQ_SEQ, EDI_ACCOUNT = EDI_ACCOUNT, 
-                TaxAmt = TaxAmt,startDate=startDate,expireDate=expireDate, strRemark=strRemark, strFromCertificate = strFromCertificate,strToCertificate=strToCertificate, 
+                TaxAmt = TaxAmt,startDate=startDate,expireDate= expireDay, strRemark=strRemark, strFromCertificate = strFromCertificate,strToCertificate=strToCertificate, 
                 strExporType = strExporType, strFileHeader= strFileHeader, strContractPlan = strContractPlan ,decDiscount=decDiscount});
 
             //encode content

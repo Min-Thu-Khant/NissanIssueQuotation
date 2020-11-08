@@ -354,7 +354,6 @@ namespace AmigoProcessManagement.Controller
             result.Columns.Add("Error Message");
             DataRow dr = result.NewRow();
             dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
-            dr["Message"] = Messages.Jimugo.I000WB001;
             result.Rows.Add(dr);
 
             return result;
@@ -553,7 +552,6 @@ namespace AmigoProcessManagement.Controller
             result.Columns.Add("Error Message");
             DataRow dr = result.NewRow();
             dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
-            dr["Message"] = Messages.Jimugo.I000WB001;
             result.Rows.Add(dr);
 
             return result;
@@ -814,7 +812,6 @@ namespace AmigoProcessManagement.Controller
             result.Columns.Add("Error Message");
             DataRow dr = result.NewRow();
             dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
-            dr["Message"] = Messages.Jimugo.I000WB001;
             result.Rows.Add(dr);
 
             return result;
@@ -1018,7 +1015,6 @@ namespace AmigoProcessManagement.Controller
 
                 DataRow dr = result.NewRow();
                 dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
-                dr["Message"] = Messages.Jimugo.I000WB001;
                 result.Rows.Add(dr);
             }
             else if (strContractPlan != "PRODUCT") //PIBrowsing
@@ -1220,7 +1216,6 @@ namespace AmigoProcessManagement.Controller
 
                 DataRow dr = result.NewRow();
                 dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
-                dr["Message"] = Messages.Jimugo.I000WB001;
                 result.Rows.Add(dr);
             }           
             return result;

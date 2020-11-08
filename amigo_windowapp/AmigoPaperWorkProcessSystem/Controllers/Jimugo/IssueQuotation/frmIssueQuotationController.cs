@@ -25,10 +25,10 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region QuotationPreview
-        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string strRemark, string strFromCertificate, string strToCertificate, string strExporType, string strFileHeader, string strContractPlan, decimal decDiscount)
+        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, int expireDay, string strRemark, string strFromCertificate, string strToCertificate, string strExporType, string strFileHeader, string strContractPlan, decimal decDiscount)
         {
             string url = Properties.Settings.Default.PreviewQuotation;
-            return WebUtility.PostQuotation(url, COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, strRemark, strFromCertificate, strToCertificate, strExporType, strFileHeader, strContractPlan, decDiscount);
+            return WebUtility.PostQuotation(url, COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDay, strRemark, strFromCertificate, strToCertificate, strExporType, strFileHeader, strContractPlan, decDiscount);
         }
         #endregion
 
