@@ -46,6 +46,7 @@
     <Compile Include="BOL\BOL_CLIENT_CERTIFICATE.cs" />
     <Compile Include="BOL\BOL_CUSTOMER_MASTER_.cs" />
     <Compile Include="BOL\BOL_REPORT_HISTORY.cs" />
+    <Compile Include="BOL\BOL_REQ_USAGE_FEE.cs" />
     <Compile Include="BOL\BOL_USAGE_CHARGE_MASTER.cs" />
     <Compile Include="DAL\AUTO_INDEX.cs" />
     <Compile Include="BOL\BOL_CONFIG.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="DAL\REQUEST_DETAIL.cs" />
     <Compile Include="DAL\REQUEST_ID.cs" />
     <Compile Include="DAL\REQ_ADDRESS.cs" />
+    <Compile Include="DAL\REQ_USAGE_FEE.cs" />
     <Compile Include="DAL\USAGE_CHARGE_MASTER.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAL\RECEIPT_DETAILS.cs" />

@@ -585,6 +585,21 @@ namespace AmigoPaperWorkProcessSystem.Core
         }
         #endregion
 
+        #region GetParameterByName
+        public static string GetParameterByName(string key, DataTable PARAMETERS)
+        {
+            try
+            {
+                return PARAMETERS.Rows[0][key].ToString();
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                return "";
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

@@ -262,6 +262,27 @@ namespace DAL_AmigoProcess.BOL
             set { _MONTHLY_COST_INCLUDING_TAX = value; }
         }
 
+        private decimal _YEAR_COST;
+        public decimal YEAR_COST
+        {
+            get { return _YEAR_COST; }
+            set { _YEAR_COST = value; }
+        }
+
+        private decimal _YEAR_COST_DISCOUNTS;
+        public decimal YEAR_COST_DISCOUNTS
+        {
+            get { return _YEAR_COST_DISCOUNTS; }
+            set { _YEAR_COST_DISCOUNTS = value; }
+        }
+
+        private decimal _YEAR_COST_INCLUDING_TAX;
+        public decimal YEAR_COST_INCLUDING_TAX
+        {
+            get { return _YEAR_COST_INCLUDING_TAX; }
+            set { _YEAR_COST_INCLUDING_TAX = value; }
+        }
+
         private int _TAX;
         public int TAX
         {

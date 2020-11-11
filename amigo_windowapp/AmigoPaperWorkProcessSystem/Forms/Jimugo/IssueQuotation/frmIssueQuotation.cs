@@ -2,6 +2,7 @@
 using AmigoPaperWorkProcessSystem.Core;
 using AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation;
 using MetroFramework;
+using Newtonsoft.Json;
 using System;
 using System.Data;
 using System.Globalization;
@@ -18,12 +19,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private string programName = "";
         private string CompanyNoBox = "AJ-0001-01";
         private string REQ_SEQ = "1";
+        private string Reg_Complete_Date;
         private string Quotation_Date;
         private string Order_Date;
-        private string Reg_Complete_Date;
         private string CompanyName;
-        private string pdfLink = "";
         private string CONTRACT_PLAN = "";
+        private string INPUT_PERSON = "";
         #endregion
 
         #region Constructor
@@ -78,19 +79,19 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         #region GetInitialData
         private void GetInitialData()
         {
-            //try
-            //{
+            try
+            {
                 frmIssueQuotationController issueQuotation = new frmIssueQuotationController();
                 DataTable result = issueQuotation.GetInitialData(CompanyNoBox, REQ_SEQ, out uIUtility.MetaData);
                 if (result.Rows.Count > 0)
                 {
                     SetValues(result.Rows[0]);
                 }
-            //}
-            //catch (Exception)
-            //{
+            }
+            catch (Exception)
+            {
 
-            //}
+            }
         }
         #endregion
 
@@ -113,7 +114,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             txtDestinationMail.Text = dr["EMAIL_ADDRESS"].ToString();
 
             //check for contract code and manupulate controls
-            CONTRACT_PLAN = dr["CONTRACT_PLAN"].ToString().Trim();
+            CONTRACT_PLAN = Convert.ToString(dr["CONTRACT_PLAN"]);
+            INPUT_PERSON = Convert.ToString(dr["INPUT_PERSON"]);
             CheckEditableRegions();
             
         }
@@ -256,27 +258,32 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 return false;
             }
 
-            //checkboxes check message?
-            //bool atLeastOneChecked = false;
-            //if (chkMonthlyQuote.Checked)
-            //{
-            //    atLeastOneChecked = true;
-            //}
+            //checkboxes check message ?
+            bool atLeastOneChecked = false;
+            if (chkMonthlyQuote.Checked)
+            {
+                atLeastOneChecked = true;
+            }
 
-            //if (chkInitialQuot.Checked)
-            //{
-            //    atLeastOneChecked = true;
-            //}
+            if (chkInitialQuot.Checked)
+            {
+                atLeastOneChecked = true;
+            }
 
-            //if (chkProductionInfo.Checked)
-            //{
-            //    atLeastOneChecked = true;
-            //}
-            //if (!atLeastOneChecked)
-            //{
-            //    MetroMessageBox.Show(this, "\n" + JimugoMessages., "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return false;
-            //}
+            if (chkProductionInfo.Checked)
+            {
+                atLeastOneChecked = true;
+            }
+
+            if (chkOrderForm.Checked)
+            {
+                atLeastOneChecked = true;
+            }
+            if (!atLeastOneChecked)
+            {
+                MetroMessageBox.Show(this, "\n" + "Please check at least one pdf type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             return true;
         }
         #endregion
@@ -288,30 +295,43 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 if (ValidateInputs())
                 {
                     frmIssueQuotationController oController = new frmIssueQuotationController();
-                    string strExportType = "";
                     decimal decSpecialAmt = 0;
-                    if (chkInitialQuot.Checked)
+                    DataTable dtExportInfo = new DataTable();
+                    dtExportInfo.Columns.Add("ExportType");
+                    dtExportInfo.Columns.Add("SpecialDiscount");
+                    if (chkInitialQuot.Checked) //Initial
                     {
-                        strExportType = "1";
                         decimal.TryParse(txtInitialSpecialDiscount.Text, out decSpecialAmt);
                         decSpecialAmt = decSpecialAmt * -1;
+                        DataRow dr = dtExportInfo.NewRow();
+                        dr["ExportType"] = "1";
+                        dr["SpecialDiscount"] = decSpecialAmt.ToString("N0");
+                        dtExportInfo.Rows.Add(dr);
                     }
-                    else if (chkMonthlyQuote.Checked)
+                    if (chkMonthlyQuote.Checked)//Monthly
                     {
-                        strExportType = "2";
                         decimal.TryParse(txtMonthlySpecialDiscount.Text, out decSpecialAmt);
                         decSpecialAmt = decSpecialAmt * -1;
+
+                        DataRow dr = dtExportInfo.NewRow();
+                        dr["ExportType"] = "2";
+                        dr["SpecialDiscount"] = decSpecialAmt.ToString("N0");
+                        dtExportInfo.Rows.Add(dr);
                     }
-                    else if (chkProductionInfo.Checked)
+                    if (chkProductionInfo.Checked)//PIBrowsing
                     {
                         decimal IntialDiscount = 0;
                         decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
                         decimal MonthlyDiscount = 0;
                         decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
                         decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
-                        strExportType = "3";
+
+                        DataRow dr = dtExportInfo.NewRow();
+                        dr["ExportType"] = "4";
+                        dr["SpecialDiscount"] = decSpecialAmt.ToString("N0");
+                        dtExportInfo.Rows.Add(dr);
                     }
-                    else if (chkOrderForm.Checked)
+                    if (chkOrderForm.Checked)//Order Form
                     {
                         if (CONTRACT_PLAN == "PRODUCT")
                         {
@@ -322,30 +342,36 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         {
                             decimal IntialDiscount = 0;
                             decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
-                            decimal MonthlyDiscount = 0;
-                            decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
-                            decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
+                            decimal YearlyDiscount = 0;
+                            decimal.TryParse(txtYearlySpecialDiscount.Text, out YearlyDiscount);
+                            decSpecialAmt = IntialDiscount + YearlyDiscount * -1;
                         }
-                        strExportType = "4";
+
+                        DataRow dr = dtExportInfo.NewRow();
+                        dr["ExportType"] = "3";
+                        dr["SpecialDiscount"] = decSpecialAmt.ToString("N0");
+                        dtExportInfo.Rows.Add(dr);
                     }
+                   
 
                     decimal decTaxAmount = (decimal)0;
                     string strStartDate = "";
                     int ExpireDay = 0;
                     string strFromCertificate = "";
                     string strToCertificate = "";
-
+                    string strExpireDate = "";
+                    //ExpireDay = Convert.ToInt32(txtQuotationExpireDay.Text.Trim());
+                    int.TryParse(txtQuotationExpireDay.Text, out ExpireDay);
                     decimal.TryParse(txtTax.Text, out decTaxAmount);
                     if (CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text, false, Utility.DataType.DATE, 255, 0))
                     {
                         strStartDate = DateConverter(txtQuotationStartDate.Text).ToString("yyyyMMdd");
+                        strExpireDate = DateConverter(txtQuotationStartDate.Text).AddDays(ExpireDay).ToString("yyyyMMdd");
                     }
                     else
                     {
                         strStartDate = DateTime.Now.ToString("yyyyMMdd");
                     }
-
-                    ExpireDay = Convert.ToInt32(txtQuotationExpireDay.Text.Trim());
 
                     if (CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text, false, Utility.DataType.DATE, 255, 0))
                     {
@@ -364,10 +390,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     {
                         strToCertificate = DateTime.Now.ToString("yyyyMMdd");
                     }
-
-                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, txtEDIAccount.Text, decTaxAmount, strStartDate, ExpireDay, "", strFromCertificate, strToCertificate, strExportType, DateTime.Now.ToString("yyyyMMddHHmmss"), CONTRACT_PLAN, decSpecialAmt);
-                    
-                    string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
+                    string strExportInfo = Utility.DtToJSon(dtExportInfo,"ReqestPDF");
+                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, 
+                        txtEDIAccount.Text, decTaxAmount, strStartDate, strExpireDate, "", strFromCertificate, strToCertificate,
+                        strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(), txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
+                    string error_message = "";//Convert.ToString(result.Rows[0]["Error Message"]);
+                    for (int i = 0; i < result.Rows.Count; i++)
+                    {
+                        error_message += Convert.ToString(result.Rows[i]["Error Message"]);
+                    }
 
 
                     if (!string.IsNullOrEmpty(error_message))
@@ -375,12 +406,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    else
-                    {
-                        pdfLink = Convert.ToString(result.Rows[0]["DownloadLink"]);
-                    }
 
-                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, DateTime.Now.ToString("yyyyMMdd"), DateTime.Now.ToString("yyyyMMdd"), txtCompanyName.Text, txtDestinationMail.Text, txtEDIAccount.Text, pdfLink, strExportType);
+                    DataTable dt = DTParameter();
 
                     #region CallPreviewScreen
                     string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp";
@@ -393,12 +420,25 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     //delete temp files
                     Utility.DeleteFiles(temp_deirectory);
 
-                    string destinationpath = temp_deirectory + @"\Quotation_temp.pdf";
+                    string destinationpath = temp_deirectory;
                     btnPreview.Enabled = false;
-                    bool success = await Core.WebUtility.Download(pdfLink, destinationpath);
+                    bool success = false;
+                    result.Columns.Add("LocalPath");
+                    result.Columns.Add("FileName");
+                    for (int i=0;i< result.Rows.Count;i++)
+                    {
+                        string pdfLink = Convert.ToString(result.Rows[i]["DownloadLink"]);
+                        string filename = WebUtility.GetFileNamefromURL(pdfLink);
+                        success = await Core.WebUtility.Download(pdfLink, destinationpath + @"\" + filename);
+                        if (success)
+                        {
+                            result.Rows[i]["LocalPath"] = destinationpath + @"\" + filename;
+                            result.Rows[i]["FileName"] =  filename;
+                        }
+                    }
                     if (success)
                     {
-                        frmIssueQuotationPrevew frm = new frmIssueQuotationPrevew(dt);
+                        frmIssueQuotationPrevew frm = new frmIssueQuotationPrevew(dt, result);
                         frm.ShowDialog();
                         this.Show();
                         this.BringToFront();
@@ -415,21 +455,34 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         }
 
         #region AddToDataTable
-        public DataTable DTParameter(string companyNoBox, string reqSeq, string quotationDate, string orderDate,string companyName, string emailAddress, string ediAccount, string downloadLink,string strExportType)
+        public DataTable DTParameter()
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("COMPANY_NO_BOX");
             dt.Columns.Add("REQ_SEQ");
-            dt.Columns.Add("QUOTATION_DATE");
-            dt.Columns.Add("ORDER_DATE");
-            dt.Columns.Add("COMPANY_NAME");
-            dt.Columns.Add("EMAIL_ADDRESS");
-            dt.Columns.Add("EDI_ACCOUNT");
-            dt.Columns.Add("DOWNLOAD_LINK");
-            dt.Columns.Add("EXPORT_TYPE");
-            dt.Rows.Add(companyNoBox, reqSeq, quotationDate, orderDate, companyName, emailAddress, ediAccount, downloadLink, strExportType);
-
+            dt.Columns.Add("CONSUMPTION_TAX");
+            dt.Columns.Add("INITIAL_SPECIAL_DISCOUNTS");
+            dt.Columns.Add("MONTHLY_SPECIAL_DISCOUNTS");
+            dt.Columns.Add("YEARLY_SPECIAL_DISCOUNT");
+            dt.Columns.Add("INPUT_PERSON");
+            dt.Columns.Add("INITIAL_REMARK");
+            dt.Columns.Add("MONTHLY_REMARK");
+            dt.Columns.Add("PI_REMARK");
+            dt.Columns.Add("ORDER_REMARK");
+            dt.Rows.Add(txtCompanyNoBox.Text.Trim(),
+                        REQ_SEQ,
+                        txtTax.Text.Trim(),
+                        txtInitialSpecialDiscount.Text.Trim(),
+                        txtMonthlySpecialDiscount.Text.Trim(),
+                        txtYearlySpecialDiscount.Text.Trim(),
+                        INPUT_PERSON,
+                        txtInitialRemark.Text.Trim(),
+                        txtMonthlyRemark.Text.Trim(),
+                        txtProductionInfoRemark.Text.Trim(),
+                        txtOrderRemark.Text.Trim()
+                        );
             return dt;
+            
         }
         #endregion
 

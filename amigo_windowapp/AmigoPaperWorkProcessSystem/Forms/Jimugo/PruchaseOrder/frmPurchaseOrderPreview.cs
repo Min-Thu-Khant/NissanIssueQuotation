@@ -32,31 +32,16 @@ namespace AmigoPaperWorkProcessSystem.Forms
         }
         #endregion
 
-        #region GetParameterByName
-        private string GetParameterByName(string key)
-        {
-            try
-            {
-                return PARAMETERS.Rows[0][key].ToString();
-            }
-            catch (Exception ex)
-            {
-                Utility.WriteErrorLog(ex.Message, ex, false);
-                return "";
-            }
-        }
-        #endregion
-
         #region SetTextBoxesFromParameters
         private void SetTextBoxesFromParameters()
         {
-            string ORDER_DATE = GetParameterByName("ORDER_DATE");
+            string ORDER_DATE = Utility.GetParameterByName("ORDER_DATE", PARAMETERS);
             txtOrderDate.Text = string.IsNullOrEmpty(ORDER_DATE) ? DateTime.Now.ToString("yyyy/MM/dd") : ORDER_DATE;
-            txtSystemEffectiveDate.Text = GetParameterByName("SYSTEM_EFFECTIVE_DATE");
-            txtSystemRegisterDeadline.Text = GetParameterByName("SYSTEM_REGISTER_DEADLINE");
-            txtTransactionType.Text = GetParameterByName("TRANSACTION_TYPE");
-            txtREQ_SEQ.Text = GetParameterByName("REQ_SEQ");
-            txtStartUseDate.Text = GetParameterByName("START_USE_DATE");
+            txtSystemEffectiveDate.Text = Utility.GetParameterByName("SYSTEM_EFFECTIVE_DATE", PARAMETERS);
+            txtSystemRegisterDeadline.Text = Utility.GetParameterByName("SYSTEM_REGISTER_DEADLINE", PARAMETERS);
+            txtTransactionType.Text = Utility.GetParameterByName("TRANSACTION_TYPE", PARAMETERS);
+            txtREQ_SEQ.Text = Utility.GetParameterByName("REQ_SEQ", PARAMETERS);
+            txtStartUseDate.Text = Utility.GetParameterByName("START_USE_DATE", PARAMETERS);
         }
         #endregion
 
@@ -72,7 +57,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             //load pdf
             try
             {
-                pdfDocViewer.LoadFromFile(GetParameterByName("PDF_FILE_PATH"));
+                pdfDocViewer.LoadFromFile(Utility.GetParameterByName("PDF_FILE_PATH", PARAMETERS));
             }
             catch (Exception ex)
             {
@@ -109,7 +94,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
                 frmPurchaseOrderPreviewController oController = new frmPurchaseOrderPreviewController();
                 try
                 {
-                    DataTable result = oController.Submit(PARAMETERS, GetParameterByName("PDF_FILE_PATH"), "pdf");
+                    DataTable result = oController.Submit(PARAMETERS, Utility.GetParameterByName("PDF_FILE_PATH", PARAMETERS), "pdf");
                     string message = Convert.ToString(result.Rows[0]["Message"]);
                     string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
 

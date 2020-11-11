@@ -49,7 +49,8 @@ namespace DAL_AmigoProcess.DAL
                                     AND REQ.REQ_SEQ = @REQ_SEQ
                                     @Extra_Condition
                                     ORDER BY REQ.Type, UM.DISPLAY_ORDER";
-        
+
+        string strSearchWithCompanyNoBox = @"SELECT COMPANY_NO_BOX FROM REQUEST_DETAIL WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX";
 
 
         #region Purchase Order
@@ -76,8 +77,7 @@ namespace DAL_AmigoProcess.DAL
                             AND REQUEST_DETAIL.COMPANY_NO_BOX= @COMPANY_NO_BOX
                             AND REQUEST_DETAIL.REQ_SEQ= @REQ_SEQ";
         #endregion
-        string strSearchWithCompanyNoBox = @"SELECT COMPANY_NO_BOX FROM REQUEST_DETAIL WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX";
-
+       
         #region Applicatoin Cancel
         string strGetRequestDetailListTotal = @"DECLARE
                                             @var_REQ_DATE_FROM DATETIME2 = '@REQ_DATE_FROM', 
@@ -290,6 +290,26 @@ namespace DAL_AmigoProcess.DAL
                                     WHERE [COMPANY_NO_BOX] = @COMPANY_NO_BOX
 							        AND [REQ_SEQ]= @REQ_SEQ";
         #endregion
+
+        #region IssueQuotation
+        string strUpdateQuotation = @"UPDATE [REQUEST_DETAIL]
+                           SET [INITIAL_COST] = @INITIAL_COST
+                               @INITIAL_COST_DISCOUNTS__
+                              ,[INITIAL_COST_INCLUDING_TAX] = @INITIAL_COST_INCLUDING_TAX
+                              ,[MONTHLY_COST] = @MONTHLY_COST
+                               @MONTHLY_COST_DISCOUNTS__
+                              ,[MONTHLY_COST_INCLUDING_TAX] = @MONTHLY_COST_INCLUDING_TAX
+                               @YEAR_COST__
+                              ,[YEAR_COST_DISCOUNTS] = @YEAR_COST_DISCOUNTS
+                              ,[YEAR_COST_INCLUDING_TAX] = @YEAR_COST_INCLUDING_TAX
+                              ,[TAX] = @TAX
+                              ,[QUOTATION_DATE] = @QUOTATION_DATE
+                              ,[UPDATED_AT] = @UPDATED_AT
+                              ,[UPDATED_BY] = @UPDATED_BY
+                         WHERE [COMPANY_NO_BOX] = @COMPANY_NO_BOX
+		                        AND REQ_SEQ = @REQ_SEQ";
+        #endregion
+
         #endregion
 
         #region Constructors
@@ -342,6 +362,81 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@AUTO_INDEX", oAUTO_INDEX.AUTO_INDEX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oAUTO_INDEX.UPDATED_AT != null ? oAUTO_INDEX.UPDATED_AT : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", oAUTO_INDEX.UPDATED_BY != null ? oAUTO_INDEX.UPDATED_BY : (object)DBNull.Value));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
+        #endregion
+
+        #region UpdateQuotation
+        #region CheckForExportType
+        private bool CheckType(DataTable TABLE, string[] TYPE)
+        {
+            bool FOUND = false;
+            for (int i = 0; i < TABLE.Rows.Count; i++)
+            {
+                foreach (string item in TYPE)
+                {
+                    if (TABLE.Rows[i]["ExportType"].ToString() == item)
+                    {
+                        FOUND = true;
+                    }
+                }
+                
+            }
+            return FOUND;
+        }
+        #endregion
+
+        #region PrepareQuery
+        private void PreapareQuery(DataTable exportInfo, bool willUpdateYearCost)
+        {
+            if (CheckType(exportInfo, new string[] { "1", "3", "4" }))
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", ",[INITIAL_COST_DISCOUNTS] = @INITIAL_COST_DISCOUNTS");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", "");
+            }
+
+            if (CheckType(exportInfo, new string[] { "2" }))
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", ",[MONTHLY_COST_DISCOUNTS] = @MONTHLY_COST_DISCOUNTS");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", "");
+            }
+
+            if (willUpdateYearCost)
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", ",[YEAR_COST] = @YEAR_COST * REQUEST_DETAIL.OP_CLIENT");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", "");
+            }
+        }
+        #endregion
+
+        public void UpdateQuotation(BOL_REQUEST_DETAIL oREQUEST_DETAIL, DataTable exportInfo, bool willUpdateYearCost, out String strMsg)
+        {
+            PreapareQuery(exportInfo, willUpdateYearCost);
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strUpdateQuotation);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQUEST_DETAIL.REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST", oREQUEST_DETAIL.INITIAL_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_DISCOUNTS", oREQUEST_DETAIL.INITIAL_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_INCLUDING_TAX", oREQUEST_DETAIL.INITIAL_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST", oREQUEST_DETAIL.MONTHLY_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_DISCOUNTS", oREQUEST_DETAIL.MONTHLY_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_INCLUDING_TAX", oREQUEST_DETAIL.MONTHLY_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST", oREQUEST_DETAIL.YEAR_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_DISCOUNTS", oREQUEST_DETAIL.YEAR_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_INCLUDING_TAX", oREQUEST_DETAIL.YEAR_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TAX", oREQUEST_DETAIL.TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@QUOTATION_DATE", oREQUEST_DETAIL.QUOTATION_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_AT_RAW) ? oREQUEST_DETAIL.UPDATED_AT_RAW : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_BY) ? oREQUEST_DETAIL.UPDATED_BY : (object)DBNull.Value));
             oMaster.ExcuteQuery(2, out strMsg);
         }
         #endregion

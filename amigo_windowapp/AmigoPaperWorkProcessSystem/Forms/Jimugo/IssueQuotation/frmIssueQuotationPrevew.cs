@@ -20,16 +20,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
     public partial class frmIssueQuotationPrevew : Form
     {
         #region Declare
-        private UIUtility uIUtility;
-        string COMPANY_NO_BOX = "";
-        string REQ_SEQ = "";
-        string QUOTATION_DATE = "";
-        string ORDER_DATE = "";
-        string COMPANY_NAME = "";
-        string EMAIL_ADDRESS = "";
-        string EDI_ACCOUNT = "";
-        string DOWNLOAD_LINK = "";
-        string EXPORT_TYPE = "";
+        DataTable _paraTable = new DataTable();
+        DataTable _exportTable = new DataTable();
         #endregion
 
         #region Constructors
@@ -38,21 +30,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
             InitializeComponent();
         }
 
-        public frmIssueQuotationPrevew(DataTable dt)
+        public frmIssueQuotationPrevew(DataTable paraTable, DataTable exportTable)
         {
             InitializeComponent();
-            foreach (DataRow row in dt.Rows)
-            {
-                COMPANY_NO_BOX = row["COMPANY_NO_BOX"].ToString();
-                REQ_SEQ = row["REQ_SEQ"].ToString();
-                QUOTATION_DATE = row["QUOTATION_DATE"].ToString();
-                ORDER_DATE = row["ORDER_DATE"].ToString();
-                COMPANY_NAME = row["COMPANY_NAME"].ToString();
-                EMAIL_ADDRESS = row["EMAIL_ADDRESS"].ToString();
-                EDI_ACCOUNT = row["EDI_ACCOUNT"].ToString();
-                DOWNLOAD_LINK = row["DOWNLOAD_LINK"].ToString();
-                EXPORT_TYPE = row["EXPORT_TYPE"].ToString();
-            }
+            _paraTable = paraTable;
+            _exportTable = exportTable;
         }
         #endregion
 
@@ -61,28 +43,26 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
         {
             try
             {
-                uIUtility = new UIUtility();
-                string pdf_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp\Quotation_temp.pdf";
-                switch (EXPORT_TYPE)
+                for (int i = 0; i < _exportTable.Rows.Count; i++)
                 {
-                    case "1":
-                        pdfInitialQuote.LoadFromFile(pdf_deirectory);
-                        tbQuoteType.SelectedIndex = 0;
-                        break;
-                    case "2":
-                        pdfMonthlyQuote.LoadFromFile(pdf_deirectory);
-                        tbQuoteType.SelectedIndex = 1;
-                        break;
-                    case "3":
-                        pdfInitialQuote.LoadFromFile(pdf_deirectory);
-                        tbQuoteType.SelectedIndex = 0;
-                        break;
-                    case "4":
-                        pdfOrderForm.LoadFromFile(pdf_deirectory);
-                        tbQuoteType.SelectedIndex = 2;
-                        break;
+                    string strExpType = _exportTable.Rows[i]["ExportType"].ToString();
+                    string pdf_deirectory = _exportTable.Rows[i]["LocalPath"].ToString();
+                    switch (strExpType)
+                    {
+                        case "1":
+                            pdfInitialQuote.LoadFromFile(pdf_deirectory);
+                            break;
+                        case "2":
+                            pdfMonthlyQuote.LoadFromFile(pdf_deirectory);
+                            break;
+                        case "3":
+                            pdfOrderForm.LoadFromFile(pdf_deirectory);
+                            break;
+                        case "4":
+                            pdfInitialQuote.LoadFromFile(pdf_deirectory);
+                            break;
+                    }
                 }
-                
             }
             catch (System.Exception ex)
             {
@@ -100,119 +80,82 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
         }
         #endregion
 
+        #region FormClosing
         private void FrmPreviewScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             pdfInitialQuote.Dispose();
             pdfMonthlyQuote.Dispose();
             pdfOrderForm.Dispose();
         }
+        #endregion
 
         #region btnCreateMail_Click
-        private async void btnCreateMail_Click(object sender, EventArgs e)
+        private void btnCreateMail_Click(object sender, EventArgs e)
         {
-            string filename = WebUtility.GetFileNamefromURL(DOWNLOAD_LINK);
-            DataTable dt = DTRequestDetailUpdate(COMPANY_NO_BOX, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPANY_NAME, EMAIL_ADDRESS, EDI_ACCOUNT, filename);
-
-            //send to web service
-            frmIssuQuotationPreviewController oController = new frmIssuQuotationPreviewController();
             try
             {
-                string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + "/Temp/Zip";
+                //send to web service
+                frmIssuQuotationPreviewController oController = new frmIssuQuotationPreviewController();
 
-                if (!Directory.Exists(temp_deirectory))
+                DataTable result = oController.GetQuotationMail(
+                      Utility.GetParameterByName("COMPANY_NO_BOX", _paraTable),
+                      Utility.GetParameterByName("REQ_SEQ", _paraTable),
+                      Utility.GetParameterByName("CONSUMPTION_TAX", _paraTable),
+                      Utility.GetParameterByName("INITIAL_COST_DISCOUNTS", _paraTable),
+                      Utility.GetParameterByName("MONTHLY_COST_DISCOUNTS", _paraTable),
+                      Utility.GetParameterByName("YEARLY_SPECIAL_DISCOUNT", _paraTable),
+                      Utility.GetParameterByName("INPUT_PERSON", _paraTable),
+                      Utility.DtToJSon(_exportTable, "Export Table"),
+                      Utility.GetParameterByName("CONTRACT_PLAN", _paraTable)
+                    );
+
+                string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
+
+
+                if (string.IsNullOrEmpty(error_message))
                 {
-                    Directory.CreateDirectory(temp_deirectory);
-                }
-                //delete temp files
-                Utility.DeleteFiles(temp_deirectory);
 
-                //send notification
-                DataTable result = oController.SendMailNotification(dt, out uIUtility.MetaData);
+                    string emailAddressCC = Convert.ToString(result.Rows[0]["EmailAddressCC"]);
+                    string templateString = Convert.ToString(result.Rows[0]["TemplateString"]);
+                    string subjectString = Convert.ToString(result.Rows[0]["SubjectString"]);
 
-                string return_message = "";
-                try
-                {
-                    return_message = result.Rows[0]["Error Message"].ToString();
-                }
-                catch (System.Exception ex)
-                {
+                    #region Open Outlook mail Client
+                    Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
 
-                }
+                    MailItem mailItem = (MailItem)outlookApp.CreateItem(OlItemType.olMailItem);
 
-                if (string.IsNullOrEmpty(return_message))
-                {
-                    //download zip file
-                    string zipDownloadLink = result.Rows[0]["ZipDownloadLink"].ToString();
-                    filename = WebUtility.GetFileNamefromURL(zipDownloadLink);
-                    string emailAddressCC = result.Rows[0]["EmailAddressCC"].ToString();
-                    string templateString = result.Rows[0]["TemplateString"].ToString();
-                    string subjectString = result.Rows[0]["SubjectString"].ToString();
+                    mailItem.Subject = subjectString; //come from configtable
+                    mailItem.To = Utility.GetParameterByName("EMAIL_ADDRESS", _paraTable);
+                    mailItem.Body = templateString;
+                    mailItem.CC = emailAddressCC;
 
-                    string FIleAttachment = temp_deirectory + "/" + filename;
-                    bool success = await Core.WebUtility.Download(zipDownloadLink, FIleAttachment);
+                    mailItem.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
 
-                    if (success)
+                    for (int i = 0; i < _exportTable.Rows.Count; i++)
                     {
-                        #region Outlook Mail Open and Replace
-                        Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
-
-                        Microsoft.Office.Interop.Outlook.MailItem mailItem = (Microsoft.Office.Interop.Outlook.MailItem)outlookApp.CreateItem(Microsoft.Office.Interop.Outlook.OlItemType.olMailItem);
-
-                        mailItem.Subject = subjectString; //come from configtable
-                        mailItem.To = EMAIL_ADDRESS;
-                        mailItem.Body = templateString;
-                        mailItem.CC = emailAddressCC;
-
-                        mailItem.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
-                        // make sure a filename was passed
-                        if (string.IsNullOrEmpty(FIleAttachment) == false)
+                        string filepath = Convert.ToString(_exportTable.Rows[i]["localPath"]);
+                        if (!string.IsNullOrEmpty(filepath))
                         {
-                            // need to check to see if file exists before we attach !
-                            if (!File.Exists(FIleAttachment))
-                                MessageBox.Show("Attached document " + FIleAttachment + " does not exist", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            // need to check to see if file exists before we attach
+                            if (!File.Exists(filepath))
+                                MessageBox.Show("Attached document " + filepath + " does not exist", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             else
                             {
-                               Attachment attachment = mailItem.Attachments.Add(FIleAttachment, Microsoft.Office.Interop.Outlook.OlAttachmentType.olByValue, Type.Missing, Type.Missing);
+                                Attachment attachment = mailItem.Attachments.Add(filepath, OlAttachmentType.olByValue, Type.Missing, Type.Missing);
                             }
                         }
-
-                        mailItem.Display(true);
-                        #endregion
                     }
-
-
+                    mailItem.Display(true);
+                    #endregion
                 }
                 else
                 {
-                    MetroMessageBox.Show(this, "\n" + return_message, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
-
             }
-
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
-                Utility.WriteErrorLog(ex.Message, ex, false);
             }
-        }
-        #endregion
-
-        #region Parametere
-        public DataTable DTRequestDetailUpdate(string COMPANY_NO_BOX, string REQ_SEQ, string QUOTATION_DATE, string ORDER_DATE, string COMPANY_NAME, string EMAIL_ADDRESS, string EDI_ACCOUNT, String DOWNLOAD_LINK)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("COMPANY_NO_BOX");
-            dt.Columns.Add("REQ_SEQ");
-            dt.Columns.Add("QUOTATION_DATE");
-            dt.Columns.Add("ORDER_DATE");
-            dt.Columns.Add("COMPANY_NAME");
-            dt.Columns.Add("EMAIL_ADDRESS");
-            dt.Columns.Add("EDI_ACCOUNT");
-            dt.Columns.Add("DOWNLOAD_LINK");
-            dt.Rows.Add(COMPANY_NO_BOX, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPANY_NAME, EMAIL_ADDRESS, EDI_ACCOUNT, DOWNLOAD_LINK);
-
-            return dt;
         }
         #endregion
        

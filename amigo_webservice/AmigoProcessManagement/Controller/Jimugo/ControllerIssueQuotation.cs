@@ -12,6 +12,8 @@ using Ionic.Zip;
 using System.Transactions;
 using System.Linq;
 using System.Globalization;
+using Newtonsoft.Json;
+using Spire.Xls.Core.Spreadsheet.Shapes;
 
 namespace AmigoProcessManagement.Controller
 {
@@ -21,27 +23,10 @@ namespace AmigoProcessManagement.Controller
         MetaResponse response;
         Stopwatch timer;
         string con = Properties.Settings.Default.MyConnection;
-        String UPDATED_AT_DATETIME;
+        DateTime TEMP;
         string CURRENT_DATETIME;
         string CURRENT_USER;
-        int Export_Type;
 
-        private string Login_ID;
-        string COMPANY_NO_BOX;
-        string REQ_SEQ;
-        string QUOTATION_DATE;
-        string ORDER_DATE;
-        string COMPLETION_NOTIFICATION_DATE;
-        string COMPANY_NAME;
-        string EMAIL_ADDRESS;
-        string DOWNLOAD_LINK;
-        string EDI_ACCOUNT;
-        string FILENAME;
-
-        REQUEST_ID DAL_REQUEST_ID;
-        REQUEST_DETAIL DAL_REQUEST_DETAIL;
-        REPORT_HISTORY DAL_REPORT_HISTORY;
-        REQ_ADDRESS DAL_REQ_ADDRESS;
         #endregion
 
         #region Constructor
@@ -51,9 +36,8 @@ namespace AmigoProcessManagement.Controller
             timer.Start();
             response = new MetaResponse();
             //UPDATED_AT
-            DateTime temp = DateTime.Now;
-            UPDATED_AT_DATETIME = temp.ToString("yyyy/MM/dd HH:mm");
-            CURRENT_DATETIME = temp.ToString("yyyyMMddHHmmss");
+            TEMP = DateTime.Now;
+            CURRENT_DATETIME = TEMP.ToString("yyyyMMddHHmmss");
         }
         public ControllerIssueQuotation(string authHeader) : this()
         {
@@ -102,61 +86,72 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region PreviewFunction
-        public MetaResponse DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark,
-            string strFromCertificate, string strToCertificate, string authHeader, string strExportType, string strFileHeader, string strContractPlan, decimal decDiscount)
+        public MetaResponse DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate,
+            string strFromCertificate, string strToCertificate, string strExportInfo, string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
             try
             {
-                Login_ID = "";//Utility_Component.DecodeAuthHeader(authHeader)[0] == null ? null : Utility_Component.DecodeAuthHeader(authHeader)[0];
-
-                //int status;
                 //message for pop up
                 DataTable messagecode = new DataTable();
                 messagecode.Columns.Add("Message");
                 messagecode.Columns.Add("Error Message");
                 DataRow dr = messagecode.NewRow();
 
-                string saveFileName = "";
-                response = getPDF(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, Remark, strFromCertificate, strToCertificate, strExportType, saveFileName, strFileHeader, strContractPlan, decDiscount);
-
-
-
+                response = getPDF(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
+                response.Status = 1;
                 return response; //process 3 successful
-
             }
             catch (Exception ex)
             {
                 return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
-            }
+            }            
         }
 
         #endregion
 
         #region PDF Create
-        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate,
-            string Remark, string strFromCertificate, string strToCertificate, string strExportType, String fileName, string strFileHeader, string strContractPlan, decimal decDiscount)
+        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, 
+            string expireDate, string strFromCertificate, string strToCertificate, string strExportInfo, string strContractPlan,
+            string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
             DataTable result = new DataTable();
             result.Clear();
+            result.Columns.Add("ExportType");
             result.Columns.Add("DownloadLink");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
-            switch (strExportType)
-            {
-                case "1":
-                    result = Preview_InitialQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, Remark, decDiscount, fileName, strFileHeader);
-                    break;
-                case "2":
-                    result = Preview_MonthlyQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, Remark, decDiscount, fileName, strFileHeader);
-                    break;
-                case "3":
-                    result = Preview_PIBrowsing(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, Remark, strFromCertificate, strToCertificate, decDiscount, fileName, strFileHeader);
-                    break;
-                case "4":
-                    result = Preview_OrderForm(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt,
-                        startDate, expireDate, Remark, strFromCertificate, strToCertificate, decDiscount, fileName, strFileHeader, strContractPlan);
-                    break;
-            }
+
+            DataTable dtExportInfo = Utility_Component.JsonToDt(strExportInfo);
+         
+            for (int i = 0; i < dtExportInfo.Rows.Count; i++)
+                {
+                    string strExportType = dtExportInfo.Rows[i]["ExportType"] == null ? "" : dtExportInfo.Rows[i]["ExportType"].ToString();
+                    decimal decDiscount = (decimal)0;
+                    decimal.TryParse(dtExportInfo.Rows[i]["SpecialDiscount"] == null ? "0" : dtExportInfo.Rows[i]["SpecialDiscount"].ToString(), out decDiscount);
+                    DataTable single_result = new DataTable();                                    
+                    
+                    switch (strExportType)
+                    {
+                        case "1":
+                            single_result = Preview_InitialQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, INITIAL_REMARK, decDiscount);
+                            break;
+                        case "2":
+                            single_result = Preview_MonthlyQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, MONTHLY_REMARK, decDiscount);
+                            break;
+                        case "4":
+                            single_result = Preview_PIBrowsing(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, PI_REMARK, strFromCertificate, strToCertificate, decDiscount);
+                            break;
+                        case "3":
+                            single_result = Preview_OrderForm(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt,
+                                startDate, expireDate, ORDER_REMARK, strFromCertificate, strToCertificate, decDiscount, strContractPlan);
+                            break;
+                    }
+                    
+                    result.Rows.Add(strExportType, single_result.Rows[0]["DownloadLink"], single_result.Rows[0]["Message"], single_result.Rows[0]["Error Message"]);
+                }
+
+            
+            
             response.Data = Utility.Utility_Component.DtToJSon(result, "pdfData");
             response.Status = 1;
             return response;
@@ -165,19 +160,14 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Preview_InitialQuotation
-        protected DataTable Preview_InitialQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount, String fileName, string strFileHeader)
+        protected DataTable Preview_InitialQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
-            String file_path = "";// conf.getStringValue("template.Path.CompletionNotification");
-            string strRPTTYPE = "";
-            string strSubject = "";
-            string strExtraCondition = "";
-
-            file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Initialquotation.Normal"));
-            FILENAME = strFileHeader + "_Quotation_" + COMPANY_NAME + "様_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            strSubject = "Initial quotation : Amigo Cloud EDI Initial expense";
-            strExtraCondition = " AND REQ.Type=1 AND Quantity>0";
-            strRPTTYPE = "1";
+            String file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Initialquotation.Normal"));
+            string strRPTTYPE = "1";
+            string strSubject = "Amigo Cloud EDI 初期費用";
+            string strExtraCondition = " AND REQ.Type=1 AND Quantity > 0";
+            string FILENAME = COMPANY_NO_BOX + "-"+ strRPTTYPE + "-"+ REQ_SEQ + "_御見積書_" + COMPANY_NAME + "様_" + CURRENT_DATETIME;
 
             FileInfo info = new FileInfo(file_path);
             Workbook workbook = new Workbook();
@@ -206,7 +196,7 @@ namespace AmigoProcessManagement.Controller
             decimal decTotal = 0;
 
             #region Header Information
-            sheet.Range["J2"].Text = COMPANY_NO_BOX + strRPTTYPE + REQ_SEQ;
+            sheet.Range["J2"].Text = COMPANY_NO_BOX + "-" + strRPTTYPE + "-" + REQ_SEQ;
             sheet.Range["J3"].Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString("00") + "月" + DateTime.Now.Day.ToString("00") + "日";
             sheet.Range["A5"].Text = COMPANY_NAME;
 
@@ -361,19 +351,14 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Preview_MonthlyQuotation
-        protected DataTable Preview_MonthlyQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount, String fileName, string strFileHeader)
+        protected DataTable Preview_MonthlyQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
-            String file_path = "";// conf.getStringValue("template.Path.CompletionNotification");
-            string strRPTTYPE = "";
-            string strSubject = "";
-            string strExtraCondition = "";
-
-            file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Monthlyquotation.Normal"));
-            FILENAME = strFileHeader + "_Quotation_" + COMPANY_NAME + "様_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            strSubject = " Monthly quotation : Amigo Cloud EDI Monthly usage fee";
-            strExtraCondition = " AND REQ.Type=2";
-            strRPTTYPE = "2";
+            String file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Monthlyquotation.Normal"));
+            string strRPTTYPE = "2";
+            string strSubject = "Amigo Cloud EDI 月額利用料";
+            string strExtraCondition = " AND REQ.Type=2";
+            string FILENAME = COMPANY_NO_BOX + "-"+ strRPTTYPE + "-" + REQ_SEQ + "_御見積書_" + COMPANY_NAME + "様_" + CURRENT_DATETIME;     
 
             FileInfo info = new FileInfo(file_path);
             Workbook workbook = new Workbook();
@@ -402,7 +387,7 @@ namespace AmigoProcessManagement.Controller
             decimal decTotal = 0;
 
             #region Header Information
-            sheet.Range["J2"].Text = COMPANY_NO_BOX + strRPTTYPE + REQ_SEQ;
+            sheet.Range["J2"].Text = COMPANY_NO_BOX + "-" + strRPTTYPE + "-" + REQ_SEQ;
             sheet.Range["J3"].Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString("00") + "月" + DateTime.Now.Day.ToString("00") + "日";
             sheet.Range["A5"].Text = COMPANY_NAME;
 
@@ -560,17 +545,15 @@ namespace AmigoProcessManagement.Controller
 
         #region Preview_PIBrowsing
         protected DataTable Preview_PIBrowsing(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate,
-            string expireDate, string Remark, string strFromCertificate, string strToCertificate, decimal decDiscount, String fileName, string strFileHeader)
+            string expireDate, string REMARK, string strFromCertificate, string strToCertificate, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
-            String file_path = "";// conf.getStringValue("template.Path.CompletionNotification");
-            string strRPTTYPE = "";
-            string strSubject = "";
-            string strExtraCondition = "";
+            String file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Initialquotation.Normal"));
+            string strRPTTYPE = "1";
+            string strSubject = "Amigo Cloud EDI 生産情報閲覧";
+            string strExtraCondition = " AND REQ.Type IN (1,3) AND Quantity>0";
+            string FILENAME = COMPANY_NO_BOX + "-" + strRPTTYPE + "-" + REQ_SEQ + "_御見積書_" + COMPANY_NAME + "様_" + CURRENT_DATETIME;
 
-            file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Initialquotation.Normal"));
-            FILENAME = strFileHeader + "_Quotation_" + COMPANY_NAME + "様_" + DateTime.Now.ToString("yyyyMMddHHmmss");
-            strExtraCondition = " AND REQ.Type IN (1,3) AND Quantity>0";
 
             FileInfo info = new FileInfo(file_path);
             Workbook workbook = new Workbook();
@@ -579,19 +562,6 @@ namespace AmigoProcessManagement.Controller
             REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
             string strMessage = "";
             DataTable dt = DAL_REQUEST_DETAIL.GetQuotationData(COMPANY_NO_BOX, REQ_SEQ, strExtraCondition, out strMessage);
-            DataTable dtBasic = new DataTable();
-            DataTable dtOption = new DataTable();
-            DataTable dtSD = new DataTable();
-
-            var BASIC = from myRow in dt.AsEnumerable()
-                        where myRow.Field<string>("FEE_STRUCTURE").Trim() == "BASIC"
-                        select myRow;
-            var OPTION = from myRow in dt.AsEnumerable()
-                         where myRow.Field<string>("FEE_STRUCTURE").Trim() == "OPTION"
-                         select myRow;
-            var SD = from myRow in dt.AsEnumerable()
-                     where myRow.Field<string>("FEE_STRUCTURE").Trim() == "SD"
-                     select myRow;
 
             Worksheet sheet = workbook.Worksheets[0];
             int intHeaderStart = 28;
@@ -599,7 +569,7 @@ namespace AmigoProcessManagement.Controller
             decimal decTotal = 0;
 
             #region Header Information
-            sheet.Range["J2"].Text = COMPANY_NO_BOX + strRPTTYPE + REQ_SEQ;
+            sheet.Range["J2"].Text = COMPANY_NO_BOX + "-" + strRPTTYPE + "-" + REQ_SEQ;
             sheet.Range["J3"].Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString("00") + "月" + DateTime.Now.Day.ToString("00") + "日";
             sheet.Range["A5"].Text = COMPANY_NAME;
 
@@ -611,20 +581,20 @@ namespace AmigoProcessManagement.Controller
             sheet.Range["F16"].Text = "発行日からＸＸ日間有効 " + ExpireDate.ToString("yyyy-MM-dd");//9
             #endregion
 
-            #region Basic Large Header
+            #region Table
             int intHeaderNumberSerial = 0;
-            if (BASIC.Any() || BASIC != null)
+            if (dt.Rows.Count > 0)
             {
-                dtBasic = BASIC.CopyToDataTable();
                 sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
                 intHeaderNumberSerial++;
                 sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
 
-                var Type1 = from myRow in dtBasic.AsEnumerable()
-                            where myRow.Field<int>("TYPE") == 1
+                var Type1 = from myRow in dt.AsEnumerable()
+                            where myRow.Field<int>("TYPE") == 1 && myRow.Field<string>("CONTRACT_CODE").Trim() != "PRODUCT"
                             select myRow;
-                var Type3 = from myRow in dtBasic.AsEnumerable()
-                            where myRow.Field<int>("TYPE") == 3
+
+                var Type3 = from myRow in dt.AsEnumerable()
+                            where myRow.Field<int>("TYPE") == 3 && myRow.Field<string>("CONTRACT_CODE").Trim() != "PRODUCT"
                             select myRow;
                 intItemStart++;
                 if (Type1.Any())
@@ -634,28 +604,30 @@ namespace AmigoProcessManagement.Controller
                     intItemStart++;
                     for (int itemIndex = 0; itemIndex < dtType1.Rows.Count; itemIndex++)
                     {
-                        decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                        string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                        int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                        decimal initial_cost = decimal.Parse(dtType1.Rows[itemIndex]["INITIAL_COST"] == null ? "0" : dtType1.Rows[itemIndex]["INITIAL_COST"].ToString());
+                        decimal initial_expense = decimal.Parse(dtType1.Rows[itemIndex]["INITIAL_EXPENSE"] == null ? "0" : dtType1.Rows[itemIndex]["INITIAL_EXPENSE"].ToString());
+                        string strItemText = dtType1.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtType1.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                        string strContractUnit = (dtType1.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtType1.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                        int intContractQTY = int.Parse(dtType1.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtType1.Rows[itemIndex]["CONTRACT_QTY"].ToString());
 
                         if (intContractQTY > 0)
                         {
                             strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
 
                         }
-                        decTotal = decTotal + (decCost * intContractQTY);
+                        decTotal = decTotal + initial_expense;
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                         sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                        sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                        sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                     }
                 }
                 if (Type3.Any())
                 {
+                    intItemStart++;
                     DataTable dtType3 = Type3.CopyToDataTable();
                     DateTime dtmFromDate = DateTime.ParseExact(strFromCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
                     DateTime dtmToDate = DateTime.ParseExact(strToCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
@@ -668,104 +640,23 @@ namespace AmigoProcessManagement.Controller
 
                     for (int itemIndex = 0; itemIndex < dtType3.Rows.Count; itemIndex++)
                     {
-                        decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["MONTHLY_COST"] == null ? "" : dtBasic.Rows[itemIndex]["MONTHLY_COST"].ToString());
-                        string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                        int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                        decimal monthly_cost = decimal.Parse(dtType3.Rows[itemIndex]["MONTHLY_COST"] == null ? "0" : dtType3.Rows[itemIndex]["MONTHLY_COST"].ToString());
+                        decimal monthly_usage_fee = decimal.Parse(dtType3.Rows[itemIndex]["MONTHLY_USAGE_FEE"] == null ? "0" : dtType3.Rows[itemIndex]["MONTHLY_USAGE_FEE"].ToString());
+                        string strItemText = dtType3.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtType3.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                        string strContractUnit = (dtType3.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtType3.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                        int intContractQTY = int.Parse(dtType3.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtType3.Rows[itemIndex]["CONTRACT_QTY"].ToString());
 
                         if (intContractQTY > 0)
                         {
                             strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
 
                         }
-                        decTotal = decTotal + (decCost * intContractQTY);
+                        decTotal = decTotal + (monthly_usage_fee * intTotalMonth);
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                         sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                        sheet.Range["I" + intItemStart.ToString()].Text = monthly_cost.ToString("N");
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
-                        sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        intItemStart++;
-                        sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
-                        intItemStart++;
-                    }
-                }
-                intHeaderStart++;
-            }
-            #endregion
-
-            #region Option Large Header
-            if (OPTION.Any())
-            {
-                dtOption = OPTION.CopyToDataTable();
-                sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
-                intHeaderNumberSerial++;
-                sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
-
-                var Type1 = from myRow in dtOption.AsEnumerable()
-                            where myRow.Field<int>("TYPE") == 1
-                            select myRow;
-                var Type3 = from myRow in dtOption.AsEnumerable()
-                            where myRow.Field<int>("TYPE") == 3
-                            select myRow;
-                intItemStart++;
-                if (Type1.Any())
-                {
-                    DataTable dtType1 = Type1.CopyToDataTable();
-                    sheet.Range["C" + intItemStart.ToString()].Text = "初期費用";
-                    intItemStart++;
-                    for (int itemIndex = 0; itemIndex < dtType1.Rows.Count; itemIndex++)
-                    {
-                        decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                        string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                        int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-
-                        if (intContractQTY > 0)
-                        {
-                            strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
-                        }
-                        decTotal = decTotal + (decCost * intContractQTY);
-                        sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                        sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
-                        sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
-                        sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        intItemStart++;
-                    }
-                }
-                if (Type3.Any())
-                {
-                    DataTable dtType3 = Type3.CopyToDataTable();
-                    DateTime dtmFromDate = DateTime.ParseExact(strFromCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
-                    DateTime dtmToDate = DateTime.ParseExact(strToCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
-
-                    int intTotalMonth = (int)((int)dtmToDate.Subtract(dtmFromDate).Days / (365.25 / 12));
-
-                    sheet.Range["C" + intItemStart.ToString()].Text = "年額費用(" + intTotalMonth.ToString() + "ヶ月分)";
-                    intItemStart++;
-
-
-                    for (int itemIndex = 0; itemIndex < dtType3.Rows.Count; itemIndex++)
-                    {
-                        decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["MONTHLY_COST"] == null ? "" : dtBasic.Rows[itemIndex]["MONTHLY_COST"].ToString());
-                        string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                        int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-
-                        if (intContractQTY > 0)
-                        {
-                            strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
-                        }
-                        decTotal = decTotal + (decCost * intContractQTY);
-                        sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                        sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
-                        sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                        sheet.Range["J" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                         sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
@@ -787,14 +678,20 @@ namespace AmigoProcessManagement.Controller
             #endregion
 
             #region GrandTotal
-            sheet.Range["J43"].Text = (decTotal + decDiscount).ToString("N0");
+            sheet.Range["J43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
             sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             #endregion
 
             #region Header Amount 
-            sheet.Range["G12"].Text = (decTotal + decDiscount).ToString("N0");
-            sheet.Range["G13"].Text = ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-            sheet.Range["G14"].Text = ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+            sheet.Range["F13"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+            sheet.Range["F14"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12:F14"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+            #endregion
+
+            #region Remark
+            XlsRectangleShape shape = sheet.RectangleShapes[4] as XlsRectangleShape;
+            shape.Text += "\n" + REMARK;
             #endregion
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
@@ -819,14 +716,14 @@ namespace AmigoProcessManagement.Controller
         #endregion        
 
         #region Preview_OrderForm
-        protected DataTable Preview_OrderForm(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, 
-            string startDate, string expireDate, string Remark, string strFromCertificate, string strToCertificate, decimal decDiscount, String fileName, 
-            string strFileHeader,string strContractPlan)
+        protected DataTable Preview_OrderForm(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt,
+            string startDate, string expireDate, string REMARK, string strFromCertificate, string strToCertificate, decimal decDiscount, string strContractPlan)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
-            string strSubject = "";
+            string strSubject = strContractPlan == "PRODUCT" ? "Amigo Cloud EDI 生産情報閲覧" : "Amigo Cloud EDI 初期費用";
+            string strRPTTYPE = "1";
             string file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Purchaseorder.Normal"));
-            string FILENAME = strFileHeader + "_Order form_" + COMPANY_NAME + "様_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            string FILENAME = COMPANY_NO_BOX + "-"+ strRPTTYPE + "-" + REQ_SEQ + "_注文書_" + COMPANY_NAME + "様_" + CURRENT_DATETIME;
             string strExtraCondition = "";
             if (strContractPlan == "PRODUCT")
             {
@@ -846,7 +743,7 @@ namespace AmigoProcessManagement.Controller
             DataTable dt = DAL_REQUEST_DETAIL.GetQuotationData(COMPANY_NO_BOX, REQ_SEQ, strExtraCondition, out strMessage);
             DataTable dtBasic = new DataTable();
             DataTable dtOption = new DataTable();
-            DataTable dtSD = new DataTable();          
+            DataTable dtSD = new DataTable();
 
             var BASIC = from myRow in dt.AsEnumerable()
                         where myRow.Field<string>("FEE_STRUCTURE").Trim() == "BASIC"
@@ -874,15 +771,12 @@ namespace AmigoProcessManagement.Controller
             string savePath = "/" + tempStorageFolder + "/" + FILENAME + ".pdf";
 
             #region Header Information
-            sheet.Range["J2"].Text = COMPANY_NO_BOX + " " + REQ_SEQ;
-            sheet.Range["J3"].Text = DateTime.Now.Year.ToString() + "年" + DateTime.Now.Month.ToString("00") + "月" + DateTime.Now.Day.ToString("00") + "日";
-            sheet.Range["A5"].Text = COMPANY_NAME;
-
+            
             sheet.Range["E9"].Text = strSubject;//4
-           
+
             #endregion
 
-            if (strContractPlan == "PRODUCT") // Initial Quotation
+            if (strContractPlan != "PRODUCT") // Initial Quotation
             {
                 #region Table Initial Data Put
                 #region Basic Large Header
@@ -893,27 +787,34 @@ namespace AmigoProcessManagement.Controller
                     sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
                     intHeaderNumberSerial++;
                     sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
+                    sheet.Range["G" + intHeaderStart.ToString()].Text = "初期費用";
 
                     for (int itemIndex = 0; itemIndex < dtBasic.Rows.Count; itemIndex++)
                     {
                         string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                        string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
                         int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                        decimal decCost = 0;
-                        decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-
-                        if (intContractQTY > 0)
+                        string strContractQTY = "";
+                        decimal initial_cost = 0;
+                        initial_cost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
+                        if (!string.IsNullOrEmpty(strContractUnit))
                         {
-                            strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
+                            strContractUnit = " [契約単位 " + strContractUnit + "]";
                         }
-                        decTotal = decTotal + (decCost * intContractQTY);
-                        sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                        sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N0");
+
+                        if (intContractQTY > 1)
+                        {
+                            strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                        }
+
+                        decTotal = decTotal + (initial_cost * intContractQTY);
+                        sheet.Range["D" + intItemStart.ToString()].Text = strItemText + strContractQTY + strContractUnit;
+                        sheet.Range["I" + intItemStart.ToString()].Text = intContractQTY.ToString();
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N0");
+                        sheet.Range["J" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                        sheet.Range["K" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
+                        sheet.Range["K" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                         intHeaderStart++;
                     }
@@ -931,22 +832,28 @@ namespace AmigoProcessManagement.Controller
                     for (int itemIndex = 0; itemIndex < dtOption.Rows.Count; itemIndex++)
                     {
                         string strItemText = dtOption.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        int intContractUnit = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtOption.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                        string strContractUnit = (dtOption.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtOption.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
                         int intContractQTY = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                        decimal decCost = 0;
-                        decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                        if (intContractUnit > 0)
+                        string strContractQTY = "";
+                        decimal initial_cost = 0;
+                        initial_cost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtOption.Rows[itemIndex]["INITIAL_COST"].ToString());
+                        if (!string.IsNullOrEmpty(strContractUnit))
                         {
-                            strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "[契約単位" + intContractUnit.ToString() + "]";
-
+                            strContractUnit = " [契約単位 " + strContractUnit + "]";
                         }
-                        decTotal = decTotal + (decCost * intContractQTY);
+
+                        if (intContractQTY > 1)
+                        {
+                            strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                        }
+                        decTotal = decTotal + (initial_cost * intContractQTY);
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                        sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N0");
+                        sheet.Range["I" + intItemStart.ToString()].Text = intContractQTY.ToString();
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N0");
+                        sheet.Range["J" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                        sheet.Range["K" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
+                        sheet.Range["K" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                         intHeaderStart++;
                     }
@@ -963,23 +870,29 @@ namespace AmigoProcessManagement.Controller
                     sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
                     for (int itemIndex = 0; itemIndex < dtSD.Rows.Count; itemIndex++)
                     {
-                        string strItemText = dtOption.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                        int intContractUnit = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtOption.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                        int intContractQTY = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                        decimal decCost = 0;
-                        decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                        if (intContractUnit > 0)
+                        string strItemText = dtSD.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtSD.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                        string strContractUnit = (dtSD.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtSD.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                        int intContractQTY = int.Parse(dtSD.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtSD.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                        string strContractQTY = "";
+                        decimal initial_cost = 0;
+                        initial_cost = decimal.Parse(dtSD.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtSD.Rows[itemIndex]["INITIAL_COST"].ToString());
+                        if (!string.IsNullOrEmpty(strContractUnit))
                         {
-                            strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "[契約単位" + intContractUnit.ToString() + "]";
-
+                            strContractUnit = " [契約単位 " + strContractUnit + "]";
                         }
-                        decTotal = decTotal + (decCost * intContractQTY);
+
+                        if (intContractQTY > 1)
+                        {
+                            strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                        }
+                        decTotal = decTotal + (initial_cost * intContractQTY);
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                        sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                        sheet.Range["I" + intItemStart.ToString()].Text = intContractQTY.ToString();
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                        sheet.Range["J" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                        sheet.Range["K" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
+                        sheet.Range["K" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                         intHeaderStart++;
                     }
@@ -992,20 +905,34 @@ namespace AmigoProcessManagement.Controller
                 {
                     sheet.Range["B42"].Text = (intHeaderNumberSerial + 1).ToString();
                     sheet.Range["C42"].Text = "特別値引き";
-                    sheet.Range["J42"].Text = decDiscount.ToString("N0");
-                    sheet.Range["J42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                    sheet.Range["K42"].Text = decDiscount.ToString("N0");
+                    sheet.Range["K42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                 }
                 #endregion
 
                 #region GrandTotal
-                sheet.Range["J43"].Text = (decTotal + decDiscount).ToString("N0");
-                sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                sheet.Range["K43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                sheet.Range["K43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                 #endregion
 
                 #region Header Amount 
-                sheet.Range["E12"].Text = (decTotal + decDiscount).ToString("N0");
-                sheet.Range["E13"].Text = ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-                sheet.Range["E14"].Text = ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+                sheet.Range["E10"].Text = "¥" + (decTotal + decDiscount).ToString("N0"); //5
+                sheet.Range["E10"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                sheet.Range["G10"].Text = "-"; 
+                sheet.Range["G10"].Style.HorizontalAlignment = HorizontalAlignType.Left;
+
+                sheet.Range["E11"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+                sheet.Range["G11"].Text = "-";
+                sheet.Range["G11"].Style.HorizontalAlignment = HorizontalAlignType.Left;
+
+                sheet.Range["E12"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+                sheet.Range["G12"].Text = "-";
+                sheet.Range["G12"].Style.HorizontalAlignment = HorizontalAlignType.Left;
+                #endregion
+
+                #region Remark
+                XlsRectangleShape shape = sheet.RectangleShapes[1] as XlsRectangleShape;
+                shape.Text += "\n"+ REMARK;
                 #endregion
                 #endregion
 
@@ -1017,23 +944,23 @@ namespace AmigoProcessManagement.Controller
                 dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
                 result.Rows.Add(dr);
             }
-            else if (strContractPlan != "PRODUCT") //PIBrowsing
+            else if (strContractPlan == "PRODUCT") //PIBrowsing
             {
                 #region Table PI Browsing Data Put
-                #region Basic Large Header
+                #region Table
                 int intHeaderNumberSerial = 0;
-                if (BASIC.Any())
+                if (dt.Rows.Count > 0)
                 {
-                    dtBasic = BASIC.CopyToDataTable();
                     sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
                     intHeaderNumberSerial++;
                     sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
 
-                    var Type1 = from myRow in dtBasic.AsEnumerable()
-                                where myRow.Field<int>("TYPE") == 1
+                    var Type1 = from myRow in dt.AsEnumerable()
+                                where myRow.Field<int>("TYPE") == 1 && myRow.Field<string>("CONTRACT_CODE").Trim() != "PRODUCT"
                                 select myRow;
-                    var Type3 = from myRow in dtBasic.AsEnumerable()
-                                where myRow.Field<int>("TYPE") == 3
+
+                    var Type3 = from myRow in dt.AsEnumerable()
+                                where myRow.Field<int>("TYPE") == 3 && myRow.Field<string>("CONTRACT_CODE").Trim() != "PRODUCT"
                                 select myRow;
                     intItemStart++;
                     if (Type1.Any())
@@ -1043,29 +970,30 @@ namespace AmigoProcessManagement.Controller
                         intItemStart++;
                         for (int itemIndex = 0; itemIndex < dtType1.Rows.Count; itemIndex++)
                         {
-                            decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                            string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                            string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                            int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                            decimal initial_cost = decimal.Parse(dtType1.Rows[itemIndex]["INITIAL_COST"] == null ? "0" : dtType1.Rows[itemIndex]["INITIAL_COST"].ToString());
+                            decimal initial_expense = decimal.Parse(dtType1.Rows[itemIndex]["INITIAL_EXPENSE"] == null ? "0" : dtType1.Rows[itemIndex]["INITIAL_EXPENSE"].ToString());
+                            string strItemText = dtType1.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtType1.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                            string strContractUnit = (dtType1.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtType1.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                            int intContractQTY = int.Parse(dtType1.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtType1.Rows[itemIndex]["CONTRACT_QTY"].ToString());
 
                             if (intContractQTY > 0)
                             {
                                 strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
 
                             }
-                            decTotal = decTotal + (decCost * intContractQTY);
+                            decTotal = decTotal + initial_expense;
                             sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                             sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                            sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                            sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
                             sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                            sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N");
                             sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                             intItemStart++;
-                            intHeaderStart++;
                         }
                     }
                     if (Type3.Any())
                     {
+                        intItemStart++;
                         DataTable dtType3 = Type3.CopyToDataTable();
                         DateTime dtmFromDate = DateTime.ParseExact(strFromCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
                         DateTime dtmToDate = DateTime.ParseExact(strToCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
@@ -1078,111 +1006,27 @@ namespace AmigoProcessManagement.Controller
 
                         for (int itemIndex = 0; itemIndex < dtType3.Rows.Count; itemIndex++)
                         {
-                            decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["MONTHLY_COST"] == null ? "" : dtBasic.Rows[itemIndex]["MONTHLY_COST"].ToString());
-                            string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                            string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                            int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                            decimal monthly_cost = decimal.Parse(dtType3.Rows[itemIndex]["MONTHLY_COST"] == null ? "0" : dtType3.Rows[itemIndex]["MONTHLY_COST"].ToString());
+                            decimal monthly_usage_fee = decimal.Parse(dtType3.Rows[itemIndex]["MONTHLY_USAGE_FEE"] == null ? "0" : dtType3.Rows[itemIndex]["MONTHLY_USAGE_FEE"].ToString());
+                            string strItemText = dtType3.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtType3.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                            string strContractUnit = (dtType3.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtType3.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                            int intContractQTY = int.Parse(dtType3.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtType3.Rows[itemIndex]["CONTRACT_QTY"].ToString());
 
                             if (intContractQTY > 0)
                             {
                                 strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
 
                             }
-                            decTotal = decTotal + (decCost * intContractQTY);
+                            decTotal = decTotal + (monthly_usage_fee * intTotalMonth);
                             sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                             sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                            sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                            sheet.Range["I" + intItemStart.ToString()].Text = monthly_cost.ToString("N");
                             sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                            sheet.Range["J" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N");
                             sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                             intItemStart++;
                             sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
                             intItemStart++;
-                            intHeaderStart++;
-                        }
-                    }
-                    intHeaderStart++;
-                }
-                #endregion
-
-                #region Option Large Header
-                if (OPTION.Any())
-                {
-                    dtOption = OPTION.CopyToDataTable();
-                    sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
-                    intHeaderNumberSerial++;
-                    sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
-
-                    var Type1 = from myRow in dtOption.AsEnumerable()
-                                where myRow.Field<int>("TYPE") == 1
-                                select myRow;
-                    var Type3 = from myRow in dtOption.AsEnumerable()
-                                where myRow.Field<int>("TYPE") == 3
-                                select myRow;
-                    intItemStart++;
-                    if (Type1.Any())
-                    {
-                        DataTable dtType1 = Type1.CopyToDataTable();
-                        sheet.Range["C" + intItemStart.ToString()].Text = "初期費用";
-                        intItemStart++;
-                        for (int itemIndex = 0; itemIndex < dtType1.Rows.Count; itemIndex++)
-                        {
-                            decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                            string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                            string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                            int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-
-                            if (intContractQTY > 0)
-                            {
-                                strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
-                            }
-                            decTotal = decTotal + (decCost * intContractQTY);
-                            sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                            sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                            sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
-                            sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
-                            sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            intItemStart++;
-                            intHeaderStart++;
-                        }
-                    }
-                    if (Type3.Any())
-                    {
-                        DataTable dtType3 = Type3.CopyToDataTable();
-                        DateTime dtmFromDate = DateTime.ParseExact(strFromCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
-                        DateTime dtmToDate = DateTime.ParseExact(strToCertificate, "yyyyMMdd", CultureInfo.InvariantCulture);
-
-                        int intTotalMonth = (int)((int)dtmToDate.Subtract(dtmFromDate).Days / (365.25 / 12));
-
-                        sheet.Range["C" + intItemStart.ToString()].Text = "年額費用(" + intTotalMonth.ToString() + "ヶ月分)";
-                        intItemStart++;
-
-
-                        for (int itemIndex = 0; itemIndex < dtType3.Rows.Count; itemIndex++)
-                        {
-                            decimal decCost = decimal.Parse(dtBasic.Rows[itemIndex]["MONTHLY_COST"] == null ? "" : dtBasic.Rows[itemIndex]["MONTHLY_COST"].ToString());
-                            string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                            string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                            int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-
-                            if (intContractQTY > 0)
-                            {
-                                strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
-                            }
-                            decTotal = decTotal + (decCost * intContractQTY);
-                            sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                            sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                            sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
-                            sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
-                            sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            intItemStart++;
-                            sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
-                            intItemStart++;
-                            intHeaderStart++;
                         }
                     }
                     intHeaderStart++;
@@ -1200,13 +1044,18 @@ namespace AmigoProcessManagement.Controller
                 #endregion
 
                 #region GrandTotal
-                sheet.Range["J43"].Text = (decTotal + decDiscount).ToString("N0");
+                sheet.Range["J43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                 #endregion
 
                 #region Header Amount 
-                sheet.Range["E12"].Text = (decTotal + decDiscount).ToString("N0");
-                sheet.Range["E13"].Text = ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-                sheet.Range["E14"].Text = ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+
+                sheet.Range["E12"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                sheet.Range["E12"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                sheet.Range["E13"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+                sheet.Range["E13"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                sheet.Range["E14"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+                sheet.Range["E14"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                 #endregion
                 #endregion
 
@@ -1217,152 +1066,217 @@ namespace AmigoProcessManagement.Controller
                 DataRow dr = result.NewRow();
                 dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
                 result.Rows.Add(dr);
-            }           
+            }
             return result;
         }
         #endregion
 
-        #region SendMailCreate
-        public MetaResponse SendMailCreate(string list, string authHeader)  //add more parameter
+        #region MailCreate
+        public MetaResponse QuotationMailCreate(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN)  //add more parameter
         {
             #region Parameters
             //message for pop up
-            DataTable messagecode = new DataTable();
-            messagecode.Columns.Add("Error Message");
-            DataRow dr = messagecode.NewRow();
+            DataTable message = new DataTable();
+            message.Columns.Add("Error Message");
+            message.Columns.Add("Message");
+            message.Columns.Add("EmailAddressCC");
+            message.Columns.Add("TemplateString");
+            message.Columns.Add("SubjectString");
+            
 
-            DataTable dtParameter = Utility.Utility_Component.JsonToDt(list);
-
-            COMPANY_NO_BOX = dtParameter.Rows[0]["COMPANY_NO_BOX"].ToString();
-            REQ_SEQ = dtParameter.Rows[0]["REQ_SEQ"].ToString();
-            COMPANY_NAME = dtParameter.Rows[0]["COMPANY_NAME"].ToString();
-            EMAIL_ADDRESS = dtParameter.Rows[0]["EMAIL_ADDRESS"].ToString();
-            EDI_ACCOUNT = dtParameter.Rows[0]["EDI_ACCOUNT"].ToString();
-            FILENAME = dtParameter.Rows[0]["DOWNLOAD_LINK"].ToString();
+            DataTable dtExportInfo = Utility_Component.JsonToDt(ExportInfo);
             #endregion
             string msg = "";
 
-
-            Login_ID = Utility_Component.DecodeAuthHeader(authHeader)[0] == null ? null : Utility_Component.DecodeAuthHeader(authHeader)[0];
-
             try
             {
+                BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
+                BOL_REPORT_HISTORY oREPORT_HISTORY = new BOL_REPORT_HISTORY();
+            
+                //bol_req
                 using (TransactionScope dbtnx = new TransactionScope())
                 {
-                    DateTime dtNow = DateTime.Now;
-                    string conmletion_noti_date = dtNow.ToString("yyyy/MM/dd");
-                    string update_at = dtNow.ToString("yyyyMMddHHmmss");
 
-                    #region Update RequestDetail For CompleteNotificationSending
-                    DAL_REQUEST_DETAIL.SendMailUpdate(COMPLETION_NOTIFICATION_DATE, COMPANY_NO_BOX, REQ_SEQ, update_at, Login_ID, out msg);
+
+                    //Re execute 3-2 ②
+                    REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
+                    DataTable dt = DAL_REQUEST_DETAIL.GetQuotationData(COMPANY_NO_BOX, REQ_SEQ, "", out msg);
+
+                    #region UPDATE REQUEST_DETAIL
+                    oREQUEST_DETAIL.COMPANY_NO_BOX = COMPANY_NO_BOX;
+                    oREQUEST_DETAIL.QUOTATION_DATE = TEMP;
+
+                    oREQUEST_DETAIL.INITIAL_COST =   dt.AsEnumerable()
+                                                    .Where(r => r.Field<int>("TYPE") == 1 && r.Field<int>("QUANTITY") > 0)
+                                                    .Sum(r => r.Field<decimal>("INITIAL_EXPENSE"));
+
+                    oREQUEST_DETAIL.INITIAL_COST_DISCOUNTS = Convert.ToDecimal(INITIAL_SPECIAL_DISCOUNTS);
+
+                    decimal INITIAL_APPLYING_DISCOUNT_AMOUNT = oREQUEST_DETAIL.INITIAL_COST - oREQUEST_DETAIL.INITIAL_COST_DISCOUNTS;
+                    oREQUEST_DETAIL.INITIAL_COST_INCLUDING_TAX = INITIAL_APPLYING_DISCOUNT_AMOUNT + (INITIAL_APPLYING_DISCOUNT_AMOUNT * (Convert.ToDecimal(CONSUMPTION_TAX) * (decimal)0.01));
+
+                    oREQUEST_DETAIL.MONTHLY_COST = dt.AsEnumerable()
+                                                    .Where(r => r.Field<int>("TYPE") == 2)
+                                                    .Sum(r => r.Field<decimal>("MONTHLY_USAGE_FEE"));
+                    oREQUEST_DETAIL.MONTHLY_COST_DISCOUNTS = Convert.ToDecimal(MONTHLY_SPECIAL_DISCOUNTS);
+
+                    decimal MONTHLY_APPLYING_DISCOUNT_AMOUNT = oREQUEST_DETAIL.MONTHLY_COST - oREQUEST_DETAIL.MONTHLY_COST_DISCOUNTS;
+                    oREQUEST_DETAIL.MONTHLY_COST_INCLUDING_TAX = MONTHLY_APPLYING_DISCOUNT_AMOUNT + (MONTHLY_APPLYING_DISCOUNT_AMOUNT * (Convert.ToDecimal(CONSUMPTION_TAX) * (decimal)0.01));
+
+                    decimal UNIT_PRICE = dt.AsEnumerable()
+                                        .Where(r => r.Field<int>("TYPE") == 3 && r.Field<int>("QUANTITY") > 0)
+                                        .Sum(r => r.Field<decimal>("UNIT_PRICE"));
+                    oREQUEST_DETAIL.YEAR_COST = UNIT_PRICE * 12;
+                    oREQUEST_DETAIL.YEAR_COST_DISCOUNTS = Convert.ToDecimal(YEARLY_SPECIAL_DISCOUNT);
+
+                    decimal YEARLY_APPLYING_DISCOUNT_AMOUNT = oREQUEST_DETAIL.YEAR_COST - oREQUEST_DETAIL.YEAR_COST_DISCOUNTS;
+                    oREQUEST_DETAIL.YEAR_COST_INCLUDING_TAX = YEARLY_APPLYING_DISCOUNT_AMOUNT + (YEARLY_APPLYING_DISCOUNT_AMOUNT * (Convert.ToDecimal(CONSUMPTION_TAX) * (decimal)0.01));
+                    oREQUEST_DETAIL.TAX = Convert.ToInt32(CONSUMPTION_TAX);
+                    oREQUEST_DETAIL.UPDATED_AT_RAW = CURRENT_DATETIME;
+                    oREQUEST_DETAIL.UPDATED_BY = CURRENT_USER;
+
+                    bool willUpdateYearCost = false;
+                    if (CONTRACT_PLAN == "PRODUCT" && UNIT_PRICE > 0)
+                    {
+                        willUpdateYearCost = true;
+                    }
+                    //UPDATE REQUEST_DETAIL
+                    DAL_REQUEST_DETAIL.UpdateQuotation(oREQUEST_DETAIL, dtExportInfo, willUpdateYearCost, out msg);
+                    if (!string.IsNullOrEmpty(msg))
+                    {
+                        DataRow dr = message.NewRow();
+                        dr["Error Message"] = Messages.Jimugo.E000WB002;
+                        message.Rows.Add(dr);
+                        response.Status = 0;
+                        response.Data = Utility.Utility_Component.DtToJSon(message, "Error");
+                        return response;
+                    }
                     #endregion
 
-                    if (String.IsNullOrEmpty(msg))
+                    #region UPDATE REPORT_HISTORY
+                    for (int i = 0; i < dtExportInfo.Rows.Count; i++)
                     {
-                        #region InsertReportHistroy
-                        DateTime now = DateTime.Now;
-                        string output_at = dtNow.ToString("yyyy/MM/dd HH:mm");
-                        string date = now.ToString("yyyyMMddHHmmss");
+                        int REPORT_TYPE = Convert.ToInt32(dtExportInfo.Rows[i]["ExportType"]);
+                        string FILENAME = Convert.ToString(dtExportInfo.Rows[i]["FileName"]);
+                        int last_index_of_underscore = FILENAME.LastIndexOf("_") + 1;
+                        FILENAME = FILENAME.Substring(0, FILENAME.Length - (FILENAME.Length - last_index_of_underscore +1));
 
-                        string req_seq = REQ_SEQ.Length != 1 ? REQ_SEQ : "0" + REQ_SEQ;
-
-                        string outputFile = COMPANY_NO_BOX + "-" + "3" + "-" + req_seq + "_完了通知書(" + EDI_ACCOUNT.Replace("@", "") + ")_" + COMPANY_NAME + ".pdf";
-                        string msgText = outputFile;
-
-                        int REPORTHISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, 5, out msg);
-
-                        if (string.IsNullOrEmpty(msg))
+                        if (REPORT_TYPE!=4) //NOT PI BROWSING
                         {
-                            DAL_REPORT_HISTORY.InsertNotiSending(COMPANY_NO_BOX, REQ_SEQ, REPORTHISTORY_SEQ, outputFile, EMAIL_ADDRESS, Login_ID, output_at, date, out msg);
+                            REPORT_HISTORY DAL_REPORT_HISTORY = new REPORT_HISTORY(con);
+                            oREPORT_HISTORY.COMPANY_NO_BOX = COMPANY_NO_BOX;
+                            oREPORT_HISTORY.REQ_SEQ = Convert.ToInt32(REQ_SEQ);
+                            oREPORT_HISTORY.REPORT_TYPE = REPORT_TYPE;
+                            oREPORT_HISTORY.REPORT_HISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, REPORT_TYPE, out msg);
+                            oREPORT_HISTORY.OUTPUT_AT = TEMP;
+                            oREPORT_HISTORY.OUTPUT_FILE = FILENAME;
+                            oREPORT_HISTORY.OUTPUT_BY = CURRENT_USER;
+                            oREPORT_HISTORY.CREATED_AT = CURRENT_DATETIME;
+                            oREPORT_HISTORY.CREATED_BY = CURRENT_USER;
+                            oREPORT_HISTORY.UPDATED_AT = CURRENT_DATETIME;
+                            oREPORT_HISTORY.UPDATED_BY = CURRENT_USER;
 
-                            if (string.IsNullOrEmpty(msg))
+                            DAL_REPORT_HISTORY.Insert(oREPORT_HISTORY, CURRENT_DATETIME, CURRENT_USER, out msg);
+
+                            if (!string.IsNullOrEmpty(msg))
                             {
+                                DataRow dr = message.NewRow();
+                                dr["Error Message"] = Messages.Jimugo.E000WB003;
+                                message.Rows.Add(dr);
+                                response.Status = 0;
+                                response.Data = Utility.Utility_Component.DtToJSon(message, "Error");
+                                return response;
+                            }
+                        }
+                        
+                    }
+                    #endregion
 
-                                BOL_CONFIG config = new BOL_CONFIG("CTS060", con);
-                                BOL_CONFIG config1 = new BOL_CONFIG("SYSTEM", con);
 
-                                string temPath = config1.getStringValue("temp.dir");
-                                temPath = HttpContext.Current.Server.MapPath("/" + temPath + "/" + FILENAME);
+                    #region UPDATE REQ_USAGE_FEE
+                    var dtresult = dt.AsEnumerable().Where(r => r.Field<int>("QUANTITY") > 0).CopyToDataTable();
+                    for (int i = 0; i < dtresult.Rows.Count; i++)
+                    {
+                        BOL_REQ_USAGE_FEE oREQ_USAGE_FEE = new BOL_REQ_USAGE_FEE();
+                        REQ_USAGE_FEE DAL_REQ_USAGE_FEE = new REQ_USAGE_FEE(con);
 
-                                string pdfSavePath = config.getStringValue("fileSavePath.completionNotice");
-                                pdfSavePath = HttpContext.Current.Server.MapPath("~/" + pdfSavePath + "/" + outputFile);
+                        oREQ_USAGE_FEE.COMPANY_NO_BOX = COMPANY_NO_BOX;
+                        oREQ_USAGE_FEE.REQ_SEQ = Convert.ToInt32(REQ_SEQ);
+                        oREQ_USAGE_FEE.CONTRACT_CODE = Convert.ToString(dtresult.Rows[i]["CONTRACT_CODE"]).Trim();
+                        oREQ_USAGE_FEE.UNIT_PRICE = Convert.ToDecimal(dtresult.Rows[i]["INITIAL_COST"]);
+                        oREQ_USAGE_FEE.AMOUNT = Convert.ToDecimal(dtresult.Rows[i]["INITIAL_EXPENSE"]);
+                        oREQ_USAGE_FEE.UPDATED_AT = CURRENT_DATETIME;
+                        oREQ_USAGE_FEE.UPDATED_BY = CURRENT_USER;
+                        oREQ_USAGE_FEE.TYPE = Convert.ToDecimal(dtresult.Rows[i]["TYPE"].ToString());
 
-                                //CopyAndMove File
-                                int res = MovePdfFile(temPath, pdfSavePath);
+                        DAL_REQ_USAGE_FEE.Update(oREQ_USAGE_FEE, out msg);
 
-                                if (res == 1)
-                                {
-                                    //BOL_CONFIG config1 = new BOL_CONFIG("SYSTEM", con);
-                                    string zipStorageFolder = "/" + config1.getStringValue("temp.dir") + "/" + outputFile.Replace(".pdf", ".zip");
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            DataRow dr = message.NewRow();
+                            dr["Error Message"] = Messages.Jimugo.E000WB017;
+                            message.Rows.Add(dr);
+                            response.Status = 0;
+                            response.Data = Utility.Utility_Component.DtToJSon(message, "Error");
+                            return response;
+                        }
+                    }
+                    #endregion
 
-                                    string PASSWORD = config.getStringValue("password.Attachment");
+                    #region MovePDF
+                    //get config object for CTS040
+                    BOL_CONFIG config = new BOL_CONFIG("CTS040", con);
+                    BOL_CONFIG systemConfig = new BOL_CONFIG("SYSTEM", con);
 
-                                    //Create ZipFile With Password
-                                    string zipDownloadLink = ZipGenerator(temPath, PASSWORD, zipStorageFolder);
 
-                                    if (zipDownloadLink != null)
-                                    {
-                                        #region SendMail
-                                        String emailAddressCC = config.getStringValue("emailAddress.cc");
-                                        string tempString = PrepareAndSendMail(COMPANY_NAME, PASSWORD);
+                    string destinationpath = "";
+                    String tempPath = HttpContext.Current.Server.MapPath("~/" + systemConfig.getStringValue("temp.dir"));
 
-                                        if (tempString != null)
-                                        {
-                                            string subjectString = config.getStringValue("emailSubject.notice");
-                                            DataTable result = new DataTable();
-                                            result.Clear();
-                                            result.Columns.Add("ZipDownloadLink");
-                                            result.Columns.Add("EmailAddressCC");
-                                            result.Columns.Add("TemplateString");
-                                            result.Columns.Add("SubjectString");
-
-                                            DataRow dtRow = result.NewRow();
-                                            dtRow["ZipDownloadLink"] = zipDownloadLink;
-                                            dtRow["EmailAddressCC"] = emailAddressCC;
-                                            dtRow["TemplateString"] = tempString;
-                                            dtRow["SubjectString"] = subjectString.Replace("${companyName}", COMPANY_NAME);
-
-                                            result.Rows.Add(dtRow);
-                                            dbtnx.Complete();
-                                            response.Data = Utility.Utility_Component.DtToJSon(result, "pdfData");
-                                            response.Status = 1;
-                                            return response;
-                                        }
-                                        else
-                                        {
-                                            return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB018);
-                                        }
-                                        #endregion
-                                    }
-                                    else
-                                    {
-                                        return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB007);
-                                    }
-                                }
-                                else
-                                {
-                                    return ResponseUtility.ReturnFailMessage(response, timer, messagecode, String.Format(Utility.Messages.Jimugo.E000WB001, msgText));
-                                }
-
+                    for (int i = 0; i < dtExportInfo.Rows.Count; i++)
+                    {
+                        int REPORT_TYPE = Convert.ToInt32(dtExportInfo.Rows[i]["ExportType"]);
+                        string FILE_NAME = dtExportInfo.Rows[i]["FileName"].ToString();
+                        if (REPORT_TYPE != 4) //NOT PI BROWSING
+                        {
+                            if (dtExportInfo.Rows[i]["ExportType"].ToString() == "3")
+                            {
+                                destinationpath = config.getStringValue("fileSavePath.send.purchaseOrder");
                             }
                             else
                             {
-                                return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB003);
+                                destinationpath = config.getStringValue("fileSavePath.send.initialQuote");
+                            }
+                            destinationpath = HttpContext.Current.Server.MapPath("~/" + destinationpath) + @"/" + FILE_NAME;
+                            //move file
+                            tempPath = tempPath + @"/" + FILE_NAME;
+                            if (!MoveTempPDF(tempPath, destinationpath))
+                            {
+                                DataRow dr = message.NewRow();
+                                dr["Error Message"] = string.Format(Messages.Jimugo.E000WB001, FILE_NAME);
+                                response.Status = 0;
+                                message.Rows.Add(dr);
+                                response.Data = Utility.Utility_Component.DtToJSon(message, "Error"); ;
+                                return response;
                             }
                         }
-                        else
-                        {
-                            return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB002);
-                        }
-
-                        #endregion
                     }
-                    else
-                    {
-                        return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB002);
-                    }
+                    #endregion
 
-                    //return response;
+                    string template = PrepareMailTemplate(COMPANY_NO_BOX, INPUT_PERSON);
+
+                    message.Clear();
+                    DataRow dtRow = message.NewRow();
+                    dtRow["EmailAddressCC"] = config.getStringValue("emailAddress.cc");
+                    dtRow["TemplateString"] = template;
+                    dtRow["SubjectString"] = config.getStringValue("emailSubject.sendForms");
+
+                    message.Rows.Add(dtRow);
+                    dbtnx.Complete();
+                    timer.Stop();
+                    response.Meta.Duration = timer.Elapsed.TotalSeconds;
+                    response.Data = Utility.Utility_Component.DtToJSon(message, "Mail Template");
+                    response.Status = 1;
+                    return response;
                 }
             }
             catch (Exception ex)
@@ -1372,13 +1286,11 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-        #region PrepareAndSendMail
-        private string PrepareAndSendMail(string COMPANY_NAME, string CONTACT_NAME)
+        #region PrepareMailTemplate
+        private string PrepareMailTemplate(string COMPANY_NAME, string CONTACT_NAME)
         {
             try
             {
-                //get config object for CTS010
-                BOL_CONFIG config = new BOL_CONFIG("CTS040", con);
 
                 Dictionary<string, string> map = new Dictionary<string, string>() {
                         { "${companyName}", COMPANY_NAME },
@@ -1386,7 +1298,7 @@ namespace AmigoProcessManagement.Controller
                     };
 
                 //prepare for mail header
-                string template_base_name = "CTS040_SendForms.txt";
+                string template_base_name = "CTS040_SendForms";
 
                 //read email template
                 string file_path = HttpContext.Current.Server.MapPath("~/Templates/Mail/" + template_base_name + ".txt");
@@ -1404,66 +1316,26 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-        #region ZipCreateWithPassword
-        public string ZipGenerator(string fileName, string PASSWORD, string ZIP_STORAGEFOLDER_PATH)
+
+        #region MoveTempPDF
+        private bool MoveTempPDF(string temPath, string destinationPath)
         {
-            string result;
             try
             {
-                //var files = Directory.GetFiles(@"D:\Git\Phase-2-test\amigo_webservice\AmigoProcessManagement\App_Data");
-
-                //string something = HttpContext.Current.Server.;
-
-                //something = something;
-
-                string SaveFilePath = HttpContext.Current.Server.MapPath(ZIP_STORAGEFOLDER_PATH); //"~/App_Data/Ouput/output.pdf"
-
-
-                using (var zip = new ZipFile())
-                {
-                    zip.Password = PASSWORD;
-                    zip.Encryption = EncryptionAlgorithm.WinZipAes256;
-                    zip.AddFile(fileName, "");
-                    zip.Save(SaveFilePath);
-                }
-
-                return result = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + ZIP_STORAGEFOLDER_PATH;
-            }
-            catch (Exception)
-            {
-                return result = null;
-
-            }
-
-
-        }
-        #endregion
-
-        #region MovePDFFIle
-        private int MovePdfFile(string temPath, string pdfSavePath)
-        {
-            int status;
-            try
-            {
-                #region CopyAndMove File
                 // Create a new FileInfo object.    
                 FileInfo fInfo = new FileInfo(temPath);
                 //check if already exist.  
-                FileInfo destinationInfo = new FileInfo(pdfSavePath);
+                 FileInfo destinationInfo = new FileInfo(destinationPath);
                 if (File.Exists(destinationInfo.FullName))
                 {
                     destinationInfo.Delete();
                 }
-                fInfo.CopyTo(pdfSavePath);
-                #endregion
-                status = 1;
-                return status;
+                fInfo.CopyTo(destinationPath);
+                return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                status = 0;
-                return 0;
-                throw;
+                return false;
             }
 
 

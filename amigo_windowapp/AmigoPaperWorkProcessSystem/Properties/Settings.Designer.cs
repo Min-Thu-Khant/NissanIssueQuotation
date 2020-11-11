@@ -12,7 +12,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -723,13 +723,13 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/SendMailNotification")]
-        public string SendQuotationMail {
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/QuotationMailCreate")]
+        public string QuotationMailCreate {
             get {
-                return ((string)(this["SendQuotationMail"]));
+                return ((string)(this["QuotationMailCreate"]));
             }
             set {
-                this["SendQuotationMail"] = value;
+                this["QuotationMailCreate"] = value;
             }
         }
     }

@@ -270,6 +270,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Storage\PDF\CompleteNoti\Save\" />
     <Folder Include="Storage\PDF\CompleteNoti\Temp\" />
+    <Folder Include="Storage\PDF\IssueQuotation\OrderForm\" />
+    <Folder Include="Storage\PDF\IssueQuotation\Quotation\" />
     <Folder Include="Storage\PDF\PurchaseOrder\" />
   </ItemGroup>
   <ItemGroup>
