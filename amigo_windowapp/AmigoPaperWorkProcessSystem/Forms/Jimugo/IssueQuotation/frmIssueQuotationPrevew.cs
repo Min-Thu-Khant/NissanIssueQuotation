@@ -106,7 +106,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
                       Utility.GetParameterByName("YEARLY_SPECIAL_DISCOUNT", _paraTable),
                       Utility.GetParameterByName("INPUT_PERSON", _paraTable),
                       Utility.DtToJSon(_exportTable, "Export Table"),
-                      Utility.GetParameterByName("CONTRACT_PLAN", _paraTable)
+                      Utility.GetParameterByName("CONTRACT_PLAN", _paraTable),
+                      Utility.GetParameterByName("Created Time", _paraTable)
                     );
 
                 string error_message = Convert.ToString(result.Rows[0]["Error Message"]);

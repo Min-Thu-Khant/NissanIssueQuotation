@@ -111,13 +111,13 @@ namespace AmigoProcessManagement.Jimugo
         #region SendMail
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public void QuotationMailCreate(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN)
+        public void QuotationMailCreate(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)
         {
             //get Authorization header
             HttpContext httpContext = HttpContext.Current;
             string authHeader = httpContext.Request.Headers["Authorization"];
             Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
-            MetaResponse response = issueQuotation.QuotationMailCreate(COMPANY_NO_BOX, REQ_SEQ, CONSUMPTION_TAX, INITIAL_SPECIAL_DISCOUNTS, MONTHLY_SPECIAL_DISCOUNTS, YEARLY_SPECIAL_DISCOUNT, INPUT_PERSON, ExportInfo, CONTRACT_PLAN);
+            MetaResponse response = issueQuotation.QuotationMailCreate(COMPANY_NO_BOX, REQ_SEQ, CONSUMPTION_TAX, INITIAL_SPECIAL_DISCOUNTS, MONTHLY_SPECIAL_DISCOUNTS, YEARLY_SPECIAL_DISCOUNT, INPUT_PERSON, ExportInfo, CONTRACT_PLAN, CREATED_TIME);
             Context.Response.Clear();
             Context.Response.ContentType = "application/json";
             Context.Response.Flush();

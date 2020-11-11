@@ -249,6 +249,10 @@
     <value>顧客マスタの登録が失敗しました。</value>
     <comment>Customer master registration failed.</comment>
   </data>
+  <data name="E000WB035" xml:space="preserve">
+    <value>{0}が入力されています。\この場合は、{1}のいずれかを選択する必要があります。</value>
+    <comment>{0} has been entered. \ In this case, you need to select one of {1}.</comment>
+  </data>
   <data name="E000ZZ001" xml:space="preserve">
     <value>必須入力です。</value>
     <comment>Mandatory input</comment>

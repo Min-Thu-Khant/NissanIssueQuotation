@@ -45,9 +45,10 @@ namespace DAL_AmigoProcess.DAL
                                     ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
                                     FROM USAGE_FEE_MASTER
                                     WHERE CONVERT(varchar(10),ADOPTION_DATE,112) <= CONVERT(varchar(10),GETDATE(),112)
+                                    AND (CONTRACT_CODE=@CONTRACT_PLAN AND FEE_STRUCTURE='BASIC') OR FEE_STRUCTURE <> 'BASIC'
                                     ) UM 
                                     ON UM.CONTRACT_CODE = REQ.CONTRACT_CODE
-                                    WHERE REQ.COMPANY_NO_BOX = '@COMPANY_NO_BOX'
+                                    WHERE REQ.COMPANY_NO_BOX = @COMPANY_NO_BOX
                                     AND REQ.REQ_SEQ = @REQ_SEQ
                                     @Extra_Condition
                                     ORDER BY REQ.Type, UM.DISPLAY_ORDER";
@@ -294,6 +295,11 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region IssueQuotation
+        string strGetUpdatedat = @"SELECT UPDATED_AT FROM [REQUEST_DETAIL] 
+                                    WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX 
+                                    AND REQ_SEQ=@REQ_SEQ
+                                    AND UPDATED_AT < @FILE_CREATED";
+
         string strUpdateQuotation = @"UPDATE [REQUEST_DETAIL]
                            SET [INITIAL_COST] = @INITIAL_COST
                                @INITIAL_COST_DISCOUNTS__
@@ -323,7 +329,7 @@ namespace DAL_AmigoProcess.DAL
 
         #endregion
 
-        #region GetAutoIndex
+        #region GetInitialData
         public DataTable GetInitialData(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialData);
@@ -369,6 +375,29 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region UpdateQuotation
+        #region CanUpdate
+        public bool CanUpdate(string COMPANY_NO_BOX, string REQ_SEQ, string FILE_CREATED, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetUpdatedat);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@FILE_CREATED", FILE_CREATED));
+            oMaster.ExcuteQuery(4, out strMsg);
+
+            int count = oMaster.dtExcuted.Rows.Count;
+
+            if (count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        #endregion
+
         #region CheckForExportType
         private bool CheckType(DataTable TABLE, string[] TYPE)
         {
@@ -694,14 +723,14 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region GetQuotationData
-        public DataTable GetQuotationData(string COMPANY_NO_BOX, string REQ_SEQ,string strExtraCondition, out string strMsg)
+        public DataTable GetQuotationData(string COMPANY_NO_BOX, string REQ_SEQ, string CONTRACT_PLAN, string strExtraCondition, out string strMsg)
         {
-            string strMessage = "";
-            string strValue = strGetQuotationData.Replace("@COMPANY_NO_BOX", COMPANY_NO_BOX).Replace("@REQ_SEQ", REQ_SEQ.ToString());
-            strValue = strValue.Replace("@Extra_Condition", strExtraCondition);
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strValue);
-            oMaster.ExcuteQuery(4, out strMessage);
-            strMsg = strMessage;
+            strGetQuotationData = strGetQuotationData.Replace("@Extra_Condition", strExtraCondition);
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetQuotationData);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CONTRACT_PLAN", CONTRACT_PLAN));
+            oMaster.ExcuteQuery(4, out strMsg);
             return oMaster.dtExcuted;
         }
         #endregion

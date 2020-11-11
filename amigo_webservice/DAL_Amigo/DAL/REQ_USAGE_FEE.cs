@@ -58,7 +58,14 @@ namespace DAL_AmigoProcess.DAL
                              WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX 
                              AND REQ_SEQ = @REQ_SEQ
                              AND CONTRACT_CODE = @CONTRACT_CODE
-                             AND TYPE = TYPE";
+                             AND TYPE = @TYPE";
+
+        string strGetUpdatedat = @"SELECT UPDATED_AT FROM [REQ_USAGE_FEE] 
+                                    WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX 
+                                    AND REQ_SEQ = @REQ_SEQ
+                                    AND CONTRACT_CODE = @CONTRACT_CODE
+                                    AND TYPE = @TYPE
+                                    AND UPDATED_AT < @FILE_CREATED";
         #endregion
 
         #region Constructors
@@ -95,6 +102,31 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CONTRACT_CODE", oREQ_USAGE_FEE.CONTRACT_CODE));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TYPE", oREQ_USAGE_FEE.TYPE));
             oMaster.ExcuteQuery(6, out strMessage);
+        }
+        #endregion
+
+        #region CanUpdate
+        public bool CanUpdate(BOL_REQ_USAGE_FEE oREQ_USAGE_FEE, string FILE_CREATED, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetUpdatedat);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQ_USAGE_FEE.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQ_USAGE_FEE.REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CONTRACT_CODE", oREQ_USAGE_FEE.CONTRACT_CODE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TYPE", oREQ_USAGE_FEE.TYPE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@FILE_CREATED", FILE_CREATED));
+            oMaster.ExcuteQuery(4, out strMsg);
+
+            int count = oMaster.dtExcuted.Rows.Count;
+
+            if (count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
         }
         #endregion
     }

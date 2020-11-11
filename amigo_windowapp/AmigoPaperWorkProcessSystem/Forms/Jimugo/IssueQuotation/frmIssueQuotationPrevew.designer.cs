@@ -83,10 +83,10 @@
             // tbInitial
             // 
             this.tbInitial.Controls.Add(this.pdfInitialQuote);
-            this.tbInitial.Location = new System.Drawing.Point(8, 42);
+            this.tbInitial.Location = new System.Drawing.Point(4, 23);
             this.tbInitial.Name = "tbInitial";
             this.tbInitial.Padding = new System.Windows.Forms.Padding(3);
-            this.tbInitial.Size = new System.Drawing.Size(1246, 424);
+            this.tbInitial.Size = new System.Drawing.Size(1254, 447);
             this.tbInitial.TabIndex = 0;
             this.tbInitial.Text = "初期見積書";
             this.tbInitial.UseVisualStyleBackColor = true;
@@ -99,7 +99,7 @@
             this.pdfInitialQuote.Margin = new System.Windows.Forms.Padding(2);
             this.pdfInitialQuote.MultiPagesThreshold = 60;
             this.pdfInitialQuote.Name = "pdfInitialQuote";
-            this.pdfInitialQuote.Size = new System.Drawing.Size(1240, 418);
+            this.pdfInitialQuote.Size = new System.Drawing.Size(1248, 441);
             this.pdfInitialQuote.TabIndex = 0;
             this.pdfInitialQuote.Threshold = 60;
             this.pdfInitialQuote.ZoomMode = Spire.PdfViewer.Forms.ZoomMode.Default;
@@ -107,10 +107,10 @@
             // tbMonthly
             // 
             this.tbMonthly.Controls.Add(this.pdfMonthlyQuote);
-            this.tbMonthly.Location = new System.Drawing.Point(8, 42);
+            this.tbMonthly.Location = new System.Drawing.Point(4, 23);
             this.tbMonthly.Name = "tbMonthly";
             this.tbMonthly.Padding = new System.Windows.Forms.Padding(3);
-            this.tbMonthly.Size = new System.Drawing.Size(1246, 424);
+            this.tbMonthly.Size = new System.Drawing.Size(1254, 447);
             this.tbMonthly.TabIndex = 1;
             this.tbMonthly.Text = "月額見積書";
             this.tbMonthly.UseVisualStyleBackColor = true;
@@ -123,7 +123,7 @@
             this.pdfMonthlyQuote.Margin = new System.Windows.Forms.Padding(2);
             this.pdfMonthlyQuote.MultiPagesThreshold = 60;
             this.pdfMonthlyQuote.Name = "pdfMonthlyQuote";
-            this.pdfMonthlyQuote.Size = new System.Drawing.Size(1240, 418);
+            this.pdfMonthlyQuote.Size = new System.Drawing.Size(1248, 441);
             this.pdfMonthlyQuote.TabIndex = 0;
             this.pdfMonthlyQuote.Text = "pdfMonthlyQuote";
             this.pdfMonthlyQuote.Threshold = 60;
@@ -132,10 +132,10 @@
             // tbOrderForm
             // 
             this.tbOrderForm.Controls.Add(this.pdfOrderForm);
-            this.tbOrderForm.Location = new System.Drawing.Point(8, 42);
+            this.tbOrderForm.Location = new System.Drawing.Point(4, 23);
             this.tbOrderForm.Name = "tbOrderForm";
             this.tbOrderForm.Padding = new System.Windows.Forms.Padding(3);
-            this.tbOrderForm.Size = new System.Drawing.Size(1246, 424);
+            this.tbOrderForm.Size = new System.Drawing.Size(1254, 447);
             this.tbOrderForm.TabIndex = 2;
             this.tbOrderForm.Text = "注文書";
             this.tbOrderForm.UseVisualStyleBackColor = true;
@@ -148,7 +148,7 @@
             this.pdfOrderForm.Margin = new System.Windows.Forms.Padding(2);
             this.pdfOrderForm.MultiPagesThreshold = 60;
             this.pdfOrderForm.Name = "pdfOrderForm";
-            this.pdfOrderForm.Size = new System.Drawing.Size(1240, 418);
+            this.pdfOrderForm.Size = new System.Drawing.Size(1248, 441);
             this.pdfOrderForm.TabIndex = 0;
             this.pdfOrderForm.Text = "pdfOrderForm";
             this.pdfOrderForm.Threshold = 60;
@@ -169,13 +169,13 @@
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(14, 10);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(159, 42);
+            this.lblMenu.Size = new System.Drawing.Size(78, 21);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "プレビュー";
             // 
             // frmIssueQuotationPrevew
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 28F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.pTitle);
@@ -185,6 +185,7 @@
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MinimumSize = new System.Drawing.Size(1300, 640);
             this.Name = "frmIssueQuotationPrevew";
+            this.Text = "[CTS040] 見積書発行画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPreviewScreen_FormClosing);
             this.Load += new System.EventHandler(this.FrmPreviewScreen_Load);

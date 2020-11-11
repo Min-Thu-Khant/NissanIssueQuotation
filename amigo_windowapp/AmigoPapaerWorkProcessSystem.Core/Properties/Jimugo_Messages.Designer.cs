@@ -358,6 +358,15 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}が入力されています。\この場合は、{1}のいずれかを選択する必要があります。.
+        /// </summary>
+        internal static string E000WB035 {
+            get {
+                return ResourceManager.GetString("E000WB035", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 必須入力です。.
         /// </summary>
         internal static string E000ZZ001 {

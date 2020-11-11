@@ -14,7 +14,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
     {
         #region GetQuotationMail
         public DataTable GetQuotationMail(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, 
-                                          string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN)
+                                          string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)
         {
             string url = Properties.Settings.Default.QuotationMailCreate;
             //convert list to json object
@@ -28,7 +28,8 @@ namespace AmigoPaperWorkProcessSystem.Controllers
                 YEARLY_SPECIAL_DISCOUNT = string.IsNullOrEmpty(YEARLY_SPECIAL_DISCOUNT) ? "0" : YEARLY_SPECIAL_DISCOUNT,
                 INPUT_PERSON = INPUT_PERSON,
                 ExportInfo = ExportInfo,
-                CONTRACT_PLAN = CONTRACT_PLAN
+                CONTRACT_PLAN = CONTRACT_PLAN.Trim(),
+                CREATED_TIME = CREATED_TIME
             });
             return WebUtility.Post(url, json);
 

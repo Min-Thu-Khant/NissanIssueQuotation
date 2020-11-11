@@ -246,7 +246,6 @@
             this.chkInitialQuot.TabIndex = 30;
             this.chkInitialQuot.Text = "初期見積書";
             this.chkInitialQuot.UseVisualStyleBackColor = true;
-            //this.chkInitialQuot.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkMonthlyQuote
             // 
@@ -259,7 +258,6 @@
             this.chkMonthlyQuote.TabIndex = 31;
             this.chkMonthlyQuote.Text = "月額見積書";
             this.chkMonthlyQuote.UseVisualStyleBackColor = true;
-            //this.chkMonthlyQuote.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkProductionInfo
             // 
@@ -272,7 +270,6 @@
             this.chkProductionInfo.TabIndex = 32;
             this.chkProductionInfo.Text = "生産情報閲覧";
             this.chkProductionInfo.UseVisualStyleBackColor = true;
-            //this.chkProductionInfo.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkOrderForm
             // 
@@ -603,7 +600,7 @@
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F);
             this.MinimumSize = new System.Drawing.Size(1300, 720);
             this.Name = "frmIssueQuotation";
-            this.Text = "frmIssueQuotation";
+            this.Text = "[CTS040] 見積書発行画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmIssueQuotation_Load);
             this.pTitle.ResumeLayout(false);

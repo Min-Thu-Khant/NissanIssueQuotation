@@ -249,6 +249,14 @@
     <value>顧客マスタの登録が失敗しました。</value>
     <comment>Customer master registration failed.</comment>
   </data>
+  <data name="E000WB033" xml:space="preserve">
+    <value>{0}が更新されています。\nもう一度プレビューボタンを押下してください。</value>
+    <comment>{0} has been updated. \ nPlease press the preview button again.</comment>
+  </data>
+  <data name="E000WB034" xml:space="preserve">
+    <value>{0}用の見積情報が無いため、帳票を作成することが出来ません。</value>
+    <comment>The record cannot be created because there is no quotation information for {0}.</comment>
+  </data>
   <data name="E000ZZ001" xml:space="preserve">
     <value>必須入力です。</value>
     <comment>Mandatory input</comment>

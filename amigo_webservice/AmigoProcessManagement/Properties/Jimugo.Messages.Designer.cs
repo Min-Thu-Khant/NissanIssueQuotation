@@ -358,6 +358,24 @@ namespace AmigoProcessManagement.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}が更新されています。\nもう一度プレビューボタンを押下してください。.
+        /// </summary>
+        internal static string E000WB033 {
+            get {
+                return ResourceManager.GetString("E000WB033", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}用の見積情報が無いため、帳票を作成することが出来ません。.
+        /// </summary>
+        internal static string E000WB034 {
+            get {
+                return ResourceManager.GetString("E000WB034", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 必須入力です。.
         /// </summary>
         internal static string E000ZZ001 {

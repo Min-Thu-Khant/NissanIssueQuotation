@@ -17,6 +17,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
+        //private string CompanyNoBox = "AX-1001-03";
         private string CompanyNoBox = "AJ-0001-01";
         private string REQ_SEQ = "1";
         private string Reg_Complete_Date;
@@ -25,6 +26,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private string CompanyName;
         private string CONTRACT_PLAN = "";
         private string INPUT_PERSON = "";
+        private string CREATED_TIME = "";
         #endregion
 
         #region Constructor
@@ -118,7 +120,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             //Expiration date
             txtQuotationExpireDay.Text = dr["EXPIRATION_DATE"].ToString();
             //check for contract code and manupulate controls
-            CONTRACT_PLAN = Convert.ToString(dr["CONTRACT_PLAN"]);
+            CONTRACT_PLAN = Convert.ToString(dr["CONTRACT_PLAN"]).Trim(); 
             INPUT_PERSON = Convert.ToString(dr["INPUT_PERSON"]);
             CheckEditableRegions();
             
@@ -238,6 +240,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             }
             if (!CheckUtility.DateRationalCheck(txtPeriodFrom.Text.Trim(), txtPeriodTo.Text.Trim()))
             {
+                MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB004, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
 
@@ -284,8 +287,34 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             }
             if (!atLeastOneChecked)
             {
-                MetroMessageBox.Show(this, "\n" + "Please check at least one pdf type.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MetroMessageBox.Show(this, "\n" + "少なくとも1つの帳票タイプをチェックしてください。", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+
+            if (!string.IsNullOrEmpty(txtInitialSpecialDiscount.Text.Trim()))
+            {
+                bool OneChecked = false;
+
+                if (chkInitialQuot.Checked)
+                {
+                    OneChecked = true;
+                }
+
+                if (chkProductionInfo.Checked)
+                {
+                    OneChecked = true;
+                }
+
+                if (chkOrderForm.Checked)
+                {
+                    OneChecked = true;
+                }
+
+                if (!OneChecked)
+                {
+                    MetroMessageBox.Show(this, "\n" + string.Format(JimugoMessages.E000WB035, "特別値引き額(初期)", "初期見積書、生産情報閲覧、注文書"), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             return true;
         }
@@ -395,19 +424,17 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         strToCertificate = DateTime.Now.ToString("yyyyMMdd");
                     }
                     string strExportInfo = Utility.DtToJSon(dtExportInfo,"ReqestPDF");
-                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, decTaxAmount, strStartDate, txtQuotationExpireDay.Text.Trim(), strFromCertificate, strToCertificate,
-                        strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
+                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, decTaxAmount, strStartDate, txtQuotationExpireDay.Text.Trim(), strFromCertificate, strToCertificate, strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
                     string error_message = "";
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
-                        error_message += Convert.ToString(result.Rows[i]["Error Message"]);
-                    }
-
-
-                    if (!string.IsNullOrEmpty(error_message))
-                    {
-                        MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        CREATED_TIME = Convert.ToString(result.Rows[i]["Created Time"]);
+                        error_message = Convert.ToString(result.Rows[i]["Error Message"]);
+                        if (!string.IsNullOrEmpty(error_message))
+                        {
+                            MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
 
                     DataTable dt = DTParameter();
@@ -473,6 +500,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             dt.Columns.Add("MONTHLY_REMARK");
             dt.Columns.Add("PI_REMARK");
             dt.Columns.Add("ORDER_REMARK");
+            dt.Columns.Add("Created Time");
             dt.Rows.Add(txtCompanyNoBox.Text.Trim(),
                         REQ_SEQ,
                         txtTax.Text.Trim(),
@@ -483,7 +511,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         txtInitialRemark.Text.Trim(),
                         txtMonthlyRemark.Text.Trim(),
                         txtOrderRemark.Text.Trim(),
-                        txtProductionInfoRemark.Text.Trim()
+                        txtProductionInfoRemark.Text.Trim(),
+                        CREATED_TIME
                         );
             return dt;
             
