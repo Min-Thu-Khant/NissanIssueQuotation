@@ -147,14 +147,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             chkMonthlyQuote.Checked = false;
             chkProductionInfo.Checked = false;
 
-            chkInitialQuot.Enabled = isproduct;
-            chkMonthlyQuote.Enabled = isproduct;
-            chkProductionInfo.Enabled = !isproduct;
-            txtInitialSpecialDiscount.Enabled = isproduct;
+            chkInitialQuot.Enabled = !isproduct;
+            chkMonthlyQuote.Enabled = !isproduct;
+            chkProductionInfo.Enabled = isproduct;
             txtPeriodFrom.Enabled = isproduct;
             txtPeriodTo.Enabled = isproduct;
-            txtMonthlySpecialDiscount.Enabled = isproduct;
-            txtYearlySpecialDiscount.Enabled = !isproduct;
+            txtMonthlySpecialDiscount.Enabled = !isproduct;
+            txtYearlySpecialDiscount.Enabled = isproduct;
         }
         #endregion
 

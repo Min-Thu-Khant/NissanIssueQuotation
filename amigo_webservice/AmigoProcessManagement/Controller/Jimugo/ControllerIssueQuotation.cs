@@ -243,7 +243,8 @@ namespace AmigoProcessManagement.Controller
                     intItemStart++;
                     intHeaderStart++;
                 }
-                intHeaderStart++;
+                intItemStart = intItemStart + 2 ;
+                intHeaderStart = intHeaderStart + 2;
             }
             #endregion
 
@@ -281,7 +282,8 @@ namespace AmigoProcessManagement.Controller
                     intItemStart++;
                     intHeaderStart++;
                 }
-                intHeaderStart++;
+                intItemStart = intItemStart + 2;
+                intHeaderStart = intHeaderStart + 2;
             }
             #endregion
 
@@ -320,7 +322,8 @@ namespace AmigoProcessManagement.Controller
                     intItemStart++;
                     intHeaderStart++;
                 }
-                intHeaderStart++;
+                intItemStart = intItemStart + 2;
+                intHeaderStart = intHeaderStart + 2;
             }
             #endregion
 
