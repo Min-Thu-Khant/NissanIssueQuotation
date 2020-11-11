@@ -12,12 +12,14 @@ namespace DAL_AmigoProcess.DAL
 
         public string strConnectionString;
 
-        string strGetInitialData = @"SELECT
+        string strGetInitialData = @"SELECT TOP 1
                                     REQUEST_DETAIL.COMPANY_NO_BOX, REQUEST_DETAIL.REQ_SEQ,
                                     EDI_ACCOUNT.EDI_ACCOUNT,
                                     FORMAT(REQUEST_DETAIL.START_USE_DATE, 'yyyy/MM/dd') START_USE_DATE,
                                     REQUEST_DETAIL.INPUT_PERSON,
-                                    REQUEST_ID.EMAIL_ADDRESS, REQUEST_DETAIL.CONTRACT_PLAN
+                                    REQUEST_ID.EMAIL_ADDRESS, REQUEST_DETAIL.CONTRACT_PLAN,
+									(SELECT TOP 1 INTEGER_VALUE1 FROM CONFIG_TBL WHERE PROGRAM_ID='SYSTEM' AND CONFIG_KEY = 'consumptionTax') CONSUMPTION_TAX,
+									(SELECT TOP 1 INTEGER_VALUE1 FROM CONFIG_TBL WHERE PROGRAM_ID='SYSTEM' AND CONFIG_KEY = 'quotation.expirationDate') EXPIRATION_DATE
                                     FROM REQUEST_DETAIL
                                     LEFT JOIN EDI_ACCOUNT
                                     ON REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX

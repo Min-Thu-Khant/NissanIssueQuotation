@@ -67,9 +67,9 @@
             this.tbMonthlyRemark = new System.Windows.Forms.TabPage();
             this.txtMonthlyRemark = new System.Windows.Forms.TextBox();
             this.tbProductionInfoRemark = new System.Windows.Forms.TabPage();
-            this.txtProductionInfoRemark = new System.Windows.Forms.TextBox();
-            this.tbOrderRemark = new System.Windows.Forms.TabPage();
             this.txtOrderRemark = new System.Windows.Forms.TextBox();
+            this.tbOrderRemark = new System.Windows.Forms.TabPage();
+            this.txtProductionInfoRemark = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.txtTax = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
@@ -93,10 +93,12 @@
             // 
             // lblMenu
             // 
+            this.lblMenu.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(14, 10);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(162, 32);
+            this.lblMenu.Size = new System.Drawing.Size(1258, 32);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "XXXXXXXXX";
             // 
@@ -244,7 +246,7 @@
             this.chkInitialQuot.TabIndex = 30;
             this.chkInitialQuot.Text = "初期見積書";
             this.chkInitialQuot.UseVisualStyleBackColor = true;
-            this.chkInitialQuot.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
+            //this.chkInitialQuot.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkMonthlyQuote
             // 
@@ -257,7 +259,7 @@
             this.chkMonthlyQuote.TabIndex = 31;
             this.chkMonthlyQuote.Text = "月額見積書";
             this.chkMonthlyQuote.UseVisualStyleBackColor = true;
-            this.chkMonthlyQuote.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
+            //this.chkMonthlyQuote.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkProductionInfo
             // 
@@ -270,7 +272,7 @@
             this.chkProductionInfo.TabIndex = 32;
             this.chkProductionInfo.Text = "生産情報閲覧";
             this.chkProductionInfo.UseVisualStyleBackColor = true;
-            this.chkProductionInfo.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
+            //this.chkProductionInfo.CheckedChanged += new System.EventHandler(this.chkType_CheckedChanged);
             // 
             // chkOrderForm
             // 
@@ -478,7 +480,7 @@
             // 
             // tbProductionInfoRemark
             // 
-            this.tbProductionInfoRemark.Controls.Add(this.txtProductionInfoRemark);
+            this.tbProductionInfoRemark.Controls.Add(this.txtOrderRemark);
             this.tbProductionInfoRemark.Location = new System.Drawing.Point(4, 23);
             this.tbProductionInfoRemark.Name = "tbProductionInfoRemark";
             this.tbProductionInfoRemark.Padding = new System.Windows.Forms.Padding(3);
@@ -486,26 +488,6 @@
             this.tbProductionInfoRemark.TabIndex = 2;
             this.tbProductionInfoRemark.Text = "注文書の備考";
             this.tbProductionInfoRemark.UseVisualStyleBackColor = true;
-            // 
-            // txtProductionInfoRemark
-            // 
-            this.txtProductionInfoRemark.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtProductionInfoRemark.Location = new System.Drawing.Point(3, 3);
-            this.txtProductionInfoRemark.Multiline = true;
-            this.txtProductionInfoRemark.Name = "txtProductionInfoRemark";
-            this.txtProductionInfoRemark.Size = new System.Drawing.Size(1245, 272);
-            this.txtProductionInfoRemark.TabIndex = 0;
-            // 
-            // tbOrderRemark
-            // 
-            this.tbOrderRemark.Controls.Add(this.txtOrderRemark);
-            this.tbOrderRemark.Location = new System.Drawing.Point(4, 23);
-            this.tbOrderRemark.Name = "tbOrderRemark";
-            this.tbOrderRemark.Padding = new System.Windows.Forms.Padding(3);
-            this.tbOrderRemark.Size = new System.Drawing.Size(1251, 278);
-            this.tbOrderRemark.TabIndex = 3;
-            this.tbOrderRemark.Text = "初期見積書(生産)の備考";
-            this.tbOrderRemark.UseVisualStyleBackColor = true;
             // 
             // txtOrderRemark
             // 
@@ -515,6 +497,26 @@
             this.txtOrderRemark.Name = "txtOrderRemark";
             this.txtOrderRemark.Size = new System.Drawing.Size(1245, 272);
             this.txtOrderRemark.TabIndex = 0;
+            // 
+            // tbOrderRemark
+            // 
+            this.tbOrderRemark.Controls.Add(this.txtProductionInfoRemark);
+            this.tbOrderRemark.Location = new System.Drawing.Point(4, 23);
+            this.tbOrderRemark.Name = "tbOrderRemark";
+            this.tbOrderRemark.Padding = new System.Windows.Forms.Padding(3);
+            this.tbOrderRemark.Size = new System.Drawing.Size(1251, 278);
+            this.tbOrderRemark.TabIndex = 3;
+            this.tbOrderRemark.Text = "初期見積書(生産)の備考";
+            this.tbOrderRemark.UseVisualStyleBackColor = true;
+            // 
+            // txtProductionInfoRemark
+            // 
+            this.txtProductionInfoRemark.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtProductionInfoRemark.Location = new System.Drawing.Point(3, 3);
+            this.txtProductionInfoRemark.Multiline = true;
+            this.txtProductionInfoRemark.Name = "txtProductionInfoRemark";
+            this.txtProductionInfoRemark.Size = new System.Drawing.Size(1245, 272);
+            this.txtProductionInfoRemark.TabIndex = 0;
             // 
             // label14
             // 
@@ -534,6 +536,7 @@
             this.txtTax.Name = "txtTax";
             this.txtTax.Size = new System.Drawing.Size(130, 21);
             this.txtTax.TabIndex = 49;
+            this.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label15
             // 
@@ -662,8 +665,8 @@
         private System.Windows.Forms.TextBox txtTax;
         private System.Windows.Forms.TextBox txtInitialRemark;
         private System.Windows.Forms.TextBox txtMonthlyRemark;
-        private System.Windows.Forms.TextBox txtProductionInfoRemark;
         private System.Windows.Forms.TextBox txtOrderRemark;
+        private System.Windows.Forms.TextBox txtProductionInfoRemark;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox txtYearlySpecialDiscount;
     }

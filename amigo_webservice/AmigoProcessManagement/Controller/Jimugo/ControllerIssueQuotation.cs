@@ -53,6 +53,7 @@ namespace AmigoProcessManagement.Controller
                 string strMessage = "";
                 REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
                 DataTable dt = DAL_REQUEST_DETAIL.GetInitialData(COMPANY_NO_BOX, REQ_SEQ, out strMessage);
+                
                 response.Data = Utility.Utility_Component.DtToJSon(dt, "InitialData");
                 if (dt.Rows.Count > 0)
                 {
@@ -218,22 +219,26 @@ namespace AmigoProcessManagement.Controller
                 for (int itemIndex = 0; itemIndex < dtBasic.Rows.Count; itemIndex++)
                 {
                     string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                    string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                    string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
                     int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                    decimal decCost = 0;
-                    decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-
-                    if (intContractQTY > 0)
+                    string strContractQTY = "";
+                    decimal initial_cost = 0;
+                    initial_cost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
+                    if (!string.IsNullOrEmpty(strContractUnit))
                     {
-                        strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "] [契約単位" + strContractUnit + "]";
-
+                        strContractUnit = " [契約単位 " + strContractUnit + "]";
                     }
-                    decTotal = decTotal + (decCost * intContractQTY);
+
+                    if (intContractQTY > 1)
+                    {
+                        strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                    }
+                    decTotal = decTotal + (initial_cost * intContractQTY);
                     sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                     sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                    sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N0");
+                    sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                     sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N0");
+                    sheet.Range["J" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
                     sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     intItemStart++;
                     intHeaderStart++;
@@ -244,29 +249,34 @@ namespace AmigoProcessManagement.Controller
 
             #region Option Large Header
             if (OPTION.Any())
-            {
+            {    
                 dtOption = OPTION.CopyToDataTable();
                 sheet.Range["B" + intHeaderStart.ToString()].Text = (intHeaderNumberSerial + 1).ToString();
                 intHeaderNumberSerial++;
                 sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
                 for (int itemIndex = 0; itemIndex < dtOption.Rows.Count; itemIndex++)
                 {
-                    string strItemText = dtOption.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                    int intContractUnit = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtOption.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                    int intContractQTY = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                    decimal decCost = 0;
-                    decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                    if (intContractUnit > 0)
+                    string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                    string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                    int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                    string strContractQTY = "";
+                    decimal initial_cost = 0;
+                    initial_cost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
+                    if (!string.IsNullOrEmpty(strContractUnit))
                     {
-                        strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "[契約単位" + intContractUnit.ToString() + "]";
-
+                        strContractUnit = " [契約単位 " + strContractUnit + "]";
                     }
-                    decTotal = decTotal + (decCost * intContractQTY);
+
+                    if (intContractQTY > 1)
+                    {
+                        strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                    }
+                    decTotal = decTotal + (initial_cost * intContractQTY);
                     sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                     sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                    sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N0");
+                    sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                     sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N0");
+                    sheet.Range["J" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
                     sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     intItemStart++;
                     intHeaderStart++;
@@ -284,22 +294,28 @@ namespace AmigoProcessManagement.Controller
                 sheet.Range["C" + intHeaderStart.ToString()].Text = "基本契約プラン";
                 for (int itemIndex = 0; itemIndex < dtSD.Rows.Count; itemIndex++)
                 {
-                    string strItemText = dtOption.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_NAME"].ToString();
-                    int intContractUnit = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_UNIT"] == null ? "0" : dtOption.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
-                    int intContractQTY = int.Parse(dtOption.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtOption.Rows[itemIndex]["CONTRACT_QTY"].ToString());
-                    decimal decCost = 0;
-                    decCost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
-                    if (intContractUnit > 0)
+                    string strItemText = dtBasic.Rows[itemIndex]["CONTRACT_NAME"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_NAME"].ToString();
+                    string strContractUnit = (dtBasic.Rows[itemIndex]["CONTRACT_UNIT"] == null ? null : dtBasic.Rows[itemIndex]["CONTRACT_UNIT"].ToString());
+                    int intContractQTY = int.Parse(dtBasic.Rows[itemIndex]["CONTRACT_QTY"] == null ? "" : dtBasic.Rows[itemIndex]["CONTRACT_QTY"].ToString());
+                    string strContractQTY = "";
+                    decimal initial_cost = 0;
+                    initial_cost = decimal.Parse(dtBasic.Rows[itemIndex]["INITIAL_COST"] == null ? "" : dtBasic.Rows[itemIndex]["INITIAL_COST"].ToString());
+                    if (!string.IsNullOrEmpty(strContractUnit))
                     {
-                        strItemText = strItemText + "[契約数量" + intContractQTY.ToString() + "[契約単位" + intContractUnit.ToString() + "]";
-
+                        strContractUnit = " [契約単位 " + strContractUnit + "]";
                     }
-                    decTotal = decTotal + (decCost * intContractQTY);
+
+                    if (intContractQTY > 1)
+                    {
+                        strContractQTY = " [契約数量 " + intContractQTY.ToString() + "]";
+                    }
+
+                    decTotal = decTotal + (initial_cost * intContractQTY);
                     sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                     sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                    sheet.Range["I" + intItemStart.ToString()].Text = decCost.ToString("N");
+                    sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
                     sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["J" + intItemStart.ToString()].Text = (decCost * intContractQTY).ToString("N");
+                    sheet.Range["J" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N");
                     sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     intItemStart++;
                     intHeaderStart++;
@@ -618,9 +634,9 @@ namespace AmigoProcessManagement.Controller
                         decTotal = decTotal + initial_expense;
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                         sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
+                        sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N");
+                        sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N0");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                     }
@@ -984,9 +1000,9 @@ namespace AmigoProcessManagement.Controller
                             decTotal = decTotal + initial_expense;
                             sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                             sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                            sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
+                            sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                             sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                            sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N");
+                            sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N0");
                             sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                             intItemStart++;
                         }

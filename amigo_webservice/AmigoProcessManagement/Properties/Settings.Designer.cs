@@ -26,8 +26,8 @@ namespace AmigoProcessManagement.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-HMJR0A1\\SQLEXPRESS;Initial Catalog=Nissan;Integrated Security" +
-            "=true;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-HMJR0A1\\SQLEXPRESS;Initial Catalog=Jimugo2;Integrated Securit" +
+            "y=true;")]
         public string MyConnection {
             get {
                 return ((string)(this["MyConnection"]));

@@ -17,8 +17,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
-        private string CompanyNoBox = "AJ-0001-01";
-        private string REQ_SEQ = "1";
+        private string CompanyNoBox = "AX-1001-03";
+        private string REQ_SEQ = "11";
         private string Reg_Complete_Date;
         private string Quotation_Date;
         private string Order_Date;
@@ -112,7 +112,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             }
             //set email address
             txtDestinationMail.Text = dr["EMAIL_ADDRESS"].ToString();
+            //Tax
+            txtTax.Text = dr["CONSUMPTION_TAX"].ToString(); 
 
+            //Expiration date
+            txtQuotationExpireDay.Text = dr["EXPIRATION_DATE"].ToString();
             //check for contract code and manupulate controls
             CONTRACT_PLAN = Convert.ToString(dr["CONTRACT_PLAN"]);
             INPUT_PERSON = Convert.ToString(dr["INPUT_PERSON"]);
@@ -147,8 +151,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             chkMonthlyQuote.Enabled = isproduct;
             chkProductionInfo.Enabled = !isproduct;
             txtInitialSpecialDiscount.Enabled = isproduct;
-            txtPeriodFrom.Enabled = !isproduct;
-            txtPeriodTo.Enabled = !isproduct;
+            txtPeriodFrom.Enabled = isproduct;
+            txtPeriodTo.Enabled = isproduct;
             txtMonthlySpecialDiscount.Enabled = isproduct;
             txtYearlySpecialDiscount.Enabled = !isproduct;
         }
@@ -248,12 +252,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text, false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text, false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
@@ -288,6 +292,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         }
         #endregion
 
+        #region Preview Button
         private async void BtnPreview_Click(object sender, EventArgs e)
         {
             try
@@ -393,7 +398,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     string strExportInfo = Utility.DtToJSon(dtExportInfo,"ReqestPDF");
                     DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, 
                         txtEDIAccount.Text, decTaxAmount, strStartDate, strExpireDate, "", strFromCertificate, strToCertificate,
-                        strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(), txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
+                        strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
                     string error_message = "";//Convert.ToString(result.Rows[0]["Error Message"]);
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
@@ -453,6 +458,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 Utility.WriteErrorLog(ex.Message, ex, false);
             }
         }
+        #endregion
 
         #region AddToDataTable
         public DataTable DTParameter()
@@ -478,8 +484,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         INPUT_PERSON,
                         txtInitialRemark.Text.Trim(),
                         txtMonthlyRemark.Text.Trim(),
-                        txtProductionInfoRemark.Text.Trim(),
-                        txtOrderRemark.Text.Trim()
+                        txtOrderRemark.Text.Trim(),
+                        txtProductionInfoRemark.Text.Trim()
                         );
             return dt;
             
@@ -509,30 +515,32 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         }
         #endregion
 
-        private void chkType_CheckedChanged(object sender, EventArgs e)
-        {
-            CheckBox chk = (CheckBox)sender;
-            if (chk.Checked)
-            {
-                switch (chk.Name)
-                {
-                    case "chkInitialQuot":
-                        chkInitialQuot.Checked = true;
-                        chkMonthlyQuote.Checked = false;
-                        chkProductionInfo.Checked = false;
-                        break;
-                    case "chkMonthlyQuote":
-                        chkInitialQuot.Checked = false;
-                        chkMonthlyQuote.Checked = true;
-                        chkProductionInfo.Checked = false;
-                        break;
-                    case "chkProductionInfo":
-                        chkInitialQuot.Checked = false;
-                        chkMonthlyQuote.Checked = false;
-                        chkProductionInfo.Checked = true;
-                        break;
-                }
-            }
-        }
+        //#region CheckTypeChanged
+        //private void chkType_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    CheckBox chk = (CheckBox)sender;
+        //    if (chk.Checked)
+        //    {
+        //        switch (chk.Name)
+        //        {
+        //            case "chkInitialQuot":
+        //                chkInitialQuot.Checked = true;
+        //                chkMonthlyQuote.Checked = false;
+        //                chkProductionInfo.Checked = false;
+        //                break;
+        //            case "chkMonthlyQuote":
+        //                chkInitialQuot.Checked = false;
+        //                chkMonthlyQuote.Checked = true;
+        //                chkProductionInfo.Checked = false;
+        //                break;
+        //            case "chkProductionInfo":
+        //                chkInitialQuot.Checked = false;
+        //                chkMonthlyQuote.Checked = false;
+        //                chkProductionInfo.Checked = true;
+        //                break;
+        //        }
+        //    }
+        //}
+        //#endregion
     }
 }
