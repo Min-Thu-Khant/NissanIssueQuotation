@@ -1039,11 +1039,11 @@ namespace AmigoProcessManagement.Controller
                                 }
                                 decTotal = decTotal + initial_expense;
                                 sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                                sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                                sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
-                                sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                                sheet.Range["J" + intItemStart.ToString()].Text = initial_expense.ToString("N0");
+                                sheet.Range["I" + intItemStart.ToString()].Text = intContractQTY.ToString();
+                                sheet.Range["J" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                                 sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                                sheet.Range["K" + intItemStart.ToString()].Text = initial_expense.ToString("N0");
+                                sheet.Range["K" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                                 intItemStart++;
                             }
                         }
@@ -1075,11 +1075,11 @@ namespace AmigoProcessManagement.Controller
                                 }
                                 decTotal = decTotal + (monthly_usage_fee * intTotalMonth);
                                 sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
-                                sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                                sheet.Range["I" + intItemStart.ToString()].Text = monthly_cost.ToString("N");
-                                sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                                sheet.Range["J" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N");
+                                sheet.Range["I" + intItemStart.ToString()].Text = intContractQTY.ToString();
+                                sheet.Range["J" + intItemStart.ToString()].Text = monthly_cost.ToString("N");
                                 sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                                sheet.Range["K" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N");
+                                sheet.Range["K" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                                 intItemStart++;
                                 sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
                                 intItemStart++;
@@ -1094,25 +1094,33 @@ namespace AmigoProcessManagement.Controller
                     {
                         sheet.Range["B42"].Text = (intHeaderNumberSerial + 1).ToString();
                         sheet.Range["C42"].Text = "特別値引き";
-                        sheet.Range["J42"].Text = decDiscount.ToString("N0");
-                        sheet.Range["J42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                        sheet.Range["K42"].Text = decDiscount.ToString("N0");
+                        sheet.Range["K42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     }
                     #endregion
 
                     #region GrandTotal
-                    sheet.Range["J43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
-                    sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                    sheet.Range["K43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                    sheet.Range["K43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     #endregion
+
 
                     #region Header Amount 
 
-                    sheet.Range["E12"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                    sheet.Range["E10"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+                    sheet.Range["E10"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                    sheet.Range["E11"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+                    sheet.Range["E11"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+                    sheet.Range["E12"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
                     sheet.Range["E12"].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["E13"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-                    sheet.Range["E13"].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["E14"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
-                    sheet.Range["E14"].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     #endregion
+
+                    #region Remark
+                    XlsRectangleShape shape = sheet.RectangleShapes[1] as XlsRectangleShape;
+                    shape.Text += "\n" + REMARK;
+                    #endregion
+                    sheet.Range["K50"].Text = "No." + COMPANY_NO_BOX + "-" + strRPTTYPE + "-" + REQ_SEQ;
+
                     #endregion
 
                     //Save excel file to pdf file.  

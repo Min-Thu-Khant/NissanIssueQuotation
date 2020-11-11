@@ -37,7 +37,7 @@ namespace DAL_AmigoProcess.DAL
                                     ISNULL(REQ.QUANTITY,0) QUANTITY,Req.Type,
                                     ISNULL(UM.INITIAL_COST,0) * ISNULL(REQ.QUANTITY,0) INITIAL_EXPENSE,
                                     ISNULL(UM.MONTHLY_COST,0) * ISNULL(REQ.QUANTITY,0) MONTHLY_USAGE_FEE,
-                                    REQ.UPDATED_AT, UM.UPDATED_AT,REQ.CONTRACT_UNIT
+                                    REQ.UPDATED_AT, UM.UPDATED_AT,REQ.CONTRACT_UNIT,REQ.UNIT_PRICE
                                     FROM REQ_USAGE_FEE REQ 
                                     LEFT JOIN 
                                     (SELECT CONTRACT_CODE,ADOPTION_DATE,FEE_STRUCTURE,CONTRACT_NAME,CONTRACT_QTY,CONTRACT_UNIT,INITIAL_COST,DISPLAY_ORDER,UPDATED_AT,

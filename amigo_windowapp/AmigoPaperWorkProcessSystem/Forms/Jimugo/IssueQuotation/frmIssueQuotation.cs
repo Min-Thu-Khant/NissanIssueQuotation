@@ -17,9 +17,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
-        //private string CompanyNoBox = "AX-1001-03";
-        private string CompanyNoBox = "AJ-0001-01";
-        private string REQ_SEQ = "1";
+        private string CompanyNoBox = "AX-1001-03";
+        //private string CompanyNoBox = "AJ-0001-01";
+        private string REQ_SEQ = "11";
         private string Reg_Complete_Date;
         private string Quotation_Date;
         private string Order_Date;
@@ -500,6 +500,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             dt.Columns.Add("MONTHLY_REMARK");
             dt.Columns.Add("PI_REMARK");
             dt.Columns.Add("ORDER_REMARK");
+            dt.Columns.Add("CONTRACT_PLAN");
             dt.Columns.Add("Created Time");
             dt.Rows.Add(txtCompanyNoBox.Text.Trim(),
                         REQ_SEQ,
@@ -512,6 +513,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         txtMonthlyRemark.Text.Trim(),
                         txtOrderRemark.Text.Trim(),
                         txtProductionInfoRemark.Text.Trim(),
+                        CONTRACT_PLAN,
                         CREATED_TIME
                         );
             return dt;
