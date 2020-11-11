@@ -87,7 +87,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region PreviewFunction
-        public MetaResponse DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate,
+        public MetaResponse DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDate,
             string strFromCertificate, string strToCertificate, string strExportInfo, string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
             try
@@ -98,7 +98,7 @@ namespace AmigoProcessManagement.Controller
                 messagecode.Columns.Add("Error Message");
                 DataRow dr = messagecode.NewRow();
 
-                response = getPDF(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
+                response = getPDF(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
                 response.Status = 1;
                 return response; //process 3 successful
             }
@@ -111,7 +111,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region PDF Create
-        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, 
+        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, 
             string expireDate, string strFromCertificate, string strToCertificate, string strExportInfo, string strContractPlan,
             string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
@@ -134,17 +134,16 @@ namespace AmigoProcessManagement.Controller
                     switch (strExportType)
                     {
                         case "1":
-                            single_result = Preview_InitialQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, INITIAL_REMARK, decDiscount);
+                            single_result = Preview_InitialQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, expireDate, INITIAL_REMARK, decDiscount);
                             break;
                         case "2":
-                            single_result = Preview_MonthlyQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, MONTHLY_REMARK, decDiscount);
+                            single_result = Preview_MonthlyQuotation(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, MONTHLY_REMARK, decDiscount);
                             break;
                         case "4":
-                            single_result = Preview_PIBrowsing(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt, startDate, expireDate, PI_REMARK, strFromCertificate, strToCertificate, decDiscount);
+                            single_result = Preview_PIBrowsing(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, PI_REMARK, strFromCertificate, strToCertificate, decDiscount);
                             break;
                         case "3":
-                            single_result = Preview_OrderForm(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT, TaxAmt,
-                                startDate, expireDate, ORDER_REMARK, strFromCertificate, strToCertificate, decDiscount, strContractPlan);
+                            single_result = Preview_OrderForm(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, ORDER_REMARK, strFromCertificate, strToCertificate, decDiscount, strContractPlan);
                             break;
                     }
                     
@@ -161,7 +160,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Preview_InitialQuotation
-        protected DataTable Preview_InitialQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount)
+        protected DataTable Preview_InitialQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string expireDate, string REMARK, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
             String file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Initialquotation.Normal"));
@@ -203,8 +202,7 @@ namespace AmigoProcessManagement.Controller
 
             sheet.Range["F11"].Text = strSubject;//4
 
-            DateTime ExpireDate = DateTime.ParseExact(expireDate, "yyyyMMdd", CultureInfo.InvariantCulture);
-            sheet.Range["F15"].Text = "発行日からＸＸ日間有効 " + ExpireDate.ToString("yyyyMMdd");//9
+            sheet.Range["F15"].Text = "発行日からＸＸ日間有効".Replace("ＸＸ", expireDate.ToString()) ;//9
             #endregion
 
             #region Basic Large Header
@@ -315,9 +313,9 @@ namespace AmigoProcessManagement.Controller
                     decTotal = decTotal + (initial_cost * intContractQTY);
                     sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                     sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                    sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N");
+                    sheet.Range["I" + intItemStart.ToString()].Text = initial_cost.ToString("N0");
                     sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                    sheet.Range["J" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N");
+                    sheet.Range["J" + intItemStart.ToString()].Text = (initial_cost * intContractQTY).ToString("N0");
                     sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                     intItemStart++;
                     intHeaderStart++;
@@ -332,20 +330,26 @@ namespace AmigoProcessManagement.Controller
             {
                 sheet.Range["B42"].Text = (intHeaderNumberSerial + 1).ToString();
                 sheet.Range["C42"].Text = "特別値引き";
-                sheet.Range["J42"].Text = decDiscount.ToString("N0");
+                sheet.Range["J42"].Text = "¥" + decDiscount.ToString("N0");
                 sheet.Range["J42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             }
             #endregion
 
             #region GrandTotal
-            sheet.Range["J43"].Text = (decTotal + decDiscount).ToString("N0");
+            sheet.Range["J43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
             sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             #endregion
 
             #region Header Amount 
-            sheet.Range["G12"].Text = (decTotal + decDiscount).ToString("N0");
-            sheet.Range["G13"].Text = ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-            sheet.Range["G14"].Text = ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+            sheet.Range["F13"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+            sheet.Range["F14"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12:F14"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+            #endregion
+
+            #region Remark
+            XlsRectangleShape shape = sheet.RectangleShapes[4] as XlsRectangleShape;
+            shape.Text += "\n" + REMARK;
             #endregion
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
@@ -370,7 +374,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Preview_MonthlyQuotation
-        protected DataTable Preview_MonthlyQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate, string expireDate, string Remark, decimal decDiscount)
+        protected DataTable Preview_MonthlyQuotation(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDate, string REMARK, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
             String file_path = HttpContext.Current.Server.MapPath("~/" + conf.getStringValue("template.Path.Monthlyquotation.Normal"));
@@ -413,9 +417,8 @@ namespace AmigoProcessManagement.Controller
             sheet.Range["F11"].Text = strSubject;//4
 
             DateTime StartDate = DateTime.ParseExact(startDate, "yyyyMMdd", CultureInfo.InvariantCulture);
-            DateTime ExpireDate = DateTime.ParseExact(expireDate, "yyyyMMdd", CultureInfo.InvariantCulture);
             sheet.Range["F15"].Text = StartDate.Year.ToString() + "年" + StartDate.Month.ToString("00") + "月" + StartDate.Day.ToString("00") + "日"; ;//8
-            sheet.Range["F16"].Text = "発行日からＸＸ日間有効 " + ExpireDate.ToString("yyyy-MM-dd");//9
+            sheet.Range["F16"].Text = "'発行日からＸＸ日間有効".Replace("ＸＸ", expireDate.ToString());//9
             #endregion
 
             #region Basic Large Header
@@ -525,20 +528,26 @@ namespace AmigoProcessManagement.Controller
             {
                 sheet.Range["B42"].Text = (intHeaderNumberSerial + 1).ToString();
                 sheet.Range["C42"].Text = "特別値引き";
-                sheet.Range["J42"].Text = decDiscount.ToString("N0");
+                sheet.Range["J42"].Text = "¥" + decDiscount.ToString("N0");
                 sheet.Range["J42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             }
             #endregion
 
             #region GrandTotal
-            sheet.Range["J43"].Text = (decTotal + decDiscount).ToString("N0");
+            sheet.Range["J43"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
             sheet.Range["J43"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             #endregion
 
             #region Header Amount 
-            sheet.Range["G12"].Text = (decTotal + decDiscount).ToString("N0");
-            sheet.Range["G13"].Text = ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
-            sheet.Range["G14"].Text = ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12"].Text = "¥" + (decTotal + decDiscount).ToString("N0");
+            sheet.Range["F13"].Text = "¥" + ((decTotal + decDiscount) * (TaxAmt * (decimal)0.01)).ToString("N0");//6
+            sheet.Range["F14"].Text = "¥" + ((decTotal + decDiscount) + (decTotal * (TaxAmt * (decimal)0.01))).ToString("N0");//7
+            sheet.Range["F12:F14"].Style.HorizontalAlignment = HorizontalAlignType.Right;
+            #endregion
+
+            #region Remark
+            XlsRectangleShape shape = sheet.RectangleShapes[4] as XlsRectangleShape;
+            shape.Text += "\n" + REMARK;
             #endregion
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
@@ -563,7 +572,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Preview_PIBrowsing
-        protected DataTable Preview_PIBrowsing(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt, string startDate,
+        protected DataTable Preview_PIBrowsing(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate,
             string expireDate, string REMARK, string strFromCertificate, string strToCertificate, decimal decDiscount)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
@@ -595,9 +604,8 @@ namespace AmigoProcessManagement.Controller
             sheet.Range["F11"].Text = strSubject;//4
 
             DateTime StartDate = DateTime.ParseExact(startDate, "yyyyMMdd", CultureInfo.InvariantCulture);
-            DateTime ExpireDate = DateTime.ParseExact(expireDate, "yyyyMMdd", CultureInfo.InvariantCulture);
             sheet.Range["F15"].Text = StartDate.Year.ToString() + "年" + StartDate.Month.ToString("00") + "月" + StartDate.Day.ToString("00") + "日"; ;//8
-            sheet.Range["F16"].Text = "発行日からＸＸ日間有効 " + ExpireDate.ToString("yyyy-MM-dd");//9
+            sheet.Range["F16"].Text = "'発行日からＸＸ日間有効".Replace("ＸＸ", expireDate.ToString());//9
             #endregion
 
             #region Table
@@ -673,9 +681,9 @@ namespace AmigoProcessManagement.Controller
                         decTotal = decTotal + (monthly_usage_fee * intTotalMonth);
                         sheet.Range["D" + intItemStart.ToString()].Text = strItemText;
                         sheet.Range["H" + intItemStart.ToString()].Text = intContractQTY.ToString();
-                        sheet.Range["I" + intItemStart.ToString()].Text = monthly_cost.ToString("N");
+                        sheet.Range["I" + intItemStart.ToString()].Text = monthly_cost.ToString("N0");
                         sheet.Range["I" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
-                        sheet.Range["J" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N");
+                        sheet.Range["J" + intItemStart.ToString()].Text = (monthly_usage_fee * intTotalMonth).ToString("N0");
                         sheet.Range["J" + intItemStart.ToString()].Style.HorizontalAlignment = HorizontalAlignType.Right;
                         intItemStart++;
                         sheet.Range["D" + intItemStart.ToString()].Text = "期間：" + dtmFromDate.ToString("yyyy/M/d") + "~" + dtmToDate.ToString("yyyy/M/d");
@@ -691,7 +699,7 @@ namespace AmigoProcessManagement.Controller
             {
                 sheet.Range["B42"].Text = (intHeaderNumberSerial + 1).ToString();
                 sheet.Range["C42"].Text = "特別値引き";
-                sheet.Range["J42"].Text = decDiscount.ToString("N0");
+                sheet.Range["J42"].Text = "¥" + decDiscount.ToString("N0");
                 sheet.Range["J42"].Style.HorizontalAlignment = HorizontalAlignType.Right;
             }
             #endregion
@@ -735,8 +743,7 @@ namespace AmigoProcessManagement.Controller
         #endregion        
 
         #region Preview_OrderForm
-        protected DataTable Preview_OrderForm(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT, decimal TaxAmt,
-            string startDate, string expireDate, string REMARK, string strFromCertificate, string strToCertificate, decimal decDiscount, string strContractPlan)
+        protected DataTable Preview_OrderForm(string COMPANY_NO_BOX, String COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string REMARK, string strFromCertificate, string strToCertificate, decimal decDiscount, string strContractPlan)
         {
             BOL_CONFIG conf = new BOL_CONFIG("CTS040", con);
             string strSubject = strContractPlan == "PRODUCT" ? "Amigo Cloud EDI 生産情報閲覧" : "Amigo Cloud EDI 初期費用";

@@ -67,7 +67,7 @@ namespace AmigoProcessManagement.Jimugo
         #region PreviewProcess
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public void DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string EDI_ACCOUNT,decimal TaxAmt,
+        public void DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ,decimal TaxAmt,
             string startDate, string expireDate,string strFromCertificate,string strToCertificate, string strExportInfo,
             string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
@@ -76,7 +76,7 @@ namespace AmigoProcessManagement.Jimugo
             string authHeader = httpContext.Request.Headers["Authorization"];
 
             Controller.ControllerIssueQuotation previewQuote = new Controller.ControllerIssueQuotation();
-            MetaResponse response = previewQuote.DoPreview(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, EDI_ACCOUNT,TaxAmt,startDate,expireDate, strFromCertificate,strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK,PI_REMARK, ORDER_REMARK);
+            MetaResponse response = previewQuote.DoPreview(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
             Context.Response.Clear();
             Context.Response.ContentType = "application/json";
             Context.Response.Flush();

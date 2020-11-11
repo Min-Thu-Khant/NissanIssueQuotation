@@ -17,8 +17,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
-        private string CompanyNoBox = "AX-1001-03";
-        private string REQ_SEQ = "11";
+        private string CompanyNoBox = "AJ-0001-01";
+        private string REQ_SEQ = "1";
         private string Reg_Complete_Date;
         private string Quotation_Date;
         private string Order_Date;
@@ -172,7 +172,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, -1, -1))
             {
                 return false;
             }
@@ -326,9 +326,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     {
                         decimal IntialDiscount = 0;
                         decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
-                        decimal MonthlyDiscount = 0;
-                        decimal.TryParse(txtMonthlySpecialDiscount.Text, out MonthlyDiscount);
-                        decSpecialAmt = IntialDiscount + MonthlyDiscount * -1;
+                        decimal YearlyDsicount = 0;
+                        decimal.TryParse(txtYearlySpecialDiscount.Text, out YearlyDsicount);
+                        decSpecialAmt = (IntialDiscount + YearlyDsicount) * -1;
 
                         DataRow dr = dtExportInfo.NewRow();
                         dr["ExportType"] = "4";
@@ -395,10 +395,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         strToCertificate = DateTime.Now.ToString("yyyyMMdd");
                     }
                     string strExportInfo = Utility.DtToJSon(dtExportInfo,"ReqestPDF");
-                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, 
-                        txtEDIAccount.Text, decTaxAmount, strStartDate, strExpireDate, "", strFromCertificate, strToCertificate,
+                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, decTaxAmount, strStartDate, txtQuotationExpireDay.Text.Trim(), strFromCertificate, strToCertificate,
                         strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
-                    string error_message = "";//Convert.ToString(result.Rows[0]["Error Message"]);
+                    string error_message = "";
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
                         error_message += Convert.ToString(result.Rows[i]["Error Message"]);
@@ -499,13 +498,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             {
                 dtm = DateTime.ParseExact(strDataValue, "yyyy/MM/dd", CultureInfo.InvariantCulture);
             }
-            catch(Exception ex)
+            catch(Exception)
             {
                 try
                 {
-                    dtm = DateTime.ParseExact(strDataValue, "yyyy/M/dd", CultureInfo.InvariantCulture);
+                    dtm = DateTime.ParseExact(strDataValue, "yyyy/M/d", CultureInfo.InvariantCulture);
                 }
-                catch (Exception ex2)
+                catch (Exception)
                 { 
                 
                 }
