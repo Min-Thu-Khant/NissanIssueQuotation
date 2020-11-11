@@ -17,7 +17,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
-        private string CompanyNoBox = "AX-1001-03";
+        private string CompanyNoBox = "AX-1001-04";
         //private string CompanyNoBox = "AJ-0001-01";
         private string REQ_SEQ = "11";
         private string Reg_Complete_Date;
@@ -164,77 +164,77 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         {
             //validate
 
-            if (!CheckUtility.SearchConditionCheck(this, txtCompanyNoBox.Text, true, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 10))
+            if (!CheckUtility.SearchConditionCheck(this, txtCompanyNoBox.Text.Trim(), true, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 10))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtEDIAccount.Text.Trim(), false, Utility.DataType.EDI_ACCOUNT, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text.Trim(), false, Utility.DataType.FULL_WIDTH, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtIssueDate.Text, false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtIssueDate.Text.Trim(), false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtOrderDate.Text, false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderDate.Text.Trim(), false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtNotificationDate.Text, false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtNotificationDate.Text.Trim(), false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtTax.Text, true, Utility.DataType.HALF_NUMBER, 2, 1))
+            if (!CheckUtility.SearchConditionCheck(this, txtTax.Text.Trim(), true, Utility.DataType.HALF_NUMBER, 2, 1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text, chkMonthlyQuote.Checked, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtQuotationStartDate.Text.Trim(), chkMonthlyQuote.Checked, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtQuotationExpireDay.Text, true, Utility.DataType.HALF_NUMBER, 3, 1))
+            if (!CheckUtility.SearchConditionCheck(this, txtQuotationExpireDay.Text.Trim(), true, Utility.DataType.HALF_NUMBER, 3, 1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtInitialSpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtInitialSpecialDiscount.Text.Trim(), false, Utility.DataType.HALF_NUMBER, 7, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtMonthlySpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtMonthlySpecialDiscount.Text.Trim(), false, Utility.DataType.HALF_NUMBER, 7, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtYearlySpecialDiscount.Text, false, Utility.DataType.HALF_NUMBER, 7, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtYearlySpecialDiscount.Text.Trim(), false, Utility.DataType.HALF_NUMBER, 7, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtDestinationMail.Text, true, Utility.DataType.EMAIL, 255, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtDestinationMail.Text.Trim(), true, Utility.DataType.EMAIL, 255, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text, CONTRACT_PLAN=="PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtPeriodFrom.Text.Trim(), CONTRACT_PLAN=="PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtPeriodTo.Text, CONTRACT_PLAN == "PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, txtPeriodTo.Text.Trim(), CONTRACT_PLAN == "PRODUCT" ? true : false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
@@ -244,22 +244,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtInitialRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtInitialRemark.Text.Trim(), false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtMonthlyRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtMonthlyRemark.Text.Trim(), false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text.Trim(), false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text, false, Utility.DataType.TEXT, 500, 0))
+            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text.Trim(), false, Utility.DataType.TEXT, 500, 0))
             {
                 return false;
             }
@@ -316,6 +316,27 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     return false;
                 }
             }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtInitialRemark.Text.Trim(), false, Utility.DataType.FULL_WIDTH, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtMonthlyRemark.Text.Trim(), false, Utility.DataType.FULL_WIDTH, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtOrderRemark.Text.Trim(), false, Utility.DataType.FULL_WIDTH, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, txtProductionInfoRemark.Text.Trim(), false, Utility.DataType.FULL_WIDTH, -1, -1))
+            {
+                return false;
+            }
+
             return true;
         }
         #endregion
