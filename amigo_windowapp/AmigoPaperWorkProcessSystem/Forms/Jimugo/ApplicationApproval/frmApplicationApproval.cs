@@ -98,11 +98,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "ERROR_NOTIFICATION",
             "UPDATED_AT",
             "UPDATED_BY",
-            "REQ_SEQ",
+            "UPDATE_MESSAGE",
             "INPUT_PERSON_EMAIL_ADDRESS_",
-            "",
-            "",
-            "UPDATED_AT_RAW"
+            "MAIL_SENDING_TARGET_FLG",
+            "MAIL_DESTINATION",
+            "UPDATED_AT_RAW",
+            "REQ_SEQ"
         };
         private string[] alignBottoms = {
                "NML_CODE_NISSAN",
@@ -488,20 +489,20 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         private void DgvList_Paint(object sender, PaintEventArgs e)
         {
-            ApplicationForTermination_Header(e, 14, 3, "解約申請", 2, 0);
-            SupplierCodeHeader_Header(e, 18, 5, "サプライヤコード", 2, 0);
-            PointOfContract_Header(e, 23, 8, "契約窓口", 2, 0);
-            InvoiceCompany_Header(e, 32, 2, "請求先会社", 2, 0);
-            InvoiceMethods_Header(e, 34, 4, "請求方法", 2, 0);
-            InvoiceAddress_Header(e, 38, 9, "請求書送付先", 2, 0);
-            BANK1_Header(e, 47, 2, "1口目", 3, 1);
-            BANK2_Header(e, 49, 2, "2口目", 3, 1);
-            BANK3_Header(e, 51, 2, "3口目", 3, 1);
-            BANK4_Header(e, 53, 2, "4口目", 3, 1);
-            BANK_Header(e, 47, 8, "請求先銀行", 3, 0);
-            UsageFee_Header(e, 55, 4, "利用料金", 2, 0);
-            OptionPlan_Header(e, 63, 6, "オプションプラン", 2, 0);
-            ServiceDesk_Header(e, 69, 2, "サービスデスク", 2, 0);
+            ApplicationForTermination_Header(e, 11, 3, "解約申請", 2, 0);
+            SupplierCodeHeader_Header(e, 15, 5, "サプライヤコード", 2, 0);
+            PointOfContract_Header(e, 20, 8, "契約窓口", 2, 0);
+            InvoiceCompany_Header(e, 29, 2, "請求先会社", 2, 0);
+            InvoiceMethods_Header(e, 31, 4, "請求方法", 2, 0);
+            InvoiceAddress_Header(e, 35, 9, "請求書送付先", 2, 0);
+            BANK1_Header(e, 44, 2, "1口目", 3, 1);
+            BANK2_Header(e, 46, 2, "2口目", 3, 1);
+            BANK3_Header(e, 48, 2, "3口目", 3, 1);
+            BANK4_Header(e, 50, 2, "4口目", 3, 1);
+            BANK_Header(e, 44, 8, "請求先銀行", 3, 0);
+            UsageFee_Header(e, 52, 4, "利用料金", 2, 0);
+            OptionPlan_Header(e, 60, 6, "オプションプラン", 2, 0);
+            ServiceDesk_Header(e, 66, 2, "サービスデスク", 2, 0);
         }
 
         private void DgvList_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
@@ -581,16 +582,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         private void BtnDisApprove_Click(object sender, EventArgs e)
         {
-            //int procCount = 0;
-            //Process[] processlist = Process.GetProcessesByName("OUTLOOK");
-            //foreach (Process theprocess in processlist)
-            //{
-            //    procCount++;
-            //}
-            //if (procCount > 0)
-            //{
-            //    //outlook is open
-            //}
             bool SEND_FROM_SERVER = false;
             if (Utility.CheckIfProcessIsRunning("OUTLOOK"))
             {
@@ -606,31 +597,52 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (!SEND_FROM_SERVER)
             {
-                #region Open Outlook mail Client
-                Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
-
-                MailItem mailItem = (MailItem)outlookApp.CreateItem(OlItemType.olMailItem);
-
-                mailItem.Subject = Utility.GetParameterByName("SubjectString", ds.Tables["MAIL"]);
-                mailItem.To = Utility.GetParameterByName("SendMail", ds.Tables["MAIL"]);
-                mailItem.Body = Utility.GetParameterByName("TemplateString", ds.Tables["MAIL"]);
-                mailItem.CC = Utility.GetParameterByName("EmailAddressCC", ds.Tables["MAIL"]); 
-
-                mailItem.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
-
-                mailItem.Display(true);
-                #endregion
+                OpenOutlook(ds.Tables["MAIL"]);
             }
+        }
+
+        private void OpenOutlook(DataTable dt)
+        {
+            #region Open Outlook mail Client
+            Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
+
+            MailItem mailItem = (MailItem)outlookApp.CreateItem(OlItemType.olMailItem);
+
+            mailItem.Subject = Utility.GetParameterByName("SubjectString", dt);
+            mailItem.To = Utility.GetParameterByName("SendMail", dt);
+            mailItem.Body = Utility.GetParameterByName("TemplateString", dt);
+            mailItem.CC = Utility.GetParameterByName("EmailAddressCC", dt);
+
+            mailItem.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
+
+            mailItem.Display(true);
+            #endregion
         }
 
         private void BtnApprove_Click(object sender, EventArgs e)
         {
+            bool SEND_FROM_SERVER = false;
+            if (Utility.CheckIfProcessIsRunning("OUTLOOK"))
+            {
+                SEND_FROM_SERVER = true;
+            }
+
+            //TEST
+            uIUtility.dtList.Rows[0]["MAIL_SENDING_TARGET_FLG"] = 1;
+            uIUtility.dtList.Rows[0]["MAIL_DESTINATION"] = "*";
+            //TEST
+
             string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
             frmApplicationApprovalController approval = new frmApplicationApprovalController();
             DataSet ds = approval.Approve(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
             if (ds.Tables.Contains("LISTING"))
             {
                 dgvList.DataSource = ds.Tables["LISTING"];
+            }
+
+            if (!SEND_FROM_SERVER && uIUtility.dtList.Rows[0]["MAIL_DESTINATION"].ToString() !="1")
+            {
+                OpenOutlook(ds.Tables["MAIL"]);
             }
         }
     }

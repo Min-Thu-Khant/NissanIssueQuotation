@@ -111,6 +111,8 @@
     <Content Include="Templates\Mail\CTS010_CompanyCode.txt" />
     <Content Include="Templates\Mail\CTS020_GdChecked.txt" />
     <Content Include="Templates\Mail\CTS020_GdCheckReq.txt" />
+    <Content Include="Templates\Mail\CTS030_ApprovalOfApplication.txt" />
+    <Content Include="Templates\Mail\CTS030_ApprovalOfApplicationToSupplier.txt" />
     <Content Include="Templates\Mail\CTS030_ApprovalOfApplicationToSupplierDenied.txt" />
     <Content Include="Templates\Mail\CTS040_SendForms.txt" />
     <Content Include="Templates\Mail\CTS050_SystemRegistrationReq.txt" />

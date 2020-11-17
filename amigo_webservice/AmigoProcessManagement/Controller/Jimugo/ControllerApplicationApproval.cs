@@ -163,7 +163,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Approve
-        public MetaResponse Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string List)
+        public MetaResponse Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string List)
         {
 
             try
@@ -173,6 +173,7 @@ namespace AmigoProcessManagement.Controller
                 DataRow row;
                 row = Listing.Rows[0];
                 string EMIAL_SENDING_TARGET_FLG = row["MAIL_SENDING_TARGET_FLG"].ToString().Trim();
+                string MAIL_DESTINATION = row["MAIL_DESTINATION"].ToString().Trim();
                 int TRANSACTION_TYPE = int.Parse(row["TRANSACTION_TYPE"].ToString().Trim());
                 DateTime START_USE_DATE = Convert.ToDateTime(row["START_USE_DATE"].ToString().Trim());
 
@@ -295,7 +296,35 @@ namespace AmigoProcessManagement.Controller
                             return response;
                         }
                         #endregion
+                        DataTable dtMail = new DataTable();
+                        bool mailSuccess = false;
+                        if (EMIAL_SENDING_TARGET_FLG == "*" && MAIL_DESTINATION == "1")
+                        {
+                            mailSuccess = SendMailToMaintenance(COMPANY_NO_BOX, REQ_TYPE.ToString(), row["COMPANY_NAME"].ToString(), CHANGED_ITEMS, SYSTEM_REGIST_DEADLINE, out dtMail);
+                        }else if (EMIAL_SENDING_TARGET_FLG == "*" && MAIL_DESTINATION == "2")
+                        {
+                            mailSuccess = SendMailToSupplier(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_MAIL_ADDRESS"].ToString(), SEND_FROM_SERVER, out dtMail);
+                        }
 
+                        if (mailSuccess)
+                        {
+                            response.Status = 1;
+                            row["UPDATED_AT"] = UPDATED_AT_DATETIME;
+                            row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
+                            row["UPDATED_BY"] = CURRENT_USER;
+                            row["UPDATE_MESSAGE"] = string.Format(Messages.Jimugo.I000ZZ016, "承認");
+                            Listing.TableName = "LISTING";
+                            ds.Tables.Add(Listing.Copy());
+                            dtMail.TableName = "MAIL";
+                            ds.Tables.Add(dtMail.Copy());
+                        }
+                        else
+                        {
+                            response.Status = 0;
+                            row["UPDATE_MESSAGE"] = Utility.Messages.Jimugo.I000ZZ005;
+                            Listing.TableName = "LISTING";
+                            ds.Tables.Add(Listing.Copy());
+                        }
                     }
 
                     response.Data = Utility.Utility_Component.DsToJSon(ds, "Approval");
@@ -471,7 +500,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region SendMailToMaintenance
-        private bool SendMailToMaintenance(string COMPANY_NO_BOX, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, out DataTable template)
+        private bool SendMailToMaintenance(string COMPANY_NO_BOX, string REQ_TYPE, string COMPANY_NAME, string CHANGE_ITEMS, string REG_DEADLINE,  out DataTable template)
         {
             DataTable message = new DataTable();
             message.Columns.Add("Error Message");
@@ -486,14 +515,19 @@ namespace AmigoProcessManagement.Controller
 
 
             Dictionary<string, string> map = new Dictionary<string, string>() {
-                        { "${companyName}", COMPANY_NO_BOX },
-                        { "${inputPerson}", INPUT_PERSON},
+                        { "${reqType}", REQ_TYPE},
+                        { "${companyNoBox}", COMPANY_NO_BOX },
+                        { "${companyName}", COMPANY_NAME },
+                        { "${changedItem}", CHANGE_ITEMS},
+                        { "${systemRegistDeadline}", REG_DEADLINE},
+                        { "${userId}", CURRENT_USER},
                     };
 
             //prepare for mail header
-            string template_base_name = "CTS030_ApprovalOfApplicationToSupplierDenied";
-            string subject = config.getStringValue("emailSubject.supplier.denied");
+            string template_base_name = "CTS030_ApprovalOfApplication";
+            string subject = config.getStringValue("emailSubject.notice");
             string cc = config.getStringValue("emailAddress.cc");
+            string to = config.getStringValue("emailAddress.to");
             template = message;
             //read email template
             string body = "";
@@ -507,8 +541,64 @@ namespace AmigoProcessManagement.Controller
                 return false;
             }
             //send mail
-            return Utility.Mail.sendMail(INPUT_PERSON_EMAIL_ADDRESS, cc, subject, body, map);
+            return Utility.Mail.sendMail(to, cc, subject, body, map);
 
+        }
+        #endregion
+
+        #region SendMailToSupplier
+        private bool SendMailToSupplier(string COMPANY_NAME, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, bool SEND_FROM_SERVER, out DataTable template)
+        {
+            DataTable message = new DataTable();
+            message.Columns.Add("Error Message");
+            message.Columns.Add("Message");
+            message.Columns.Add("SendMail");
+            message.Columns.Add("EmailAddressCC");
+            message.Columns.Add("TemplateString");
+            message.Columns.Add("SubjectString");
+
+            //get config object for CTS030
+            BOL_CONFIG config = new BOL_CONFIG("CTS030", con);
+
+
+            Dictionary<string, string> map = new Dictionary<string, string>() {
+                        { "${companyName}", COMPANY_NAME },
+                        { "${inputPerson}", INPUT_PERSON},
+                    };
+
+            //prepare for mail header
+            string template_base_name = "CTS030_ApprovalOfApplicationToSupplier";
+            string subject = config.getStringValue("emailSubject.supplier");
+            string cc = config.getStringValue("emailAddress.cc");
+            template = message;
+            //read email template
+            string body = "";
+            try
+            {
+                string file_path = HttpContext.Current.Server.MapPath("~/Templates/Mail/" + template_base_name + ".txt");
+                body = System.IO.File.ReadAllText(file_path);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            if (SEND_FROM_SERVER)
+            {
+                //send mail
+                return Utility.Mail.sendMail(INPUT_PERSON_EMAIL_ADDRESS, cc, subject, body, map);
+            }
+            else
+            {
+                message.Clear();
+                DataRow dtRow = message.NewRow();
+                dtRow["SendMail"] = INPUT_PERSON_EMAIL_ADDRESS;
+                dtRow["EmailAddressCC"] = cc;
+                dtRow["TemplateString"] = body.Replace("${companyName}", COMPANY_NAME).Replace("${inputPerson}", INPUT_PERSON);
+                dtRow["SubjectString"] = subject;
+                message.Rows.Add(dtRow);
+                template = message;
+                return true;
+            }
 
         }
         #endregion

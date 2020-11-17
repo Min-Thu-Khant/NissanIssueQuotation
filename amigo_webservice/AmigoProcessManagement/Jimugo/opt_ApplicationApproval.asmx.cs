@@ -56,7 +56,7 @@ namespace AmigoProcessManagement.Jimugo
         #region Approve
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public void Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
+        public void Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string LIST)
         {
             //get Authorization header
             HttpContext httpContext = HttpContext.Current;
@@ -75,7 +75,7 @@ namespace AmigoProcessManagement.Jimugo
             else
             {
                 ControllerApplicationApproval approval = new Controller.ControllerApplicationApproval(authHeader);
-                MetaResponse response = approval.Approve(COMPANY_NO_BOX, REQ_TYPE, CHANGED_ITEMS, SYSTEM_EFFECTIVE_DATE, SYSTEM_REGIST_DEADLINE, LIST);
+                MetaResponse response = approval.Approve(COMPANY_NO_BOX, REQ_TYPE, CHANGED_ITEMS, SYSTEM_EFFECTIVE_DATE, SYSTEM_REGIST_DEADLINE, SEND_FROM_SERVER, LIST);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();
