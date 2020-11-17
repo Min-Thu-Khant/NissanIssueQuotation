@@ -378,7 +378,7 @@ namespace AmigoProcessManagement.Controller
                 if (string.IsNullOrEmpty(msg))
                 {
                     DataTable dtMail = new DataTable();
-                    bool success = DisapproveSendMail(COMPANY_NO_BOX, row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_EMAIL_ADDRESS"].ToString(), SEND_FROM_SERVER, out dtMail);
+                    bool success = DisapproveSendMail(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_EMAIL_ADDRESS"].ToString(), SEND_FROM_SERVER, out dtMail);
 
                     if (success)
                     {
@@ -413,8 +413,8 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-        #region PrepareAndSendMail
-        private bool DisapproveSendMail(string COMPANY_NO_BOX, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, bool SEND_FROM_SERVER, out DataTable template)
+        #region DisapproveSendMail
+        private bool DisapproveSendMail(string COMPANY_NAME, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, bool SEND_FROM_SERVER, out DataTable template)
         {
             DataTable message = new DataTable();
             message.Columns.Add("Error Message");
@@ -429,7 +429,7 @@ namespace AmigoProcessManagement.Controller
 
             
             Dictionary<string, string> map = new Dictionary<string, string>() {
-                        { "${companyName}", COMPANY_NO_BOX },
+                        { "${companyName}", COMPANY_NAME },
                         { "${inputPerson}", INPUT_PERSON},
                     };
 
@@ -460,7 +460,7 @@ namespace AmigoProcessManagement.Controller
                 DataRow dtRow = message.NewRow();
                 dtRow["SendMail"] = INPUT_PERSON_EMAIL_ADDRESS;
                 dtRow["EmailAddressCC"] = cc;
-                dtRow["TemplateString"] = body.Replace("${companyName}", COMPANY_NO_BOX).Replace("${inputPerson}", INPUT_PERSON);
+                dtRow["TemplateString"] = body.Replace("${companyName}", COMPANY_NAME).Replace("${inputPerson}", INPUT_PERSON);
                 dtRow["SubjectString"] = subject;
                 message.Rows.Add(dtRow);
                 template = message;
@@ -469,5 +469,49 @@ namespace AmigoProcessManagement.Controller
 
         }
         #endregion
+
+        #region SendMailToMaintenance
+        private bool SendMailToMaintenance(string COMPANY_NO_BOX, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, out DataTable template)
+        {
+            DataTable message = new DataTable();
+            message.Columns.Add("Error Message");
+            message.Columns.Add("Message");
+            message.Columns.Add("SendMail");
+            message.Columns.Add("EmailAddressCC");
+            message.Columns.Add("TemplateString");
+            message.Columns.Add("SubjectString");
+
+            //get config object for CTS030
+            BOL_CONFIG config = new BOL_CONFIG("CTS030", con);
+
+
+            Dictionary<string, string> map = new Dictionary<string, string>() {
+                        { "${companyName}", COMPANY_NO_BOX },
+                        { "${inputPerson}", INPUT_PERSON},
+                    };
+
+            //prepare for mail header
+            string template_base_name = "CTS030_ApprovalOfApplicationToSupplierDenied";
+            string subject = config.getStringValue("emailSubject.supplier.denied");
+            string cc = config.getStringValue("emailAddress.cc");
+            template = message;
+            //read email template
+            string body = "";
+            try
+            {
+                string file_path = HttpContext.Current.Server.MapPath("~/Templates/Mail/" + template_base_name + ".txt");
+                body = System.IO.File.ReadAllText(file_path);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            //send mail
+            return Utility.Mail.sendMail(INPUT_PERSON_EMAIL_ADDRESS, cc, subject, body, map);
+
+
+        }
+        #endregion
+
     }
 }
