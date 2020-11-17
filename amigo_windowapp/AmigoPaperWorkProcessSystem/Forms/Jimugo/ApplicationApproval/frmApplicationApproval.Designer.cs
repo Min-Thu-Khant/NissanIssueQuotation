@@ -28,83 +28,83 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle145 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle146 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle147 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle148 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle149 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle150 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle151 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle152 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle153 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle154 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle155 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle156 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle157 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle158 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle159 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle160 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle161 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle162 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle163 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle164 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle165 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle166 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle167 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle168 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle169 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle170 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle171 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle172 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle173 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle174 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle175 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle176 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle177 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle178 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle179 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle180 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle181 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle182 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle183 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle184 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle185 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle186 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle187 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle188 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle189 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle190 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle191 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle192 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle193 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle194 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle195 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle196 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle197 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle198 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle199 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle200 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle201 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle202 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle203 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle204 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle205 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle206 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle207 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle208 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle209 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle210 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle211 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle212 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle213 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle214 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle215 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle216 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle37 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle38 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle39 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle40 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle41 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle42 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle43 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle44 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle45 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pTitle = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
-            this.btnInsert = new System.Windows.Forms.Button();
-            this.btnModify = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnApproveCancel = new System.Windows.Forms.Button();
+            this.btnDisApprove = new System.Windows.Forms.Button();
+            this.btnApprove = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -219,35 +219,36 @@
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
-            // btnInsert
+            // btnApproveCancel
             // 
-            this.btnInsert.Location = new System.Drawing.Point(241, 65);
-            this.btnInsert.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnInsert.Name = "btnInsert";
-            this.btnInsert.Size = new System.Drawing.Size(100, 30);
-            this.btnInsert.TabIndex = 7;
-            this.btnInsert.Text = "承認解除";
-            this.btnInsert.UseVisualStyleBackColor = true;
+            this.btnApproveCancel.Location = new System.Drawing.Point(241, 65);
+            this.btnApproveCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnApproveCancel.Name = "btnApproveCancel";
+            this.btnApproveCancel.Size = new System.Drawing.Size(100, 30);
+            this.btnApproveCancel.TabIndex = 7;
+            this.btnApproveCancel.Text = "承認解除";
+            this.btnApproveCancel.UseVisualStyleBackColor = true;
+            this.btnApproveCancel.Click += new System.EventHandler(this.BtnApproveCancel_Click);
             // 
-            // btnModify
+            // btnDisApprove
             // 
-            this.btnModify.Location = new System.Drawing.Point(129, 65);
-            this.btnModify.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(100, 30);
-            this.btnModify.TabIndex = 6;
-            this.btnModify.Text = "否認";
-            this.btnModify.UseVisualStyleBackColor = true;
+            this.btnDisApprove.Location = new System.Drawing.Point(129, 65);
+            this.btnDisApprove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDisApprove.Name = "btnDisApprove";
+            this.btnDisApprove.Size = new System.Drawing.Size(100, 30);
+            this.btnDisApprove.TabIndex = 6;
+            this.btnDisApprove.Text = "否認";
+            this.btnDisApprove.UseVisualStyleBackColor = true;
             // 
-            // btnSearch
+            // btnApprove
             // 
-            this.btnSearch.Location = new System.Drawing.Point(16, 65);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(100, 30);
-            this.btnSearch.TabIndex = 5;
-            this.btnSearch.Text = "承認";
-            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnApprove.Location = new System.Drawing.Point(16, 65);
+            this.btnApprove.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnApprove.Name = "btnApprove";
+            this.btnApprove.Size = new System.Drawing.Size(100, 30);
+            this.btnApprove.TabIndex = 5;
+            this.btnApprove.Text = "承認";
+            this.btnApprove.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -262,6 +263,7 @@
             // 
             // txtCompanyNoBox
             // 
+            this.txtCompanyNoBox.Enabled = false;
             this.txtCompanyNoBox.Location = new System.Drawing.Point(127, 111);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
@@ -283,6 +285,7 @@
             // 
             this.txtItemChanged.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtItemChanged.Enabled = false;
             this.txtItemChanged.Location = new System.Drawing.Point(127, 145);
             this.txtItemChanged.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtItemChanged.Name = "txtItemChanged";
@@ -443,8 +446,8 @@
             // DISTINGUISH
             // 
             this.DISTINGUISH.DataPropertyName = "DISTINGUISH";
-            dataGridViewCellStyle145.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.DISTINGUISH.DefaultCellStyle = dataGridViewCellStyle145;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.DISTINGUISH.DefaultCellStyle = dataGridViewCellStyle1;
             this.DISTINGUISH.Frozen = true;
             this.DISTINGUISH.HeaderText = "区分";
             this.DISTINGUISH.Name = "DISTINGUISH";
@@ -454,8 +457,8 @@
             // REQ_TYPE
             // 
             this.REQ_TYPE.DataPropertyName = "REQ_TYPE";
-            dataGridViewCellStyle146.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.REQ_TYPE.DefaultCellStyle = dataGridViewCellStyle146;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.REQ_TYPE.DefaultCellStyle = dataGridViewCellStyle2;
             this.REQ_TYPE.Frozen = true;
             this.REQ_TYPE.HeaderText = "申請区分";
             this.REQ_TYPE.Name = "REQ_TYPE";
@@ -464,8 +467,8 @@
             // REQ_STATUS
             // 
             this.REQ_STATUS.DataPropertyName = "REQ_STATUS";
-            dataGridViewCellStyle147.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.REQ_STATUS.DefaultCellStyle = dataGridViewCellStyle147;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.REQ_STATUS.DefaultCellStyle = dataGridViewCellStyle3;
             this.REQ_STATUS.Frozen = true;
             this.REQ_STATUS.HeaderText = "申請状況";
             this.REQ_STATUS.Name = "REQ_STATUS";
@@ -475,8 +478,8 @@
             // TRANSACTION_TYPE
             // 
             this.TRANSACTION_TYPE.DataPropertyName = "TRANSACTION_TYPE";
-            dataGridViewCellStyle148.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.TRANSACTION_TYPE.DefaultCellStyle = dataGridViewCellStyle148;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.TRANSACTION_TYPE.DefaultCellStyle = dataGridViewCellStyle4;
             this.TRANSACTION_TYPE.Frozen = true;
             this.TRANSACTION_TYPE.HeaderText = "取引区分";
             this.TRANSACTION_TYPE.Name = "TRANSACTION_TYPE";
@@ -486,8 +489,8 @@
             // COMPANY_NAME
             // 
             this.COMPANY_NAME.DataPropertyName = "COMPANY_NAME";
-            dataGridViewCellStyle149.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle149;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle5;
             this.COMPANY_NAME.Frozen = true;
             this.COMPANY_NAME.HeaderText = "会社名";
             this.COMPANY_NAME.Name = "COMPANY_NAME";
@@ -497,8 +500,8 @@
             // COMPANY_NAME_READING
             // 
             this.COMPANY_NAME_READING.DataPropertyName = "COMPANY_NAME_READING";
-            dataGridViewCellStyle150.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.COMPANY_NAME_READING.DefaultCellStyle = dataGridViewCellStyle150;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.COMPANY_NAME_READING.DefaultCellStyle = dataGridViewCellStyle6;
             this.COMPANY_NAME_READING.HeaderText = "会社名フリガナ";
             this.COMPANY_NAME_READING.Name = "COMPANY_NAME_READING";
             this.COMPANY_NAME_READING.ReadOnly = true;
@@ -507,8 +510,8 @@
             // REQ_DATE
             // 
             this.REQ_DATE.DataPropertyName = "REQ_DATE";
-            dataGridViewCellStyle151.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.REQ_DATE.DefaultCellStyle = dataGridViewCellStyle151;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.REQ_DATE.DefaultCellStyle = dataGridViewCellStyle7;
             this.REQ_DATE.HeaderText = "申請日時";
             this.REQ_DATE.Name = "REQ_DATE";
             this.REQ_DATE.ReadOnly = true;
@@ -517,8 +520,8 @@
             // INPUT_DATE
             // 
             this.INPUT_DATE.DataPropertyName = "INPUT_DATE";
-            dataGridViewCellStyle152.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.INPUT_DATE.DefaultCellStyle = dataGridViewCellStyle152;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.INPUT_DATE.DefaultCellStyle = dataGridViewCellStyle8;
             this.INPUT_DATE.HeaderText = "記入年月日";
             this.INPUT_DATE.Name = "INPUT_DATE";
             this.INPUT_DATE.ReadOnly = true;
@@ -526,8 +529,8 @@
             // INPUT_PERSON
             // 
             this.INPUT_PERSON.DataPropertyName = "INPUT_PERSON";
-            dataGridViewCellStyle153.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.INPUT_PERSON.DefaultCellStyle = dataGridViewCellStyle153;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.INPUT_PERSON.DefaultCellStyle = dataGridViewCellStyle9;
             this.INPUT_PERSON.HeaderText = "記入者";
             this.INPUT_PERSON.Name = "INPUT_PERSON";
             this.INPUT_PERSON.ReadOnly = true;
@@ -536,8 +539,8 @@
             // INPUT_PERSON_EMAIL_ADDRESS
             // 
             this.INPUT_PERSON_EMAIL_ADDRESS.DataPropertyName = "INPUT_PERSON_EMAIL_ADDRESS";
-            dataGridViewCellStyle154.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.INPUT_PERSON_EMAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle154;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.INPUT_PERSON_EMAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle10;
             this.INPUT_PERSON_EMAIL_ADDRESS.HeaderText = "記入者メールアドレス";
             this.INPUT_PERSON_EMAIL_ADDRESS.Name = "INPUT_PERSON_EMAIL_ADDRESS";
             this.INPUT_PERSON_EMAIL_ADDRESS.ReadOnly = true;
@@ -546,8 +549,8 @@
             // CANCELLATION_DATE
             // 
             this.CANCELLATION_DATE.DataPropertyName = "CANCELLATION_DATE";
-            dataGridViewCellStyle155.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.CANCELLATION_DATE.DefaultCellStyle = dataGridViewCellStyle155;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.CANCELLATION_DATE.DefaultCellStyle = dataGridViewCellStyle11;
             this.CANCELLATION_DATE.HeaderText = "解約年月日";
             this.CANCELLATION_DATE.Name = "CANCELLATION_DATE";
             this.CANCELLATION_DATE.ReadOnly = true;
@@ -555,8 +558,8 @@
             // CANCELLATION_EDI_ACCOUNT
             // 
             this.CANCELLATION_EDI_ACCOUNT.DataPropertyName = "CANCELLATION_EDI_ACCOUNT";
-            dataGridViewCellStyle156.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CANCELLATION_EDI_ACCOUNT.DefaultCellStyle = dataGridViewCellStyle156;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CANCELLATION_EDI_ACCOUNT.DefaultCellStyle = dataGridViewCellStyle12;
             this.CANCELLATION_EDI_ACCOUNT.HeaderText = "EDIアカウント";
             this.CANCELLATION_EDI_ACCOUNT.Name = "CANCELLATION_EDI_ACCOUNT";
             this.CANCELLATION_EDI_ACCOUNT.ReadOnly = true;
@@ -564,8 +567,8 @@
             // CANCELLATION_REASON
             // 
             this.CANCELLATION_REASON.DataPropertyName = "CANCELLATION_REASON";
-            dataGridViewCellStyle157.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CANCELLATION_REASON.DefaultCellStyle = dataGridViewCellStyle157;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CANCELLATION_REASON.DefaultCellStyle = dataGridViewCellStyle13;
             this.CANCELLATION_REASON.HeaderText = "理由";
             this.CANCELLATION_REASON.Name = "CANCELLATION_REASON";
             this.CANCELLATION_REASON.ReadOnly = true;
@@ -574,8 +577,8 @@
             // START_USE_DATE
             // 
             this.START_USE_DATE.DataPropertyName = "START_USE_DATE";
-            dataGridViewCellStyle158.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.START_USE_DATE.DefaultCellStyle = dataGridViewCellStyle158;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.START_USE_DATE.DefaultCellStyle = dataGridViewCellStyle14;
             this.START_USE_DATE.HeaderText = "利用開始年月日";
             this.START_USE_DATE.Name = "START_USE_DATE";
             this.START_USE_DATE.ReadOnly = true;
@@ -584,8 +587,8 @@
             // NML_CODE_NISSAN
             // 
             this.NML_CODE_NISSAN.DataPropertyName = "NML_CODE_NISSAN";
-            dataGridViewCellStyle159.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NML_CODE_NISSAN.DefaultCellStyle = dataGridViewCellStyle159;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NML_CODE_NISSAN.DefaultCellStyle = dataGridViewCellStyle15;
             this.NML_CODE_NISSAN.HeaderText = "日産";
             this.NML_CODE_NISSAN.Name = "NML_CODE_NISSAN";
             this.NML_CODE_NISSAN.ReadOnly = true;
@@ -594,8 +597,8 @@
             // NML_CODE_NS
             // 
             this.NML_CODE_NS.DataPropertyName = "NML_CODE_NS";
-            dataGridViewCellStyle160.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NML_CODE_NS.DefaultCellStyle = dataGridViewCellStyle160;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NML_CODE_NS.DefaultCellStyle = dataGridViewCellStyle16;
             this.NML_CODE_NS.HeaderText = "NS";
             this.NML_CODE_NS.Name = "NML_CODE_NS";
             this.NML_CODE_NS.ReadOnly = true;
@@ -604,8 +607,8 @@
             // NML_CODE_JATCO
             // 
             this.NML_CODE_JATCO.DataPropertyName = "NML_CODE_JATCO";
-            dataGridViewCellStyle161.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NML_CODE_JATCO.DefaultCellStyle = dataGridViewCellStyle161;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NML_CODE_JATCO.DefaultCellStyle = dataGridViewCellStyle17;
             this.NML_CODE_JATCO.HeaderText = "JATCO";
             this.NML_CODE_JATCO.Name = "NML_CODE_JATCO";
             this.NML_CODE_JATCO.ReadOnly = true;
@@ -614,8 +617,8 @@
             // NML_CODE_AK
             // 
             this.NML_CODE_AK.DataPropertyName = "NML_CODE_AK";
-            dataGridViewCellStyle162.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NML_CODE_AK.DefaultCellStyle = dataGridViewCellStyle162;
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NML_CODE_AK.DefaultCellStyle = dataGridViewCellStyle18;
             this.NML_CODE_AK.HeaderText = "愛知機械";
             this.NML_CODE_AK.Name = "NML_CODE_AK";
             this.NML_CODE_AK.ReadOnly = true;
@@ -624,8 +627,8 @@
             // NML_CODE_NK
             // 
             this.NML_CODE_NK.DataPropertyName = "NML_CODE_NK";
-            dataGridViewCellStyle163.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.NML_CODE_NK.DefaultCellStyle = dataGridViewCellStyle163;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.NML_CODE_NK.DefaultCellStyle = dataGridViewCellStyle19;
             this.NML_CODE_NK.HeaderText = "日産工機";
             this.NML_CODE_NK.Name = "NML_CODE_NK";
             this.NML_CODE_NK.ReadOnly = true;
@@ -634,8 +637,8 @@
             // CONTRACTOR_COMPANY_NAME
             // 
             this.CONTRACTOR_COMPANY_NAME.DataPropertyName = "CONTRACTOR_COMPANY_NAME";
-            dataGridViewCellStyle164.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle164;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle20;
             this.CONTRACTOR_COMPANY_NAME.HeaderText = "会社名";
             this.CONTRACTOR_COMPANY_NAME.Name = "CONTRACTOR_COMPANY_NAME";
             this.CONTRACTOR_COMPANY_NAME.ReadOnly = true;
@@ -644,8 +647,8 @@
             // CONTRACTOR_DEPARTMENT_IN_CHARGE
             // 
             this.CONTRACTOR_DEPARTMENT_IN_CHARGE.DataPropertyName = "CONTRACTOR_DEPARTMENT_IN_CHARGE";
-            dataGridViewCellStyle165.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_DEPARTMENT_IN_CHARGE.DefaultCellStyle = dataGridViewCellStyle165;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_DEPARTMENT_IN_CHARGE.DefaultCellStyle = dataGridViewCellStyle21;
             this.CONTRACTOR_DEPARTMENT_IN_CHARGE.HeaderText = "部署名";
             this.CONTRACTOR_DEPARTMENT_IN_CHARGE.Name = "CONTRACTOR_DEPARTMENT_IN_CHARGE";
             this.CONTRACTOR_DEPARTMENT_IN_CHARGE.ReadOnly = true;
@@ -654,8 +657,8 @@
             // CONTRACTOR_CONTACT_NAME
             // 
             this.CONTRACTOR_CONTACT_NAME.DataPropertyName = "CONTRACTOR_CONTACT_NAME";
-            dataGridViewCellStyle166.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_CONTACT_NAME.DefaultCellStyle = dataGridViewCellStyle166;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_CONTACT_NAME.DefaultCellStyle = dataGridViewCellStyle22;
             this.CONTRACTOR_CONTACT_NAME.HeaderText = "担当者";
             this.CONTRACTOR_CONTACT_NAME.Name = "CONTRACTOR_CONTACT_NAME";
             this.CONTRACTOR_CONTACT_NAME.ReadOnly = true;
@@ -664,8 +667,8 @@
             // CONTRACTOR_CONTACT_NAME_READING
             // 
             this.CONTRACTOR_CONTACT_NAME_READING.DataPropertyName = "CONTRACTOR_CONTACT_NAME_READING";
-            dataGridViewCellStyle167.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_CONTACT_NAME_READING.DefaultCellStyle = dataGridViewCellStyle167;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_CONTACT_NAME_READING.DefaultCellStyle = dataGridViewCellStyle23;
             this.CONTRACTOR_CONTACT_NAME_READING.HeaderText = "フリガナ";
             this.CONTRACTOR_CONTACT_NAME_READING.Name = "CONTRACTOR_CONTACT_NAME_READING";
             this.CONTRACTOR_CONTACT_NAME_READING.ReadOnly = true;
@@ -674,8 +677,8 @@
             // CONTRACTOR_POSTAL_CODE
             // 
             this.CONTRACTOR_POSTAL_CODE.DataPropertyName = "CONTRACTOR_POSTAL_CODE";
-            dataGridViewCellStyle168.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_POSTAL_CODE.DefaultCellStyle = dataGridViewCellStyle168;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_POSTAL_CODE.DefaultCellStyle = dataGridViewCellStyle24;
             this.CONTRACTOR_POSTAL_CODE.HeaderText = "郵便番号";
             this.CONTRACTOR_POSTAL_CODE.Name = "CONTRACTOR_POSTAL_CODE";
             this.CONTRACTOR_POSTAL_CODE.ReadOnly = true;
@@ -684,8 +687,8 @@
             // CONTRACTOR_ADDRESS
             // 
             this.CONTRACTOR_ADDRESS.DataPropertyName = "CONTRACTOR_ADDRESS";
-            dataGridViewCellStyle169.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_ADDRESS.DefaultCellStyle = dataGridViewCellStyle169;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_ADDRESS.DefaultCellStyle = dataGridViewCellStyle25;
             this.CONTRACTOR_ADDRESS.HeaderText = "住所";
             this.CONTRACTOR_ADDRESS.Name = "CONTRACTOR_ADDRESS";
             this.CONTRACTOR_ADDRESS.ReadOnly = true;
@@ -694,8 +697,8 @@
             // CONTRACTOR_ADDRESS_BUILDING
             // 
             this.CONTRACTOR_ADDRESS_BUILDING.DataPropertyName = "CONTRACTOR_ADDRESS_BUILDING";
-            dataGridViewCellStyle170.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_ADDRESS_BUILDING.DefaultCellStyle = dataGridViewCellStyle170;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_ADDRESS_BUILDING.DefaultCellStyle = dataGridViewCellStyle26;
             this.CONTRACTOR_ADDRESS_BUILDING.HeaderText = "建物";
             this.CONTRACTOR_ADDRESS_BUILDING.Name = "CONTRACTOR_ADDRESS_BUILDING";
             this.CONTRACTOR_ADDRESS_BUILDING.ReadOnly = true;
@@ -704,8 +707,8 @@
             // CONTRACTOR_MAIL_ADDRESS
             // 
             this.CONTRACTOR_MAIL_ADDRESS.DataPropertyName = "CONTRACTOR_MAIL_ADDRESS";
-            dataGridViewCellStyle171.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle171;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle27;
             this.CONTRACTOR_MAIL_ADDRESS.HeaderText = "メールアドレス";
             this.CONTRACTOR_MAIL_ADDRESS.Name = "CONTRACTOR_MAIL_ADDRESS";
             this.CONTRACTOR_MAIL_ADDRESS.ReadOnly = true;
@@ -714,8 +717,8 @@
             // CONTRACTOR_PHONE_NUMBER
             // 
             this.CONTRACTOR_PHONE_NUMBER.DataPropertyName = "CONTRACTOR_PHONE_NUMBER";
-            dataGridViewCellStyle172.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACTOR_PHONE_NUMBER.DefaultCellStyle = dataGridViewCellStyle172;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACTOR_PHONE_NUMBER.DefaultCellStyle = dataGridViewCellStyle28;
             this.CONTRACTOR_PHONE_NUMBER.HeaderText = "電話番号";
             this.CONTRACTOR_PHONE_NUMBER.Name = "CONTRACTOR_PHONE_NUMBER";
             this.CONTRACTOR_PHONE_NUMBER.ReadOnly = true;
@@ -724,8 +727,8 @@
             // BILL_SUPPLIER_NAME
             // 
             this.BILL_SUPPLIER_NAME.DataPropertyName = "BILL_SUPPLIER_NAME";
-            dataGridViewCellStyle173.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_SUPPLIER_NAME.DefaultCellStyle = dataGridViewCellStyle173;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_SUPPLIER_NAME.DefaultCellStyle = dataGridViewCellStyle29;
             this.BILL_SUPPLIER_NAME.HeaderText = "名称";
             this.BILL_SUPPLIER_NAME.Name = "BILL_SUPPLIER_NAME";
             this.BILL_SUPPLIER_NAME.ReadOnly = true;
@@ -734,8 +737,8 @@
             // BILL_SUPPLIER_NAME_READING
             // 
             this.BILL_SUPPLIER_NAME_READING.DataPropertyName = "BILL_SUPPLIER_NAME_READING";
-            dataGridViewCellStyle174.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_SUPPLIER_NAME_READING.DefaultCellStyle = dataGridViewCellStyle174;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_SUPPLIER_NAME_READING.DefaultCellStyle = dataGridViewCellStyle30;
             this.BILL_SUPPLIER_NAME_READING.HeaderText = "フリガナ";
             this.BILL_SUPPLIER_NAME_READING.Name = "BILL_SUPPLIER_NAME_READING";
             this.BILL_SUPPLIER_NAME_READING.ReadOnly = true;
@@ -745,7 +748,7 @@
             // 
             this.BILL_METHOD1.DataPropertyName = "BILL_METHOD1";
             this.BILL_METHOD1.FalseValue = "0";
-            this.BILL_METHOD1.HeaderText = "請求方法_郵送";
+            this.BILL_METHOD1.HeaderText = "郵送";
             this.BILL_METHOD1.Name = "BILL_METHOD1";
             this.BILL_METHOD1.ReadOnly = true;
             this.BILL_METHOD1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -757,7 +760,7 @@
             // 
             this.BILL_METHOD2.DataPropertyName = "BILL_METHOD2";
             this.BILL_METHOD2.FalseValue = "0";
-            this.BILL_METHOD2.HeaderText = "請求方法_Email";
+            this.BILL_METHOD2.HeaderText = "Email";
             this.BILL_METHOD2.Name = "BILL_METHOD2";
             this.BILL_METHOD2.ReadOnly = true;
             this.BILL_METHOD2.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -769,7 +772,7 @@
             // 
             this.BILL_METHOD3.DataPropertyName = "BILL_METHOD3";
             this.BILL_METHOD3.FalseValue = "0";
-            this.BILL_METHOD3.HeaderText = "請求方法_WEBﾀﾞｳﾝﾛｰﾄﾞ";
+            this.BILL_METHOD3.HeaderText = "WEBﾀﾞｳﾝﾛｰﾄﾞ";
             this.BILL_METHOD3.Name = "BILL_METHOD3";
             this.BILL_METHOD3.ReadOnly = true;
             this.BILL_METHOD3.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -781,7 +784,7 @@
             // 
             this.BILL_METHOD5.DataPropertyName = "BILL_METHOD5";
             this.BILL_METHOD5.FalseValue = "0";
-            this.BILL_METHOD5.HeaderText = "請求方法_その他";
+            this.BILL_METHOD5.HeaderText = "その他";
             this.BILL_METHOD5.Name = "BILL_METHOD5";
             this.BILL_METHOD5.ReadOnly = true;
             this.BILL_METHOD5.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -792,8 +795,8 @@
             // BILL_COMPANY_NAME
             // 
             this.BILL_COMPANY_NAME.DataPropertyName = "BILL_COMPANY_NAME";
-            dataGridViewCellStyle175.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle175;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_COMPANY_NAME.DefaultCellStyle = dataGridViewCellStyle31;
             this.BILL_COMPANY_NAME.HeaderText = "会社名";
             this.BILL_COMPANY_NAME.Name = "BILL_COMPANY_NAME";
             this.BILL_COMPANY_NAME.ReadOnly = true;
@@ -802,8 +805,8 @@
             // BILL_DEPARTMENT_IN_CHARGE
             // 
             this.BILL_DEPARTMENT_IN_CHARGE.DataPropertyName = "BILL_DEPARTMENT_IN_CHARGE";
-            dataGridViewCellStyle176.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_DEPARTMENT_IN_CHARGE.DefaultCellStyle = dataGridViewCellStyle176;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_DEPARTMENT_IN_CHARGE.DefaultCellStyle = dataGridViewCellStyle32;
             this.BILL_DEPARTMENT_IN_CHARGE.HeaderText = "部署名";
             this.BILL_DEPARTMENT_IN_CHARGE.Name = "BILL_DEPARTMENT_IN_CHARGE";
             this.BILL_DEPARTMENT_IN_CHARGE.ReadOnly = true;
@@ -812,8 +815,8 @@
             // BILL_CONTACT_NAME
             // 
             this.BILL_CONTACT_NAME.DataPropertyName = "BILL_CONTACT_NAME";
-            dataGridViewCellStyle177.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_CONTACT_NAME.DefaultCellStyle = dataGridViewCellStyle177;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_CONTACT_NAME.DefaultCellStyle = dataGridViewCellStyle33;
             this.BILL_CONTACT_NAME.HeaderText = "担当者";
             this.BILL_CONTACT_NAME.Name = "BILL_CONTACT_NAME";
             this.BILL_CONTACT_NAME.ReadOnly = true;
@@ -822,8 +825,8 @@
             // BILL_CONTACT_NAME_READING
             // 
             this.BILL_CONTACT_NAME_READING.DataPropertyName = "BILL_CONTACT_NAME_READING";
-            dataGridViewCellStyle178.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_CONTACT_NAME_READING.DefaultCellStyle = dataGridViewCellStyle178;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_CONTACT_NAME_READING.DefaultCellStyle = dataGridViewCellStyle34;
             this.BILL_CONTACT_NAME_READING.HeaderText = "フリガナ";
             this.BILL_CONTACT_NAME_READING.Name = "BILL_CONTACT_NAME_READING";
             this.BILL_CONTACT_NAME_READING.ReadOnly = true;
@@ -832,8 +835,8 @@
             // BILL_POSTAL_CODE
             // 
             this.BILL_POSTAL_CODE.DataPropertyName = "BILL_POSTAL_CODE";
-            dataGridViewCellStyle179.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_POSTAL_CODE.DefaultCellStyle = dataGridViewCellStyle179;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_POSTAL_CODE.DefaultCellStyle = dataGridViewCellStyle35;
             this.BILL_POSTAL_CODE.HeaderText = "郵便番号";
             this.BILL_POSTAL_CODE.Name = "BILL_POSTAL_CODE";
             this.BILL_POSTAL_CODE.ReadOnly = true;
@@ -842,8 +845,8 @@
             // BILL_ADDRESS
             // 
             this.BILL_ADDRESS.DataPropertyName = "BILL_ADDRESS";
-            dataGridViewCellStyle180.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle180;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle36;
             this.BILL_ADDRESS.HeaderText = "住所";
             this.BILL_ADDRESS.Name = "BILL_ADDRESS";
             this.BILL_ADDRESS.ReadOnly = true;
@@ -852,8 +855,8 @@
             // BILL_ADDRESS_BUILDING
             // 
             this.BILL_ADDRESS_BUILDING.DataPropertyName = "BILL_ADDRESS_BUILDING";
-            dataGridViewCellStyle181.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_ADDRESS_BUILDING.DefaultCellStyle = dataGridViewCellStyle181;
+            dataGridViewCellStyle37.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_ADDRESS_BUILDING.DefaultCellStyle = dataGridViewCellStyle37;
             this.BILL_ADDRESS_BUILDING.HeaderText = "建物";
             this.BILL_ADDRESS_BUILDING.Name = "BILL_ADDRESS_BUILDING";
             this.BILL_ADDRESS_BUILDING.ReadOnly = true;
@@ -862,8 +865,8 @@
             // BILL_MAIL_ADDRESS
             // 
             this.BILL_MAIL_ADDRESS.DataPropertyName = "BILL_MAIL_ADDRESS";
-            dataGridViewCellStyle182.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle182;
+            dataGridViewCellStyle38.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle38;
             this.BILL_MAIL_ADDRESS.HeaderText = "メールアドレス";
             this.BILL_MAIL_ADDRESS.Name = "BILL_MAIL_ADDRESS";
             this.BILL_MAIL_ADDRESS.ReadOnly = true;
@@ -872,8 +875,8 @@
             // BILL_PHONE_NUMBER
             // 
             this.BILL_PHONE_NUMBER.DataPropertyName = "BILL_PHONE_NUMBER";
-            dataGridViewCellStyle183.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_PHONE_NUMBER.DefaultCellStyle = dataGridViewCellStyle183;
+            dataGridViewCellStyle39.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_PHONE_NUMBER.DefaultCellStyle = dataGridViewCellStyle39;
             this.BILL_PHONE_NUMBER.HeaderText = "電話番号";
             this.BILL_PHONE_NUMBER.Name = "BILL_PHONE_NUMBER";
             this.BILL_PHONE_NUMBER.ReadOnly = true;
@@ -882,9 +885,9 @@
             // BILL_BANK_ACCOUNT_NAME_1
             // 
             this.BILL_BANK_ACCOUNT_NAME_1.DataPropertyName = "BILL_BANK_ACCOUNT_NAME_1";
-            dataGridViewCellStyle184.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NAME_1.DefaultCellStyle = dataGridViewCellStyle184;
-            this.BILL_BANK_ACCOUNT_NAME_1.HeaderText = "口座名_1";
+            dataGridViewCellStyle40.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NAME_1.DefaultCellStyle = dataGridViewCellStyle40;
+            this.BILL_BANK_ACCOUNT_NAME_1.HeaderText = "口座名";
             this.BILL_BANK_ACCOUNT_NAME_1.Name = "BILL_BANK_ACCOUNT_NAME_1";
             this.BILL_BANK_ACCOUNT_NAME_1.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NAME_1.Width = 120;
@@ -892,9 +895,9 @@
             // BILL_BANK_ACCOUNT_NUMBER_1
             // 
             this.BILL_BANK_ACCOUNT_NUMBER_1.DataPropertyName = "BILL_BANK_ACCOUNT_NUMBER_1";
-            dataGridViewCellStyle185.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NUMBER_1.DefaultCellStyle = dataGridViewCellStyle185;
-            this.BILL_BANK_ACCOUNT_NUMBER_1.HeaderText = "座番号_1";
+            dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NUMBER_1.DefaultCellStyle = dataGridViewCellStyle41;
+            this.BILL_BANK_ACCOUNT_NUMBER_1.HeaderText = "座番号";
             this.BILL_BANK_ACCOUNT_NUMBER_1.Name = "BILL_BANK_ACCOUNT_NUMBER_1";
             this.BILL_BANK_ACCOUNT_NUMBER_1.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NUMBER_1.Width = 120;
@@ -902,9 +905,9 @@
             // BILL_BANK_ACCOUNT_NAME_2
             // 
             this.BILL_BANK_ACCOUNT_NAME_2.DataPropertyName = "BILL_BANK_ACCOUNT_NAME_2";
-            dataGridViewCellStyle186.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NAME_2.DefaultCellStyle = dataGridViewCellStyle186;
-            this.BILL_BANK_ACCOUNT_NAME_2.HeaderText = "口座名_2";
+            dataGridViewCellStyle42.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NAME_2.DefaultCellStyle = dataGridViewCellStyle42;
+            this.BILL_BANK_ACCOUNT_NAME_2.HeaderText = "口座名";
             this.BILL_BANK_ACCOUNT_NAME_2.Name = "BILL_BANK_ACCOUNT_NAME_2";
             this.BILL_BANK_ACCOUNT_NAME_2.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NAME_2.Width = 120;
@@ -912,9 +915,9 @@
             // BILL_BANK_ACCOUNT_NUMBER_2
             // 
             this.BILL_BANK_ACCOUNT_NUMBER_2.DataPropertyName = "BILL_BANK_ACCOUNT_NUMBER_2";
-            dataGridViewCellStyle187.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NUMBER_2.DefaultCellStyle = dataGridViewCellStyle187;
-            this.BILL_BANK_ACCOUNT_NUMBER_2.HeaderText = "口座番号_2";
+            dataGridViewCellStyle43.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NUMBER_2.DefaultCellStyle = dataGridViewCellStyle43;
+            this.BILL_BANK_ACCOUNT_NUMBER_2.HeaderText = "口座番号";
             this.BILL_BANK_ACCOUNT_NUMBER_2.Name = "BILL_BANK_ACCOUNT_NUMBER_2";
             this.BILL_BANK_ACCOUNT_NUMBER_2.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NUMBER_2.Width = 120;
@@ -922,9 +925,9 @@
             // BILL_BANK_ACCOUNT_NAME_3
             // 
             this.BILL_BANK_ACCOUNT_NAME_3.DataPropertyName = "BILL_BANK_ACCOUNT_NAME_3";
-            dataGridViewCellStyle188.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NAME_3.DefaultCellStyle = dataGridViewCellStyle188;
-            this.BILL_BANK_ACCOUNT_NAME_3.HeaderText = "口座名_3";
+            dataGridViewCellStyle44.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NAME_3.DefaultCellStyle = dataGridViewCellStyle44;
+            this.BILL_BANK_ACCOUNT_NAME_3.HeaderText = "口座名";
             this.BILL_BANK_ACCOUNT_NAME_3.Name = "BILL_BANK_ACCOUNT_NAME_3";
             this.BILL_BANK_ACCOUNT_NAME_3.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NAME_3.Width = 120;
@@ -932,9 +935,9 @@
             // BILL_BANK_ACCOUNT_NUMBER_3
             // 
             this.BILL_BANK_ACCOUNT_NUMBER_3.DataPropertyName = "BILL_BANK_ACCOUNT_NUMBER_3";
-            dataGridViewCellStyle189.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NUMBER_3.DefaultCellStyle = dataGridViewCellStyle189;
-            this.BILL_BANK_ACCOUNT_NUMBER_3.HeaderText = "口座番号_3";
+            dataGridViewCellStyle45.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NUMBER_3.DefaultCellStyle = dataGridViewCellStyle45;
+            this.BILL_BANK_ACCOUNT_NUMBER_3.HeaderText = "口座番号";
             this.BILL_BANK_ACCOUNT_NUMBER_3.Name = "BILL_BANK_ACCOUNT_NUMBER_3";
             this.BILL_BANK_ACCOUNT_NUMBER_3.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NUMBER_3.Width = 120;
@@ -942,9 +945,9 @@
             // BILL_BANK_ACCOUNT_NAME_4
             // 
             this.BILL_BANK_ACCOUNT_NAME_4.DataPropertyName = "BILL_BANK_ACCOUNT_NAME_4";
-            dataGridViewCellStyle190.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NAME_4.DefaultCellStyle = dataGridViewCellStyle190;
-            this.BILL_BANK_ACCOUNT_NAME_4.HeaderText = "口座名_4";
+            dataGridViewCellStyle46.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NAME_4.DefaultCellStyle = dataGridViewCellStyle46;
+            this.BILL_BANK_ACCOUNT_NAME_4.HeaderText = "口座名";
             this.BILL_BANK_ACCOUNT_NAME_4.Name = "BILL_BANK_ACCOUNT_NAME_4";
             this.BILL_BANK_ACCOUNT_NAME_4.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NAME_4.Width = 120;
@@ -952,9 +955,9 @@
             // BILL_BANK_ACCOUNT_NUMBER_4
             // 
             this.BILL_BANK_ACCOUNT_NUMBER_4.DataPropertyName = "BILL_BANK_ACCOUNT_NUMBER_4";
-            dataGridViewCellStyle191.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_BANK_ACCOUNT_NUMBER_4.DefaultCellStyle = dataGridViewCellStyle191;
-            this.BILL_BANK_ACCOUNT_NUMBER_4.HeaderText = "口座番号_4";
+            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_BANK_ACCOUNT_NUMBER_4.DefaultCellStyle = dataGridViewCellStyle47;
+            this.BILL_BANK_ACCOUNT_NUMBER_4.HeaderText = "口座番号";
             this.BILL_BANK_ACCOUNT_NUMBER_4.Name = "BILL_BANK_ACCOUNT_NUMBER_4";
             this.BILL_BANK_ACCOUNT_NUMBER_4.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NUMBER_4.Width = 120;
@@ -962,8 +965,8 @@
             // INITIAL_COST
             // 
             this.INITIAL_COST.DataPropertyName = "INITIAL_COST";
-            dataGridViewCellStyle192.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.INITIAL_COST.DefaultCellStyle = dataGridViewCellStyle192;
+            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.INITIAL_COST.DefaultCellStyle = dataGridViewCellStyle48;
             this.INITIAL_COST.HeaderText = "初期費用";
             this.INITIAL_COST.Name = "INITIAL_COST";
             this.INITIAL_COST.ReadOnly = true;
@@ -972,8 +975,8 @@
             // MONTHLY_COST
             // 
             this.MONTHLY_COST.DataPropertyName = "MONTHLY_COST";
-            dataGridViewCellStyle193.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.MONTHLY_COST.DefaultCellStyle = dataGridViewCellStyle193;
+            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.MONTHLY_COST.DefaultCellStyle = dataGridViewCellStyle49;
             this.MONTHLY_COST.HeaderText = "月額利用料";
             this.MONTHLY_COST.Name = "MONTHLY_COST";
             this.MONTHLY_COST.ReadOnly = true;
@@ -982,8 +985,8 @@
             // YEAR_COST
             // 
             this.YEAR_COST.DataPropertyName = "YEAR_COST";
-            dataGridViewCellStyle194.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.YEAR_COST.DefaultCellStyle = dataGridViewCellStyle194;
+            dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.YEAR_COST.DefaultCellStyle = dataGridViewCellStyle50;
             this.YEAR_COST.HeaderText = "年額利用料";
             this.YEAR_COST.Name = "YEAR_COST";
             this.YEAR_COST.ReadOnly = true;
@@ -992,8 +995,8 @@
             // BREAKDOWN
             // 
             this.BREAKDOWN.DataPropertyName = "BREAKDOWN";
-            dataGridViewCellStyle195.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BREAKDOWN.DefaultCellStyle = dataGridViewCellStyle195;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BREAKDOWN.DefaultCellStyle = dataGridViewCellStyle51;
             this.BREAKDOWN.HeaderText = "内訳";
             this.BREAKDOWN.Name = "BREAKDOWN";
             this.BREAKDOWN.ReadOnly = true;
@@ -1004,8 +1007,8 @@
             // CONTRACT_PLAN
             // 
             this.CONTRACT_PLAN.DataPropertyName = "CONTRACT_PLAN";
-            dataGridViewCellStyle196.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACT_PLAN.DefaultCellStyle = dataGridViewCellStyle196;
+            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACT_PLAN.DefaultCellStyle = dataGridViewCellStyle52;
             this.CONTRACT_PLAN.HeaderText = "Amigo契約プラン";
             this.CONTRACT_PLAN.Name = "CONTRACT_PLAN";
             this.CONTRACT_PLAN.ReadOnly = true;
@@ -1014,8 +1017,8 @@
             // PLAN_AMIGO_CAI
             // 
             this.PLAN_AMIGO_CAI.DataPropertyName = "PLAN_AMIGO_CAI";
-            dataGridViewCellStyle197.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PLAN_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle197;
+            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PLAN_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle53;
             this.PLAN_AMIGO_CAI.HeaderText = "CAI利用者数";
             this.PLAN_AMIGO_CAI.Name = "PLAN_AMIGO_CAI";
             this.PLAN_AMIGO_CAI.ReadOnly = true;
@@ -1024,8 +1027,8 @@
             // PLAN_AMIGO_BIZ
             // 
             this.PLAN_AMIGO_BIZ.DataPropertyName = "PLAN_AMIGO_BIZ";
-            dataGridViewCellStyle198.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PLAN_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle198;
+            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PLAN_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle54;
             this.PLAN_AMIGO_BIZ.HeaderText = "Biz利用者数";
             this.PLAN_AMIGO_BIZ.Name = "PLAN_AMIGO_BIZ";
             this.PLAN_AMIGO_BIZ.ReadOnly = true;
@@ -1034,9 +1037,9 @@
             // BOX_SIZE
             // 
             this.BOX_SIZE.DataPropertyName = "BOX_SIZE";
-            dataGridViewCellStyle199.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BOX_SIZE.DefaultCellStyle = dataGridViewCellStyle199;
-            this.BOX_SIZE.HeaderText = "BOXサイズ";
+            dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BOX_SIZE.DefaultCellStyle = dataGridViewCellStyle55;
+            this.BOX_SIZE.HeaderText = "BOXサイズ (GD)";
             this.BOX_SIZE.Name = "BOX_SIZE";
             this.BOX_SIZE.ReadOnly = true;
             this.BOX_SIZE.Width = 105;
@@ -1044,9 +1047,9 @@
             // OP_AMIGO_CAI
             // 
             this.OP_AMIGO_CAI.DataPropertyName = "OP_AMIGO_CAI";
-            dataGridViewCellStyle200.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle200;
-            this.OP_AMIGO_CAI.HeaderText = "オプションプラン_CAI権限";
+            dataGridViewCellStyle56.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle56;
+            this.OP_AMIGO_CAI.HeaderText = "CAI権限";
             this.OP_AMIGO_CAI.Name = "OP_AMIGO_CAI";
             this.OP_AMIGO_CAI.ReadOnly = true;
             this.OP_AMIGO_CAI.Width = 120;
@@ -1054,9 +1057,9 @@
             // OP_AMIGO_BIZ
             // 
             this.OP_AMIGO_BIZ.DataPropertyName = "OP_AMIGO_BIZ";
-            dataGridViewCellStyle201.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle201;
-            this.OP_AMIGO_BIZ.HeaderText = "オプションプラン_Biz権限";
+            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle57;
+            this.OP_AMIGO_BIZ.HeaderText = "Biz権限";
             this.OP_AMIGO_BIZ.Name = "OP_AMIGO_BIZ";
             this.OP_AMIGO_BIZ.ReadOnly = true;
             this.OP_AMIGO_BIZ.Width = 120;
@@ -1064,9 +1067,9 @@
             // OP_BOX_SERVER
             // 
             this.OP_BOX_SERVER.DataPropertyName = "OP_BOX_SERVER";
-            dataGridViewCellStyle202.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BOX_SERVER.DefaultCellStyle = dataGridViewCellStyle202;
-            this.OP_BOX_SERVER.HeaderText = "オプションプラン_拡張BOXサーバー";
+            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BOX_SERVER.DefaultCellStyle = dataGridViewCellStyle58;
+            this.OP_BOX_SERVER.HeaderText = "拡張BOXサーバー";
             this.OP_BOX_SERVER.Name = "OP_BOX_SERVER";
             this.OP_BOX_SERVER.ReadOnly = true;
             this.OP_BOX_SERVER.Width = 120;
@@ -1074,9 +1077,9 @@
             // OP_BOX_BROWSER
             // 
             this.OP_BOX_BROWSER.DataPropertyName = "OP_BOX_BROWSER";
-            dataGridViewCellStyle203.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BOX_BROWSER.DefaultCellStyle = dataGridViewCellStyle203;
-            this.OP_BOX_BROWSER.HeaderText = "オプションプラン_拡張BOXブラウザ";
+            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BOX_BROWSER.DefaultCellStyle = dataGridViewCellStyle59;
+            this.OP_BOX_BROWSER.HeaderText = "拡張BOXブラウザ";
             this.OP_BOX_BROWSER.Name = "OP_BOX_BROWSER";
             this.OP_BOX_BROWSER.ReadOnly = true;
             this.OP_BOX_BROWSER.Width = 120;
@@ -1084,9 +1087,9 @@
             // OP_FLAT
             // 
             this.OP_FLAT.DataPropertyName = "OP_FLAT";
-            dataGridViewCellStyle204.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_FLAT.DefaultCellStyle = dataGridViewCellStyle204;
-            this.OP_FLAT.HeaderText = "オプションプラン_FLAT変換";
+            dataGridViewCellStyle60.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_FLAT.DefaultCellStyle = dataGridViewCellStyle60;
+            this.OP_FLAT.HeaderText = "FLAT変換";
             this.OP_FLAT.Name = "OP_FLAT";
             this.OP_FLAT.ReadOnly = true;
             this.OP_FLAT.Width = 120;
@@ -1094,9 +1097,9 @@
             // OP_CLIENT
             // 
             this.OP_CLIENT.DataPropertyName = "OP_CLIENT";
-            dataGridViewCellStyle205.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_CLIENT.DefaultCellStyle = dataGridViewCellStyle205;
-            this.OP_CLIENT.HeaderText = "オプションプラン_クライアント証明書";
+            dataGridViewCellStyle61.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_CLIENT.DefaultCellStyle = dataGridViewCellStyle61;
+            this.OP_CLIENT.HeaderText = "クライアント証明書";
             this.OP_CLIENT.Name = "OP_CLIENT";
             this.OP_CLIENT.ReadOnly = true;
             this.OP_CLIENT.Width = 120;
@@ -1104,8 +1107,8 @@
             // OP_BASIC_SERVICE
             // 
             this.OP_BASIC_SERVICE.DataPropertyName = "OP_BASIC_SERVICE";
-            dataGridViewCellStyle206.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BASIC_SERVICE.DefaultCellStyle = dataGridViewCellStyle206;
+            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BASIC_SERVICE.DefaultCellStyle = dataGridViewCellStyle62;
             this.OP_BASIC_SERVICE.HeaderText = "サービスデスク_基本";
             this.OP_BASIC_SERVICE.Name = "OP_BASIC_SERVICE";
             this.OP_BASIC_SERVICE.ReadOnly = true;
@@ -1114,8 +1117,8 @@
             // OP_ADD_SERVICE
             // 
             this.OP_ADD_SERVICE.DataPropertyName = "OP_ADD_SERVICE";
-            dataGridViewCellStyle207.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_ADD_SERVICE.DefaultCellStyle = dataGridViewCellStyle207;
+            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_ADD_SERVICE.DefaultCellStyle = dataGridViewCellStyle63;
             this.OP_ADD_SERVICE.HeaderText = "サービスデスク_追加";
             this.OP_ADD_SERVICE.Name = "OP_ADD_SERVICE";
             this.OP_ADD_SERVICE.ReadOnly = true;
@@ -1124,8 +1127,8 @@
             // SERVICE_DESK
             // 
             this.SERVICE_DESK.DataPropertyName = "SERVICE_DESK";
-            dataGridViewCellStyle208.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.SERVICE_DESK.DefaultCellStyle = dataGridViewCellStyle208;
+            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.SERVICE_DESK.DefaultCellStyle = dataGridViewCellStyle64;
             this.SERVICE_DESK.HeaderText = "サービスデスク";
             this.SERVICE_DESK.Name = "SERVICE_DESK";
             this.SERVICE_DESK.ReadOnly = true;
@@ -1136,8 +1139,8 @@
             // CAI_SERVER_IP_ADDRESS
             // 
             this.CAI_SERVER_IP_ADDRESS.DataPropertyName = "CAI_SERVER_IP_ADDRESS";
-            dataGridViewCellStyle209.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CAI_SERVER_IP_ADDRESS.DefaultCellStyle = dataGridViewCellStyle209;
+            dataGridViewCellStyle65.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CAI_SERVER_IP_ADDRESS.DefaultCellStyle = dataGridViewCellStyle65;
             this.CAI_SERVER_IP_ADDRESS.HeaderText = "サーバーIPアドレス";
             this.CAI_SERVER_IP_ADDRESS.Name = "CAI_SERVER_IP_ADDRESS";
             this.CAI_SERVER_IP_ADDRESS.ReadOnly = true;
@@ -1146,8 +1149,8 @@
             // CAI_NETWORK
             // 
             this.CAI_NETWORK.DataPropertyName = "CAI_NETWORK";
-            dataGridViewCellStyle210.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CAI_NETWORK.DefaultCellStyle = dataGridViewCellStyle210;
+            dataGridViewCellStyle66.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CAI_NETWORK.DefaultCellStyle = dataGridViewCellStyle66;
             this.CAI_NETWORK.HeaderText = "ネットワーク";
             this.CAI_NETWORK.Name = "CAI_NETWORK";
             this.CAI_NETWORK.ReadOnly = true;
@@ -1156,8 +1159,8 @@
             // CONTRACT_CSP
             // 
             this.CONTRACT_CSP.DataPropertyName = "CONTRACT_CSP";
-            dataGridViewCellStyle211.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACT_CSP.DefaultCellStyle = dataGridViewCellStyle211;
+            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACT_CSP.DefaultCellStyle = dataGridViewCellStyle67;
             this.CONTRACT_CSP.HeaderText = "契約CSP";
             this.CONTRACT_CSP.Name = "CONTRACT_CSP";
             this.CONTRACT_CSP.ReadOnly = true;
@@ -1166,8 +1169,8 @@
             // CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS
             // 
             this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.DataPropertyName = "CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS";
-            dataGridViewCellStyle212.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle212;
+            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle68;
             this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.HeaderText = "証明書送付先メールアドレス";
             this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.Name = "CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS";
             this.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS.ReadOnly = true;
@@ -1176,8 +1179,8 @@
             // ERROR_NOTIFICATION
             // 
             this.ERROR_NOTIFICATION.DataPropertyName = "ERROR_NOTIFICATION";
-            dataGridViewCellStyle213.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.ERROR_NOTIFICATION.DefaultCellStyle = dataGridViewCellStyle213;
+            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.ERROR_NOTIFICATION.DefaultCellStyle = dataGridViewCellStyle69;
             this.ERROR_NOTIFICATION.HeaderText = "エラー通知";
             this.ERROR_NOTIFICATION.Name = "ERROR_NOTIFICATION";
             this.ERROR_NOTIFICATION.ReadOnly = true;
@@ -1188,8 +1191,8 @@
             // colUPDATED_AT
             // 
             this.colUPDATED_AT.DataPropertyName = "UPDATED_AT";
-            dataGridViewCellStyle214.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.colUPDATED_AT.DefaultCellStyle = dataGridViewCellStyle214;
+            dataGridViewCellStyle70.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.colUPDATED_AT.DefaultCellStyle = dataGridViewCellStyle70;
             this.colUPDATED_AT.HeaderText = "更新日時";
             this.colUPDATED_AT.Name = "colUPDATED_AT";
             this.colUPDATED_AT.ReadOnly = true;
@@ -1198,8 +1201,8 @@
             // UPDATED_BY
             // 
             this.UPDATED_BY.DataPropertyName = "UPDATED_BY";
-            dataGridViewCellStyle215.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.UPDATED_BY.DefaultCellStyle = dataGridViewCellStyle215;
+            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.UPDATED_BY.DefaultCellStyle = dataGridViewCellStyle71;
             this.UPDATED_BY.HeaderText = "更新ユーザーID";
             this.UPDATED_BY.Name = "UPDATED_BY";
             this.UPDATED_BY.ReadOnly = true;
@@ -1207,8 +1210,8 @@
             // 
             // 更新メッセージ
             // 
-            dataGridViewCellStyle216.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.更新メッセージ.DefaultCellStyle = dataGridViewCellStyle216;
+            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.更新メッセージ.DefaultCellStyle = dataGridViewCellStyle72;
             this.更新メッセージ.HeaderText = "更新メッセージ";
             this.更新メッセージ.Name = "更新メッセージ";
             this.更新メッセージ.ReadOnly = true;
@@ -1258,9 +1261,9 @@
             this.Controls.Add(this.txtItemChanged);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtCompanyNoBox);
-            this.Controls.Add(this.btnInsert);
-            this.Controls.Add(this.btnModify);
-            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.btnApproveCancel);
+            this.Controls.Add(this.btnDisApprove);
+            this.Controls.Add(this.btnApprove);
             this.Controls.Add(this.pTitle);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmApplicationApproval";
@@ -1278,9 +1281,9 @@
 
         private System.Windows.Forms.Panel pTitle;
         private System.Windows.Forms.Label lblMenu;
-        private System.Windows.Forms.Button btnInsert;
-        private System.Windows.Forms.Button btnModify;
-        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnApproveCancel;
+        private System.Windows.Forms.Button btnDisApprove;
+        private System.Windows.Forms.Button btnApprove;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
         private System.Windows.Forms.Label label2;

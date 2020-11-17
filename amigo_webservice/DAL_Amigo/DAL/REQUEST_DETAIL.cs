@@ -461,6 +461,18 @@ namespace DAL_AmigoProcess.DAL
                                                 WHERE REQUEST_DETAIL. COMPANY_NO_BOX = @COMPANY_NO_BOX
                                                 @REQ_SEQ_
                                                 ORDER BY REQUEST_DETAIL.REQ_SEQ";
+
+        string strDisapprove = @"UPDATE REQUEST_DETAIL SET
+		                            REQ_STATUS = 3,
+		                            AMIGO_COOPERATION = @AMIGO_COOPERATION,
+		                            AMIGO_COOPERATION_CHENGED_ITEMS=@AMIGO_COOPERATION_CHENGED_ITEMS,
+		                            SYSTEM_EFFECTIVE_DATE=@SYSTEM_EFFECTIVE_DATE,
+		                            SYSTEM_REGIST_DEADLINE=@SYSTEM_REGIST_DEADLINE,
+		                            UPDATED_AT = @CURRENT_DATETIME,
+		                            UPDATED_BY= @CURRENT_USER
+	                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+	                            AND REQ_SEQ = @REQ_SEQ
+	                            AND UPDATED_AT=@UPDATED_AT";
         #endregion
         #endregion
 
@@ -891,8 +903,23 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region ApplicationApproval
-        
-        #region GetQuotationData
+        #region Disapprove
+        public void Disapprove(BOL_REQUEST_DETAIL oREQUEST_DETAIL, string CURRENT_USER, string CURRENT_DATETIME, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialData);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION", oREQUEST_DETAIL.AMIGO_COOPERATION));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION_CHENGED_ITEMS", oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_EFFECTIVE_DATE", oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_REGIST_DEADLINE", oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQUEST_DETAIL.REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oREQUEST_DETAIL.UPDATED_AT));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
+        #endregion
+        #region GetInitialDataForApproval
         public DataTable GetInitialDataForApproval(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_STATUS, int REQ_TYPE, out string strMsg)
         {
             if (REQ_TYPE == 9 && REQ_STATUS < 2)

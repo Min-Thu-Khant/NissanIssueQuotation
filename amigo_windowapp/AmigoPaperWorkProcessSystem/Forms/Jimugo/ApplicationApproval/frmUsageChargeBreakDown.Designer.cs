@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -41,7 +40,14 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -54,18 +60,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCurrent = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.btnOK = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.dgvCurrentTotal = new System.Windows.Forms.DataGridView();
             this.NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CONTRACT_CODE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.INITIAL_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -77,7 +72,18 @@
             this.YEAR_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YEAR_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YEAR_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnOK = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dgvCurrentTotal = new System.Windows.Forms.DataGridView();
+            this.INITIAL_EXPENSE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MONTHLY_USAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YEARLY_USAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvChangeTotal = new System.Windows.Forms.DataGridView();
+            this.INITIAL_EXPENSE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MONTHLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YEARLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvChange = new System.Windows.Forms.DataGridView();
             this.NO1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CONTRACT_CODE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -90,12 +96,6 @@
             this.YEAR_UNIT_PRICE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YEAR_QUANTITY1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YEAR_AMOUNT1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.INITIAL_EXPENSE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MONTHLY_USAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YEARLY_USAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.INITIAL_EXPENSE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MONTHLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YEARLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrent)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrentTotal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChangeTotal)).BeginInit();
@@ -137,68 +137,6 @@
             this.dgvCurrent.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvCurrent.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvCurrent.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvCurrent_Paint);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "利用料金内訳";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(612, 44);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 15);
-            this.label2.TabIndex = 10;
-            this.label2.Text = "変更";
-            // 
-            // btnOK
-            // 
-            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnOK.Location = new System.Drawing.Point(519, 340);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(150, 30);
-            this.btnOK.TabIndex = 9;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 44);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(31, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "現行";
-            // 
-            // dgvCurrentTotal
-            // 
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle13.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvCurrentTotal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
-            this.dgvCurrentTotal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCurrentTotal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.INITIAL_EXPENSE,
-            this.MONTHLY_USAGE,
-            this.YEARLY_USAGE});
-            this.dgvCurrentTotal.EnableHeadersVisualStyles = false;
-            this.dgvCurrentTotal.Location = new System.Drawing.Point(270, 13);
-            this.dgvCurrentTotal.Name = "dgvCurrentTotal";
-            this.dgvCurrentTotal.RowHeadersVisible = false;
-            this.dgvCurrentTotal.Size = new System.Drawing.Size(303, 40);
-            this.dgvCurrentTotal.TabIndex = 13;
             // 
             // NO
             // 
@@ -319,6 +257,96 @@
             this.YEAR_AMOUNT.ReadOnly = true;
             this.YEAR_AMOUNT.Width = 85;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(10, 11);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 17);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "利用料金内訳";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(612, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(31, 15);
+            this.label2.TabIndex = 10;
+            this.label2.Text = "変更";
+            // 
+            // btnOK
+            // 
+            this.btnOK.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.btnOK.Location = new System.Drawing.Point(519, 340);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(150, 30);
+            this.btnOK.TabIndex = 9;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.BtnOK_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(20, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "現行";
+            // 
+            // dgvCurrentTotal
+            // 
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvCurrentTotal.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle13;
+            this.dgvCurrentTotal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCurrentTotal.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.INITIAL_EXPENSE,
+            this.MONTHLY_USAGE,
+            this.YEARLY_USAGE});
+            this.dgvCurrentTotal.EnableHeadersVisualStyles = false;
+            this.dgvCurrentTotal.Location = new System.Drawing.Point(270, 13);
+            this.dgvCurrentTotal.Name = "dgvCurrentTotal";
+            this.dgvCurrentTotal.RowHeadersVisible = false;
+            this.dgvCurrentTotal.Size = new System.Drawing.Size(303, 40);
+            this.dgvCurrentTotal.TabIndex = 13;
+            // 
+            // INITIAL_EXPENSE
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N0";
+            this.INITIAL_EXPENSE.DefaultCellStyle = dataGridViewCellStyle14;
+            this.INITIAL_EXPENSE.HeaderText = "初期費用";
+            this.INITIAL_EXPENSE.Name = "INITIAL_EXPENSE";
+            this.INITIAL_EXPENSE.ReadOnly = true;
+            // 
+            // MONTHLY_USAGE
+            // 
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle15.Format = "N0";
+            this.MONTHLY_USAGE.DefaultCellStyle = dataGridViewCellStyle15;
+            this.MONTHLY_USAGE.HeaderText = "月額利用料";
+            this.MONTHLY_USAGE.Name = "MONTHLY_USAGE";
+            this.MONTHLY_USAGE.ReadOnly = true;
+            // 
+            // YEARLY_USAGE
+            // 
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle16.Format = "N0";
+            this.YEARLY_USAGE.DefaultCellStyle = dataGridViewCellStyle16;
+            this.YEARLY_USAGE.HeaderText = "年額利用料";
+            this.YEARLY_USAGE.Name = "YEARLY_USAGE";
+            this.YEARLY_USAGE.ReadOnly = true;
+            // 
             // dgvChangeTotal
             // 
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -340,6 +368,34 @@
             this.dgvChangeTotal.RowHeadersVisible = false;
             this.dgvChangeTotal.Size = new System.Drawing.Size(303, 40);
             this.dgvChangeTotal.TabIndex = 17;
+            // 
+            // INITIAL_EXPENSE1
+            // 
+            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N0";
+            this.INITIAL_EXPENSE1.DefaultCellStyle = dataGridViewCellStyle18;
+            this.INITIAL_EXPENSE1.HeaderText = "初期費用";
+            this.INITIAL_EXPENSE1.Name = "INITIAL_EXPENSE1";
+            this.INITIAL_EXPENSE1.ReadOnly = true;
+            // 
+            // MONTHLY_USAGE1
+            // 
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "N0";
+            dataGridViewCellStyle19.NullValue = null;
+            this.MONTHLY_USAGE1.DefaultCellStyle = dataGridViewCellStyle19;
+            this.MONTHLY_USAGE1.HeaderText = "月額利用料";
+            this.MONTHLY_USAGE1.Name = "MONTHLY_USAGE1";
+            this.MONTHLY_USAGE1.ReadOnly = true;
+            // 
+            // YEARLY_USAGE1
+            // 
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N0";
+            this.YEARLY_USAGE1.DefaultCellStyle = dataGridViewCellStyle20;
+            this.YEARLY_USAGE1.HeaderText = "年額利用料";
+            this.YEARLY_USAGE1.Name = "YEARLY_USAGE1";
+            this.YEARLY_USAGE1.ReadOnly = true;
             // 
             // dgvChange
             // 
@@ -496,61 +552,6 @@
             this.YEAR_AMOUNT1.ReadOnly = true;
             this.YEAR_AMOUNT1.Width = 85;
             // 
-            // INITIAL_EXPENSE
-            // 
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle14.Format = "N0";
-            this.INITIAL_EXPENSE.DefaultCellStyle = dataGridViewCellStyle14;
-            this.INITIAL_EXPENSE.HeaderText = "初期費用";
-            this.INITIAL_EXPENSE.Name = "INITIAL_EXPENSE";
-            this.INITIAL_EXPENSE.ReadOnly = true;
-            // 
-            // MONTHLY_USAGE
-            // 
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle15.Format = "N0";
-            this.MONTHLY_USAGE.DefaultCellStyle = dataGridViewCellStyle15;
-            this.MONTHLY_USAGE.HeaderText = "月額利用料";
-            this.MONTHLY_USAGE.Name = "MONTHLY_USAGE";
-            this.MONTHLY_USAGE.ReadOnly = true;
-            // 
-            // YEARLY_USAGE
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle16.Format = "N0";
-            this.YEARLY_USAGE.DefaultCellStyle = dataGridViewCellStyle16;
-            this.YEARLY_USAGE.HeaderText = "年額利用料";
-            this.YEARLY_USAGE.Name = "YEARLY_USAGE";
-            this.YEARLY_USAGE.ReadOnly = true;
-            // 
-            // INITIAL_EXPENSE1
-            // 
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle18.Format = "N0";
-            this.INITIAL_EXPENSE1.DefaultCellStyle = dataGridViewCellStyle18;
-            this.INITIAL_EXPENSE1.HeaderText = "初期費用";
-            this.INITIAL_EXPENSE1.Name = "INITIAL_EXPENSE1";
-            this.INITIAL_EXPENSE1.ReadOnly = true;
-            // 
-            // MONTHLY_USAGE1
-            // 
-            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle19.Format = "N0";
-            dataGridViewCellStyle19.NullValue = null;
-            this.MONTHLY_USAGE1.DefaultCellStyle = dataGridViewCellStyle19;
-            this.MONTHLY_USAGE1.HeaderText = "月額利用料";
-            this.MONTHLY_USAGE1.Name = "MONTHLY_USAGE1";
-            this.MONTHLY_USAGE1.ReadOnly = true;
-            // 
-            // YEARLY_USAGE1
-            // 
-            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle20.Format = "N0";
-            this.YEARLY_USAGE1.DefaultCellStyle = dataGridViewCellStyle20;
-            this.YEARLY_USAGE1.HeaderText = "年額利用料";
-            this.YEARLY_USAGE1.Name = "YEARLY_USAGE1";
-            this.YEARLY_USAGE1.ReadOnly = true;
-            // 
             // frmUsageChargeBreakDown
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -570,7 +571,6 @@
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1200, 423);
             this.Name = "frmUsageChargeBreakDown";
-            this.Text = "frmUsageChargeBreakDown";
             this.Load += new System.EventHandler(this.FrmUsageChargeBreakDown_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrentTotal)).EndInit();

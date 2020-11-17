@@ -47,7 +47,7 @@ namespace DAL_AmigoProcess.DAL
                                     ORDER BY
                                     MAIL_ADDRESS";
         string strGetUsageChargeBreakDownPopUp = @"SELECT 
-                                                ROW_NUMBER() OVER (ORDER BY DISPLAY_ORDER) No,
+                                                ROW_NUMBER() OVER (ORDER BY DISPLAY_ORDER) NO,
                                                 TBL.CONTRACT_CODE, 
                                                 SUM(TBL.INITIAL_UNIT_PRICE) INITIAL_UNIT_PRICE,
                                                 SUM(TBL.INITIAL_QUANTITY) INITIAL_QUANTITY,

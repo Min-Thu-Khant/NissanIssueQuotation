@@ -148,7 +148,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 "BREAKDOWN",
                 "PLAN_AMIGO_CAI",
                 "PLAN_AMIGO_BIZ",
-                "BOX_SIZE",
                 "OP_AMIGO_CAI",
                 "OP_AMIGO_BIZ",
                 "OP_BOX_SERVER",
@@ -553,6 +552,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 Utility.WriteErrorLog(ex.Message, ex, false);
                 MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        #endregion
+
+        #region ApproveCancel
+        private void BtnApproveCancel_Click(object sender, EventArgs e)
+        {
+            if (_REQ_STATUS == "2")
+            {
+                MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ036, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion

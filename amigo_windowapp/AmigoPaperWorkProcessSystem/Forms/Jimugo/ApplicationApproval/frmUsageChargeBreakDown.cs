@@ -143,5 +143,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.ApplicationApproval
         }
 
         #endregion
+
+        private void BtnOK_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

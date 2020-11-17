@@ -119,5 +119,132 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
+        #region Disapprove
+        public MetaResponse Disapprove(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string List)
+        {
+
+            try
+            {
+                DataTable Listing = Utility_Component.JsonToDt(List);
+                DataRow row;
+
+                if (REQ_TYPE == 2)
+                {
+                    row = Listing.Rows[1];
+                }
+                else
+                {
+                    row = Listing.Rows[0];
+                }
+
+                string msg = "";
+                BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
+                oREQUEST_DETAIL.REQ_STATUS = 3;
+                if (REQ_TYPE == 1 || REQ_TYPE ==9 || (REQ_TYPE == 2 && !string.IsNullOrEmpty(CHANGED_ITEMS.Trim())))
+                {
+                    oREQUEST_DETAIL.AMIGO_COOPERATION = 1;
+                }
+                else
+                {
+                    oREQUEST_DETAIL.AMIGO_COOPERATION = 2;
+                }
+
+                oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS = CHANGED_ITEMS.Trim();
+                oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE = Convert.ToDateTime(SYSTEM_EFFECTIVE_DATE);
+                oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE = Convert.ToDateTime(SYSTEM_REGIST_DEADLINE);
+
+                REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
+                DAL_REQUEST_DETAIL.Disapprove(oREQUEST_DETAIL, CURRENT_USER, CURRENT_DATETIME, out msg);
+
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    if (SEND_FROM_SERVER)
+                    {
+                        //bool success = PrepareAndSendMail(COMPANY_NO_BOX, row["INPUT_PERSON"], row["INPUT_PERSON_EMAIL_ADDRESS"], SEND_FROM_SERVER);
+
+                        //if (success)
+                        //{
+                        //    response.Status = 1;
+                        //    ResponseUtility.ReturnSuccessMessage(row, "", CURRENT_DATETIME, CURRENT_USER);
+                        //}
+                    }
+                    else
+                    {
+                        
+                    }
+                }
+                else
+                {
+                    response.Status = 0;
+                    ResponseUtility.ReturnFailMessage(row);
+                }
+                
+                response.Data = Utility.Utility_Component.DtToJSon(Listing, "Approval List"); ;
+                timer.Stop();
+                response.Meta.Duration = timer.Elapsed.TotalSeconds;
+                return response;
+            }
+            catch (Exception ex)
+            {
+                return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
+            }
+        }
+        #endregion
+
+        #region PrepareAndSendMail
+        private bool PrepareAndSendMail(string COMPANY_NO_BOX, string INPUT_PERSON, string INPUT_PERSON_EMAIL_ADDRESS, bool SEND_FROM_SERVER, out DataTable template)
+        {
+            DataTable message = new DataTable();
+            message.Columns.Add("Error Message");
+            message.Columns.Add("Message");
+            message.Columns.Add("EmailAddressCC");
+            message.Columns.Add("TemplateString");
+            message.Columns.Add("SubjectString");
+            
+            //get config object for CTS030
+            BOL_CONFIG config = new BOL_CONFIG("CTS030", con);
+
+            
+            Dictionary<string, string> map = new Dictionary<string, string>() {
+                        { "${companyName}", COMPANY_NO_BOX },
+                        { "${inputPerson}", INPUT_PERSON},
+                    };
+
+            //prepare for mail header
+            string template_base_name = "CTS030_ApprovalOfApplicationToSupplierDenied";
+            string subject = config.getStringValue("emailSubject.supplier.denied"); //come from config table
+            string cc = config.getStringValue("emailAddress.cc");
+            template = message;
+            //read email template
+            string body = "";
+            try
+            {
+                string file_path = HttpContext.Current.Server.MapPath("~/Templates/Mail/" + template_base_name + ".txt");
+                body = System.IO.File.ReadAllText(file_path);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            if (SEND_FROM_SERVER)
+            {
+                //send mail
+                return Utility.Mail.sendMail(INPUT_PERSON_EMAIL_ADDRESS, cc, subject, body, map);
+            }
+            else
+            {
+                message.Clear();
+                DataRow dtRow = message.NewRow();
+                dtRow["SendMail"] = INPUT_PERSON_EMAIL_ADDRESS;
+                dtRow["EmailAddressCC"] = cc;
+                dtRow["TemplateString"] = body.Replace("${companyName}", COMPANY_NO_BOX).Replace("${inputPerson}", INPUT_PERSON);
+                dtRow["SubjectString"] = subject;
+                message.Rows.Add(dtRow);
+                template = message;
+                return true;
+            }
+
+        }
+        #endregion
     }
 }
