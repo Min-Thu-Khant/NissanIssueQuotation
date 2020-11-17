@@ -239,6 +239,7 @@
             this.btnDisApprove.TabIndex = 6;
             this.btnDisApprove.Text = "否認";
             this.btnDisApprove.UseVisualStyleBackColor = true;
+            this.btnDisApprove.Click += new System.EventHandler(this.BtnDisApprove_Click);
             // 
             // btnApprove
             // 
@@ -1109,7 +1110,7 @@
             this.OP_BASIC_SERVICE.DataPropertyName = "OP_BASIC_SERVICE";
             dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.OP_BASIC_SERVICE.DefaultCellStyle = dataGridViewCellStyle62;
-            this.OP_BASIC_SERVICE.HeaderText = "サービスデスク_基本";
+            this.OP_BASIC_SERVICE.HeaderText = "基本";
             this.OP_BASIC_SERVICE.Name = "OP_BASIC_SERVICE";
             this.OP_BASIC_SERVICE.ReadOnly = true;
             this.OP_BASIC_SERVICE.Width = 120;
@@ -1119,7 +1120,7 @@
             this.OP_ADD_SERVICE.DataPropertyName = "OP_ADD_SERVICE";
             dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.OP_ADD_SERVICE.DefaultCellStyle = dataGridViewCellStyle63;
-            this.OP_ADD_SERVICE.HeaderText = "サービスデスク_追加";
+            this.OP_ADD_SERVICE.HeaderText = "追加";
             this.OP_ADD_SERVICE.Name = "OP_ADD_SERVICE";
             this.OP_ADD_SERVICE.ReadOnly = true;
             this.OP_ADD_SERVICE.Width = 120;

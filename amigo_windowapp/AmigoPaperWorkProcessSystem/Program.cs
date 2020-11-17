@@ -34,7 +34,7 @@ namespace AmigoPaperWorkProcessSystem
             Application.SetCompatibleTextRenderingDefault(false);
             Utility.Id = "000001";
             Utility.Password = "password";
-            Application.Run(new frmApplicationApproval("","","","",""));
+            Application.Run(new frmApplicationApproval("", "利用申請書承認", "","",""));
         }
     }
 }

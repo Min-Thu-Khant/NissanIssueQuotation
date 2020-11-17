@@ -46,12 +46,14 @@
             // 
             // dgvCurrent
             // 
+            this.dgvCurrent.AllowUserToAddRows = false;
             this.dgvCurrent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCurrent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NO,
             this.MAIL_ADDRESS});
-            this.dgvCurrent.Location = new System.Drawing.Point(32, 69);
+            this.dgvCurrent.Location = new System.Drawing.Point(32, 67);
             this.dgvCurrent.Name = "dgvCurrent";
+            this.dgvCurrent.RowHeadersVisible = false;
             this.dgvCurrent.Size = new System.Drawing.Size(450, 260);
             this.dgvCurrent.TabIndex = 12;
             // 
@@ -116,23 +118,27 @@
             // 
             // dgvChange
             // 
+            this.dgvChange.AllowUserToAddRows = false;
             this.dgvChange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvChange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn2,
             this.dataGridViewTextBoxColumn4});
-            this.dgvChange.Location = new System.Drawing.Point(509, 69);
+            this.dgvChange.Location = new System.Drawing.Point(509, 67);
             this.dgvChange.Name = "dgvChange";
+            this.dgvChange.RowHeadersVisible = false;
             this.dgvChange.Size = new System.Drawing.Size(450, 260);
             this.dgvChange.TabIndex = 13;
             // 
             // dataGridViewTextBoxColumn2
             // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "NO";
             this.dataGridViewTextBoxColumn2.HeaderText = "No";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn4
             // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "MAIL_ADDRESS";
             this.dataGridViewTextBoxColumn4.HeaderText = "メールアドレス";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -166,9 +172,9 @@
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dgvChange;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn NO;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAIL_ADDRESS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
     }
 }

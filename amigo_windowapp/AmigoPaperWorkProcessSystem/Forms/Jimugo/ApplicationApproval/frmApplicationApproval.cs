@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -565,5 +566,19 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             }
         }
         #endregion
+
+        private void BtnDisApprove_Click(object sender, EventArgs e)
+        {
+            int procCount = 0;
+            Process[] processlist = Process.GetProcessesByName("OUTLOOK");
+            foreach (Process theprocess in processlist)
+            {
+                procCount++;
+            }
+            if (procCount > 0)
+            {
+                //outlook is open
+            }
+        }
     }
 }
