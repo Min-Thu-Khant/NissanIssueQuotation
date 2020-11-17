@@ -16,7 +16,7 @@ namespace AmigoProcessManagement.Jimugo
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     // To allow this Web Service to be called from script, using ASP.NET AJAX, uncomment the following line. 
-     [System.Web.Script.Services.ScriptService]
+    [System.Web.Script.Services.ScriptService]
     public class opt_IssueQuotation : System.Web.Services.WebService
     {
 
@@ -25,126 +25,97 @@ namespace AmigoProcessManagement.Jimugo
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void GetInitialData(string COMPANY_NO_BOX, string REQ_SEQ)
         {
+            //get Authorization header
             HttpContext httpContext = HttpContext.Current;
             string authHeader = httpContext.Request.Headers["Authorization"];
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
 
-            Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
-            MetaResponse response = issueQuotation.getIntitialData(COMPANY_NO_BOX, REQ_SEQ);
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Flush();
-            Context.Response.Write(JsonConvert.SerializeObject(response));
-            Context.Response.End();
-            //get Authorization header
-            //HttpContext httpContext = HttpContext.Current;
-            //string authHeader = httpContext.Request.Headers["Authorization"];
-
-            //Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
-
-            //if (auth.Message != "")
-            //{
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(auth));
-            //    Context.Response.End();
-            //}
-            //else
-            //{
-            //    Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
-            //    MetaResponse response = issueQuotation.getIntitialData(COMPANY_NO_BOX, REQ_SEQ);
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(response));
-            //    Context.Response.End();
-            //}
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
+                MetaResponse response = issueQuotation.getIntitialData(COMPANY_NO_BOX, REQ_SEQ);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
 
         }
         #endregion
-
 
         #region PreviewProcess
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public void DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ,decimal TaxAmt,
-            string startDate, string expireDate,string strFromCertificate,string strToCertificate, string strExportInfo,
+        public void DoPreview(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt,
+            string startDate, string expireDate, string strFromCertificate, string strToCertificate, string strExportInfo,
             string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
-            //get Authorization header  
+
+            // get Authorization header
             HttpContext httpContext = HttpContext.Current;
             string authHeader = httpContext.Request.Headers["Authorization"];
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
 
-            Controller.ControllerIssueQuotation previewQuote = new Controller.ControllerIssueQuotation();
-            MetaResponse response = previewQuote.DoPreview(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Flush();
-            Context.Response.Write(JsonConvert.SerializeObject(response));
-            Context.Response.End();
-
-            //HttpContext httpContext = HttpContext.Current;
-            //string authHeader = httpContext.Request.Headers["Authorization"];
-            //Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
-
-            //if (auth.Message != "")
-            //{
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(auth));
-            //    Context.Response.End();
-            //}
-            //else
-            //{
-            //    Controller.ControllerRegisterCompleteNotificationSending completeNotificationSending = new Controller.ControllerRegisterCompleteNotificationSending();
-            //    MetaResponse response = completeNotificationSending.NotiSendingPreview(COMPANY_NAME, COMPANY_NO_BOX, REQ_SEQ, EDI_ACCOUNT, authHeader);
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(response));
-            //    Context.Response.End();
-            //}
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                Controller.ControllerIssueQuotation previewQuote = new Controller.ControllerIssueQuotation();
+                MetaResponse response = previewQuote.DoPreview(COMPANY_NO_BOX, COMPANY_NAME, REQ_SEQ, TaxAmt, startDate, expireDate, strFromCertificate, strToCertificate, strExportInfo, strContractPlan, INITIAL_REMARK, MONTHLY_REMARK, PI_REMARK, ORDER_REMARK);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
         }
         #endregion
 
-        #region SendMail
+        #region QuotationMailCreate
         [WebMethod]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public void QuotationMailCreate(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)
         {
-            //get Authorization header
+            //// get Authorization header
             HttpContext httpContext = HttpContext.Current;
             string authHeader = httpContext.Request.Headers["Authorization"];
-            Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
-            MetaResponse response = issueQuotation.QuotationMailCreate(COMPANY_NO_BOX, REQ_SEQ, CONSUMPTION_TAX, INITIAL_SPECIAL_DISCOUNTS, MONTHLY_SPECIAL_DISCOUNTS, YEARLY_SPECIAL_DISCOUNT, INPUT_PERSON, ExportInfo, CONTRACT_PLAN, CREATED_TIME);
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Flush();
-            Context.Response.Write(JsonConvert.SerializeObject(response));
-            Context.Response.End();
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
 
-            //Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
-
-            //if (auth.Message != "")
-            //{
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(auth));
-            //    Context.Response.End();
-            //}
-            //else
-            //{
-            //    Controller.ControllerRegisterCompleteNotificationSending completeNotiController = new Controller.ControllerRegisterCompleteNotificationSending();
-            //    MetaResponse response = completeNotiController.SendMailCreate(List, authHeader);
-            //    Context.Response.Clear();
-            //    Context.Response.ContentType = "application/json";
-            //    Context.Response.Flush();
-            //    Context.Response.Write(JsonConvert.SerializeObject(response));
-            //    Context.Response.End();
-            //}
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                Controller.ControllerIssueQuotation issueQuotation = new Controller.ControllerIssueQuotation(authHeader);
+                MetaResponse response = issueQuotation.QuotationMailCreate(COMPANY_NO_BOX, REQ_SEQ, CONSUMPTION_TAX, INITIAL_SPECIAL_DISCOUNTS, MONTHLY_SPECIAL_DISCOUNTS, YEARLY_SPECIAL_DISCOUNT, INPUT_PERSON, ExportInfo, CONTRACT_PLAN, CREATED_TIME);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
         }
         #endregion
+
     }
 }

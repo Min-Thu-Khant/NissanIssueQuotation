@@ -213,9 +213,9 @@
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(19, 11);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(168, 21);
+            this.lblMenu.Size = new System.Drawing.Size(78, 21);
             this.lblMenu.TabIndex = 0;
-            this.lblMenu.Text = "注文書プレビュー画面";
+            this.lblMenu.Text = "プレビュー";
             // 
             // pdfDocViewer
             // 

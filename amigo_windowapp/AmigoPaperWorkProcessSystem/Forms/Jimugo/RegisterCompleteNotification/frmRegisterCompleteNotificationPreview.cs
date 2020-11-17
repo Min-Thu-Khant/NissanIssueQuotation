@@ -67,6 +67,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         {
             try
             {
+                //theme
+                this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
+                this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
+
                 uIUtility = new UIUtility();
                 string pdf_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp/temp.pdf";
                 pdfDocumentViewer.LoadFromFile(pdf_deirectory);

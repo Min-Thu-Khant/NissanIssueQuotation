@@ -32,6 +32,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.btnBack = new MetroFramework.Controls.MetroButton();
+            this.txtCompanyName = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.txtBillToCompanyName = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.txtAccountName = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
+            this.txtCompanyNumberBox = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
+            this.txtCompanyNameReading = new MetroFramework.Controls.MetroTextBox();
+            this.btnSearch = new MetroFramework.Controls.MetroButton();
+            this.btnChange = new MetroFramework.Controls.MetroButton();
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colCOMPANY_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colBILL_COMPANY_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,19 +60,7 @@
             this.colBILL_EXPENSES = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEFFECTIVE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTRANSACTION_TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnBack = new MetroFramework.Controls.MetroButton();
-            this.txtCompanyName = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
-            this.txtBillToCompanyName = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.txtAccountName = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
-            this.txtCompanyNumberBox = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.txtCompanyNameReading = new MetroFramework.Controls.MetroTextBox();
-            this.btnSearch = new MetroFramework.Controls.MetroButton();
-            this.btnChange = new MetroFramework.Controls.MetroButton();
+            this.colREQ_SEQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,7 +100,8 @@
             this.colBILL_TRANSFER_FEE,
             this.colBILL_EXPENSES,
             this.colEFFECTIVE_DATE,
-            this.colTRANSACTION_TYPE});
+            this.colTRANSACTION_TYPE,
+            this.colREQ_SEQ});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(17, 159);
             this.dgvList.Name = "dgvList";
@@ -115,125 +117,6 @@
             this.dgvList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgvList_DataError);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
-            // 
-            // colCheck
-            // 
-            this.colCheck.HeaderText = "";
-            this.colCheck.Name = "colCheck";
-            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCheck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colCOMPANY_NAME
-            // 
-            this.colCOMPANY_NAME.DataPropertyName = "COMPANY_NAME";
-            this.colCOMPANY_NAME.HeaderText = "会社名";
-            this.colCOMPANY_NAME.Name = "colCOMPANY_NAME";
-            this.colCOMPANY_NAME.ReadOnly = true;
-            // 
-            // colBILL_COMPANY_NAME
-            // 
-            this.colBILL_COMPANY_NAME.DataPropertyName = "BILL_COMPANY_NAME";
-            this.colBILL_COMPANY_NAME.HeaderText = "請求先＿会社名";
-            this.colBILL_COMPANY_NAME.Name = "colBILL_COMPANY_NAME";
-            this.colBILL_COMPANY_NAME.ReadOnly = true;
-            // 
-            // colCOMPANY_NO_BOX
-            // 
-            this.colCOMPANY_NO_BOX.DataPropertyName = "COMPANY_NO_BOX";
-            this.colCOMPANY_NO_BOX.HeaderText = "会社番号＋BOX";
-            this.colCOMPANY_NO_BOX.Name = "colCOMPANY_NO_BOX";
-            this.colCOMPANY_NO_BOX.ReadOnly = true;
-            // 
-            // colBILL_BANK_ACCOUNT_NAME_1
-            // 
-            this.colBILL_BANK_ACCOUNT_NAME_1.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-1";
-            this.colBILL_BANK_ACCOUNT_NAME_1.HeaderText = "銀行口座名1";
-            this.colBILL_BANK_ACCOUNT_NAME_1.Name = "colBILL_BANK_ACCOUNT_NAME_1";
-            // 
-            // colBILL_BANK_ACCOUNT_NAME_2
-            // 
-            this.colBILL_BANK_ACCOUNT_NAME_2.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-2";
-            this.colBILL_BANK_ACCOUNT_NAME_2.HeaderText = "銀行口座名2";
-            this.colBILL_BANK_ACCOUNT_NAME_2.Name = "colBILL_BANK_ACCOUNT_NAME_2";
-            // 
-            // colBILL_BANK_ACCOUNT_NAME_3
-            // 
-            this.colBILL_BANK_ACCOUNT_NAME_3.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-3";
-            this.colBILL_BANK_ACCOUNT_NAME_3.HeaderText = "銀行口座名3";
-            this.colBILL_BANK_ACCOUNT_NAME_3.Name = "colBILL_BANK_ACCOUNT_NAME_3";
-            // 
-            // colBILL_BANK_ACCOUNT_NAME_4
-            // 
-            this.colBILL_BANK_ACCOUNT_NAME_4.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-4";
-            this.colBILL_BANK_ACCOUNT_NAME_4.HeaderText = "銀行口座名4";
-            this.colBILL_BANK_ACCOUNT_NAME_4.Name = "colBILL_BANK_ACCOUNT_NAME_4";
-            // 
-            // colNCS_CUSTOMER_CODE
-            // 
-            this.colNCS_CUSTOMER_CODE.DataPropertyName = "NCS_CUSTOMER_CODE";
-            this.colNCS_CUSTOMER_CODE.HeaderText = "経理取引先コード";
-            this.colNCS_CUSTOMER_CODE.Name = "colNCS_CUSTOMER_CODE";
-            // 
-            // colBILL_BILLING_INTERVAL
-            // 
-            this.colBILL_BILLING_INTERVAL.DataPropertyName = "BILL_BILLING_INTERVAL";
-            this.colBILL_BILLING_INTERVAL.HeaderText = "年額月額区分";
-            this.colBILL_BILLING_INTERVAL.Items.AddRange(new object[] {
-            "月額",
-            "四半期",
-            "半期",
-            "年額"});
-            this.colBILL_BILLING_INTERVAL.Name = "colBILL_BILLING_INTERVAL";
-            this.colBILL_BILLING_INTERVAL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colBILL_BILLING_INTERVAL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colBILL_DEPOSIT_RULES
-            // 
-            this.colBILL_DEPOSIT_RULES.DataPropertyName = "BILL_DEPOSIT_RULES";
-            this.colBILL_DEPOSIT_RULES.HeaderText = "入金時期";
-            this.colBILL_DEPOSIT_RULES.Items.AddRange(new object[] {
-            "翌月",
-            "当月",
-            "翌々月月頭"});
-            this.colBILL_DEPOSIT_RULES.Name = "colBILL_DEPOSIT_RULES";
-            this.colBILL_DEPOSIT_RULES.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colBILL_DEPOSIT_RULES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colBILL_TRANSFER_FEE
-            // 
-            this.colBILL_TRANSFER_FEE.DataPropertyName = "BILL_TRANSFER_FEE";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N0";
-            dataGridViewCellStyle2.NullValue = null;
-            this.colBILL_TRANSFER_FEE.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colBILL_TRANSFER_FEE.HeaderText = "銀行振込手数料";
-            this.colBILL_TRANSFER_FEE.Name = "colBILL_TRANSFER_FEE";
-            // 
-            // colBILL_EXPENSES
-            // 
-            this.colBILL_EXPENSES.DataPropertyName = "BILL_EXPENSES";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            dataGridViewCellStyle3.NullValue = null;
-            this.colBILL_EXPENSES.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colBILL_EXPENSES.HeaderText = "諸経費";
-            this.colBILL_EXPENSES.Name = "colBILL_EXPENSES";
-            // 
-            // colEFFECTIVE_DATE
-            // 
-            this.colEFFECTIVE_DATE.DataPropertyName = "EFFECTIVE_DATE";
-            this.colEFFECTIVE_DATE.HeaderText = "EFFECTIVE_DATE";
-            this.colEFFECTIVE_DATE.Name = "colEFFECTIVE_DATE";
-            this.colEFFECTIVE_DATE.ReadOnly = true;
-            this.colEFFECTIVE_DATE.Visible = false;
-            // 
-            // colTRANSACTION_TYPE
-            // 
-            this.colTRANSACTION_TYPE.DataPropertyName = "TRANSACTION_TYPE";
-            this.colTRANSACTION_TYPE.HeaderText = "TRANSACTION_TYPE";
-            this.colTRANSACTION_TYPE.Name = "colTRANSACTION_TYPE";
-            this.colTRANSACTION_TYPE.ReadOnly = true;
-            this.colTRANSACTION_TYPE.Visible = false;
             // 
             // btnBack
             // 
@@ -291,7 +174,7 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.Location = new System.Drawing.Point(182, 89);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(107, 19);
+            this.metroLabel2.Size = new System.Drawing.Size(90, 19);
             this.metroLabel2.TabIndex = 8;
             this.metroLabel2.Text = "会社名フリガナ";
             // 
@@ -463,6 +346,132 @@
             this.btnChange.UseSelectable = true;
             this.btnChange.Click += new System.EventHandler(this.BtnChange_Click_1);
             // 
+            // colCheck
+            // 
+            this.colCheck.HeaderText = "";
+            this.colCheck.Name = "colCheck";
+            this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colCheck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colCOMPANY_NAME
+            // 
+            this.colCOMPANY_NAME.DataPropertyName = "COMPANY_NAME";
+            this.colCOMPANY_NAME.HeaderText = "会社名";
+            this.colCOMPANY_NAME.Name = "colCOMPANY_NAME";
+            this.colCOMPANY_NAME.ReadOnly = true;
+            // 
+            // colBILL_COMPANY_NAME
+            // 
+            this.colBILL_COMPANY_NAME.DataPropertyName = "BILL_COMPANY_NAME";
+            this.colBILL_COMPANY_NAME.HeaderText = "請求先＿会社名";
+            this.colBILL_COMPANY_NAME.Name = "colBILL_COMPANY_NAME";
+            this.colBILL_COMPANY_NAME.ReadOnly = true;
+            // 
+            // colCOMPANY_NO_BOX
+            // 
+            this.colCOMPANY_NO_BOX.DataPropertyName = "COMPANY_NO_BOX";
+            this.colCOMPANY_NO_BOX.HeaderText = "会社番号＋BOX";
+            this.colCOMPANY_NO_BOX.Name = "colCOMPANY_NO_BOX";
+            this.colCOMPANY_NO_BOX.ReadOnly = true;
+            // 
+            // colBILL_BANK_ACCOUNT_NAME_1
+            // 
+            this.colBILL_BANK_ACCOUNT_NAME_1.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-1";
+            this.colBILL_BANK_ACCOUNT_NAME_1.HeaderText = "銀行口座名1";
+            this.colBILL_BANK_ACCOUNT_NAME_1.Name = "colBILL_BANK_ACCOUNT_NAME_1";
+            // 
+            // colBILL_BANK_ACCOUNT_NAME_2
+            // 
+            this.colBILL_BANK_ACCOUNT_NAME_2.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-2";
+            this.colBILL_BANK_ACCOUNT_NAME_2.HeaderText = "銀行口座名2";
+            this.colBILL_BANK_ACCOUNT_NAME_2.Name = "colBILL_BANK_ACCOUNT_NAME_2";
+            // 
+            // colBILL_BANK_ACCOUNT_NAME_3
+            // 
+            this.colBILL_BANK_ACCOUNT_NAME_3.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-3";
+            this.colBILL_BANK_ACCOUNT_NAME_3.HeaderText = "銀行口座名3";
+            this.colBILL_BANK_ACCOUNT_NAME_3.Name = "colBILL_BANK_ACCOUNT_NAME_3";
+            // 
+            // colBILL_BANK_ACCOUNT_NAME_4
+            // 
+            this.colBILL_BANK_ACCOUNT_NAME_4.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-4";
+            this.colBILL_BANK_ACCOUNT_NAME_4.HeaderText = "銀行口座名4";
+            this.colBILL_BANK_ACCOUNT_NAME_4.Name = "colBILL_BANK_ACCOUNT_NAME_4";
+            // 
+            // colNCS_CUSTOMER_CODE
+            // 
+            this.colNCS_CUSTOMER_CODE.DataPropertyName = "NCS_CUSTOMER_CODE";
+            this.colNCS_CUSTOMER_CODE.HeaderText = "経理取引先コード";
+            this.colNCS_CUSTOMER_CODE.Name = "colNCS_CUSTOMER_CODE";
+            // 
+            // colBILL_BILLING_INTERVAL
+            // 
+            this.colBILL_BILLING_INTERVAL.DataPropertyName = "BILL_BILLING_INTERVAL";
+            this.colBILL_BILLING_INTERVAL.HeaderText = "年額月額区分";
+            this.colBILL_BILLING_INTERVAL.Items.AddRange(new object[] {
+            "月額",
+            "四半期",
+            "半期",
+            "年額"});
+            this.colBILL_BILLING_INTERVAL.Name = "colBILL_BILLING_INTERVAL";
+            this.colBILL_BILLING_INTERVAL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colBILL_BILLING_INTERVAL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colBILL_DEPOSIT_RULES
+            // 
+            this.colBILL_DEPOSIT_RULES.DataPropertyName = "BILL_DEPOSIT_RULES";
+            this.colBILL_DEPOSIT_RULES.HeaderText = "入金時期";
+            this.colBILL_DEPOSIT_RULES.Items.AddRange(new object[] {
+            "翌月",
+            "当月",
+            "翌々月月頭"});
+            this.colBILL_DEPOSIT_RULES.Name = "colBILL_DEPOSIT_RULES";
+            this.colBILL_DEPOSIT_RULES.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colBILL_DEPOSIT_RULES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // colBILL_TRANSFER_FEE
+            // 
+            this.colBILL_TRANSFER_FEE.DataPropertyName = "BILL_TRANSFER_FEE";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            dataGridViewCellStyle2.NullValue = null;
+            this.colBILL_TRANSFER_FEE.DefaultCellStyle = dataGridViewCellStyle2;
+            this.colBILL_TRANSFER_FEE.HeaderText = "銀行振込手数料";
+            this.colBILL_TRANSFER_FEE.Name = "colBILL_TRANSFER_FEE";
+            // 
+            // colBILL_EXPENSES
+            // 
+            this.colBILL_EXPENSES.DataPropertyName = "BILL_EXPENSES";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            dataGridViewCellStyle3.NullValue = null;
+            this.colBILL_EXPENSES.DefaultCellStyle = dataGridViewCellStyle3;
+            this.colBILL_EXPENSES.HeaderText = "諸経費";
+            this.colBILL_EXPENSES.Name = "colBILL_EXPENSES";
+            // 
+            // colEFFECTIVE_DATE
+            // 
+            this.colEFFECTIVE_DATE.DataPropertyName = "EFFECTIVE_DATE";
+            this.colEFFECTIVE_DATE.HeaderText = "EFFECTIVE_DATE";
+            this.colEFFECTIVE_DATE.Name = "colEFFECTIVE_DATE";
+            this.colEFFECTIVE_DATE.ReadOnly = true;
+            this.colEFFECTIVE_DATE.Visible = false;
+            // 
+            // colTRANSACTION_TYPE
+            // 
+            this.colTRANSACTION_TYPE.DataPropertyName = "TRANSACTION_TYPE";
+            this.colTRANSACTION_TYPE.HeaderText = "TRANSACTION_TYPE";
+            this.colTRANSACTION_TYPE.Name = "colTRANSACTION_TYPE";
+            this.colTRANSACTION_TYPE.ReadOnly = true;
+            this.colTRANSACTION_TYPE.Visible = false;
+            // 
+            // colREQ_SEQ
+            // 
+            this.colREQ_SEQ.DataPropertyName = "REQ_SEQ";
+            this.colREQ_SEQ.HeaderText = "REQ_SEQ";
+            this.colREQ_SEQ.Name = "colREQ_SEQ";
+            this.colREQ_SEQ.Visible = false;
+            // 
             // frm38
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -523,5 +532,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colBILL_EXPENSES;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEFFECTIVE_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colTRANSACTION_TYPE;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colREQ_SEQ;
     }
 }

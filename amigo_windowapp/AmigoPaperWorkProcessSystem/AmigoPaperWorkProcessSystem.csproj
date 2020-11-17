@@ -107,7 +107,9 @@
     <Compile Include="Controllers\frm37Controller.cs" />
     <Compile Include="Controllers\frm38Controller.cs" />
     <Compile Include="Controllers\Jimugo\frmClientCertificateListController.cs" />
+    <Compile Include="Controllers\Jimugo\frmApplicationApprovalController.cs" />
     <Compile Include="Controllers\Jimugo\frmCompanyCodeListController.cs" />
+    <Compile Include="Controllers\Jimugo\frmCustomerMasterMaintenanceController.cs" />
     <Compile Include="Controllers\Jimugo\frmJimugoMenuController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssueQuotationController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssuQuotationPreviewController.cs" />
@@ -172,6 +174,36 @@
     <Compile Include="Forms\frm38.Designer.cs">
       <DependentUpon>frm38.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.Designer.cs">
+      <DependentUpon>frmErrrorNotification.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.Designer.cs">
+      <DependentUpon>frmServiceDesk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.Designer.cs">
+      <DependentUpon>frmUsageChargeBreakDown.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.designer.cs">
+      <DependentUpon>frmCustomerMasterPopup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.Designer.cs">
+      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Jimugo\frmClientCertificateList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -189,6 +221,12 @@
     </Compile>
     <Compile Include="Forms\Jimugo\frmCompanyCodeList.designer.cs">
       <DependentUpon>frmCompanyCodeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterMaintenance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterMaintenance.designer.cs">
+      <DependentUpon>frmCustomerMasterMaintenance.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\frmJimugo.cs">
       <SubType>Form</SubType>
@@ -316,6 +354,21 @@
       <DependentUpon>frm38.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.resx">
+      <DependentUpon>frmErrrorNotification.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.resx">
+      <DependentUpon>frmServiceDesk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.resx">
+      <DependentUpon>frmUsageChargeBreakDown.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.resx">
+      <DependentUpon>frmCustomerMasterPopup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.resx">
+      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmClientCertificateList.resx">
       <DependentUpon>frmClientCertificateList.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,6 +377,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmCompanyCodeList.resx">
       <DependentUpon>frmCompanyCodeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterMaintenance.resx">
+      <DependentUpon>frmCustomerMasterMaintenance.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmJimugo.resx">
       <DependentUpon>frmJimugo.cs</DependentUpon>
@@ -440,5 +496,6 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

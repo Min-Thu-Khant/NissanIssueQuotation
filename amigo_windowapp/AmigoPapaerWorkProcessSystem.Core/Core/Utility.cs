@@ -42,7 +42,9 @@ namespace AmigoPaperWorkProcessSystem.Core
             HALF_ALPHA_NUMERIC,
             FULL_WIDTH,
             MINIMUM,
-            INPUT_TYPE
+            INPUT_TYPE,
+            MINIMUM_TRANSFER_FEE,
+            MINIMUM_EXPENSE
         };
 
         public enum LogType

@@ -48,6 +48,7 @@ namespace DAL_AmigoProcess.DAL
                                                         FROM REPORT_HISTORY
                                                         WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
                                                         AND REPORT_TYPE = @REPORT_TYPE
+                                                        AND REQ_SEQ = @REQ_SEQ
                                                         GROUP BY COMPANY_NO_BOX,REQ_SEQ,REPORT_TYPE";
 
         string strInsertNotiSending = @"INSERT INTO [REPORT_HISTORY]
@@ -106,11 +107,12 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region GetReportHistorySeq
-        public int GetReportHistorySEQ(string COMPANY_NO_BOX, int REPORT_TYPE, out string strMsg)
+        public int GetReportHistorySEQ(string COMPANY_NO_BOX, int REPORT_TYPE, int REQ_SEQ, out string strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetReportHistorySEQByCompanyNoBox);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@REPORT_TYPE", REPORT_TYPE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
             oMaster.ExcuteQuery(4, out strMsg);
             int REPORT_HISTORY_SEQ = 0;
             try
@@ -169,7 +171,7 @@ namespace DAL_AmigoProcess.DAL
         //#endregion
 
         #region InsertRegisterCompleteNotificationSending
-        public void InsertNotiSending(string COMPANY_NO_BOX, string REQ_SEQ, int REPORT_HISTORY_SEQ, string OUTPUT_FILE, string EMAIL_ADDRESS, string LoginID, string OUTPUT_AT, string DATE, out String strMsg)
+        public void InsertNotiSending(string COMPANY_NO_BOX, int REQ_SEQ, int REPORT_HISTORY_SEQ, string OUTPUT_FILE, string EMAIL_ADDRESS, string LoginID, string OUTPUT_AT, string DATE, out String strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strInsertNotiSending);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));

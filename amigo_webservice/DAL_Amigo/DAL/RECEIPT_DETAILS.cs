@@ -240,8 +240,6 @@ namespace DAL_AmigoProcess.DAL
                                           TRANSACTION_DATE=@TRANSACTIONDATE AND
                                           TRANSACTION_NO = @TRANSACTION_NO";
 
-       
-
         #endregion
 
         #region GetDataByDuplicateKeys
@@ -403,8 +401,6 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
-
-        
 
         #region GetDateFor35_Grid
         public DataTable GetDateFor35_Grid(DateTime dtmFrom, DateTime dtmTo, out string strMsg)

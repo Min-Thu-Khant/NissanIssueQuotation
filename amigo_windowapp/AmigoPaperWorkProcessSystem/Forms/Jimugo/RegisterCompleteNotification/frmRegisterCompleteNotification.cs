@@ -126,18 +126,24 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 {
                     DataTable result = oController.PreviewFunction(txtCompanyName.Text, txtCompanyNoBox.Text, REQ_SEQ, txtEDIAccount.Text);
 
-                    string message = Convert.ToString(result.Rows[0]["Message"]);
-                    string error_message = Convert.ToString(result.Rows[0]["Error Message"]);
-
-                    if (!string.IsNullOrEmpty(result.Rows[0]["Message"].ToString()))
+                    string return_message="";
+                    try
                     {
-                        MetroMessageBox.Show(this, "\n" + message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return_message = result.Rows[0]["Message"].ToString();
+                    }
+                    catch (Exception)
+                    {
+
                     }
 
-                    if (!string.IsNullOrEmpty(result.Rows[0]["Error Message"].ToString()))
+                    if (string.IsNullOrEmpty(return_message))
                     {
-                        MetroMessageBox.Show(this, "\n" + error_message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        pdfLink = result.Rows[0]["DownloadLink"].ToString();
+                        MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB001, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MetroMessageBox.Show(this, "\n" + return_message, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
                     DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, pdfLink);

@@ -286,11 +286,10 @@ namespace AmigoPaperWorkProcessSystem.Forms
                                 dr["BILL_DEPOSIT_RULES"] = intBillingDepositRules;
                                 dr["BILL_TRANSFER_FEE"] = decimal.Parse(dgvList.Rows[i].Cells["colBILL_TRANSFER_FEE"].Value.ToString());
                                 dr["BILL_EXPENSES"] = decimal.Parse(dgvList.Rows[i].Cells["colBILL_EXPENSES"].Value.ToString());
-                                dr["UPDATE_DATE"] = DateTime.Now;
-                                dr["UPDATER_CODE"] = Utility.Id;
                                 dr["COMPANY_NO_BOX"] = dgvList.Rows[i].Cells["colCOMPANY_NO_BOX"].Value.ToString().Trim();
                                 dr["TRANSACTION_TYPE"] = dgvList.Rows[i].Cells["colTRANSACTION_TYPE"].Value.ToString().Trim();
                                 dr["EFFECTIVE_DATE"] = dgvList.Rows[i].Cells["colEFFECTIVE_DATE"].Value.ToString().Trim();
+                                dr["REQ_SEQ"] = dgvList.Rows[i].Cells["colREQ_SEQ"].Value.ToString().Trim();
                                 dr["NCS_CUSTOMER_CODE"] = dgvList.Rows[i].Cells["colNCS_CUSTOMER_CODE"].Value.ToString().Trim();
                                 dt.Rows.Add(dr);
 
@@ -353,6 +352,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             dt.Columns.Add("EFFECTIVE_DATE");
             dt.Columns.Add("COMPANY_NO_BOX");
             dt.Columns.Add("NCS_CUSTOMER_CODE");
+            dt.Columns.Add("REQ_SEQ");
             return dt;
         }
         #endregion
@@ -384,7 +384,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             dt.Columns.Add("BILL_EXPENSES");
             dt.Columns.Add("TRANSACTION_TYPE");
             dt.Columns.Add("EFFECTIVE_DATE");
-
+            dt.Columns.Add("REQ_SEQ");
             dgvList.DataSource = dt;
             ResetHeader();
         }

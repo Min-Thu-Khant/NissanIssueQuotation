@@ -16,7 +16,7 @@ namespace AmigoPaperWorkProcessSystem._3A.Controllers
 {
     class _3AController
     {
-        #region Declare;
+        #region Declare
         private string read_file_name;
         #endregion
 

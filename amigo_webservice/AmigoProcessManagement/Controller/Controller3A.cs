@@ -93,7 +93,7 @@ namespace AmigoProcessManagement.Controller
         {
             CUSTOMER_MASTER oCust = new CUSTOMER_MASTER(Properties.Settings.Default.MyConnection);
             string run_date = DateTime.Now.ToString();
-            DataTable dtCustomer = oCust.getDataByAll();
+            DataTable dtCustomer = oCust.getBillBankAccounts();
             for (int i = 0; i < dtUploadData.Rows.Count; i++)
             {
                 string strCustomerName = (dtUploadData.Rows[i]["CUSTOMER_NAME"]!=null ? dtUploadData.Rows[i]["CUSTOMER_NAME"].ToString().Trim() : "");

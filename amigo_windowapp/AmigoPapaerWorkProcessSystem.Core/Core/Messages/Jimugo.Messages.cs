@@ -1058,13 +1058,13 @@ namespace AmigoPaperWorkProcessSystem.Core
             }
 
         }
-        
+
         public static string E000ZZ053
         {
             get
             {
                 //return message
-                return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.E000ZZ053; 
+                return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.E000ZZ053; //E000ZZ053
             }
         }
 
@@ -1073,7 +1073,7 @@ namespace AmigoPaperWorkProcessSystem.Core
             get
             {
                 //return message
-                return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.E000WB035; 
+                return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.E000WB035;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
+﻿namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
 {
     partial class frmIssueQuotationPrevew
     {

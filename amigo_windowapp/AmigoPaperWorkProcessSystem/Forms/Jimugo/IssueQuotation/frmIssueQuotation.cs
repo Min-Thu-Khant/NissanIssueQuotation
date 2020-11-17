@@ -1,6 +1,6 @@
 ﻿using AmigoPaperWorkProcessSystem.Controllers;
 using AmigoPaperWorkProcessSystem.Core;
-using AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation;
+using AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation;
 using MetroFramework;
 using Newtonsoft.Json;
 using System;
@@ -17,13 +17,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
-        private string CompanyNoBox = "AX-1001-04";
-        //private string CompanyNoBox = "AJ-0001-01";
-        private string REQ_SEQ = "11";
+        private string CompanyNoBox = "";
+        private string REQ_SEQ = "";
         private string Reg_Complete_Date;
         private string Quotation_Date;
         private string Order_Date;
-        private string CompanyName;
+        private string Company_Name;
         private string CONTRACT_PLAN = "";
         private string INPUT_PERSON = "";
         private string CREATED_TIME = "";
@@ -47,12 +46,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         {
             this.programID = programID;
             this.programName = programName;
-            this.CompanyNoBox = "AJ-0001-05";
-            this.REQ_SEQ = "1";
+            this.CompanyNoBox = CompanyNoBox;
+            this.REQ_SEQ = REQ_SEQ;
             this.Quotation_Date = Quotation_Date;
             this.Order_Date = Order_Date;
             this.Reg_Complete_Date = Reg_Complete_Date;
-            this.CompanyName = CompanyName;
+            this.Company_Name = CompanyName;
 
         }
         #endregion
@@ -70,9 +69,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             uIUtility = new UIUtility();
 
             //set textboxes
-            txtCompanyNoBox.Text = CompanyNoBox;
-            txtCompanyName.Text = CompanyName;
-            txtNotificationDate.Text = Reg_Complete_Date;
+            txtCompanyNoBox.Text = this.CompanyNoBox;
+            txtCompanyName.Text = this.Company_Name;
+            txtNotificationDate.Text = this.Reg_Complete_Date;
+            txtIssueDate.Text = this.Quotation_Date;
+            txtOrderDate.Text = this.Order_Date;
+            txtNotificationDate.Text = this.Reg_Complete_Date;
 
             GetInitialData();
         }
@@ -90,9 +92,18 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     SetValues(result.Rows[0]);
                 }
             }
-            catch (Exception)
+            catch (System.TimeoutException)
             {
-
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -398,7 +409,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                             decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
                             decimal YearlyDiscount = 0;
                             decimal.TryParse(txtYearlySpecialDiscount.Text, out YearlyDiscount);
-                            decSpecialAmt = IntialDiscount + YearlyDiscount * -1;
+                            decSpecialAmt = (IntialDiscount + YearlyDiscount) * -1;
                         }
 
                         DataRow dr = dtExportInfo.NewRow();
@@ -499,9 +510,18 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                 }
 
             }
+            catch (System.TimeoutException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
                 Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -510,6 +530,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         public DataTable DTParameter()
         {
             DataTable dt = new DataTable();
+            dt.Columns.Add("EMAIL_ADDRESS");
             dt.Columns.Add("COMPANY_NO_BOX");
             dt.Columns.Add("REQ_SEQ");
             dt.Columns.Add("CONSUMPTION_TAX");
@@ -523,7 +544,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             dt.Columns.Add("ORDER_REMARK");
             dt.Columns.Add("CONTRACT_PLAN");
             dt.Columns.Add("Created Time");
-            dt.Rows.Add(txtCompanyNoBox.Text.Trim(),
+            dt.Rows.Add(txtDestinationMail.Text.Trim(),
+                        txtCompanyNoBox.Text.Trim(),
                         REQ_SEQ,
                         txtTax.Text.Trim(),
                         txtInitialSpecialDiscount.Text.Trim(),
@@ -565,32 +587,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         }
         #endregion
 
-        //#region CheckTypeChanged
-        //private void chkType_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    CheckBox chk = (CheckBox)sender;
-        //    if (chk.Checked)
-        //    {
-        //        switch (chk.Name)
-        //        {
-        //            case "chkInitialQuot":
-        //                chkInitialQuot.Checked = true;
-        //                chkMonthlyQuote.Checked = false;
-        //                chkProductionInfo.Checked = false;
-        //                break;
-        //            case "chkMonthlyQuote":
-        //                chkInitialQuot.Checked = false;
-        //                chkMonthlyQuote.Checked = true;
-        //                chkProductionInfo.Checked = false;
-        //                break;
-        //            case "chkProductionInfo":
-        //                chkInitialQuot.Checked = false;
-        //                chkMonthlyQuote.Checked = false;
-        //                chkProductionInfo.Checked = true;
-        //                break;
-        //        }
-        //    }
-        //}
-        //#endregion
+
     }
 }

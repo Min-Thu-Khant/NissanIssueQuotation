@@ -37,7 +37,7 @@ namespace AmigoProcessManagement.Controller
                     dt.Columns.Add("BILL_COMPANY_NAME", typeof(System.String));
 
                     CUSTOMER_MASTER oCustomer = new CUSTOMER_MASTER(Properties.Settings.Default.MyConnection);
-                    DataTable dtCustomer = oCustomer.getDataByAll();
+                    DataTable dtCustomer = oCustomer.getBillBankAccounts();
 
                     for (int i = 0; i < dt.Rows.Count; i++)//loop through Amigo Detail
                     {

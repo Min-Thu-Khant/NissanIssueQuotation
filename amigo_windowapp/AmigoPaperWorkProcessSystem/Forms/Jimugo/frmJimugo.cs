@@ -203,6 +203,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 case "CTS020": // usage application list
                     OpenAppListScreen(programID, programName);
                     break;
+                case "CMS010": // customer master maintence
+                    OpenCustomerMasterMaintenance(programID, programName);
+                    break;
                 default:
                     break;
             }
@@ -372,22 +375,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
-        //#region OpenIssueQuotationScreen
-        //private void OpenIssueQuotationScreen(string programID, string programName)
-        //{
-        //    if (!(Application.OpenForms.OfType<Issue_Quotation.frmIssueQuotation>().Count() == 1))
-        //    {
-        //        Issue_Quotation.frmIssueQuotation IssueQuotation = new Issue_Quotation.frmIssueQuotation(programID, programName,"","","","","","");
-        //        IssueQuotation.Show();
-        //    }
-        //    else
-        //    {
-        //        MetroMessageBox.Show(this, "\n" + Messages.DepositConfirmationMenu.ProcessAlreadyRunning, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        //need change after message list
-        //    }
-        //}
-        //#endregion
-
         #region OpenAppListScreen
         private void OpenAppListScreen(string programID, string programName)
         {
@@ -426,6 +413,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             if (!(Application.OpenForms.OfType<frmUsageChargeMaster>().Count() == 1))
             {
                 frmUsageChargeMaster form = new frmUsageChargeMaster(programID, programName);
+                form.Show();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.DepositConfirmationMenu.ProcessAlreadyRunning, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //need change after message list
+            }
+        }
+        #endregion
+
+        #region OpenCustomerMasterMaintenance
+        private void OpenCustomerMasterMaintenance(string programID, string programName)
+        {
+            if (!(Application.OpenForms.OfType<frmCustomerMasterMaintenance>().Count() == 1))
+            {
+                frmCustomerMasterMaintenance form = new frmCustomerMasterMaintenance(programID, programName);
                 form.Show();
             }
             else

@@ -26,6 +26,92 @@ namespace DAL_AmigoProcess.DAL
                                   where COMPANY_NO_BOX= @COMPANY_NO_BOX
                                   AND REQ_SEQ= @REQ_SEQ
                                   AND TYPE=4";
+        #region ApplicationApproval
+        string strGetServiceDeskPopUp = @"SELECT 
+                                        REQ_ADDRESS_SEQ NO,
+                                        CONTACT_NAME,
+                                        MAIL_ADDRESS,
+                                        PHONE_NUMBER
+                                        FROM REQ_ADDRESS
+                                        WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+                                        AND REQ_SEQ = @REQ_SEQ
+                                        AND TYPE = 3
+                                        ORDER BY CONTACT_NAME, MAIL_ADDRESS,PHONE_NUMBER";
+        string strGetErrorNotiPopUp = @"SELECT
+                                    REQ_ADDRESS_SEQ NO,
+                                    MAIL_ADDRESS
+                                    FROM REQ_ADDRESS
+                                    WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+                                    AND REQ_SEQ = @REQ_SEQ
+                                    AND TYPE = 4
+                                    ORDER BY
+                                    MAIL_ADDRESS";
+        string strGetUsageChargeBreakDownPopUp = @"SELECT 
+                                                ROW_NUMBER() OVER (ORDER BY DISPLAY_ORDER) No,
+                                                TBL.CONTRACT_CODE, 
+                                                SUM(TBL.INITIAL_UNIT_PRICE) INITIAL_UNIT_PRICE,
+                                                SUM(TBL.INITIAL_QUANTITY) INITIAL_QUANTITY,
+                                                SUM(TBL.INITIAL_AMOUNT) INITIAL_AMOUNT,
+                                                SUM(TBL.MONTHLY_UNIT_PRICE) MONTHLY_UNIT_PRICE,
+                                                SUM(TBL.MONTHLY_QUANTITY) MONTHLY_QUANTITY,
+                                                SUM(TBL.MONTHLY_AMOUNT) MONTHLY_AMOUNT,
+                                                SUM(TBL.YEAR_UNIT_PRICE) YEAR_UNIT_PRICE,
+                                                SUM(TBL.YEAR_QUANTITY) YEAR_QUANTITY,
+                                                SUM(TBL.YEAR_AMOUNT) YEAR_AMOUNT
+                                                FROM (
+                                                SELECT
+                                                REQ_USAGE_FEE.CONTRACT_CODE,
+                                                REQ_USAGE_FEE.CONTRACT_NAME,
+                                                CASE
+	                                                WHEN REQ_USAGE_FEE.TYPE = 1 THEN REQ_USAGE_FEE.UNIT_PRICE 
+	                                                ELSE 0
+                                                END INITIAL_UNIT_PRICE,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 1 THEN REQ_USAGE_FEE.QUANTITY 
+	                                                ELSE 0
+                                                END INITIAL_QUANTITY,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 1 THEN REQ_USAGE_FEE.AMOUNT 
+	                                                ELSE 0
+                                                END INITIAL_AMOUNT,
+                                                CASE
+	                                                WHEN REQ_USAGE_FEE.TYPE = 2 THEN REQ_USAGE_FEE.UNIT_PRICE 
+	                                                ELSE 0
+                                                END MONTHLY_UNIT_PRICE,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 2 THEN REQ_USAGE_FEE.QUANTITY 
+	                                                ELSE 0
+                                                END MONTHLY_QUANTITY,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 2 THEN REQ_USAGE_FEE.AMOUNT 
+	                                                ELSE 0
+                                                END MONTHLY_AMOUNT,
+                                                CASE
+	                                                WHEN REQ_USAGE_FEE.TYPE = 3 THEN REQ_USAGE_FEE.UNIT_PRICE 
+	                                                ELSE 0
+                                                END YEAR_UNIT_PRICE,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 3 THEN REQ_USAGE_FEE.QUANTITY 
+	                                                ELSE 0
+                                                END YEAR_QUANTITY,
+                                                CASE 
+	                                                WHEN REQ_USAGE_FEE.TYPE = 3 THEN REQ_USAGE_FEE.AMOUNT 
+	                                                ELSE 0
+                                                END YEAR_AMOUNT,
+                                                USAGE_FEE_MASTER.DISPLAY_ORDER
+                                                FROM REQ_USAGE_FEE
+                                                LEFT JOIN
+                                                (SELECT
+                                                CONTRACT_CODE, 
+                                                DISPLAY_ORDER,
+                                                ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
+                                                FROM USAGE_FEE_MASTER
+                                                WHERE ADOPTION_DATE <= GETDATE()) USAGE_FEE_MASTER
+                                                ON REQ_USAGE_FEE.CONTRACT_CODE = USAGE_FEE_MASTER.CONTRACT_CODE
+                                                WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX
+                                                AND REQ_SEQ = @REQ_SEQ) TBL
+                                                GROUP BY TBL.CONTRACT_CODE, TBL.CONTRACT_NAME, TBL.DISPLAY_ORDER";
+        #endregion
         #endregion
 
         #region Constructors
@@ -62,5 +148,42 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
+
+        #region GetServiceDeskPopUp
+        public System.Data.DataTable GetServiceDeskPopUp(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
+        {
+            //result
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetServiceDeskPopUp);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(4, out strMsg);
+            return oMaster.dtExcuted;
+        }
+        #endregion
+
+        #region GetErrorNotificationPopUp
+        public System.Data.DataTable GetErrorNotificationPopUp(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
+        {
+            //result
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetErrorNotiPopUp);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(4, out strMsg);
+            return oMaster.dtExcuted;
+        }
+        #endregion
+
+        #region GetUsageChargeBreakDownPopUp
+        public System.Data.DataTable GetUsageChargeBreakDownPopUp(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
+        {
+            //result
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetUsageChargeBreakDownPopUp);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(4, out strMsg);
+            return oMaster.dtExcuted;
+        }
+        #endregion
+
     }
 }

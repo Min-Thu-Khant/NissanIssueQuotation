@@ -1,4 +1,5 @@
-﻿using AmigoPaperWorkProcessSystem.Forms;
+﻿using AmigoPaperWorkProcessSystem.Core;
+using AmigoPaperWorkProcessSystem.Forms;
 using AmigoPaperWorkProcessSystem.Forms.Jimugo;
 using AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation;
 using System;
@@ -31,7 +32,9 @@ namespace AmigoPaperWorkProcessSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmIssueQuotation());
+            Utility.Id = "000001";
+            Utility.Password = "password";
+            Application.Run(new frmApplicationApproval("","","","",""));
         }
     }
 }

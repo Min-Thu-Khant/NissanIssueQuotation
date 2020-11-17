@@ -41,7 +41,7 @@ namespace AmigoProcessManagement
             }
             else
             {
-                Controller.Controller38 o38 = new Controller.Controller38();
+                Controller.Controller38 o38 = new Controller.Controller38(authHeader);
                 Response response = o38.GetCustomerList(COMPANY_NAME, COMPANY_NAME_READING, BILL_COMPANY_NAME, COMPANY_NO_BOX, ACCOUNT_NAME);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
@@ -74,7 +74,7 @@ namespace AmigoProcessManagement
             }
             else
             {               
-                Controller.Controller38 o38 = new Controller.Controller38();
+                Controller.Controller38 o38 = new Controller.Controller38(authHeader);
                 Response response = o38.UpdateCustomer(Customers);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";

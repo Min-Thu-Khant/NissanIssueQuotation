@@ -45,7 +45,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         private void FrmOrderRegistration_Load(object sender, EventArgs e)
         {
             //set title
-            lblMenu.Text = this.ProgramName;
+            //lblMenu.Text = this.ProgramName;
 
             //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;

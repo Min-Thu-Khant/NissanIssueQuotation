@@ -46,7 +46,7 @@ namespace AmigoProcessManagement.Controller
 
                     //Get Data from CUSTOMER MASTER 
                     CUSTOMER_MASTER oCustomer = new CUSTOMER_MASTER(Properties.Settings.Default.MyConnection);
-                    DataTable dtCustomer = oCustomer.getDataByAll();
+                    DataTable dtCustomer = oCustomer.getBillBankAccounts();
 
                     for (int i = 0; i < dt.Rows.Count; i++)//loop through Amigo Detail
                     {

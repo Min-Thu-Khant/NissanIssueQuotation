@@ -142,5 +142,12 @@ namespace AmigoProcessManagement.Utility
 
         }
         #endregion
+
+        #region DsToJSon
+        public static string DsToJSon(DataSet ds, string strHeader)
+        {
+            return JsonConvert.SerializeObject(ds, Formatting.Indented);
+        }
+        #endregion
     }
 }

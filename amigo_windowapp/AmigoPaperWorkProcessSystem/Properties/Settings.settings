@@ -126,7 +126,8 @@
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_UsageInfoRegistrationList.asmx/ExtractEDIAutoInfo?COMPANY_NO_BOX=@COMPANY_NO_BOX</Value>
     </Setting>
     <Setting Name="GetCustomerMasterMaintenance" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetMaintenance?OFFSET=0&amp;LIMIT=30</Value>
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetMaintenance?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;COMPANY_NAME=@COMPANY_NAME&amp;COMPANY_NAME_READING=@NAME_READING&amp;EDI_ACCOUNT=@EDI_ACCOUNT&amp;MAIL_ADDRESS=@MAIL_ADDRESS&amp;CONTRACTOR=@CONTRACTOR&amp;INVOICE=@INVOICE&amp;SERVICE_DESK=@SERVICE_DESK&amp;NOTIFICATION_DESTINATION=@NOTIFICATION_DESTINATION&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT
+</Value>
     </Setting>
     <Setting Name="GetPurchaseOrdertem" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_PurchaseOrder.asmx/Search?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;REQ_SEQ=@REQ_SEQ</Value>
@@ -172,6 +173,15 @@
     </Setting>
     <Setting Name="QuotationMailCreate" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_IssueQuotation.asmx/QuotationMailCreate</Value>
+    </Setting>
+    <Setting Name="GetPopupScreenData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetPopupScreenData?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;REQ_SEQ=@REQ_SEQ</Value>
+    </Setting>
+    <Setting Name="UpdateCustomerMasterList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/Update</Value>
+    </Setting>
+    <Setting Name="ApplicationApproval_GetInitialData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/GetClientCertificateList</Value>
     </Setting>
   </Settings>
 </SettingsFile>

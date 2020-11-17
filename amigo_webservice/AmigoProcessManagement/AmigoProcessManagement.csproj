@@ -84,8 +84,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Jimugo\opt_ApplicationApproval.asmx" />
     <Content Include="Jimugo\opt_ClientCertificateList.asmx" />
     <Content Include="Jimugo\opt_CompanyCodeList.asmx" />
+    <Content Include="Jimugo\opt_CustomerMasterMaintenance.asmx" />
     <Content Include="Jimugo\opt_IssueQuotation.asmx" />
     <Content Include="Jimugo\opt_jimugo.asmx" />
     <Content Include="Jimugo\opt_PurchaseOrder.asmx" />
@@ -125,7 +127,9 @@
     <Compile Include="Controller\Controller36.cs" />
     <Compile Include="Controller\Controller37.cs" />
     <Compile Include="Controller\Jimugo\ControllerClientCertificateList.cs" />
+    <Compile Include="Controller\Jimugo\ControllerApplicationApproval.cs" />
     <Compile Include="Controller\Jimugo\ControllerCompanyCodeList.cs" />
+    <Compile Include="Controller\Jimugo\ControllerCustomerMasterMaintenance.cs" />
     <Compile Include="Controller\Jimugo\ControllerEDICandicate.cs" />
     <Compile Include="Controller\Jimugo\ControllerIssueQuotation.cs" />
     <Compile Include="Controller\Jimugo\ControllerJimugo.cs" />
@@ -135,12 +139,20 @@
     <Compile Include="Controller\Jimugo\ControllerUsageApplicationList.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageChargeMaster.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageInfoRegistrationList.cs" />
+    <Compile Include="Jimugo\opt_ApplicationApproval.asmx.cs">
+      <DependentUpon>opt_ApplicationApproval.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Jimugo\opt_ClientCertificateList.asmx.cs">
       <DependentUpon>opt_ClientCertificateList.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Jimugo\opt_CompanyCodeList.asmx.cs">
       <DependentUpon>opt_CompanyCodeList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_CustomerMasterMaintenance.asmx.cs">
+      <DependentUpon>opt_CustomerMasterMaintenance.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Jimugo\opt_IssueQuotation.asmx.cs">
@@ -270,8 +282,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Storage\PDF\CompleteNoti\Save\" />
     <Folder Include="Storage\PDF\CompleteNoti\Temp\" />
-    <Folder Include="Storage\PDF\IssueQuotation\OrderForm\" />
-    <Folder Include="Storage\PDF\IssueQuotation\Quotation\" />
     <Folder Include="Storage\PDF\PurchaseOrder\" />
   </ItemGroup>
   <ItemGroup>

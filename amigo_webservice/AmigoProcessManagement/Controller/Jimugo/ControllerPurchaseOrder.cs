@@ -101,10 +101,10 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-        #region CastToBOL_CUSTOMER_MASTER_PHASE2
-        private BOL_CUSTOMER_MASTER_PHASE2 Cast_CUSTOMER_MASTER_PHASE2(DataRow row)
+        #region CastToBOL_CUSTOMER_MASTER
+        private BOL_CUSTOMER_MASTER Cast_CUSTOMER_MASTER(DataRow row)
         {
-            BOL_CUSTOMER_MASTER_PHASE2 oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER_PHASE2();
+            BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
 
             oCUSTOMER_MASTER.CONTRACT_DATE = Utility_Component.dtColumnToDateTime(row["CONTRACT_DATE"].ToString());
             oCUSTOMER_MASTER.SPECIAL_NOTES_1 = row["SPECIAL_NOTES_1"].ToString();
@@ -220,7 +220,7 @@ namespace AmigoProcessManagement.Controller
 
                     if (customer_count == 0) //if customer not found
                     {
-                        BOL_CUSTOMER_MASTER_PHASE2 oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER_PHASE2();
+                        BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
 
                         if (REQ_SEQ == 2)
                         {
@@ -228,7 +228,7 @@ namespace AmigoProcessManagement.Controller
 
                             if (CustomerList.Rows.Count > 0)
                             {
-                                oCUSTOMER_MASTER = Cast_CUSTOMER_MASTER_PHASE2(CustomerList.Rows[0]);
+                                oCUSTOMER_MASTER = Cast_CUSTOMER_MASTER(CustomerList.Rows[0]);
                                 oCUSTOMER_MASTER.UPDATE_CONTENT = 3;
                             }
                             else //Need another message?
@@ -265,8 +265,8 @@ namespace AmigoProcessManagement.Controller
 
                     #region Insert Browsing supplier CUSTOMER MASTER
                     DataTable LatestCustomer = DAL_CUSTOMER_MASTER.GetTopCustomerByKeys(COMPANY_NO_BOX, TRANSACTION_TYPE, START_USE_DATE, out msg);
-                    BOL_CUSTOMER_MASTER_PHASE2 oBROWSING_SUPPLIER = new BOL_CUSTOMER_MASTER_PHASE2();
-                    oBROWSING_SUPPLIER = Cast_CUSTOMER_MASTER_PHASE2(LatestCustomer.Rows[0]);
+                    BOL_CUSTOMER_MASTER oBROWSING_SUPPLIER = new BOL_CUSTOMER_MASTER();
+                    oBROWSING_SUPPLIER = Cast_CUSTOMER_MASTER(LatestCustomer.Rows[0]);
 
                     if (CONTRACT_PLAN == "PRODUCT" && REQ_TYPE == 2 && (!Utility_Component.IsYearMonthEqual(START_USE_DATE, oBROWSING_SUPPLIER.EFFECTIVE_DATE)))
                     {
@@ -305,7 +305,7 @@ namespace AmigoProcessManagement.Controller
                     oREPORT_HISTORY.REPORT_TYPE = 4;
 
                     REPORT_HISTORY DAL_REPORT_HISTORY = new REPORT_HISTORY(con);
-                    int HISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, oREPORT_HISTORY.REPORT_TYPE, out msg);
+                    int HISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, oREPORT_HISTORY.REPORT_TYPE, oREPORT_HISTORY.REQ_SEQ, out msg);
 
                     //rollback if not success
                     if (!String.IsNullOrEmpty(msg))

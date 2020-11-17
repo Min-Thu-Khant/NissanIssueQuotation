@@ -50,6 +50,7 @@ namespace DAL_AmigoProcess.DAL
                                     AND COMPANY_NO_BOX = @COMPANY_NO_BOX
                                     AND REQ_SEQ = @REQ_SEQ) AS TBL
                                     GROUP BY CONTRACT_CODE,CONTRACT_NAME,DISPLAY_ORDER";
+
         string strUpdate = @"UPDATE [dbo].[REQ_USAGE_FEE]
                                SET [UNIT_PRICE] = @UNIT_PRICE
                                   ,[AMOUNT] = @AMOUNT

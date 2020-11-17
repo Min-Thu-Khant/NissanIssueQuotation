@@ -275,12 +275,20 @@ namespace AmigoPaperWorkProcessSystem.Core
         #endregion
 
         #region ResetHeader
-        public void ResetHeader()
+        public void ResetHeader(int value = 0)
         {
             dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dgvList.ColumnHeadersHeight = 40;
-            dgvList.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomCenter;
+            if (value != 0)
+            {
+                dgvList.ColumnHeadersHeight = value;
+            }
+            else
+            {
+                dgvList.ColumnHeadersHeight = 40;
+            }
+
+            dgvList.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             ResetCheckBoxSize();
         }
         #endregion
@@ -602,7 +610,6 @@ namespace AmigoPaperWorkProcessSystem.Core
             }
         }
         #endregion
-
      
         #region SubmitChanges
         public DataTable SubmitChanges()
@@ -771,7 +778,7 @@ namespace AmigoPaperWorkProcessSystem.Core
         #endregion
 
         #region GenerateDefaultTalbe
-        public void DummyTable()
+        public void DummyTable(int value = 0)
         {
             dtList = new DataTable();
 
@@ -780,7 +787,7 @@ namespace AmigoPaperWorkProcessSystem.Core
                 dtList.Columns.Add(dummyColumns[i]);
             }
             dgvList.DataSource = dtList;
-            ResetHeader();
+            ResetHeader(value);
         }
         #endregion
 
@@ -820,6 +827,68 @@ namespace AmigoPaperWorkProcessSystem.Core
 
                 //Generate the merged Header Column Rectangle.
                 Rectangle mergedHeaderRect = new Rectangle(xCord, yCord, mergedHeaderWidth, (headerCellRectangle.Height / 2) + heightOffset);
+
+                //draw rectangle border
+                Pen pen = new Pen(Color.Silver, 1);
+                e.Graphics.DrawRectangle(pen, mergedHeaderRect);
+
+                ////Draw the merged Header Column Rectangle.
+                Brush brush = new SolidBrush(Color.FromArgb(64, 64, 64));
+                e.Graphics.FillRectangle(brush, mergedHeaderRect);
+
+                //Draw the merged Header Column Text.
+                StringFormat format = new StringFormat();
+                format.Alignment = StringAlignment.Center;
+                format.LineAlignment = StringAlignment.Center;
+
+                e.Graphics.DrawString(text, dgvList.ColumnHeadersDefaultCellStyle.Font, Brushes.Silver, mergedHeaderRect, format);
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        public static void Merge_Header(PaintEventArgs e, int index, int count, string text, DataGridView dgvList, int rowcount, int row)
+        {
+            try
+            {
+                //Offsets to adjust the position of the merged Header.
+                int heightOffset = -1;
+                int widthOffset = 0;
+                int xOffset = 1;
+                int yOffset = 2;
+
+                //Index of Header column from where the merging will start.
+                int columnIndex = index;
+
+                //Number of Header columns to be merged.
+                int columnCount = count;
+
+                //Get the position of the Header Cell.
+                Rectangle headerCellRectangle = dgvList.GetCellDisplayRectangle(columnIndex, -1, true);
+
+                //X coordinate  of the merged Header Column.
+                int xCord = headerCellRectangle.Location.X + xOffset;
+
+                //Y coordinate  of the merged Header Column.
+                int yCord = headerCellRectangle.Location.Y + yOffset;
+
+                //Calculate Width of merged Header Column by adding the widths of all Columns to be merged.
+                int all_column_width = 0;
+                for (int i = 0; i < columnCount; i++)
+                {
+                    all_column_width += dgvList.Columns[columnIndex + i].Width;
+                }
+                int mergedHeaderWidth = all_column_width + widthOffset - 2;
+
+                if (row == 1)
+                {
+                    yCord = yCord + (headerCellRectangle.Height / rowcount);
+                }
+
+                //Generate the merged Header Column Rectangle.
+                Rectangle mergedHeaderRect = new Rectangle(xCord, yCord, mergedHeaderWidth, (headerCellRectangle.Height / rowcount) + heightOffset);
 
                 //draw rectangle border
                 Pen pen = new Pen(Color.Silver, 1);

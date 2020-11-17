@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ImportBankData" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://ncs-srv80:50000/AmigoProcessManagement/opt_3A.asmx/do_3A</Value>
+      <Value Profile="(Default)">http://localhost:6077/opt_3A.asmx/do_3A</Value>
     </Setting>
   </Settings>
 </SettingsFile>

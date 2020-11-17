@@ -32,11 +32,14 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.pdfDocumentThumbnail1 = new Spire.PdfViewer.Forms.PdfThumbnails.PdfDocumentThumbnail();
             this.pdfDocumentViewer = new Spire.PdfViewer.Forms.PdfDocumentViewer();
+            this.pTitle = new System.Windows.Forms.Panel();
+            this.lblMenu = new System.Windows.Forms.Label();
+            this.pTitle.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCreateMail
             // 
-            this.btnCreateMail.Location = new System.Drawing.Point(20, 22);
+            this.btnCreateMail.Location = new System.Drawing.Point(20, 63);
             this.btnCreateMail.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCreateMail.Name = "btnCreateMail";
             this.btnCreateMail.Size = new System.Drawing.Size(100, 30);
@@ -47,7 +50,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(141, 22);
+            this.btnBack.Location = new System.Drawing.Point(141, 63);
             this.btnBack.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(100, 30);
@@ -73,21 +76,42 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pdfDocumentViewer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(229)))), ((int)(((byte)(229)))), ((int)(((byte)(229)))));
-            this.pdfDocumentViewer.Location = new System.Drawing.Point(20, 73);
+            this.pdfDocumentViewer.Location = new System.Drawing.Point(20, 112);
             this.pdfDocumentViewer.Margin = new System.Windows.Forms.Padding(2);
             this.pdfDocumentViewer.MultiPagesThreshold = 60;
             this.pdfDocumentViewer.Name = "pdfDocumentViewer";
-            this.pdfDocumentViewer.Size = new System.Drawing.Size(1248, 678);
+            this.pdfDocumentViewer.Size = new System.Drawing.Size(1248, 639);
             this.pdfDocumentViewer.TabIndex = 118;
             this.pdfDocumentViewer.Text = "pdfDocumentViewer1";
             this.pdfDocumentViewer.Threshold = 60;
             this.pdfDocumentViewer.ZoomMode = Spire.PdfViewer.Forms.ZoomMode.Default;
+            // 
+            // pTitle
+            // 
+            this.pTitle.Controls.Add(this.lblMenu);
+            this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pTitle.Location = new System.Drawing.Point(0, 0);
+            this.pTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pTitle.Name = "pTitle";
+            this.pTitle.Size = new System.Drawing.Size(1284, 44);
+            this.pTitle.TabIndex = 119;
+            // 
+            // lblMenu
+            // 
+            this.lblMenu.AutoSize = true;
+            this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMenu.Location = new System.Drawing.Point(19, 11);
+            this.lblMenu.Name = "lblMenu";
+            this.lblMenu.Size = new System.Drawing.Size(78, 21);
+            this.lblMenu.TabIndex = 0;
+            this.lblMenu.Text = "プレビュー";
             // 
             // frmRegisterCompleteNotificationPreview
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 761);
+            this.Controls.Add(this.pTitle);
             this.Controls.Add(this.pdfDocumentViewer);
             this.Controls.Add(this.pdfDocumentThumbnail1);
             this.Controls.Add(this.btnCreateMail);
@@ -99,6 +123,8 @@
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPreviewScreen_FormClosing);
             this.Load += new System.EventHandler(this.FrmPreviewScreen_Load);
+            this.pTitle.ResumeLayout(false);
+            this.pTitle.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -109,5 +135,7 @@
         private System.Windows.Forms.Button btnBack;
         private Spire.PdfViewer.Forms.PdfThumbnails.PdfDocumentThumbnail pdfDocumentThumbnail1;
         private Spire.PdfViewer.Forms.PdfDocumentViewer pdfDocumentViewer;
+        private System.Windows.Forms.Panel pTitle;
+        private System.Windows.Forms.Label lblMenu;
     }
 }

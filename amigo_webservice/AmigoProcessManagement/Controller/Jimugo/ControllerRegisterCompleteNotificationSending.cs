@@ -21,13 +21,12 @@ namespace AmigoProcessManagement.Controller
         #region Declare
         private string Login_ID;
         string COMPANY_NO_BOX;
-        string REQ_SEQ;
+        int REQ_SEQ;
         string QUOTATION_DATE;
         string ORDER_DATE;
         string COMPLETION_NOTIFICATION_DATE;
         string COMPANY_NAME;
         string EMAIL_ADDRESS;
-        string DOWNLOAD_LINK;
         string FILENAME;
         Stopwatch timer;
         //string EDI_ACCOUNT;
@@ -225,7 +224,7 @@ namespace AmigoProcessManagement.Controller
             DataTable dtParameter = Utility.Utility_Component.JsonToDt(list);
 
             COMPANY_NO_BOX = dtParameter.Rows[0]["COMPANY_NO_BOX"].ToString();
-            REQ_SEQ = dtParameter.Rows[0]["REQ_SEQ"].ToString();
+            REQ_SEQ = Convert.ToInt32(dtParameter.Rows[0]["REQ_SEQ"].ToString());
             QUOTATION_DATE = dtParameter.Rows[0]["QUOTATION_DATE"].ToString();
             ORDER_DATE = dtParameter.Rows[0]["ORDER_DATE"].ToString();
             COMPLETION_NOTIFICATION_DATE = dtParameter.Rows[0]["COMPLETION_NOTIFICATION_DATE"].ToString();
@@ -258,12 +257,10 @@ namespace AmigoProcessManagement.Controller
                         string output_at = dtNow.ToString("yyyy/MM/dd HH:mm");
                         string date = now.ToString("yyyyMMddHHmmss");
 
-                        string req_seq = REQ_SEQ.Length != 1 ? REQ_SEQ : "0" + REQ_SEQ;
-
-                        string outputFile = COMPANY_NO_BOX + "-" + "3" + "-" + req_seq + "_完了通知書(" + EDI_ACCOUNT.Replace("@", "") + ")_" + COMPANY_NAME + ".pdf";
+                        string outputFile = COMPANY_NO_BOX + "-" + "3" + "-" + REQ_SEQ + "_完了通知書(" + EDI_ACCOUNT.Replace("@", "") + ")_" + COMPANY_NAME + ".pdf";
                         string msgText = outputFile;
 
-                        int REPORTHISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, 5, out msg);
+                        int REPORTHISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, 5, REQ_SEQ, out msg);
 
                         if (string.IsNullOrEmpty(msg))
                         {

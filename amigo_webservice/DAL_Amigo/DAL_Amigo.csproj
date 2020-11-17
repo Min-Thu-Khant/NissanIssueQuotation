@@ -42,15 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BOL\BOL_BANK_ACCOUNT_MASTER.cs" />
     <Compile Include="BOL\BOL_AUTO_INDEX.cs" />
     <Compile Include="BOL\BOL_CLIENT_CERTIFICATE.cs" />
-    <Compile Include="BOL\BOL_CUSTOMER_MASTER_.cs" />
+    <Compile Include="BOL\BOL_CUSTOMER_MASTER.cs" />
     <Compile Include="BOL\BOL_REPORT_HISTORY.cs" />
     <Compile Include="BOL\BOL_REQ_USAGE_FEE.cs" />
     <Compile Include="BOL\BOL_USAGE_CHARGE_MASTER.cs" />
+    <Compile Include="DAL\BANK_ACCOUNT_MASTER.cs" />
     <Compile Include="DAL\AUTO_INDEX.cs" />
     <Compile Include="BOL\BOL_CONFIG.cs" />
-    <Compile Include="BOL\BOL_CUSTOMER_MASTER.cs" />
     <Compile Include="BOL\BOL_EDI_ACCOUNT.cs" />
     <Compile Include="BOL\BOL_EDI_CANDIDATE.cs" />
     <Compile Include="BOL\BOL_REQUEST_ID.cs" />

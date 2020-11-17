@@ -33,28 +33,21 @@ namespace DAL_AmigoProcess.DAL
                                        [UPDATED_AT] = @UPDATED_AT,
                                        [UPDATED_BY] = @UPDATED_BY
                                   WHERE [AUTO_INDEX_ID] = @AUTO_INDEX_ID";
-        string strGetQuotationData = @"SELECT REQ.COMPANY_NO_BOX,UM.CONTRACT_CODE,UM.FEE_STRUCTURE,UM.CONTRACT_NAME,UM.CONTRACT_QTY,UM.INITIAL_COST,UM.MONTHLY_COST,
-                                    ISNULL(REQ.QUANTITY,0) QUANTITY,Req.Type,
-                                    ISNULL(UM.INITIAL_COST,0) * ISNULL(REQ.QUANTITY,0) INITIAL_EXPENSE,
-                                    ISNULL(UM.MONTHLY_COST,0) * ISNULL(REQ.QUANTITY,0) MONTHLY_USAGE_FEE,
-                                    REQ.UPDATED_AT, UM.UPDATED_AT,REQ.CONTRACT_UNIT,REQ.UNIT_PRICE
-                                    FROM REQ_USAGE_FEE REQ 
-                                    LEFT JOIN 
-                                    (SELECT CONTRACT_CODE,ADOPTION_DATE,FEE_STRUCTURE,CONTRACT_NAME,CONTRACT_QTY,CONTRACT_UNIT,INITIAL_COST,DISPLAY_ORDER,UPDATED_AT,
-                                    MONTHLY_COST,
-                                    ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
-                                    FROM USAGE_FEE_MASTER
-                                    WHERE CONVERT(varchar(10),ADOPTION_DATE,112) <= CONVERT(varchar(10),GETDATE(),112)
-                                    AND (CONTRACT_CODE=@CONTRACT_PLAN AND FEE_STRUCTURE='BASIC') OR FEE_STRUCTURE <> 'BASIC'
-                                    ) UM 
-                                    ON UM.CONTRACT_CODE = REQ.CONTRACT_CODE
-                                    WHERE REQ.COMPANY_NO_BOX = @COMPANY_NO_BOX
-                                    AND REQ.REQ_SEQ = @REQ_SEQ
-                                    @Extra_Condition
-                                    ORDER BY REQ.Type, UM.DISPLAY_ORDER";
 
         string strSearchWithCompanyNoBox = @"SELECT COMPANY_NO_BOX FROM REQUEST_DETAIL WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX";
 
+        string strGetBreakDownScreenData = @"SELECT INITIAL_COST,
+                                            INITIAL_COST_DISCOUNTS,
+                                            (INITIAL_COST-INITIAL_COST_DISCOUNTS) AS INITIAL_COST_DIFF,
+                                            MONTHLY_COST,
+                                            MONTHLY_COST_DISCOUNTS,
+                                            (MONTHLY_COST-MONTHLY_COST_DISCOUNTS) AS MONTHLY_COST_DIFF,
+                                            YEAR_COST,
+                                            YEAR_COST_DISCOUNTS,
+                                            (YEAR_COST-YEAR_COST_DISCOUNTS) AS YEAR_COST_DIFF
+                                            FROM REQUEST_DETAIL
+                                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+                                            AND REQ_SEQ = @REQ_SEQ";
 
         #region Purchase Order
         string strUpdateForOrderRegister = @"UPDATE [REQUEST_DETAIL]
@@ -80,7 +73,7 @@ namespace DAL_AmigoProcess.DAL
                             AND REQUEST_DETAIL.COMPANY_NO_BOX= @COMPANY_NO_BOX
                             AND REQUEST_DETAIL.REQ_SEQ= @REQ_SEQ";
         #endregion
-       
+
         #region Applicatoin Cancel
         string strGetRequestDetailListTotal = @"DECLARE
                                             @var_REQ_DATE_FROM DATETIME2 = '@REQ_DATE_FROM', 
@@ -300,6 +293,26 @@ namespace DAL_AmigoProcess.DAL
                                     AND REQ_SEQ=@REQ_SEQ
                                     AND UPDATED_AT < @FILE_CREATED";
 
+        string strGetQuotationData = @"SELECT REQ.COMPANY_NO_BOX,UM.CONTRACT_CODE,UM.FEE_STRUCTURE,UM.CONTRACT_NAME,UM.CONTRACT_QTY,UM.INITIAL_COST,UM.MONTHLY_COST,
+                                    ISNULL(REQ.QUANTITY,0) QUANTITY,Req.Type,
+                                    ISNULL(UM.INITIAL_COST,0) * ISNULL(REQ.QUANTITY,0) INITIAL_EXPENSE,
+                                    ISNULL(UM.MONTHLY_COST,0) * ISNULL(REQ.QUANTITY,0) MONTHLY_USAGE_FEE,
+                                    REQ.UPDATED_AT, UM.UPDATED_AT,REQ.CONTRACT_UNIT,REQ.UNIT_PRICE
+                                    FROM REQ_USAGE_FEE REQ 
+                                    LEFT JOIN 
+                                    (SELECT CONTRACT_CODE,ADOPTION_DATE,FEE_STRUCTURE,CONTRACT_NAME,CONTRACT_QTY,CONTRACT_UNIT,INITIAL_COST,DISPLAY_ORDER,UPDATED_AT,
+                                    MONTHLY_COST,
+                                    ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
+                                    FROM USAGE_FEE_MASTER
+                                    WHERE CONVERT(varchar(10),ADOPTION_DATE,112) <= CONVERT(varchar(10),GETDATE(),112)
+                                    AND (CONTRACT_CODE=@CONTRACT_PLAN AND FEE_STRUCTURE='BASIC') OR FEE_STRUCTURE <> 'BASIC'
+                                    ) UM 
+                                    ON UM.CONTRACT_CODE = REQ.CONTRACT_CODE
+                                    WHERE REQ.COMPANY_NO_BOX = @COMPANY_NO_BOX
+                                    AND REQ.REQ_SEQ = @REQ_SEQ
+                                    @Extra_Condition
+                                    ORDER BY REQ.Type, UM.DISPLAY_ORDER";
+
         string strUpdateQuotation = @"UPDATE [REQUEST_DETAIL]
                            SET [INITIAL_COST] = @INITIAL_COST
                                @INITIAL_COST_DISCOUNTS__
@@ -318,6 +331,137 @@ namespace DAL_AmigoProcess.DAL
 		                        AND REQ_SEQ = @REQ_SEQ";
         #endregion
 
+        #region ApplicationApproval
+        string strGetInitialDataForApproval = @"SELECT
+                                                ROW_NUMBER() OVER (ORDER BY REQUEST_DETAIL.REQ_SEQ) No,
+                                                '' AS DISTINGUISH,
+                                                CASE
+	                                                WHEN REQUEST_DETAIL.REQ_TYPE = 1 THEN N'新規' 
+	                                                WHEN REQUEST_DETAIL.REQ_TYPE = 2 THEN N'変更' 
+	                                                WHEN REQUEST_DETAIL.REQ_TYPE = 9 THEN N'解約'
+                                                END REQ_TYPE,
+                                                CASE
+	                                                WHEN REQUEST_DETAIL.REQ_STATUS = 0 THEN N'仮登録(保存)' 
+	                                                WHEN REQUEST_DETAIL.REQ_STATUS = 1 THEN N'申請中' 
+	                                                WHEN REQUEST_DETAIL.REQ_STATUS = 2 THEN N'承認済'
+	                                                WHEN REQUEST_DETAIL.REQ_STATUS = 3 THEN N'否認' 
+	                                                WHEN REQUEST_DETAIL.REQ_STATUS = 9 THEN N'申請取'
+                                                END REQ_STATUS,
+                                                CASE
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 1 THEN N'要元' 
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 2 THEN N'サプライヤ'
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 3 THEN N'納代' 
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 4 THEN N'生産情報閲覧'
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 11 THEN N'SI'
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 12 THEN N'SOL' 
+	                                                WHEN REQUEST_DETAIL.TRANSACTION_TYPE = 19 THEN N'その他'
+                                                END TRANSACTION_TYPE,
+                                                REQUEST_DETAIL.COMPANY_NAME,
+                                                REQUEST_DETAIL.COMPANY_NAME_READING,
+                                                FORMAT (REQUEST_DETAIL.REQ_DATE, 'yyyy/MM/dd HH:mm') REQ_DATE,
+                                                FORMAT (REQUEST_DETAIL.INPUT_DATE, 'yyyy/MM/dd') INPUT_DATE,
+                                                REQUEST_DETAIL.INPUT_PERSON,
+                                                REQUEST_DETAIL.INPUT_PERSON_EMAIL_ADDRESS,
+                                                FORMAT (REQUEST_DETAIL.CANCELLATION_DATE, 'yyyy/MM/dd') CANCELLATION_DATE,
+                                                REQUEST_DETAIL.CANCELLATION_EDI_ACCOUNT,
+                                                REQUEST_DETAIL.CANCELLATION_REASON,
+                                                FORMAT (REQUEST_DETAIL.START_USE_DATE, 'yyyy/MM/dd')START_USE_DATE,
+                                                REQUEST_DETAIL.NML_CODE_NISSAN,
+                                                REQUEST_DETAIL.NML_CODE_NS,
+                                                REQUEST_DETAIL.NML_CODE_JATCO,
+                                                REQUEST_DETAIL.NML_CODE_AK,
+                                                REQUEST_DETAIL.NML_CODE_NK,
+                                                REQ_ADDRESS1.COMPANY_NAME CONTRACTOR_COMPANY_NAME,
+                                                REQ_ADDRESS1.DEPARTMENT_IN_CHARGE CONTRACTOR_DEPARTMENT_IN_CHARGE,
+                                                REQ_ADDRESS1.CONTACT_NAME CONTRACTOR_CONTACT_NAME,
+                                                REQ_ADDRESS1.CONTACT_NAME_READING CONTRACTOR_CONTACT_NAME_READING,
+                                                REQ_ADDRESS1.POSTAL_CODE CONTRACTOR_POSTAL_CODE,
+                                                REQ_ADDRESS1.ADDRESS CONTRACTOR_ADDRESS,
+                                                REQ_ADDRESS1.ADDRESS_BUILDING CONTRACTOR_ADDRESS_BUILDING,
+                                                REQ_ADDRESS1.MAIL_ADDRESS CONTRACTOR_MAIL_ADDRESS,
+                                                REQ_ADDRESS1.PHONE_NUMBER CONTRACTOR_PHONE_NUMBER,
+                                                REQUEST_DETAIL.BILL_SUPPLIER_NAME,
+                                                REQUEST_DETAIL.BILL_SUPPLIER_NAME_READING,
+                                                CASE
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,1,1) = 1 THEN 'True'
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,1,1) = 0 THEN 'False'
+                                                ELSE 'False'
+                                                END BILL_METHOD1,
+                                                CASE
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,2,1) = 1 THEN 'True'
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,2,1) = 0 THEN 'False'
+                                                ELSE 'False'
+                                                END BILL_METHOD2,
+                                                CASE
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,3,1) = 1 THEN 'True'
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,3,1) = 0 THEN 'False'
+                                                ELSE 'False'
+                                                END BILL_METHOD3,
+                                                CASE
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,5,1) = 1 THEN 'True'
+                                                WHEN SUBSTRING(REQUEST_DETAIL.BILL_METHOD,5,1) = 0 THEN 'False'
+                                                ELSE 'False'
+                                                END BILL_METHOD5,
+                                                REQ_ADDRESS2.COMPANY_NAME BILL_COMPANY_NAME,
+                                                REQ_ADDRESS2.DEPARTMENT_IN_CHARGE BILL_DEPARTMENT_IN_CHARGE,
+                                                REQ_ADDRESS2.CONTACT_NAME BILL_CONTACT_NAME,
+                                                REQ_ADDRESS2.CONTACT_NAME_READING BILL_CONTACT_NAME_READING,
+                                                REQ_ADDRESS2.POSTAL_CODE BILL_POSTAL_CODE,
+                                                REQ_ADDRESS2.ADDRESS BILL_ADDRESS,
+                                                REQ_ADDRESS2.ADDRESS_BUILDING BILL_ADDRESS_BUILDING,
+                                                REQ_ADDRESS2.MAIL_ADDRESS BILL_MAIL_ADDRESS,
+                                                REQ_ADDRESS2.PHONE_NUMBER BILL_PHONE_NUMBER,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-1] BILL_BANK_ACCOUNT_NAME_1,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-1] BILL_BANK_ACCOUNT_NUMBER_1,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-2] BILL_BANK_ACCOUNT_NAME_2,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-2] BILL_BANK_ACCOUNT_NUMBER_2,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-3] BILL_BANK_ACCOUNT_NAME_3,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-3] BILL_BANK_ACCOUNT_NUMBER_3,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-4] BILL_BANK_ACCOUNT_NAME_4,
+                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-4] BILL_BANK_ACCOUNT_NUMBER_4,
+                                                REQUEST_DETAIL.INITIAL_COST,
+                                                REQUEST_DETAIL.MONTHLY_COST,
+                                                REQUEST_DETAIL.YEAR_COST,
+                                                '*' AS BREAKDOWN ,
+                                                REQUEST_DETAIL.CONTRACT_PLAN,
+                                                REQUEST_DETAIL.PLAN_AMIGO_CAI,
+                                                REQUEST_DETAIL.PLAN_AMIGO_BIZ,
+                                                REQUEST_DETAIL.BOX_SIZE,
+                                                REQUEST_DETAIL.OP_AMIGO_CAI,
+                                                REQUEST_DETAIL.OP_AMIGO_BIZ,
+                                                REQUEST_DETAIL.OP_BOX_SERVER,
+                                                REQUEST_DETAIL.OP_BOX_BROWSER,
+                                                REQUEST_DETAIL.OP_FLAT,
+                                                REQUEST_DETAIL.OP_CLIENT,
+                                                REQUEST_DETAIL.OP_BASIC_SERVICE,
+                                                REQUEST_DETAIL.OP_ADD_SERVICE,
+                                                '*' AS SERVICE_DESK,
+                                                REQUEST_DETAIL.CAI_SERVER_IP_ADDRESS,
+                                                REQUEST_DETAIL.CAI_NETWORK,
+                                                REQUEST_DETAIL.CONTRACT_CSP,
+                                                REQUEST_DETAIL.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS,
+                                                '*' AS ERROR_NOTIFICATION,
+                                                REQUEST_DETAIL.UPDATED_AT,
+                                                REQUEST_DETAIL.UPDATED_BY,
+                                                REQUEST_DETAIL.REQ_SEQ
+                                                FROM REQUEST_DETAIL
+                                                LEFT JOIN REQ_ADDRESS REQ_ADDRESS1
+                                                ON REQUEST_DETAIL.COMPANY_NO_BOX = REQ_ADDRESS1.COMPANY_NO_BOX
+                                                AND REQUEST_DETAIL.REQ_SEQ = REQ_ADDRESS1.REQ_SEQ
+                                                AND REQ_ADDRESS1.TYPE = 1
+                                                AND REQ_ADDRESS1.REQ_ADDRESS_SEQ = 1
+                                                LEFT JOIN REQ_ADDRESS REQ_ADDRESS2
+                                                ON REQUEST_DETAIL.COMPANY_NO_BOX = REQ_ADDRESS2.COMPANY_NO_BOX
+                                                AND REQUEST_DETAIL.REQ_SEQ = REQ_ADDRESS2.REQ_SEQ
+                                                AND REQ_ADDRESS2.TYPE = 2
+                                                AND REQ_ADDRESS2.REQ_ADDRESS_SEQ = 1
+                                                LEFT JOIN BANK_ACCOUNT_MASTER
+                                                ON REQUEST_DETAIL.COMPANY_NO_BOX = BANK_ACCOUNT_MASTER.COMPANY_NO_BOX
+                                                AND REQUEST_DETAIL.REQ_SEQ = BANK_ACCOUNT_MASTER.REQ_SEQ
+                                                WHERE REQUEST_DETAIL. COMPANY_NO_BOX = @COMPANY_NO_BOX
+                                                @REQ_SEQ_
+                                                ORDER BY REQUEST_DETAIL.REQ_SEQ";
+        #endregion
         #endregion
 
         #region Constructors
@@ -329,7 +473,7 @@ namespace DAL_AmigoProcess.DAL
 
         #endregion
 
-        #region GetInitialData
+        #region GetAutoIndex
         public DataTable GetInitialData(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialData);
@@ -370,104 +514,6 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@AUTO_INDEX", oAUTO_INDEX.AUTO_INDEX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oAUTO_INDEX.UPDATED_AT != null ? oAUTO_INDEX.UPDATED_AT : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", oAUTO_INDEX.UPDATED_BY != null ? oAUTO_INDEX.UPDATED_BY : (object)DBNull.Value));
-            oMaster.ExcuteQuery(2, out strMsg);
-        }
-        #endregion
-
-        #region UpdateQuotation
-        #region CanUpdate
-        public bool CanUpdate(string COMPANY_NO_BOX, string REQ_SEQ, string FILE_CREATED, out string strMsg)
-        {
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetUpdatedat);
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@FILE_CREATED", FILE_CREATED));
-            oMaster.ExcuteQuery(4, out strMsg);
-
-            int count = oMaster.dtExcuted.Rows.Count;
-
-            if (count <= 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-
-        }
-        #endregion
-
-        #region CheckForExportType
-        private bool CheckType(DataTable TABLE, string[] TYPE)
-        {
-            bool FOUND = false;
-            for (int i = 0; i < TABLE.Rows.Count; i++)
-            {
-                foreach (string item in TYPE)
-                {
-                    if (TABLE.Rows[i]["ExportType"].ToString() == item)
-                    {
-                        FOUND = true;
-                    }
-                }
-                
-            }
-            return FOUND;
-        }
-        #endregion
-
-        #region PrepareQuery
-        private void PreapareQuery(DataTable exportInfo, bool willUpdateYearCost)
-        {
-            if (CheckType(exportInfo, new string[] { "1", "3", "4" }))
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", ",[INITIAL_COST_DISCOUNTS] = @INITIAL_COST_DISCOUNTS");
-            }
-            else
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", "");
-            }
-
-            if (CheckType(exportInfo, new string[] { "2" }))
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", ",[MONTHLY_COST_DISCOUNTS] = @MONTHLY_COST_DISCOUNTS");
-            }
-            else
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", "");
-            }
-
-            if (willUpdateYearCost)
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", ",[YEAR_COST] = @YEAR_COST * REQUEST_DETAIL.OP_CLIENT");
-            }
-            else
-            {
-                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", "");
-            }
-        }
-        #endregion
-
-        public void UpdateQuotation(BOL_REQUEST_DETAIL oREQUEST_DETAIL, DataTable exportInfo, bool willUpdateYearCost, out String strMsg)
-        {
-            PreapareQuery(exportInfo, willUpdateYearCost);
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strUpdateQuotation);
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQUEST_DETAIL.REQ_SEQ));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST", oREQUEST_DETAIL.INITIAL_COST));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_DISCOUNTS", oREQUEST_DETAIL.INITIAL_COST_DISCOUNTS));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_INCLUDING_TAX", oREQUEST_DETAIL.INITIAL_COST_INCLUDING_TAX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST", oREQUEST_DETAIL.MONTHLY_COST));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_DISCOUNTS", oREQUEST_DETAIL.MONTHLY_COST_DISCOUNTS));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_INCLUDING_TAX", oREQUEST_DETAIL.MONTHLY_COST_INCLUDING_TAX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST", oREQUEST_DETAIL.YEAR_COST));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_DISCOUNTS", oREQUEST_DETAIL.YEAR_COST_DISCOUNTS));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_INCLUDING_TAX", oREQUEST_DETAIL.YEAR_COST_INCLUDING_TAX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TAX", oREQUEST_DETAIL.TAX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@QUOTATION_DATE", oREQUEST_DETAIL.QUOTATION_DATE));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_AT_RAW) ? oREQUEST_DETAIL.UPDATED_AT_RAW : (object)DBNull.Value));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_BY) ? oREQUEST_DETAIL.UPDATED_BY : (object)DBNull.Value));
             oMaster.ExcuteQuery(2, out strMsg);
         }
         #endregion
@@ -669,7 +715,7 @@ namespace DAL_AmigoProcess.DAL
         }
         #endregion
 
-
+        
         #endregion
 
         #region GetClientCertificateDiffenent
@@ -710,7 +756,7 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region MailCreateUpdate
-        public void SendMailUpdate(string COMPLETION_NOTIFICATION_DATE, string COMPANY_NO_BOX, string REQ_SEQ, string UPDATED_AT, string LOGIN_ID, out String strMsg)
+        public void SendMailUpdate(string COMPLETION_NOTIFICATION_DATE, string COMPANY_NO_BOX, int REQ_SEQ, string UPDATED_AT, string LOGIN_ID, out String strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strSendMailUpdate);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPLETION_NOTIFICATION_DATE", COMPLETION_NOTIFICATION_DATE));
@@ -733,6 +779,142 @@ namespace DAL_AmigoProcess.DAL
             oMaster.ExcuteQuery(4, out strMsg);
             return oMaster.dtExcuted;
         }
+        #endregion
+
+        #region UpdateQuotation
+        #region CanUpdate
+        public bool CanUpdate(string COMPANY_NO_BOX, string REQ_SEQ, string FILE_CREATED, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetUpdatedat);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@FILE_CREATED", FILE_CREATED));
+            oMaster.ExcuteQuery(4, out strMsg);
+
+            int count = oMaster.dtExcuted.Rows.Count;
+
+            if (count <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+        #endregion
+
+        #region CheckForExportType
+        private bool CheckType(DataTable TABLE, string[] TYPE)
+        {
+            bool FOUND = false;
+            for (int i = 0; i < TABLE.Rows.Count; i++)
+            {
+                foreach (string item in TYPE)
+                {
+                    if (TABLE.Rows[i]["ExportType"].ToString() == item)
+                    {
+                        FOUND = true;
+                    }
+                }
+
+            }
+            return FOUND;
+        }
+        #endregion
+
+        #region PrepareQuery
+        private void PreapareQuery(DataTable exportInfo, bool willUpdateYearCost)
+        {
+            if (CheckType(exportInfo, new string[] { "1", "3", "4" }))
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", ",[INITIAL_COST_DISCOUNTS] = @INITIAL_COST_DISCOUNTS");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@INITIAL_COST_DISCOUNTS__", "");
+            }
+
+            if (CheckType(exportInfo, new string[] { "2" }))
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", ",[MONTHLY_COST_DISCOUNTS] = @MONTHLY_COST_DISCOUNTS");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@MONTHLY_COST_DISCOUNTS__", "");
+            }
+
+            if (willUpdateYearCost)
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", ",[YEAR_COST] = @YEAR_COST * REQUEST_DETAIL.OP_CLIENT");
+            }
+            else
+            {
+                strUpdateQuotation = strUpdateQuotation.Replace("@YEAR_COST__", "");
+            }
+        }
+        #endregion
+
+        public void UpdateQuotation(BOL_REQUEST_DETAIL oREQUEST_DETAIL, DataTable exportInfo, bool willUpdateYearCost, out String strMsg)
+        {
+            PreapareQuery(exportInfo, willUpdateYearCost);
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strUpdateQuotation);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQUEST_DETAIL.REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST", oREQUEST_DETAIL.INITIAL_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_DISCOUNTS", oREQUEST_DETAIL.INITIAL_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@INITIAL_COST_INCLUDING_TAX", oREQUEST_DETAIL.INITIAL_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST", oREQUEST_DETAIL.MONTHLY_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_DISCOUNTS", oREQUEST_DETAIL.MONTHLY_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@MONTHLY_COST_INCLUDING_TAX", oREQUEST_DETAIL.MONTHLY_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST", oREQUEST_DETAIL.YEAR_COST));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_DISCOUNTS", oREQUEST_DETAIL.YEAR_COST_DISCOUNTS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YEAR_COST_INCLUDING_TAX", oREQUEST_DETAIL.YEAR_COST_INCLUDING_TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TAX", oREQUEST_DETAIL.TAX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@QUOTATION_DATE", oREQUEST_DETAIL.QUOTATION_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_AT_RAW) ? oREQUEST_DETAIL.UPDATED_AT_RAW : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", !string.IsNullOrEmpty(oREQUEST_DETAIL.UPDATED_BY) ? oREQUEST_DETAIL.UPDATED_BY : (object)DBNull.Value));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
+        #endregion
+
+        #region getBreakDownScreenData
+        public DataTable getBreakDownScreenData(string COMPANY_NO_BOX, string REQ_SEQ, out string Msg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetBreakDownScreenData);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(4, out Msg);
+            return oMaster.dtExcuted;
+        }
+        #endregion
+
+        #region ApplicationApproval
+        
+        #region GetQuotationData
+        public DataTable GetInitialDataForApproval(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_STATUS, int REQ_TYPE, out string strMsg)
+        {
+            if (REQ_TYPE == 9 && REQ_STATUS < 2)
+            {
+                strGetInitialDataForApproval = strGetInitialDataForApproval.Replace("@REQ_SEQ_", @"AND ( 
+                                                REQUEST_DETAIL.REQ_SEQ = @REQ_SEQ
+                                                OR
+                                                REQUEST_DETAIL.REQ_SEQ = (SELECT MAX(REQ_SEQ) FROM REQUEST_DETAIL WHERE REQ_STATUS < 2 AND COMPANY_NO_BOX = @COMPANY_NO_BOX)
+                                                )");
+            }
+            else
+            {
+                strGetInitialDataForApproval = strGetInitialDataForApproval.Replace("@REQ_SEQ_", "@REQ_SEQ");
+            }
+            
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialDataForApproval);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(4, out strMsg);
+            return oMaster.dtExcuted;
+        }
+        #endregion
         #endregion
     }
     #endregion

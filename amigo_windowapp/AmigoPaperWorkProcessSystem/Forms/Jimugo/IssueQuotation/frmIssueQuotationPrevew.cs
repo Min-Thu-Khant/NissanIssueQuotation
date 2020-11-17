@@ -15,7 +15,7 @@ using Microsoft.Office.Interop.Outlook;
 using MetroFramework;
 using AmigoPaperWorkProcessSystem.Controllers;
 
-namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.IssueQuotation
+namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
 {
     public partial class frmIssueQuotationPrevew : Form
     {

@@ -25,7 +25,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region QuotationPreview
-        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDay, string strFromCertificate, string strToCertificate, 
+        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDay, string strFromCertificate, string strToCertificate,
             string strExportInfo, string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
             string url = Properties.Settings.Default.PreviewQuotation;

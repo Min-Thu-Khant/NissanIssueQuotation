@@ -98,6 +98,7 @@ namespace AmigoPaperWorkProcessSystem.Core
             return filename;
         }
         #endregion
+
         #endregion
 
         #region PostMethod
@@ -240,7 +241,6 @@ namespace AmigoPaperWorkProcessSystem.Core
             }
 
             ////prepare return data
-            //MetaData = JsonConvert.DeserializeObject<Meta>(JsonConvert.SerializeObject(result.Meta));
             string returnData = result.Data;
             DataTable dt = Utility.JsonToDt(returnData);
 
@@ -249,7 +249,7 @@ namespace AmigoPaperWorkProcessSystem.Core
 
         public static DataTable Post(string url, string json)
         {
-            
+
             //encode content
             var data = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -273,6 +273,52 @@ namespace AmigoPaperWorkProcessSystem.Core
             DataTable dt = Utility.JsonToDt(returnData);
 
             return dt;
+        }
+
+        public static DataSet Post(string url, string json, bool dataset)
+        {
+
+            //encode content
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpClient client = makeAuthHeader();
+
+            var response = client.PostAsync(url, data);
+
+            string content = response.Result.Content.ReadAsStringAsync().Result;
+
+            dynamic result = JsonConvert.DeserializeObject(content);
+
+            //log error message
+            if (result.Status == 0)
+            {
+                Utility.WriteErrorLog(result.Message.ToString(), null, true);
+            }
+
+            ////prepare return data
+            string strData = result.Data;
+            DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
+            return dataSet;
+        }
+
+        public static DataSet Post(string url)
+        {
+            HttpClient client = makeAuthHeader();
+            var response = client.GetAsync(url);
+
+            //call methods
+            string content = response.Result.Content.ReadAsStringAsync().Result;
+
+            dynamic result = JsonConvert.DeserializeObject(content);
+
+            //log error message
+            if (result.Status == 0)
+            {
+                Utility.WriteErrorLog(result.Message.ToString(), null, true);
+            }
+            string strData = result.Data;
+            DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
+            return dataSet;
         }
 
         #endregion

@@ -79,7 +79,7 @@ namespace AmigoProcessManagement.Utility
                     //create mail
                     MailMessage mail = CreateMiMeMail(config.From, CC, toAddress, subject, template, map, filePaths);
 
-                    //smtp cred -will remove
+                    //smtp cred 
                     SmtpServer.Credentials = new System.Net.NetworkCredential(config.User, config.Password);
 
 
@@ -88,7 +88,7 @@ namespace AmigoProcessManagement.Utility
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

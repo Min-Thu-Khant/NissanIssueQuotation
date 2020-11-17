@@ -535,8 +535,8 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetMaintenance?OF" +
-            "FSET=0&LIMIT=30")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetMaintenance?COMPANY_NO_BOX=@COMPANY_NO_BOX&COMPANY_NAME=@COMPANY_NAME&COMPANY_NAME_READING=@NAME_READING&EDI_ACCOUNT=@EDI_ACCOUNT&MAIL_ADDRESS=@MAIL_ADDRESS&CONTRACTOR=@CONTRACTOR&INVOICE=@INVOICE&SERVICE_DESK=@SERVICE_DESK&NOTIFICATION_DESTINATION=@NOTIFICATION_DESTINATION&OFFSET=@OFFSET&LIMIT=@LIMIT
+")]
         public string GetCustomerMasterMaintenance {
             get {
                 return ((string)(this["GetCustomerMasterMaintenance"]));
@@ -730,6 +730,44 @@ namespace AmigoPaperWorkProcessSystem.Properties {
             }
             set {
                 this["QuotationMailCreate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/GetPopupScreenDat" +
+            "a?COMPANY_NO_BOX=@COMPANY_NO_BOX&REQ_SEQ=@REQ_SEQ")]
+        public string GetPopupScreenData {
+            get {
+                return ((string)(this["GetPopupScreenData"]));
+            }
+            set {
+                this["GetPopupScreenData"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/Update")]
+        public string UpdateCustomerMasterList {
+            get {
+                return ((string)(this["UpdateCustomerMasterList"]));
+            }
+            set {
+                this["UpdateCustomerMasterList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/GetClientCertificateLis" +
+            "t")]
+        public string ApplicationApproval_GetInitialData {
+            get {
+                return ((string)(this["ApplicationApproval_GetInitialData"]));
+            }
+            set {
+                this["ApplicationApproval_GetInitialData"] = value;
             }
         }
     }

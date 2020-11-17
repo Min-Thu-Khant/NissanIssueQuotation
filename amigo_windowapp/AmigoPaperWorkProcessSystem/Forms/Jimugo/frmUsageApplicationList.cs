@@ -2,6 +2,7 @@
 using AmigoPaperWorkProcessSystem.Core;
 using AmigoPaperWorkProcessSystem.Core.Model;
 using AmigoPaperWorkProcessSystem.Forms.Jimugo;
+using AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation;
 using AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification;
 using AmigoPaperWorkProcessSystem.Jimugo;
 using MetroFramework;
@@ -705,6 +706,9 @@ namespace AmigoPaperWorkProcessSystem.Forms
                         case "colCOMPLETION_NOTIFICATION_DATE":// CTS060
                             OpenRegistrationCompleteNotiForm(dgvList.Rows[e.RowIndex]);
                             break;
+                        case "colQUOTATION_DATE"://CTS040
+                            OpenIssueQuotationForm(dgvList.Rows[e.RowIndex]);
+                            break;  
                         default:
                             break;
                     }
@@ -764,6 +768,32 @@ namespace AmigoPaperWorkProcessSystem.Forms
                     row.Cells["colUPDATED_BY"].Value = Utility.Id;
                     frm.Dispose();
                 }
+            }
+        }
+        #endregion
+
+        #region OpenIssueQuotationForm
+        private void OpenIssueQuotationForm(DataGridViewRow row)
+        {
+            string value = Convert.ToString(row.Cells["colQUOTATION_DATE"].Value);
+            if (value != null)
+            {
+                frmIssueQuotation frm = new frmIssueQuotation(
+                    "CTS040", GetProgramNameByID("CTS040"),
+                    Convert.ToString(row.Cells["colCOMPANY_NO_BOX"].Value),
+                    Convert.ToString(row.Cells["colREQ_SEQ"].Value),
+                    Convert.ToString(row.Cells["colQUOTATION_DATE"].Value),
+                    Convert.ToString(row.Cells["colORDER_DATE"].Value),
+                    Convert.ToString(row.Cells["colCOMPLETION_NOTIFICATION_DATE"].Value),
+                    Convert.ToString(row.Cells["colCOMPANY_NAME"].Value)
+                );
+                frm.ShowDialog();
+                //if (frm.ShowDialog() == DialogResult.OK)
+                //{
+                //    row.Cells["colORDER_DATE"].Value = frm.ORDER_DATE;
+                //    row.Cells["colUPDATED_BY"].Value = Utility.Id;
+                //    frm.Dispose();
+                //}
             }
         }
         #endregion
