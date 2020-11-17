@@ -52,5 +52,101 @@ namespace AmigoProcessManagement.Jimugo
             }
         }
         #endregion
+
+        #region Approve
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public void Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
+        {
+            //get Authorization header
+            HttpContext httpContext = HttpContext.Current;
+            string authHeader = httpContext.Request.Headers["Authorization"];
+
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
+
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                ControllerApplicationApproval approval = new Controller.ControllerApplicationApproval(authHeader);
+                MetaResponse response = approval.Approve(COMPANY_NO_BOX, REQ_TYPE, CHANGED_ITEMS, SYSTEM_EFFECTIVE_DATE, SYSTEM_REGIST_DEADLINE, LIST);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
+        }
+        #endregion
+
+        #region Disapprove
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public void Disapprove(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string LIST)
+        {
+            //get Authorization header
+            HttpContext httpContext = HttpContext.Current;
+            string authHeader = httpContext.Request.Headers["Authorization"];
+
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
+
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                ControllerApplicationApproval approval = new Controller.ControllerApplicationApproval(authHeader);
+                MetaResponse response = approval.Disapprove(COMPANY_NO_BOX, REQ_TYPE, CHANGED_ITEMS, SYSTEM_EFFECTIVE_DATE, SYSTEM_REGIST_DEADLINE, SEND_FROM_SERVER, LIST);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
+        }
+        #endregion
+
+        #region ApproveCancel
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public void ApproveCancel(string COMPANY_NO_BOX, string LIST)
+        {
+            //get Authorization header
+            HttpContext httpContext = HttpContext.Current;
+            string authHeader = httpContext.Request.Headers["Authorization"];
+
+            Response auth = Controller.ControllerCheckIn.CheckLogIn_forProcess(authHeader);
+
+            if (auth.Message != "")
+            {
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(auth));
+                Context.Response.End();
+            }
+            else
+            {
+                ControllerApplicationApproval approval = new Controller.ControllerApplicationApproval(authHeader);
+                MetaResponse response = approval.ApproveCancel(COMPANY_NO_BOX, LIST);
+                Context.Response.Clear();
+                Context.Response.ContentType = "application/json";
+                Context.Response.Flush();
+                Context.Response.Write(JsonConvert.SerializeObject(response));
+                Context.Response.End();
+            }
+        }
+        #endregion
     }
 }

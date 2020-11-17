@@ -399,6 +399,11 @@ namespace DAL_AmigoProcess.DAL
                                                     AND [TRANSACTION_TYPE] = @TRANSACTION_TYPE
                                                     AND [EFFECTIVE_DATE] = @ORG_EFFECTIVE_DATE
 							                        AND [UPDATED_AT] @UPDATED_AT";
+
+        #region ApplicationApproval
+
+        #endregion
+
         #region IsAlreadyUpdate
         public bool IsAlreadyUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out string strMsg)
         {
@@ -445,7 +450,6 @@ namespace DAL_AmigoProcess.DAL
 
         #endregion
 
-
         #region getData
         public DataTable getBillBankAccounts()
         {
@@ -454,7 +458,6 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
-
 
         #region getGridViewData
         public DataTable getGridViewData(string COMPANY_NAME, string COMPANY_NAME_READING, string BILL_COMPANY_NAME, string COMPANY_NO_BOX, string ACCOUNT_NAME)
@@ -673,6 +676,7 @@ namespace DAL_AmigoProcess.DAL
             }
         }
         #endregion
+
         #region CustomerMasterMaintenanceUpdate
         public void CustomerMasterUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, string CURRENT_DATETIME, string CURRENT_USER, out String strMsg)
         {
@@ -702,6 +706,10 @@ namespace DAL_AmigoProcess.DAL
 
             oMaster.ExcuteQuery(2, out strMsg);
         }
+        #endregion
+
+        #region ApplicationApproval
+ 
         #endregion
     }
     #endregion

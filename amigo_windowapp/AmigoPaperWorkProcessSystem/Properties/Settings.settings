@@ -183,5 +183,14 @@
     <Setting Name="ApplicationApproval_GetInitialData" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/GetClientCertificateList</Value>
     </Setting>
+    <Setting Name="ApplicationApproval_Disapprove" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Disapprove</Value>
+    </Setting>
+    <Setting Name="ApplicationApproval_ApproveCancel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/ApproveCancel</Value>
+    </Setting>
+    <Setting Name="ApplicationApproval_Approve" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Approve</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

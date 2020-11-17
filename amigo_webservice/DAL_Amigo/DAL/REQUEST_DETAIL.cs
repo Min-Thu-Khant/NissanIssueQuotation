@@ -443,6 +443,11 @@ namespace DAL_AmigoProcess.DAL
                                                 '*' AS ERROR_NOTIFICATION,
                                                 REQUEST_DETAIL.UPDATED_AT,
                                                 REQUEST_DETAIL.UPDATED_BY,
+                                                '' AS UPDATE_MESSAGE,
+                                                REQUEST_DETAIL.INPUT_PERSON_EMAIL_ADDRESS INPUT_PERSON_EMAIL_ADDRESS_,
+                                                '' AS MAIL_SENDING_TARGET_FLG,
+                                                '' AS MAIL_DESTINATION,
+                                                REQUEST_DETAIL.UPDATED_AT AS UPDATED_AT_RAW,
                                                 REQUEST_DETAIL.REQ_SEQ
                                                 FROM REQUEST_DETAIL
                                                 LEFT JOIN REQ_ADDRESS REQ_ADDRESS1
@@ -473,6 +478,26 @@ namespace DAL_AmigoProcess.DAL
 	                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
 	                            AND REQ_SEQ = @REQ_SEQ
 	                            AND UPDATED_AT=@UPDATED_AT";
+
+        string strApprove = @"UPDATE REQUEST_DETAIL SET
+		                            REQ_STATUS = @REQ_STATUS,
+		                            AMIGO_COOPERATION = @AMIGO_COOPERATION,
+		                            AMIGO_COOPERATION_CHENGED_ITEMS=@AMIGO_COOPERATION_CHENGED_ITEMS,
+		                            SYSTEM_EFFECTIVE_DATE=@SYSTEM_EFFECTIVE_DATE,
+		                            SYSTEM_REGIST_DEADLINE=@SYSTEM_REGIST_DEADLINE,
+                                    SYSTEM_SETTING_STATUS = @SYSTEM_SETTING_STATUS,
+		                            UPDATED_AT = @CURRENT_DATETIME,
+		                            UPDATED_BY= @CURRENT_USER
+	                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+	                            AND REQ_SEQ = @REQ_SEQ
+	                            AND UPDATED_AT=@UPDATED_AT";
+
+        string strApproveCancel = @"UPDATE REQUEST_DETAIL SET
+		                            REQ_STATUS = 1,
+		                            UPDATED_AT = @CURRENT_DATETIME,
+		                            UPDATED_BY= @CURRENT_USER
+                                    WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
+	                                AND REQ_SEQ = @REQ_SEQ";
         #endregion
         #endregion
 
@@ -906,7 +931,7 @@ namespace DAL_AmigoProcess.DAL
         #region Disapprove
         public void Disapprove(BOL_REQUEST_DETAIL oREQUEST_DETAIL, string CURRENT_USER, string CURRENT_DATETIME, out string strMsg)
         {
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialData);
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strDisapprove);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION", oREQUEST_DETAIL.AMIGO_COOPERATION));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION_CHENGED_ITEMS", oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_EFFECTIVE_DATE", oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE));
@@ -919,6 +944,38 @@ namespace DAL_AmigoProcess.DAL
             oMaster.ExcuteQuery(2, out strMsg);
         }
         #endregion
+
+        #region ApproveCancel
+        public void ApproveCancel(string COMPANY_NO_BOX, string REQ_SEQ, string CURRENT_USER, string CURRENT_DATETIME, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strApproveCancel);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
+        #endregion
+
+        #region Approve
+        public void Approve(BOL_REQUEST_DETAIL oREQUEST_DETAIL, string CURRENT_USER, string CURRENT_DATETIME, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strApprove);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_STATUS", oREQUEST_DETAIL.REQ_STATUS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION", oREQUEST_DETAIL.AMIGO_COOPERATION));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@AMIGO_COOPERATION_CHENGED_ITEMS", oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_EFFECTIVE_DATE", oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_REGIST_DEADLINE", oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_SETTING_STATUS", oREQUEST_DETAIL.SYSTEM_SETTING_STATUS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oREQUEST_DETAIL.REQ_SEQ));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oREQUEST_DETAIL.UPDATED_AT));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
+        #endregion
+
         #region GetInitialDataForApproval
         public DataTable GetInitialDataForApproval(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_STATUS, int REQ_TYPE, out string strMsg)
         {

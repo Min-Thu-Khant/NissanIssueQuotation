@@ -142,9 +142,11 @@ namespace AmigoPaperWorkProcessSystem.Core
         #region CheckIfProcessIsRunning
         public static bool CheckIfProcessIsRunning(String processName)
         {
+            
             bool isRunning = Process.GetProcessesByName(processName).FirstOrDefault(p => p.MainModule.FileName.Contains(processName)) != default(Process);
 
             return isRunning;
+
         }
         #endregion
 

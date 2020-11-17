@@ -770,5 +770,41 @@ namespace AmigoPaperWorkProcessSystem.Properties {
                 this["ApplicationApproval_GetInitialData"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Disapprove")]
+        public string ApplicationApproval_Disapprove {
+            get {
+                return ((string)(this["ApplicationApproval_Disapprove"]));
+            }
+            set {
+                this["ApplicationApproval_Disapprove"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/ApproveCancel")]
+        public string ApplicationApproval_ApproveCancel {
+            get {
+                return ((string)(this["ApplicationApproval_ApproveCancel"]));
+            }
+            set {
+                this["ApplicationApproval_ApproveCancel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Approve")]
+        public string ApplicationApproval_Approve {
+            get {
+                return ((string)(this["ApplicationApproval_Approve"]));
+            }
+            set {
+                this["ApplicationApproval_Approve"] = value;
+            }
+        }
     }
 }

@@ -26,5 +26,61 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         }
         #endregion
 
+        #region Approve
+        public DataSet Approve(string COMPANY_NO_BOX, string REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
+        {
+
+            string url = Properties.Settings.Default.ApplicationApproval_Approve;
+            //convert list to json object
+            string json = JsonConvert.SerializeObject(new
+            {
+                COMPANY_NO_BOX = COMPANY_NO_BOX,
+                REQ_TYPE = REQ_TYPE,
+                CHANGED_ITEMS = CHANGED_ITEMS,
+                SYSTEM_EFFECTIVE_DATE = SYSTEM_EFFECTIVE_DATE,
+                SYSTEM_REGIST_DEADLINE = SYSTEM_REGIST_DEADLINE,
+                LIST = LIST
+            });
+
+            return WebUtility.Post(url, json, true);
+        }
+        #endregion
+
+        #region Disapprove
+        public DataSet Disapprove(string COMPANY_NO_BOX,string REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string LIST)
+        {
+
+            string url = Properties.Settings.Default.ApplicationApproval_Disapprove;
+            //convert list to json object
+            string json = JsonConvert.SerializeObject(new
+            {
+                COMPANY_NO_BOX = COMPANY_NO_BOX,
+                REQ_TYPE = REQ_TYPE,
+                CHANGED_ITEMS = CHANGED_ITEMS,
+                SYSTEM_EFFECTIVE_DATE = SYSTEM_EFFECTIVE_DATE,
+                SYSTEM_REGIST_DEADLINE = SYSTEM_REGIST_DEADLINE,
+                SEND_FROM_SERVER = SEND_FROM_SERVER,
+                LIST = LIST
+            });
+
+            return WebUtility.Post(url, json, true);
+        }
+        #endregion
+
+        #region ApproveCancel
+        public DataSet ApproveCancel(string COMPANY_NO_BOX,string LIST)
+        {
+
+            string url = Properties.Settings.Default.ApplicationApproval_ApproveCancel;
+            //convert list to json object
+            string json = JsonConvert.SerializeObject(new
+            {
+                COMPANY_NO_BOX = COMPANY_NO_BOX,
+                LIST = LIST
+            });
+
+            return WebUtility.Post(url, json, true);
+        }
+        #endregion
     }
 }

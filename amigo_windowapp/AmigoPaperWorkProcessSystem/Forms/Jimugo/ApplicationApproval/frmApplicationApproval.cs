@@ -2,6 +2,7 @@
 using AmigoPaperWorkProcessSystem.Core;
 using AmigoPaperWorkProcessSystem.Forms.Jimugo.ApplicationApproval;
 using MetroFramework;
+using Microsoft.Office.Interop.Outlook;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -100,7 +101,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "REQ_SEQ",
             "INPUT_PERSON_EMAIL_ADDRESS_",
             "",
-            ""
+            "",
+            "UPDATED_AT_RAW"
         };
         private string[] alignBottoms = {
                "NML_CODE_NISSAN",
@@ -402,7 +404,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Utility.WriteErrorLog(ex.Message, ex, false);
                 MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -549,7 +551,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Utility.WriteErrorLog(ex.Message, ex, false);
                 MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -564,20 +566,71 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ036, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            else
+            {
+                string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+                frmApplicationApprovalController approval = new frmApplicationApprovalController();
+                DataSet ds = approval.ApproveCancel(txtCompanyNoBox.Text.Trim(), List);
+                if (ds.Tables.Contains("LISTING"))
+                {
+                    dgvList.DataSource = ds.Tables["LISTING"];
+                }
+            }
         }
         #endregion
 
         private void BtnDisApprove_Click(object sender, EventArgs e)
         {
-            int procCount = 0;
-            Process[] processlist = Process.GetProcessesByName("OUTLOOK");
-            foreach (Process theprocess in processlist)
+            //int procCount = 0;
+            //Process[] processlist = Process.GetProcessesByName("OUTLOOK");
+            //foreach (Process theprocess in processlist)
+            //{
+            //    procCount++;
+            //}
+            //if (procCount > 0)
+            //{
+            //    //outlook is open
+            //}
+            bool SEND_FROM_SERVER = false;
+            if (Utility.CheckIfProcessIsRunning("OUTLOOK"))
             {
-                procCount++;
+                SEND_FROM_SERVER = true;
             }
-            if (procCount > 0)
+            string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+            frmApplicationApprovalController approval = new frmApplicationApprovalController();
+            DataSet ds = approval.Disapprove(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), SEND_FROM_SERVER, List);
+            if (ds.Tables.Contains("LISTING"))
             {
-                //outlook is open
+                dgvList.DataSource = ds.Tables["LISTING"];
+            }
+
+            if (!SEND_FROM_SERVER)
+            {
+                #region Open Outlook mail Client
+                Microsoft.Office.Interop.Outlook.Application outlookApp = new Microsoft.Office.Interop.Outlook.Application();
+
+                MailItem mailItem = (MailItem)outlookApp.CreateItem(OlItemType.olMailItem);
+
+                mailItem.Subject = Utility.GetParameterByName("SubjectString", ds.Tables["MAIL"]);
+                mailItem.To = Utility.GetParameterByName("SendMail", ds.Tables["MAIL"]);
+                mailItem.Body = Utility.GetParameterByName("TemplateString", ds.Tables["MAIL"]);
+                mailItem.CC = Utility.GetParameterByName("EmailAddressCC", ds.Tables["MAIL"]); 
+
+                mailItem.Importance = Microsoft.Office.Interop.Outlook.OlImportance.olImportanceHigh;
+
+                mailItem.Display(true);
+                #endregion
+            }
+        }
+
+        private void BtnApprove_Click(object sender, EventArgs e)
+        {
+            string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+            frmApplicationApprovalController approval = new frmApplicationApprovalController();
+            DataSet ds = approval.Approve(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
+            if (ds.Tables.Contains("LISTING"))
+            {
+                dgvList.DataSource = ds.Tables["LISTING"];
             }
         }
     }
