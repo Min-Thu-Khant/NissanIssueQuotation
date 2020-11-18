@@ -47,7 +47,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region Disapprove
-        public DataSet Disapprove(string COMPANY_NO_BOX,string REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, bool SEND_FROM_SERVER, string LIST)
+        public DataSet Disapprove(string COMPANY_NO_BOX,string REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
         {
 
             string url = Properties.Settings.Default.ApplicationApproval_Disapprove;
@@ -59,7 +59,6 @@ namespace AmigoPaperWorkProcessSystem.Controllers
                 CHANGED_ITEMS = CHANGED_ITEMS,
                 SYSTEM_EFFECTIVE_DATE = SYSTEM_EFFECTIVE_DATE,
                 SYSTEM_REGIST_DEADLINE = SYSTEM_REGIST_DEADLINE,
-                SEND_FROM_SERVER = SEND_FROM_SERVER,
                 LIST = LIST
             });
 
@@ -68,7 +67,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region ApproveCancel
-        public DataSet ApproveCancel(string COMPANY_NO_BOX,string LIST)
+        public DataSet ApproveCancel(string COMPANY_NO_BOX, string REQ_SEQ, string LIST)
         {
 
             string url = Properties.Settings.Default.ApplicationApproval_ApproveCancel;
@@ -76,6 +75,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
             string json = JsonConvert.SerializeObject(new
             {
                 COMPANY_NO_BOX = COMPANY_NO_BOX,
+                REQ_SEQ = REQ_SEQ,
                 LIST = LIST
             });
 

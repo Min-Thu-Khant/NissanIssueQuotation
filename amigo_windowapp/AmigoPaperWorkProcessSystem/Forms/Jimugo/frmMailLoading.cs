@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AmigoPaperWorkProcessSystem.Core;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,11 @@ namespace AmigoPaperWorkProcessSystem.Jimugo
         private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void FrmMailLoading_Load(object sender, EventArgs e)
+        {
+            lblMailMsg.Text = JimugoMessages.I000ZZ020;
         }
     }
 }

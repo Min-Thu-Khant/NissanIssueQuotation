@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.metroProgressSpinner1 = new MetroFramework.Controls.MetroProgressSpinner();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMailMsg = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
@@ -46,14 +46,14 @@
             this.metroProgressSpinner1.UseSelectable = true;
             this.metroProgressSpinner1.Value = 35;
             // 
-            // label1
+            // lblMailMsg
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(65, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "メール送信中です。\r\n";
+            this.lblMailMsg.AutoSize = true;
+            this.lblMailMsg.Location = new System.Drawing.Point(65, 20);
+            this.lblMailMsg.Name = "lblMailMsg";
+            this.lblMailMsg.Size = new System.Drawing.Size(99, 13);
+            this.lblMailMsg.TabIndex = 1;
+            this.lblMailMsg.Text = "メール送信中です。\r\n";
             // 
             // btnClose
             // 
@@ -82,13 +82,14 @@
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(248, 92);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblMailMsg);
             this.Controls.Add(this.metroProgressSpinner1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMailLoading";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Load += new System.EventHandler(this.FrmMailLoading_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -98,7 +99,7 @@
         #endregion
 
         private MetroFramework.Controls.MetroProgressSpinner metroProgressSpinner1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblMailMsg;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel panel1;
     }
