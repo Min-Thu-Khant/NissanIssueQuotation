@@ -22,8 +22,8 @@ namespace AmigoProcessManagement.Jimugo
 
         #region getMonthlySaleAggregationList
         [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void getMonthlySaleAggregationList(string strDate)
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public void getMonthlySaleAggregationList(string YEAR_MONTH)
         {
             //get Authorization header
             HttpContext httpContext = HttpContext.Current;
@@ -42,7 +42,7 @@ namespace AmigoProcessManagement.Jimugo
             else
             {
                 Controller.ControllerMonthlySaleAggregation regList = new Controller.ControllerMonthlySaleAggregation();
-                MetaResponse response = regList.getMonthlySaleAggregationList(strDate);
+                MetaResponse response = regList.getMonthlySaleAggregationList(YEAR_MONTH);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();
