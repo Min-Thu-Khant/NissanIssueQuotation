@@ -12,12 +12,12 @@ Amigo利用申請システムでは、セキュリティの関係より２段階
 お手数ですが、Aventailのユーザー情報でログイン後、Amigo利用申請システムアカウント情報でログインお願いします。
 
 ○Aventailのユーザー情報
-		ユーザー名  ：${aventailUserName}
-		パスワード   ：${aventailPassword}
+		ユーザー名    ：${aventailUserName}
+		パスワード    ：${aventailPassword}
 
 ○Amigo利用申請システムアカウント情報
 		会社番号＋BOX ：${companyNoBox}
-		パスワード          ：${password}
+		パスワード    ：${password}
 
 本件についての操作方法・技術的問い合わせは、Amigoサービスデスク迄お願いします。
 

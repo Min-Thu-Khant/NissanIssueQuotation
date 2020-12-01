@@ -24,15 +24,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             new Validate{ Name = "colSPECIAL_NOTES_2", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50},
             new Validate{ Name = "colSPECIAL_NOTES_3", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50},
             new Validate{ Name = "colSPECIAL_NOTES_4", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50},
-            new Validate{ Name = "colNCS_CUSTOMER_CODE", Type = Utility.DataType.FULL_WIDTH, Edit=true, Require=false, Max=4 },
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_1", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 10},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_1", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 48},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_2", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 10},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_2", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 48},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_3", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 10},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_3", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 48},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_4", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 10},
-            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_4", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 48},
+            new Validate{ Name = "colNCS_CUSTOMER_CODE", Type = Utility.DataType.FULL_WIDTH, Edit=true, Require=false, Max=6 },
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_1", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 48},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_1", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 10},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_2", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 48},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_2", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 10},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_3", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 48},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_3", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 10},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NAME_4", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 48},
+            new Validate{ Name = "colBILL_BANK_ACCOUNT_NUMBER_4", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 10},
             new Validate{ Name = "colBILL_BILLING_INTERVAL", Type = Utility.DataType.TEXT, Edit = true, Require = false, Max = 255},
             new Validate{ Name = "colBILL_DEPOSIT_RULES", Type = Utility.DataType.TEXT, Edit = true, Require = false, Max = 255},
             new Validate{ Name = "colBILL_TRANSFER_FEE", Type = Utility.DataType.MINIMUM_TRANSFER_FEE, Edit = true, Require = false, Max = 255},
@@ -250,12 +250,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             //set title
             lblMenu.Text = programName;
+            this.Text = "[" + programID + "] " + programName;
 
             //utility
             uIUtility = new UIUtility(dgvList, null, null, Modifiable, dummyColumns);
             uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
-            SetDefaultColumnWidths(); //adjust checkbox sizes
-            uIUtility.DummyTable();// add dummy table to merge columns
+            uIUtility.ResetCheckBoxSize();//adjust checkbox sizes
+            uIUtility.DummyTable(55);// add dummy table to merge columns
             uIUtility.DisableAutoSort();//disable autosort
             PopulateDropdowns();
 
@@ -278,6 +279,25 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             this.dgvList.ColumnHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.GridHeaderColor;
             this.dgvList.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.GridHeaderFontColor;
+
+            this.dgvList.Columns["colMAIL_ADDRESS"].HeaderText = "サービスデスク契約者\r\nメールアドレス";
+            this.dgvList.Columns["colMAIL_ADDRESS"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["colNCS_CUSTOMER_CODE"].HeaderText = "経理取引先\r\nコード";
+            this.dgvList.Columns["colNCS_CUSTOMER_CODE"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["colBILL_BILLING_INTERVAL"].HeaderText = "請求先\r\n年額月額区分";
+            this.dgvList.Columns["colBILL_BILLING_INTERVAL"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["colBILL_DEPOSIT_RULES"].HeaderText = "請求先\r\n入金時期";
+            this.dgvList.Columns["colBILL_DEPOSIT_RULES"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["colBILL_TRANSFER_FEE"].HeaderText = "請求先\r\n銀行振込手数料";
+            this.dgvList.Columns["colBILL_TRANSFER_FEE"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["colBILL_EXPENSES"].HeaderText = "請求先\r\n諸経費";
+            this.dgvList.Columns["colBILL_EXPENSES"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
             this.WindowState = FormWindowState.Maximized;
         }
         #endregion
@@ -295,7 +315,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             if (txtCompanyName.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
+                if (!CheckUtility.SearchConditionCheck(this, "会社名", txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
                 {
                     return;
                 }
@@ -303,7 +323,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtCompanyNameReading.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, txtCompanyNameReading.Text, false, Utility.DataType.FULL_WIDTH, 60, 0))
+                if (!CheckUtility.SearchConditionCheck(this, "会社名フリガナ", txtCompanyNameReading.Text, false, Utility.DataType.FULL_WIDTH, 60, 0))
                 {
                     return;
                 }
@@ -311,7 +331,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtCompanyNoBox.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, txtCompanyNoBox.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 60, 0))
+                if (!CheckUtility.SearchConditionCheck(this, "会社番号＋BOX", txtCompanyNoBox.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 60, 0))
                 {
                     return;
                 }
@@ -319,7 +339,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtEDIAccount.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, 4, 0))
+                if (!CheckUtility.SearchConditionCheck(this, "EDIアカウント", txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, 4, 0))
                 {
                     return;
                 }
@@ -327,7 +347,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtMailAddress.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, txtMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
+                if (!CheckUtility.SearchConditionCheck(this, "メールアドレス", txtMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
                 {
                     return;
                 }
@@ -348,8 +368,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 if (uIUtility.checkSelectedRow())
                 {
-                    var confirmResult = MetroMessageBox.Show(this, "\n" + JimugoMessages.I000ZZ012, "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-                    if (confirmResult == DialogResult.OK)
+
+                    if (!uIUtility.IsInModifyMode())
                     {
                         BindGrid();
                     }
@@ -683,27 +703,31 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             //get column values where MK not null or empty
             DataTable dt = uIUtility.SubmitChanges();
 
-            //send to web service
-            frmCustomerMasterMaintenanceController oController = new frmCustomerMasterMaintenanceController();
-            try
+            if (dt.Rows.Count > 0)
             {
-                DataTable result = oController.Submit(dt, out uIUtility.MetaData);
 
-                //update data grid view
-                uIUtility.UpdateReturnedresults(result);
-            }
-            catch (System.TimeoutException)
-            {
-                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (System.Net.WebException)
-            {
-                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                Utility.WriteErrorLog(ex.Message, ex, false);
-                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //send to web service
+                frmCustomerMasterMaintenanceController oController = new frmCustomerMasterMaintenanceController();
+                try
+                {
+                    DataTable result = oController.Submit(dt, out uIUtility.MetaData);
+
+                    //update data grid view
+                    uIUtility.UpdateReturnedresults(result);
+                }
+                catch (System.TimeoutException)
+                {
+                    MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (System.Net.WebException)
+                {
+                    MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    Utility.WriteErrorLog(ex.Message, ex, false);
+                    MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         #endregion
@@ -777,13 +801,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             txtEDIAccount.Text = "";
             txtMailAddress.Text = "";
             cboLimit.SelectedIndex = 0;
-            uIUtility.ClearDataGrid();
-            lblTotalRecords.Text = "";
-            lblTotalPages.Text = "0";
-            lblcurrentPage.Text = "0";
 
-            cboLimit.SelectedIndex = 0;
-            uIUtility.ClearDataGrid();
         }
         #endregion
 
@@ -834,14 +852,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
 
             dgvList.Columns["colNCS_CUSTOMER_CODE"].Width = 90;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_1"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_1"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_2"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_2"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_3"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_3"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_4"].Width = 120;
-            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_4"].Width = 120;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_1"].Width = 100;  
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_1"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_2"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_2"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_3"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_3"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NAME_4"].Width = 100;
+            dgvList.Columns["colBILL_BANK_ACCOUNT_NUMBER_4"].Width = 100;
 
             dgvList.Columns["colBILL_BILLING_INTERVAL"].Width = 100;
             dgvList.Columns["colBILL_DEPOSIT_RULES"].Width = 110;
@@ -849,14 +867,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             dgvList.Columns["colBILL_EXPENSES"].Width = 90;
 
             dgvList.Columns["colPLAN_AMIGO_CAI"].Width = 90;
-            dgvList.Columns["colPLAN_AMIGO_BIZ"].Width = 90;//
+            dgvList.Columns["colPLAN_AMIGO_BIZ"].Width = 90;
 
             dgvList.Columns["colBOX_SIZE"].Width = 90;
 
             dgvList.Columns["colINITIAL_COST"].Width = 90;
             dgvList.Columns["colMONTHLY_COST"].Width = 90;
             dgvList.Columns["colYEAR_COST"].Width = 90;
-            dgvList.Columns["colBREAK_DOWN"].Width = 50;//
+            dgvList.Columns["colBREAK_DOWN"].Width = 50;
 
             dgvList.Columns["colCONTRACT_PLAN"].Width = 115;
 
@@ -865,7 +883,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             dgvList.Columns["colOP_BOX_SERVER"].Width = 120;
             dgvList.Columns["colOP_BOX_BROWSER"].Width = 120;
             dgvList.Columns["colOP_FLAT"].Width = 120;
-            dgvList.Columns["colOP_CLIENT"].Width = 120;//
+            dgvList.Columns["colOP_CLIENT"].Width = 120;
 
             dgvList.Columns["colOP_BASIC_SERVICE"].Width = 120;
             dgvList.Columns["colOP_ADD_SERVICE"].Width = 120;
@@ -873,7 +891,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             dgvList.Columns["colSOCIOS_USER_FLG"].Width = 90;
 
             dgvList.Columns["colCOMPANY_NAME_CHANGED_DATE"].Width = 100;
-            dgvList.Columns["colPREVIOUS_COMPANY_NAME"].Width = 150;//
+            dgvList.Columns["colPREVIOUS_COMPANY_NAME"].Width = 150;
 
             dgvList.Columns["colNML_CODE_NISSAN"].Width = 100;
             dgvList.Columns["colNML_CODE_NS"].Width = 100;

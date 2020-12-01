@@ -134,7 +134,7 @@ namespace AmigoProcessManagement.Controller
                 }
                 else
                 {
-                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ028, oUSAGE_CHARGE_MASTER.CONTRACT_CODE.Trim() + " と " + Convert.ToDateTime(oUSAGE_CHARGE_MASTER.ADOPTION_DATE).ToString("yyyy/MM/dd")));
+                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ028, "契約コードと採用日の組み合わせ"));
                     return;
                 }
 

@@ -53,7 +53,7 @@ namespace AmigoProcessManagement.Jimugo
         }
         #endregion
 
-        #region Search
+        #region GetSubProgramLists
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void GetSubProgramLists()

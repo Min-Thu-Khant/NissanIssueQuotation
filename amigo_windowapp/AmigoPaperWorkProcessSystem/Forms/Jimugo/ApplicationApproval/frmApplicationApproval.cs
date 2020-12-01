@@ -107,6 +107,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "UPDATED_AT_RAW",
             "REQ_SEQ"
         };
+
         private string[] alignBottoms = {
                "NML_CODE_NISSAN",
                "NML_CODE_NS",
@@ -152,8 +153,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 "MONTHLY_COST",
                 "YEAR_COST",
                 "BREAKDOWN",
-                "PLAN_AMIGO_CAI",
-                "PLAN_AMIGO_BIZ",
                 "OP_AMIGO_CAI",
                 "OP_AMIGO_BIZ",
                 "OP_BOX_SERVER",
@@ -163,6 +162,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 "OP_BASIC_SERVICE",
                 "OP_ADD_SERVICE"
         };
+
         private Dictionary<string, string> OperationItems = new Dictionary<string,string> {
             { "COMPANY_NAME", "会社名" },
             { "NML_CODE_NISSAN", "サプライヤコード(日産)" },
@@ -194,6 +194,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         public string COMPANY_NO_BOX  { get; set; }
         public string _REQ_SEQ { get; set; }
         private string _req_status;
+        public DialogResult Dialog { get; set; }
+        public string UPDATED_AT { get; set; }
+        public string UPDATED_AT_RAW { get; set; }
+        public string REQ_STATUS_RAW { get; set; }
+        public string REQ_TYPE_RAW { get; set; }
         public string _REQ_STATUS
         {
             get { return _req_status; }
@@ -252,19 +257,18 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         public frmApplicationApproval()
         {
             InitializeComponent();
+            Dialog = DialogResult.Cancel;
         }
 
-        public frmApplicationApproval(string PROGRAM_ID, string PROGRAM_NAME, string COMPANY_NO_BOX, string REQ_SEQ, string REQ_TYPE):this()
+        public frmApplicationApproval(string PROGRAM_ID, string PROGRAM_NAME, string COMPANY_NO_BOX, string REQ_SEQ, string REQ_TYPE, string REQ_STATUS):this()
         {
             this.ProgramID = PROGRAM_ID;
             this.ProgramName = PROGRAM_NAME;
-            //this.COMPANY_NO_BOX = COMPANY_NO_BOX;
-            //this._REQ_SEQ = REQ_SEQ;
-            //this.APPLICATION_SELECTION = APPLICATION_SELECTION;
-            this.COMPANY_NO_BOX = "AJ-0001-01";
-            this._REQ_SEQ = "1";
-            this._REQ_STATUS = "申請中";
-            this._REQ_TYPE = "解約";
+            this.COMPANY_NO_BOX = COMPANY_NO_BOX;
+            this._REQ_SEQ = REQ_SEQ;
+            this._REQ_STATUS = REQ_STATUS;
+            this._REQ_TYPE = REQ_TYPE;
+            this.REQ_TYPE_RAW = REQ_TYPE;
 
         }
         #endregion
@@ -325,7 +329,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
                     if (dgvList.Columns[i].Name == "BREAKDOWN")
                     {
-                        if (result.Tables["BREAKDOWN_CURRENT"].Rows.Count != result.Tables["BREAKDOWN_CURRENT"].Rows.Count)
+                        if (result.Tables["BREAKDOWN_CURRENT"].Rows.Count != result.Tables["BREAKDOWN_CHANGE"].Rows.Count)
                         {
                             dgvList.Rows[1].Cells[i].Style.BackColor = Color.Pink;
                         }
@@ -333,7 +337,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
                     if (dgvList.Columns[i].Name == "ERROR_NOTIFICATION")
                     {
-                        if (result.Tables["ERROR_NOTI_CURRENT"].Rows.Count != result.Tables["ERROR_NOTI_CURRENT"].Rows.Count)
+                        if (result.Tables["ERROR_NOTI_CURRENT"].Rows.Count != result.Tables["ERROR_NOTI_CHANGE"].Rows.Count)
                         {
                             dgvList.Rows[1].Cells[i].Style.BackColor = Color.Pink;
                             txtItemChanged.Text = txtItemChanged.Text + COMMA_VALUE + "エラー通知";
@@ -348,6 +352,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region FormLoad
         private void FrmApplicationApproval_Load(object sender, EventArgs e)
         {
+            //set title
+            lblMenu.Text = ProgramName;
+            this.Text = "[" + ProgramID + "] " + ProgramName;
+
             //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
             this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
@@ -356,12 +364,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.dgvList.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.GridHeaderFontColor;
             this.Font = Properties.Settings.Default.jimugoFont;
 
+            this.dgvList.Columns["BILL_METHOD3"].HeaderText = "WEB\r\nﾀﾞｳﾝﾛｰﾄﾞ";
+            this.dgvList.Columns["BILL_METHOD3"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+
+            this.dgvList.Columns["BOX_SIZE"].HeaderText = "BOXサイズ\r\n(GB)";
+            this.dgvList.Columns["BOX_SIZE"].DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            
+
             //start parameters
             txtCompanyNoBox.Text = this.COMPANY_NO_BOX;
-
-            //set title
-            lblMenu.Text = ProgramName;
-
             
 
             //UI
@@ -638,32 +649,84 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region ApproveCancel
         private void BtnApproveCancel_Click(object sender, EventArgs e)
         {
-            if (_REQ_STATUS == "2")
+            try
             {
-                MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ036, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                string approvecancelstatus = "申請中";
+                if (_REQ_STATUS != "2")
+                {
+                    MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ036, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+                    frmApplicationApprovalController approval = new frmApplicationApprovalController();
+                    DataSet ds = approval.ApproveCancel(txtCompanyNoBox.Text.Trim(), _REQ_SEQ, List);
+                    if (ds.Tables.Contains("LISTING"))
+                    {
+                        dgvList.DataSource = ds.Tables["LISTING"];
+                        ChangeStatus(approvecancelstatus);
+                    }
+                }
+            }
+            catch (System.TimeoutException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        #endregion
+
+        #region ChangeStatus
+        private void ChangeStatus(string value)
+        {
+            if (dgvList.Rows.Count > 1)
+            {
+                ChangeStatus(value, 1);
             }
             else
             {
-                string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
-                frmApplicationApprovalController approval = new frmApplicationApprovalController();
-                DataSet ds = approval.ApproveCancel(txtCompanyNoBox.Text.Trim(), _REQ_SEQ, List);
-                if (ds.Tables.Contains("LISTING"))
-                {
-                    dgvList.DataSource = ds.Tables["LISTING"];
-                }
+                ChangeStatus(value, 0);
+            }
+        }
+        private void ChangeStatus(string value, int index)
+        {
+            if (dgvList.Rows[index].Cells["UPDATE_MESSAGE"].Value.ToString().Contains(String.Format(JimugoMessages.I000ZZ016, "")))
+            {
+                this._REQ_STATUS = value;
+                this.REQ_STATUS_RAW = value;
+                dgvList.Rows[index].Cells["REQ_STATUS"].Value = value;
+                UPDATED_AT = Convert.ToString(dgvList.Rows[index].Cells["colUPDATED_AT"].Value);
+                UPDATED_AT_RAW = Convert.ToString(dgvList.Rows[index].Cells["colUPDATED_AT_RAW"].Value);
+                Dialog = DialogResult.OK;
+            }
+            else
+            {
+                Dialog = DialogResult.Cancel;
             }
         }
         #endregion
 
         #region ApproveDisapproveCheck
-        private bool ApproveDisapproveCheck()
+        private bool ApproveDisapproveCheck(bool approve)
         {
-            //if (_REQ_STATUS != "1")
-            //{
-            //    MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ035, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    return false;
-            //}
-                
+            if (approve)
+            {
+                if (_REQ_STATUS !="1")
+                {
+                    MetroMessageBox.Show(this, "\n" + JimugoMessages.E000ZZ035, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+
             if (dgvList.Rows[0].Cells["MAIL_SENDING_TARGET_FLG"].Value.ToString() =="*")
             {
                 if (string.IsNullOrEmpty(txtRegDeadline.Text.Trim()) || string.IsNullOrEmpty(txtSystemEffectiveDate.Text.Trim())) //if both dates are empty
@@ -673,11 +736,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 }
                 else
                 {
-                    if (!CheckUtility.SearchConditionCheck(this, txtSystemEffectiveDate.Text.Trim(), true, Utility.DataType.DATE, -1, -1)) {
+                    if (!CheckUtility.SearchConditionCheck(this, "システム有効日", txtSystemEffectiveDate.Text.Trim(), true, Utility.DataType.DATE, -1, -1)) {
                         return false;
                     }
 
-                    if (!CheckUtility.SearchConditionCheck(this, txtRegDeadline.Text.Trim(), true, Utility.DataType.TIMESTAMP, -1, -1))
+                    if (!CheckUtility.SearchConditionCheck(this, "システム登録期限", txtRegDeadline.Text.Trim(), true, Utility.DataType.TIMESTAMP, -1, -1))
                     {
                         return false;
                     }
@@ -690,19 +753,38 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region DisApprove
         private void BtnDisApprove_Click(object sender, EventArgs e)
         {
-            if (ApproveDisapproveCheck())
+            try
             {
-               
-                string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
-                frmApplicationApprovalController approval = new frmApplicationApprovalController();
-                DataSet ds = approval.Disapprove(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
-                if (ds.Tables.Contains("LISTING"))
+                string disapprovestatus = "否認";
+                if (ApproveDisapproveCheck(false))
                 {
-                    dgvList.DataSource = ds.Tables["LISTING"];
+
+                    string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+                    frmApplicationApprovalController approval = new frmApplicationApprovalController();
+                    DataSet ds = approval.Disapprove(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
+                    if (ds.Tables.Contains("LISTING"))
+                    {
+                        dgvList.DataSource = ds.Tables["LISTING"];
+                        ChangeStatus(disapprovestatus);
+                        OpenOutlook(ds.Tables["MAIL"]);
+                    }
+
                 }
-                OpenOutlook(ds.Tables["MAIL"]);
-    
             }
+            catch (System.TimeoutException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
         #endregion
 
@@ -729,29 +811,48 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Approve
         private void BtnApprove_Click(object sender, EventArgs e)
         {
-            if (ApproveDisapproveCheck())
+            try
             {
-                var confirmResult = MetroMessageBox.Show(this, "\n" + JimugoMessages.I000ZZ019, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (confirmResult == DialogResult.Yes)
+                string approvestatus = "承認済";
+                if (ApproveDisapproveCheck(true))
                 {
-                    //Show mail progress message
-                    Thread mailthread = new Thread(new ThreadStart(ShowMailLoading));
-                    mailthread.Start();
-
-                    string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
-                    frmApplicationApprovalController approval = new frmApplicationApprovalController();
-                    DataSet ds = approval.Approve(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
-                    if (ds.Tables.Contains("LISTING"))
+                    var confirmResult = MetroMessageBox.Show(this, "\n" + JimugoMessages.I000ZZ019, "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirmResult == DialogResult.Yes)
                     {
-                        dgvList.DataSource = ds.Tables["LISTING"];
-                    }
+                        //Show mail progress message
+                        Thread mailthread = new Thread(new ThreadStart(ShowMailLoading));
+                        mailthread.Start();
 
-                    if (dgvList.Rows[0].Cells["MAIL_SENDING_TARGET_FLG"].Value.ToString() == "*" && dgvList.Rows[0].Cells["MAIL_DESTINATION"].Value.ToString() == "2")
-                    {
-                        OpenOutlook(ds.Tables["MAIL"]);
+                        string List = Utility.DtToJSon(uIUtility.dtList, "LISTING");
+                        frmApplicationApprovalController approval = new frmApplicationApprovalController();
+                        DataSet ds = approval.Approve(txtCompanyNoBox.Text.Trim(), _REQ_TYPE, REQ_TYPE_RAW, txtItemChanged.Text.Trim(), txtSystemEffectiveDate.Text.Trim(), txtRegDeadline.Text.Trim(), List);
+                        if (ds.Tables.Contains("LISTING"))
+                        {
+                            dgvList.DataSource = ds.Tables["LISTING"];
+                            ChangeStatus(approvestatus);
+                        }
+
+                        if (dgvList.Rows[0].Cells["MAIL_SENDING_TARGET_FLG"].Value.ToString() == "*" && dgvList.Rows[0].Cells["MAIL_DESTINATION"].Value.ToString() == "2")
+                        {
+                            OpenOutlook(ds.Tables["MAIL"]);
+                        }
+                        mailthread.Abort();
+
                     }
-                    mailthread.Abort();
                 }
+            }
+            catch (System.TimeoutException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.ServerTimeOut, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Net.WebException)
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.General.NoConnection, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (System.Exception ex)
+            {
+                Utility.WriteErrorLog(ex.Message, ex, false);
+                MetroMessageBox.Show(this, "\n" + Messages.General.ThereWasAnError, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -762,5 +863,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             System.Windows.Forms.Application.Run(new frmMailLoading());
         }
         #endregion
+
+        private void FrmApplicationApproval_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = Dialog;
+        }
     }
 }

@@ -146,7 +146,7 @@ namespace AmigoProcessManagement.Controller
                     }
                 }
                 response.Status = 1;
-                response.Data = Utility.Utility_Component.DtToJSon(dgvList, "CompanyCodeList Update"); ;
+                response.Data = Utility.Utility_Component.DtToJSon(dgvList, "Application List Update"); ;
                 timer.Stop();
                 response.Meta.Duration = timer.Elapsed.TotalSeconds;
                 return response;

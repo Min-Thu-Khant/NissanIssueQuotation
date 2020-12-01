@@ -166,7 +166,13 @@ namespace DAL_AmigoProcess.DAL
                                         CUSTOMER_MASTER_VIEW.MONTHLY_COST - CUSTOMER_MASTER_VIEW.MONTHLY_COST_DISCOUNTS AS MONTHLY_COST,
                                         CUSTOMER_MASTER_VIEW.YEAR_COST - CUSTOMER_MASTER_VIEW.YEAR_COST_DISCOUNTS AS YEAR_COST,
 										'*' as BREAK_DOWN,
-                                        CUSTOMER_MASTER_VIEW.CONTRACT_PLAN,
+                                        CASE TRIM(CUSTOMER_MASTER_VIEW.CONTRACT_PLAN)
+										WHEN 'SERVER' THEN N'サーバー'
+										WHEN 'SERVERRIGHT' THEN N'サーバーライト'
+										WHEN 'BROWSERAUTO' THEN N'ブラウザ自動'
+										WHEN 'BROWSER' THEN N'ブラウザ'
+										WHEN 'PRODUCT' THEN N'生産情報閲覧'
+										END CONTRACT_PLAN,
                                         CUSTOMER_MASTER_VIEW.OP_AMIGO_CAI,
                                         CUSTOMER_MASTER_VIEW.OP_AMIGO_BIZ,
                                         CUSTOMER_MASTER_VIEW.OP_BOX_SERVER,
@@ -206,6 +212,7 @@ namespace DAL_AmigoProcess.DAL
                                         REQ_ADDRESS.MAIL_ADDRESS
                                         FROM REQ_ADDRESS
                                         WHERE REQ_ADDRESS.COMPANY_NO_BOX = REQ1.COMPANY_NO_BOX
+                                        AND TYPE = 3
                                         FOR XML PATH('')), 1, 2, '') as CONSTRACTOR_SERVICE_DESK_MAIL
                                         FROM REQ_ADDRESS REQ1
                                         GROUP BY COMPANY_NO_BOX, REQ_SEQ, TYPE) REQ_ADDRESS1
@@ -218,6 +225,7 @@ namespace DAL_AmigoProcess.DAL
                                         REQ_ADDRESS.MAIL_ADDRESS
                                         FROM REQ_ADDRESS
                                         WHERE REQ_ADDRESS.COMPANY_NO_BOX = REQ.COMPANY_NO_BOX
+                                        AND TYPE = 4
                                         FOR XML PATH('')), 1, 2, '') as SERVICE_ERROR_NOTIFICATION_MAIL
                                         FROM REQ_ADDRESS REQ
                                         GROUP BY COMPANY_NO_BOX, REQ_SEQ, TYPE) REQ_ADDRESS2
@@ -268,7 +276,7 @@ namespace DAL_AmigoProcess.DAL
                                             WHERE COMPANY_NO_BOX= @COMPANY_NO_BOX
                                             AND TRANSACTION_TYPE= @TRANSACTION_TYPE
                                             AND EFFECTIVE_DATE <= @EFFECTIVE_DATE
-                                            ORDER BY EFFECTIVE_DATE DESC";
+                                            ORDER BY EFFECTIVE_DATE, REQ_SEQ DESC";
 
         string strInsertCustomerMaster = @"INSERT INTO [CUSTOMER_MASTER]
                                            ([COMPANY_NO_BOX]
@@ -377,8 +385,9 @@ namespace DAL_AmigoProcess.DAL
                                                 WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
                                                 AND TRANSACTION_TYPE = @TRANSACTION_TYPE
                                                 AND FORMAT(EFFECTIVE_DATE,'yyyy/MM/dd') = @EFFECTIVE_DATE
+                                                AND REQ_SEQ = @REQ_SEQ
                                                 AND UPDATED_AT @UPDATED_AT";
-        string strCustomerMasterUpdate = @"UPDATE [dbo].[CUSTOMER_MASTER]
+        string strCustomerMasterUpdate = @"UPDATE [CUSTOMER_MASTER]
                                                     SET [EFFECTIVE_DATE] = @EFFECTIVE_DATE,
                                                     [CONTRACT_DATE] = @CONTRACT_DATE,
                                                     [SPECIAL_NOTES_1]= @SPECIAL_NOTES_1,
@@ -398,12 +407,8 @@ namespace DAL_AmigoProcess.DAL
                                                     WHERE [COMPANY_NO_BOX] = @COMPANY_NO_BOX
                                                     AND [TRANSACTION_TYPE] = @TRANSACTION_TYPE
                                                     AND [EFFECTIVE_DATE] = @ORG_EFFECTIVE_DATE
+                                                    AND [REQ_SEQ] = @REQ_SEQ
 							                        AND [UPDATED_AT] @UPDATED_AT";
-
-        #region ApplicationApproval
-
-        #endregion
-
         #region IsAlreadyUpdate
         public bool IsAlreadyUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out string strMsg)
         {
@@ -412,9 +417,11 @@ namespace DAL_AmigoProcess.DAL
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strAlreadyUpdate);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oCUSTOMER_MASTER.COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", oCUSTOMER_MASTER.TRANSACTION_TYPE));
-            string dat = Convert.ToDateTime(oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE).ToString("yyyy/MM/dd");
+            string date = Convert.ToDateTime(oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE).ToString("yyyy/MM/dd");
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE != null ? Convert.ToDateTime(oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE).ToString("yyyy/MM/dd") : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oCUSTOMER_MASTER.UPDATED_AT_RAW != null ? oCUSTOMER_MASTER.UPDATED_AT_RAW : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oCUSTOMER_MASTER.REQ_SEQ.ToString() != null ? oCUSTOMER_MASTER.REQ_SEQ : (object)DBNull.Value));
+
             oMaster.ExcuteQuery(4, out strMsg);
 
             int count;
@@ -567,7 +574,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@BILL_EXPENSES", oCUSTOMER_MASTER.BILL_EXPENSES!= null ? oCUSTOMER_MASTER.BILL_EXPENSES : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NAME_CHANGED_DATE", oCUSTOMER_MASTER.COMPANY_NAME_CHANGED_DATE != null ? oCUSTOMER_MASTER.COMPANY_NAME_CHANGED_DATE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PREVIOUS_COMPANY_NAME", oCUSTOMER_MASTER.PREVIOUS_COMPANY_NAME != null ? oCUSTOMER_MASTER.PREVIOUS_COMPANY_NAME : (object)DBNull.Value));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@OBOEGAKI_DATE", oCUSTOMER_MASTER.OBOEGAKI_DATE != null ? oCUSTOMER_MASTER.UPDATED_BY : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@OBOEGAKI_DATE", oCUSTOMER_MASTER.OBOEGAKI_DATE != null ? oCUSTOMER_MASTER.OBOEGAKI_DATE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
 
@@ -646,36 +653,6 @@ namespace DAL_AmigoProcess.DAL
         }
         #endregion
 
-        #region IsAlreadyExist
-        public bool IsAlreadyExist(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out string strMsg)
-        {
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strAlreadyUsed);
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oCUSTOMER_MASTER.COMPANY_NO_BOX));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", oCUSTOMER_MASTER.TRANSACTION_TYPE));
-            string dat = Convert.ToDateTime(oCUSTOMER_MASTER.EFFECTIVE_DATE).ToString("yyyy/MM/dd");
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", oCUSTOMER_MASTER.EFFECTIVE_DATE != null ? Convert.ToDateTime(oCUSTOMER_MASTER.EFFECTIVE_DATE).ToString("yyyy/MM/dd") : (object)DBNull.Value));
-            oMaster.ExcuteQuery(4, out strMsg);
-
-            int count;
-            try
-            {
-                count = int.Parse(oMaster.dtExcuted.Rows[0][0].ToString());
-            }
-            catch (Exception)
-            {
-                count = 0;
-            }
-
-            if (count <= 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        #endregion
 
         #region CustomerMasterMaintenanceUpdate
         public void CustomerMasterUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, string CURRENT_DATETIME, string CURRENT_USER, out String strMsg)
@@ -686,7 +663,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oCUSTOMER_MASTER.COMPANY_NO_BOX != null ? oCUSTOMER_MASTER.COMPANY_NO_BOX : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", oCUSTOMER_MASTER.TRANSACTION_TYPE.ToString() != null ? oCUSTOMER_MASTER.TRANSACTION_TYPE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", oCUSTOMER_MASTER.EFFECTIVE_DATE != null ? oCUSTOMER_MASTER.EFFECTIVE_DATE : (object)DBNull.Value));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ORG_EFFECTIVE_DATE", oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE != null ? oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ORG_EFFECTIVE_DATE", oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE != null ? Convert.ToDateTime(oCUSTOMER_MASTER.ORG_EFFECTIVE_DATE).ToString("yyyy/MM/dd") : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CONTRACT_DATE", oCUSTOMER_MASTER.CONTRACT_DATE != null ? oCUSTOMER_MASTER.CONTRACT_DATE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SPECIAL_NOTES_1", oCUSTOMER_MASTER.SPECIAL_NOTES_1 != null ? oCUSTOMER_MASTER.SPECIAL_NOTES_1 : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SPECIAL_NOTES_2", oCUSTOMER_MASTER.SPECIAL_NOTES_2 != null ? oCUSTOMER_MASTER.SPECIAL_NOTES_2 : (object)DBNull.Value));
@@ -703,13 +680,10 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oCUSTOMER_MASTER.UPDATED_AT_RAW != null ? oCUSTOMER_MASTER.UPDATED_AT_RAW : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oCUSTOMER_MASTER.REQ_SEQ.ToString() != null ? oCUSTOMER_MASTER.REQ_SEQ : (object)DBNull.Value));
 
             oMaster.ExcuteQuery(2, out strMsg);
         }
-        #endregion
-
-        #region ApplicationApproval
- 
         #endregion
     }
     #endregion

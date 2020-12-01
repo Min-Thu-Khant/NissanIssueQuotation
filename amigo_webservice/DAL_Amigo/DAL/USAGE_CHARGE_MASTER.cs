@@ -32,8 +32,8 @@ namespace DAL_AmigoProcess.DAL
                                         CONVERT(VARCHAR,CONTRACT_QTY) CONTRACT_QTY,
                                         CONTRACT_UNIT,
                                         FORMAT(ADOPTION_DATE, 'yyyy/MM/dd') AS ADOPTION_DATE,
-                                        CONVERT(VARCHAR,INITIAL_COST) INITIAL_COST,
-                                        CONVERT(VARCHAR,MONTHLY_COST) MONTHLY_COST,
+                                        INITIAL_COST,
+                                        CONVERT(int,MONTHLY_COST) MONTHLY_COST,
                                         (CASE INPUT_TYPE 
                                         WHEN '1' THEN N'選択' 
                                         WHEN '2' THEN N'数量' 

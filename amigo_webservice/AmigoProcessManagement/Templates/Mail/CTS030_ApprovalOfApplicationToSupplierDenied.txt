@@ -10,11 +10,6 @@ ${inputPerson}様
 
 
 
-
-
-
-
-
 本件についてのお問い合わせは、Amigoサービスデスク迄お願いします。
 
 Amigoサービスデスク ： amigo_servicedesk@ncs-net.co.jp

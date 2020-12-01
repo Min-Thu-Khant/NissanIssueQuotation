@@ -19,7 +19,6 @@ namespace AmigoProcessManagement.Controller
     public class ControllerRegisterCompleteNotificationSending
     {
         #region Declare
-        private string Login_ID;
         string COMPANY_NO_BOX;
         int REQ_SEQ;
         string QUOTATION_DATE;
@@ -44,6 +43,10 @@ namespace AmigoProcessManagement.Controller
         CLIENT_CERTIFICATE DAL_CLIENT_CERTIFICATE;
         REQ_ADDRESS DAL_REQ_ADDRESS;
         string con = Properties.Settings.Default.MyConnection;
+        string UPDATED_AT_DATETIME;
+        string CURRENT_DATETIME;
+        string CURRENT_USER;
+        DateTime TEMP = DateTime.Now;
         #endregion
 
         #region Constructor
@@ -57,8 +60,17 @@ namespace AmigoProcessManagement.Controller
             DAL_REQ_ADDRESS = new REQ_ADDRESS(con);
             timer = new Stopwatch();
             timer.Start();
+            //UPDATED_AT
+            UPDATED_AT_DATETIME = TEMP.ToString("yyyy/MM/dd HH:mm");
+            CURRENT_DATETIME = TEMP.ToString("yyyyMMddHHmmss");
 
         }
+
+        public ControllerRegisterCompleteNotificationSending(string authHeader) : this()
+        {
+            CURRENT_USER = Utility_Component.DecodeAuthHeader(authHeader)[0];
+        }
+
         #endregion
 
         #region GetRegisterCompleteNotificationList
@@ -104,8 +116,6 @@ namespace AmigoProcessManagement.Controller
         {
             try
             {
-                Login_ID = Utility_Component.DecodeAuthHeader(authHeader)[0] == null ? null : Utility_Component.DecodeAuthHeader(authHeader)[0];
-
                 //int status;
                 //message for pop up
                 DataTable messagecode = new DataTable();
@@ -115,20 +125,22 @@ namespace AmigoProcessManagement.Controller
                 string strMessage = "";
                 //get config object for CTS060
                 BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
-                string FY = config.getStringValue("client.certificate.FY");
 
-                int clientCertificateDiff = DAL_REQUEST_DETAIL.GetClientCertificateDiff(COMPANY_NO_BOX, REQ_SEQ, FY, out strMessage);
+                int FY = config.getIntValue("client.certificate.FY");
+
+                int clientCertificateDiff = DAL_REQUEST_DETAIL.GetClientCertificateDiff(COMPANY_NO_BOX, REQ_SEQ, FY.ToString(), out strMessage);
+
                 status = 1;
                 for(int i=0; clientCertificateDiff > i; i++)
                 {
                     if (clientCertificateDiff != 0)
                     {
                         #region SearchClientCertificateNo
-                        string clientCertificateNo = DAL_CLIENT_CERTIFICATE.GetClientCertificateNo(FY, out strMessage);
+                        string clientCertificateNo = DAL_CLIENT_CERTIFICATE.GetClientCertificateNo(FY.ToString(), out strMessage);
                         if (clientCertificateNo != null) 
                         {
                             #region UpdateWithClientCertificateNo
-                            status = UpdateWithClientCertificateNO(clientCertificateNo, COMPANY_NO_BOX, Login_ID, strMessage);
+                            status = UpdateWithClientCertificateNO(clientCertificateNo, COMPANY_NO_BOX, CURRENT_USER, strMessage);
                             #endregion
                         }
                         else
@@ -213,13 +225,12 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region SendMailCreate
-        public MetaResponse SendMailCreate(string list, string authHeader )  //add more parameter
+        public MetaResponse SendMailCreate(string list)  //add more parameter
         {
             #region Parameters
             //message for pop up
             DataTable messagecode = new DataTable();
             messagecode.Columns.Add("Error Message");
-            DataRow dr = messagecode.NewRow();
 
             DataTable dtParameter = Utility.Utility_Component.JsonToDt(list);
 
@@ -231,40 +242,38 @@ namespace AmigoProcessManagement.Controller
             COMPANY_NAME = dtParameter.Rows[0]["COMPANY_NAME"].ToString();
             EMAIL_ADDRESS = dtParameter.Rows[0]["EMAIL_ADDRESS"].ToString();
             EDI_ACCOUNT = dtParameter.Rows[0]["EDI_ACCOUNT"].ToString();
-            FILENAME = dtParameter.Rows[0]["DOWNLOAD_LINK"].ToString();
+            FILENAME = dtParameter.Rows[0]["FILENAME"].ToString();
             #endregion
             string msg = "";
 
-
-            Login_ID = Utility_Component.DecodeAuthHeader(authHeader)[0] == null ? null : Utility_Component.DecodeAuthHeader(authHeader)[0];
 
             try
             {
                 using (TransactionScope dbtnx = new TransactionScope())
                 {
-                    DateTime dtNow = DateTime.Now;
-                    string conmletion_noti_date = dtNow.ToString("yyyy/MM/dd");
-                    string update_at = dtNow.ToString("yyyyMMddHHmmss");
+                    //DateTime dtNow = DateTime.Now;
+                    //string conmletion_noti_date = dtNow.ToString("yyyy/MM/dd");
+                    //string update_at = dtNow.ToString("yyyyMMddHHmmss");
 
                     #region Update RequestDetail For CompleteNotificationSending
-                    DAL_REQUEST_DETAIL.SendMailUpdate(COMPLETION_NOTIFICATION_DATE, COMPANY_NO_BOX, REQ_SEQ, update_at, Login_ID, out msg);
+                    DAL_REQUEST_DETAIL.SendMailUpdate(COMPLETION_NOTIFICATION_DATE, COMPANY_NO_BOX, REQ_SEQ, CURRENT_DATETIME, CURRENT_USER, out msg);
                     #endregion
 
                     if (String.IsNullOrEmpty(msg))
                     {
                         #region InsertReportHistroy
                         DateTime now = DateTime.Now;
-                        string output_at = dtNow.ToString("yyyy/MM/dd HH:mm");
-                        string date = now.ToString("yyyyMMddHHmmss");
+                        //string output_at = dtNow.ToString("yyyy/MM/dd HH:mm");
+                        //string date = now.ToString("yyyyMMddHHmmss");
 
-                        string outputFile = COMPANY_NO_BOX + "-" + "3" + "-" + REQ_SEQ + "_完了通知書(" + EDI_ACCOUNT.Replace("@", "") + ")_" + COMPANY_NAME + ".pdf";
+                        string outputFile = COMPANY_NO_BOX + "-" + "3" + "-" + REQ_SEQ + "_完了通知書(" + EDI_ACCOUNT.Replace("@", "") + ")_" + COMPANY_NAME+ "様" + ".pdf";
                         string msgText = outputFile;
 
                         int REPORTHISTORY_SEQ = DAL_REPORT_HISTORY.GetReportHistorySEQ(COMPANY_NO_BOX, 5, REQ_SEQ, out msg);
 
                         if (string.IsNullOrEmpty(msg))
                         {
-                            DAL_REPORT_HISTORY.InsertNotiSending(COMPANY_NO_BOX, REQ_SEQ, REPORTHISTORY_SEQ, outputFile, EMAIL_ADDRESS, Login_ID, output_at, date, out msg);
+                            DAL_REPORT_HISTORY.InsertNotiSending(COMPANY_NO_BOX, REQ_SEQ, REPORTHISTORY_SEQ, outputFile, EMAIL_ADDRESS, CURRENT_USER, UPDATED_AT_DATETIME, CURRENT_DATETIME, out msg);
 
                             if (string.IsNullOrEmpty(msg))
                             {
@@ -273,10 +282,10 @@ namespace AmigoProcessManagement.Controller
                                 BOL_CONFIG config1 = new BOL_CONFIG("SYSTEM", con);
 
                                 string temPath = config1.getStringValue("temp.dir");
-                                temPath = HttpContext.Current.Server.MapPath("/" + temPath + "/" + FILENAME);
+                                temPath =  temPath + "/" + FILENAME;
 
                                 string pdfSavePath = config.getStringValue("fileSavePath.completionNotice");
-                                pdfSavePath = HttpContext.Current.Server.MapPath("~/" + pdfSavePath + "/" + outputFile);
+                                pdfSavePath = pdfSavePath + "/" + outputFile;
 
                                 //CopyAndMove File
                                 int res = MovePdfFile(temPath, pdfSavePath);
@@ -284,14 +293,14 @@ namespace AmigoProcessManagement.Controller
                                 if (res == 1)
                                 {
                                     //BOL_CONFIG config1 = new BOL_CONFIG("SYSTEM", con);
-                                    string zipStorageFolder = "/" + config1.getStringValue("temp.dir") + "/" + outputFile.Replace(".pdf", ".zip");
+                                    string zipStorageFolder =  config1.getStringValue("temp.dir") + "/" + outputFile.Replace(".pdf", ".zi_");
 
                                     string PASSWORD = config.getStringValue("password.Attachment");
 
                                     //Create ZipFile With Password
-                                    string zipDownloadLink = ZipGenerator(temPath, PASSWORD, zipStorageFolder);
+                                    bool zipgenerate = ZipGenerator(temPath, PASSWORD, zipStorageFolder);
 
-                                    if (zipDownloadLink != null)
+                                    if (zipgenerate)
                                     {
                                         #region SendMail
                                         String emailAddressCC = config.getStringValue("emailAddress.cc");
@@ -302,16 +311,20 @@ namespace AmigoProcessManagement.Controller
                                             string subjectString = config.getStringValue("emailSubject.notice");
                                             DataTable result = new DataTable();
                                             result.Clear();
-                                            result.Columns.Add("ZipDownloadLink");
+                                            result.Columns.Add("ZipFileName");
                                             result.Columns.Add("EmailAddressCC");
                                             result.Columns.Add("TemplateString");
                                             result.Columns.Add("SubjectString");
+                                            result.Columns.Add("UPDATED_AT");
+                                            result.Columns.Add("UPDATED_AT_RAW");
 
                                             DataRow dtRow = result.NewRow();
-                                            dtRow["ZipDownloadLink"] = zipDownloadLink;
+                                            dtRow["ZipFileName"] = outputFile.Replace(".pdf", ".zi_");
                                             dtRow["EmailAddressCC"] = emailAddressCC;
                                             dtRow["TemplateString"] = tempString;
                                             dtRow["SubjectString"] = subjectString.Replace("${companyName}", COMPANY_NAME);
+                                            dtRow["UPDATED_AT"] = UPDATED_AT_DATETIME;
+                                            dtRow["UPDATED_AT_RAW"] = CURRENT_DATETIME;
 
                                             result.Rows.Add(dtRow);
                                             dbtnx.Complete();
@@ -353,7 +366,6 @@ namespace AmigoProcessManagement.Controller
                         return ResponseUtility.ReturnFailMessage(response, timer, messagecode, Utility.Messages.Jimugo.E000WB002);
                     }
 
-                    //return response;
                 }
             }
             catch (Exception ex)
@@ -377,7 +389,7 @@ namespace AmigoProcessManagement.Controller
             BOL_CONFIG conf= new BOL_CONFIG("CTS060", con);
             String templateStorageFolder = conf.getStringValue("template.Path.CompletionNotification");
            
-            string file_path = HttpContext.Current.Server.MapPath( "~/"+templateStorageFolder + "/CompletionNotice_Template.xlsx");
+            string file_path = HttpContext.Current.Server.MapPath( "~/"+templateStorageFolder );
             FileInfo info = new FileInfo(file_path);
             Workbook workbook = new Workbook();
             //Load excel file  
@@ -452,13 +464,13 @@ namespace AmigoProcessManagement.Controller
             #region ClientCertificateNo Add
             string[] clientCertificate = CLIENT_CERTIFICATE_NO.Split(',');
             int extraRowCount;
-            if ( (clientCertificate.Length) %2 == 0)
+            if ( (clientCertificate.Length) %4 == 0)
             {
-                extraRowCount = (clientCertificate.Length / 2) - 1;
+                extraRowCount = (clientCertificate.Length / 4) - 1;
             }
             else
             {
-                extraRowCount = (clientCertificate.Length / 2) ;
+                extraRowCount = (clientCertificate.Length / 4) ;
             }
 
             if (extraRowCount > 0)
@@ -482,7 +494,7 @@ namespace AmigoProcessManagement.Controller
             for (int x = 0; x < (extraRowCount+1) ; x++)
             {
                 string certificates = "";
-                for ( int a=0 ; a < 2; a++)
+                for ( int a=0 ; a < 4; a++)
                 {
                     try
                     {
@@ -495,7 +507,7 @@ namespace AmigoProcessManagement.Controller
                     }
                 }
                 //b += 2;
-                sheet.Range["G" + (53 + extraRows + x)].Text = certificates;
+                sheet.Range["G" + (53 + extraRows + x)].Text = certificates ;
             }
             #endregion
 
@@ -513,10 +525,10 @@ namespace AmigoProcessManagement.Controller
 
             sheet.Range["G"+(33+extraRows)].Text = COMPANY_NO_BOX == null ? "" : COMPANY_NO_BOX; //need to change
             sheet.Range["G"+(34+extraRows )].Text = EDI_ACCOUNT;
-            sheet.Range["I"+(35 + extraRows)].Text = ADM_USER_ID;
-            sheet.Range["R"+(35+extraRows)].Text = ADM_PASSWORD;
-            sheet.Range["I"+(36 + extraRows)].Text = ATDL_USER_ID;
-            sheet.Range["R"+(36 + extraRows)].Text = ATDL_USER_PASSWORD;
+            sheet.Range["H"+(35 + extraRows)].Text = ADM_USER_ID;
+            sheet.Range["Q"+(35+extraRows)].Text = ADM_PASSWORD;
+            sheet.Range["H"+(36 + extraRows)].Text = ATDL_USER_ID;
+            sheet.Range["Q"+(36 + extraRows)].Text = ATDL_USER_PASSWORD;
 
             sheet.Range["G"+(39 + extraRows)].Text = SSHGW_USER_ID;
             sheet.Range["G"+(40 + extraRows)].Text = SSHGW_PUBLIC_KEY;
@@ -540,28 +552,27 @@ namespace AmigoProcessManagement.Controller
             sheet.Range["G"+(56 + extraRows+ extraRowCount)].Text = SUPPORT_MAIL_ADDRESS;
             sheet.Range["P"+(56 + extraRows+ extraRowCount)].Text = SUPPORT_PHONE_NUMBER;
 
-            sheet.Range["I"+(22 + extraRows)].Text = SFTP;
-            sheet.Range["I"+(23 + extraRows)].Text = HTTPS;
-            sheet.Range["I"+(25 + extraRows)].Text = JNX_URL;
-            sheet.Range["I"+(26 + extraRows)].Text = IPSEC;
-            sheet.Range["I"+(27 + extraRows)].Text = TP;
-            sheet.Range["I"+(28 + extraRows)].Text = AMIGO_COMPANY_NAME;
-            sheet.Range["I"+(30 + extraRows)].Text = INTERNET_URL;
+            sheet.Range["G"+(22 + extraRows)].Text = SFTP;
+            sheet.Range["G"+(23 + extraRows)].Text = HTTPS;
+            sheet.Range["G"+(25 + extraRows)].Text = JNX_URL;
+            sheet.Range["G"+(26 + extraRows)].Text = IPSEC;
+            sheet.Range["G"+(27 + extraRows)].Text = TP;
+            sheet.Range["G"+(28 + extraRows)].Text = AMIGO_COMPANY_NAME;
+            sheet.Range["G"+(30 + extraRows)].Text = INTERNET_URL;
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
             String tempStorageFolder = config.getStringValue("temp.dir");
-            string savePath = "/"+tempStorageFolder +"/"+ fileName;
+            string savePath = tempStorageFolder +"/"+ fileName;
 
             //Save excel file to pdf file.  
-            string DownloadLink = HttpContext.Current.Server.MapPath("~"+savePath); 
-            workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF); 
+            workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF); 
 
             DataTable result = new DataTable();
             result.Clear();
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("MessageCode");
             DataRow dr = result.NewRow();
-            dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+            dr["FILENAME"] = fileName;
             dr["MessageCode"] = "I000WB001";
             result.Rows.Add(dr);
 
@@ -575,37 +586,23 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region ZipCreateWithPassword
-        public string ZipGenerator(string fileName,string PASSWORD,string ZIP_STORAGEFOLDER_PATH)
+        public bool ZipGenerator(string fileName,string PASSWORD,string ZIP_STORAGEFOLDER_PATH)
         {
             string result;
             try
             {
-                //var files = Directory.GetFiles(@"D:\Git\Phase-2-test\amigo_webservice\AmigoProcessManagement\App_Data");
-
-                //string something = HttpContext.Current.Server.;
-
-                //something = something;
-
-                string SaveFilePath = HttpContext.Current.Server.MapPath(ZIP_STORAGEFOLDER_PATH); //"~/App_Data/Ouput/output.pdf"
-
-
                 using (var zip = new ZipFile())
                 {
                     zip.Password = PASSWORD;
                     zip.Encryption = EncryptionAlgorithm.WinZipAes256;
                     zip.AddFile(fileName, "");
-                    zip.Save(SaveFilePath);
+                    zip.Save(ZIP_STORAGEFOLDER_PATH);
                 }
-
-                return result = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + ZIP_STORAGEFOLDER_PATH;
+                return true;
             }
-            catch (Exception)
-            {
-                return result = null;
-
+            catch (Exception) {
+                return false;
             }
-            
-
         }
         #endregion
 

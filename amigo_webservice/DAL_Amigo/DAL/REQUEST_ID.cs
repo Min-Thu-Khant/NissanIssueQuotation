@@ -120,7 +120,6 @@ namespace DAL_AmigoProcess.DAL
         string strUpdate = @"UPDATE [REQUEST_ID]
                                SET [COMPANY_NAME] = @COMPANY_NAME,
                                    [PASSWORD] = @PASSWORD,
-                                   [PASSWORD_HASHED] = @PASSWORD_HASHED,
                                    [PASSWORD_SET_DATE] = @PASSWORD_SET_DATE,
                                    [PASSWORD_EXPIRATION_DATE] = @PASSWORD_EXPIRATION_DATE,
                                    [EMAIL_ADDRESS] = @EMAIL_ADDRESS,
@@ -144,7 +143,7 @@ namespace DAL_AmigoProcess.DAL
                                                     ' ' as CK,
                                                     ' ' as MK,
                                                     EDI_ACCOUNT.EDI_ACCOUNT,
-                                                    EDI_ACCOUNT.COMPANY_NO_BOX,
+                                                    REQUEST_ID.COMPANY_NO_BOX,
                                                     REQUEST_DETAIL.COMPANY_NAME,
                                                     REQUEST_ID.GD_CODE,
                                                     EDI_ACCOUNT.CONSIGN_FLG,
@@ -190,10 +189,6 @@ namespace DAL_AmigoProcess.DAL
                                                     LEFT JOIN 
 	                                                    EDI_ACCOUNT
 	                                                    ON REQUEST_ID.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
-	                                                    LEFT JOIN REQ_USAGE_FEE 
-	                                                    ON REQ_USAGE_FEE.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
-	                                                    AND REQ_USAGE_FEE.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
-	                                                    AND CONTRACT_CODE IN ('SERVER', 'SERVERRIGHT', 'BROWSERAUTO', 'BROWSER', 'PRODUCT')
                                                     LEFT JOIN REQ_ADDRESS ADD1 
 	                                                    ON ADD1.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
 	                                                    AND ADD1.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
@@ -224,14 +219,21 @@ namespace DAL_AmigoProcess.DAL
                                                             LEFT JOIN 
 	                                                            EDI_ACCOUNT
 	                                                            ON REQUEST_ID.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
-	                                                            LEFT JOIN REQ_USAGE_FEE 
-	                                                            ON REQ_USAGE_FEE.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
-	                                                            AND REQ_USAGE_FEE.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
-	                                                            AND CONTRACT_CODE IN ('SERVER', 'SERVERRIGHT', 'BROWSER', 'PRODUCT')
-                                                            LEFT JOIN REQ_ADDRESS 
-	                                                            ON REQ_ADDRESS.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
-	                                                            AND REQ_ADDRESS.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
-	                                                            AND REQ_ADDRESS.TYPE = 4
+                                                            LEFT JOIN REQ_ADDRESS ADD1 
+	                                                            ON ADD1.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
+	                                                            AND ADD1.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
+														        AND ADD1.REQ_ADDRESS_SEQ = 1
+	                                                            AND ADD1.TYPE = 4
+													        LEFT JOIN REQ_ADDRESS ADD2 
+	                                                            ON ADD2.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
+	                                                            AND ADD2.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
+														        AND ADD2.REQ_ADDRESS_SEQ = 2
+	                                                            AND ADD2.TYPE = 4
+													        LEFT JOIN REQ_ADDRESS ADD3 
+	                                                            ON ADD3.COMPANY_NO_BOX = REQUEST_DETAIL.COMPANY_NO_BOX
+	                                                            AND ADD3.REQ_SEQ = REQUEST_DETAIL.REQ_SEQ
+														        AND ADD3.REQ_ADDRESS_SEQ = 3
+	                                                            AND ADD3.TYPE = 4
                                                             WHERE 
 	                                                            REQUEST_ID.COMPANY_NO_BOX LIKE '%' + @COMPANY_NO_BOX + '%'
 	                                                            AND REQUEST_DETAIL.COMPANY_NAME LIKE '%' + @COMPANY_NAME + '%'
@@ -242,6 +244,7 @@ namespace DAL_AmigoProcess.DAL
                                 FROM REQUEST_ID,EDI_ACCOUNT
                                 WHERE REQUEST_ID.COMPANY_NO_BOX=EDI_ACCOUNT.COMPANY_NO_BOX
                                 AND REQUEST_ID.COMPANY_NO_BOX=@COMPANY_NO_BOX";
+        string strGetMaxCompanyBox = @"SELECT MAX(COMPANY_BOX) +1 AS BOX FROM REQUEST_ID WHERE COMPANY_NO = @COMPANY_NO";
         #endregion
 
         #region Usage Application 
@@ -300,6 +303,23 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@LIMIT", LIMIT));
             oMaster.ExcuteQuery(4, out strMsg);
             return oMaster.dtExcuted;
+        }
+        #endregion
+
+        #region GetCompanyCodeList
+        public int GetMaxCompanyBox(string COMPANY_NO, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetMaxCompanyBox);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO", COMPANY_NO));
+            oMaster.ExcuteQuery(4, out strMsg);
+            if (oMaster.dtExcuted.Rows.Count > 0)
+            {
+                return int.Parse(oMaster.dtExcuted.Rows[0][0].ToString());
+            }
+            else
+            {
+                return 0;
+            }
         }
         #endregion
 
@@ -387,7 +407,6 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_ID.COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NAME", oREQUEST_ID.COMPANY_NAME));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD", oREQUEST_ID.PASSWORD != null ? oREQUEST_ID.PASSWORD : (object)DBNull.Value));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_HASHED", oREQUEST_ID.PASSWORD_HASHED != null ? oREQUEST_ID.PASSWORD_HASHED : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_SET_DATE", oREQUEST_ID.PASSWORD_SET_DATE != null ? Convert.ToDateTime(oREQUEST_ID.PASSWORD_SET_DATE) : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_EXPIRATION_DATE",oREQUEST_ID.PASSWORD_EXPIRATION_DATE != null ? Convert.ToDateTime(oREQUEST_ID.PASSWORD_EXPIRATION_DATE) : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EMAIL_ADDRESS", oREQUEST_ID.EMAIL_ADDRESS !=null ? oREQUEST_ID.EMAIL_ADDRESS : (object)DBNull.Value));

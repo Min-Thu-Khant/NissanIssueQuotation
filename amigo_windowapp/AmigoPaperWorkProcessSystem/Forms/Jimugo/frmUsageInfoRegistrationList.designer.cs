@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsageInfoRegistrationList));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -64,6 +63,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsageInfoRegistrationList));
             this.btnSendMail = new System.Windows.Forms.Button();
             this.btnEDI_AutoNumber = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
@@ -77,25 +77,13 @@
             this.lblMenu = new System.Windows.Forms.Label();
             this.lblClear = new System.Windows.Forms.Label();
             this.cboLimit = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblEDIAccount = new System.Windows.Forms.Label();
             this.txtEDIAccount = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblCompanyNoBox = new System.Windows.Forms.Label();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblTotalRecords = new System.Windows.Forms.Label();
-            this.btnCheck = new System.Windows.Forms.Button();
-            this.btnUnCheck = new System.Windows.Forms.Button();
-            this.lblTotalPages = new System.Windows.Forms.Label();
-            this.lblcurrentPage = new System.Windows.Forms.Label();
-            this.btnLast = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnFirst = new System.Windows.Forms.Button();
-            this.btnPrev = new System.Windows.Forms.Button();
-            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.colNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colMK = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -132,8 +120,20 @@
             this.colUPDATED_AT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATED_BY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATE_MESSAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ROW_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTotalRecords = new System.Windows.Forms.Label();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.btnUnCheck = new System.Windows.Forms.Button();
+            this.lblTotalPages = new System.Windows.Forms.Label();
+            this.lblcurrentPage = new System.Windows.Forms.Label();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
+            this.btnPrev = new System.Windows.Forms.Button();
+            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
@@ -254,7 +254,7 @@
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(16, 11);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(189, 34);
+            this.lblMenu.Size = new System.Drawing.Size(275, 34);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -280,16 +280,16 @@
             this.cboLimit.Size = new System.Drawing.Size(164, 22);
             this.cboLimit.TabIndex = 31;
             // 
-            // label3
+            // lblEDIAccount
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(542, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 21);
-            this.label3.TabIndex = 29;
-            this.label3.Text = "EDIアカウント";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEDIAccount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblEDIAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEDIAccount.Location = new System.Drawing.Point(542, 118);
+            this.lblEDIAccount.Name = "lblEDIAccount";
+            this.lblEDIAccount.Size = new System.Drawing.Size(84, 21);
+            this.lblEDIAccount.TabIndex = 29;
+            this.lblEDIAccount.Text = "EDIアカウント";
+            this.lblEDIAccount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtEDIAccount
             // 
@@ -299,16 +299,16 @@
             this.txtEDIAccount.Size = new System.Drawing.Size(160, 21);
             this.txtEDIAccount.TabIndex = 28;
             // 
-            // label2
+            // lblCompanyName
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(281, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(77, 21);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "会社名";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyName.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyName.Location = new System.Drawing.Point(281, 118);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(77, 21);
+            this.lblCompanyName.TabIndex = 27;
+            this.lblCompanyName.Text = "会社名";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyName
             // 
@@ -318,16 +318,16 @@
             this.txtCompanyName.Size = new System.Drawing.Size(170, 21);
             this.txtCompanyName.TabIndex = 26;
             // 
-            // label1
+            // lblCompanyNoBox
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(23, 118);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(112, 21);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "会社番号＋BOX";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyNoBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyNoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyNoBox.Location = new System.Drawing.Point(23, 118);
+            this.lblCompanyNoBox.Name = "lblCompanyNoBox";
+            this.lblCompanyNoBox.Size = new System.Drawing.Size(112, 21);
+            this.lblCompanyNoBox.TabIndex = 25;
+            this.lblCompanyNoBox.Text = "会社番号＋BOX";
+            this.lblCompanyNoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyNoBox
             // 
@@ -382,7 +382,7 @@
             this.colUPDATED_AT,
             this.colUPDATED_BY,
             this.colUPDATE_MESSAGE,
-            this.UPDATED_AT_RAW,
+            this.colUPDATED_AT_RAW,
             this.ROW_ID});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(23, 243);
@@ -396,157 +396,6 @@
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.lblTotalRecords);
-            this.panel1.Controls.Add(this.btnCheck);
-            this.panel1.Controls.Add(this.btnUnCheck);
-            this.panel1.Controls.Add(this.lblTotalPages);
-            this.panel1.Controls.Add(this.lblcurrentPage);
-            this.panel1.Controls.Add(this.btnLast);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.btnNext);
-            this.panel1.Controls.Add(this.btnFirst);
-            this.panel1.Controls.Add(this.btnPrev);
-            this.panel1.Location = new System.Drawing.Point(23, 198);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1238, 37);
-            this.panel1.TabIndex = 36;
-            // 
-            // lblTotalRecords
-            // 
-            this.lblTotalRecords.AutoSize = true;
-            this.lblTotalRecords.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalRecords.Location = new System.Drawing.Point(3, 12);
-            this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
-            this.lblTotalRecords.TabIndex = 36;
-            // 
-            // btnCheck
-            // 
-            this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCheck.BackgroundImage")));
-            this.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCheck.FlatAppearance.BorderSize = 0;
-            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheck.Location = new System.Drawing.Point(739, 3);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(35, 30);
-            this.btnCheck.TabIndex = 32;
-            this.btnCheck.UseVisualStyleBackColor = true;
-            this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
-            // 
-            // btnUnCheck
-            // 
-            this.btnUnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnCheck.BackgroundImage")));
-            this.btnUnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnUnCheck.FlatAppearance.BorderSize = 0;
-            this.btnUnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUnCheck.Location = new System.Drawing.Point(782, 3);
-            this.btnUnCheck.Name = "btnUnCheck";
-            this.btnUnCheck.Size = new System.Drawing.Size(35, 30);
-            this.btnUnCheck.TabIndex = 33;
-            this.btnUnCheck.UseVisualStyleBackColor = true;
-            this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
-            // 
-            // lblTotalPages
-            // 
-            this.lblTotalPages.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblTotalPages.AutoSize = true;
-            this.lblTotalPages.Location = new System.Drawing.Point(1066, 11);
-            this.lblTotalPages.Name = "lblTotalPages";
-            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
-            this.lblTotalPages.TabIndex = 31;
-            this.lblTotalPages.Text = "0";
-            // 
-            // lblcurrentPage
-            // 
-            this.lblcurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblcurrentPage.AutoSize = true;
-            this.lblcurrentPage.Location = new System.Drawing.Point(962, 11);
-            this.lblcurrentPage.Name = "lblcurrentPage";
-            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
-            this.lblcurrentPage.TabIndex = 30;
-            this.lblcurrentPage.Text = "0";
-            // 
-            // btnLast
-            // 
-            this.btnLast.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLast.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.next_icon;
-            this.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnLast.FlatAppearance.BorderSize = 0;
-            this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLast.Location = new System.Drawing.Point(1177, 3);
-            this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(41, 30);
-            this.btnLast.TabIndex = 28;
-            this.btnLast.UseVisualStyleBackColor = true;
-            this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(1018, 11);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(19, 14);
-            this.label6.TabIndex = 25;
-            this.label6.Text = "Of";
-            // 
-            // btnNext
-            // 
-            this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnNext.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.right_arrow;
-            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnNext.FlatAppearance.BorderSize = 0;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(1128, 3);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(41, 30);
-            this.btnNext.TabIndex = 26;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
-            // 
-            // btnFirst
-            // 
-            this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnFirst.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.previous_icon;
-            this.btnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnFirst.FlatAppearance.BorderSize = 0;
-            this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFirst.Location = new System.Drawing.Point(839, 3);
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(41, 30);
-            this.btnFirst.TabIndex = 29;
-            this.btnFirst.UseVisualStyleBackColor = true;
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnPrev.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.left_arrow;
-            this.btnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPrev.FlatAppearance.BorderSize = 0;
-            this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrev.Location = new System.Drawing.Point(888, 3);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(41, 30);
-            this.btnPrev.TabIndex = 27;
-            this.btnPrev.UseVisualStyleBackColor = true;
-            this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
-            // 
-            // displayItemLabel1
-            // 
-            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.displayItemLabel1.Location = new System.Drawing.Point(23, 160);
-            this.displayItemLabel1.Name = "displayItemLabel1";
-            this.displayItemLabel1.Size = new System.Drawing.Size(79, 22);
-            this.displayItemLabel1.TabIndex = 35;
             // 
             // colNo
             // 
@@ -909,10 +758,10 @@
             // 
             // UPDATED_AT_RAW
             // 
-            this.UPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Name = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Visible = false;
+            this.colUPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Name = "colUPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Visible = false;
             // 
             // ROW_ID
             // 
@@ -920,6 +769,159 @@
             this.ROW_ID.HeaderText = "ROW_ID";
             this.ROW_ID.Name = "ROW_ID";
             this.ROW_ID.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.lblTotalRecords);
+            this.panel1.Controls.Add(this.btnCheck);
+            this.panel1.Controls.Add(this.btnUnCheck);
+            this.panel1.Controls.Add(this.lblTotalPages);
+            this.panel1.Controls.Add(this.lblcurrentPage);
+            this.panel1.Controls.Add(this.btnLast);
+            this.panel1.Controls.Add(this.label6);
+            this.panel1.Controls.Add(this.btnNext);
+            this.panel1.Controls.Add(this.btnFirst);
+            this.panel1.Controls.Add(this.btnPrev);
+            this.panel1.Location = new System.Drawing.Point(23, 198);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1238, 37);
+            this.panel1.TabIndex = 36;
+            // 
+            // lblTotalRecords
+            // 
+            this.lblTotalRecords.AutoSize = true;
+            this.lblTotalRecords.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalRecords.Location = new System.Drawing.Point(3, 12);
+            this.lblTotalRecords.Name = "lblTotalRecords";
+            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalRecords.TabIndex = 36;
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCheck.BackgroundImage")));
+            this.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCheck.FlatAppearance.BorderSize = 0;
+            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheck.Location = new System.Drawing.Point(739, 3);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(35, 30);
+            this.btnCheck.TabIndex = 32;
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
+            // 
+            // btnUnCheck
+            // 
+            this.btnUnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnCheck.BackgroundImage")));
+            this.btnUnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnUnCheck.FlatAppearance.BorderSize = 0;
+            this.btnUnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnCheck.Location = new System.Drawing.Point(782, 3);
+            this.btnUnCheck.Name = "btnUnCheck";
+            this.btnUnCheck.Size = new System.Drawing.Size(35, 30);
+            this.btnUnCheck.TabIndex = 33;
+            this.btnUnCheck.UseVisualStyleBackColor = true;
+            this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
+            // 
+            // lblTotalPages
+            // 
+            this.lblTotalPages.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTotalPages.AutoSize = true;
+            this.lblTotalPages.Location = new System.Drawing.Point(1066, 11);
+            this.lblTotalPages.Name = "lblTotalPages";
+            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
+            this.lblTotalPages.TabIndex = 31;
+            this.lblTotalPages.Text = "0";
+            // 
+            // lblcurrentPage
+            // 
+            this.lblcurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblcurrentPage.AutoSize = true;
+            this.lblcurrentPage.Location = new System.Drawing.Point(962, 11);
+            this.lblcurrentPage.Name = "lblcurrentPage";
+            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
+            this.lblcurrentPage.TabIndex = 30;
+            this.lblcurrentPage.Text = "0";
+            // 
+            // btnLast
+            // 
+            this.btnLast.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnLast.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.next_icon;
+            this.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnLast.FlatAppearance.BorderSize = 0;
+            this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLast.Location = new System.Drawing.Point(1177, 3);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(41, 30);
+            this.btnLast.TabIndex = 28;
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(1018, 11);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(19, 14);
+            this.label6.TabIndex = 25;
+            this.label6.Text = "Of";
+            // 
+            // btnNext
+            // 
+            this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnNext.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.right_arrow;
+            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.Location = new System.Drawing.Point(1128, 3);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(41, 30);
+            this.btnNext.TabIndex = 26;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnFirst.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.previous_icon;
+            this.btnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnFirst.FlatAppearance.BorderSize = 0;
+            this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFirst.Location = new System.Drawing.Point(839, 3);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(41, 30);
+            this.btnFirst.TabIndex = 29;
+            this.btnFirst.UseVisualStyleBackColor = true;
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnPrev.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.left_arrow;
+            this.btnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPrev.FlatAppearance.BorderSize = 0;
+            this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrev.Location = new System.Drawing.Point(888, 3);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(41, 30);
+            this.btnPrev.TabIndex = 27;
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
+            // 
+            // displayItemLabel1
+            // 
+            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.displayItemLabel1.LabelText = " 表示件数";
+            this.displayItemLabel1.Location = new System.Drawing.Point(23, 160);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
+            this.displayItemLabel1.Name = "displayItemLabel1";
+            this.displayItemLabel1.Size = new System.Drawing.Size(79, 22);
+            this.displayItemLabel1.TabIndex = 35;
             // 
             // frmUsageInfoRegistrationList
             // 
@@ -931,11 +933,11 @@
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.lblClear);
             this.Controls.Add(this.cboLimit);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblEDIAccount);
             this.Controls.Add(this.txtEDIAccount);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.txtCompanyName);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblCompanyNoBox);
             this.Controls.Add(this.txtCompanyNoBox);
             this.Controls.Add(this.btnSendMail);
             this.Controls.Add(this.btnEDI_AutoNumber);
@@ -977,11 +979,11 @@
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Label lblClear;
         private System.Windows.Forms.ComboBox cboLimit;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblEDIAccount;
         private System.Windows.Forms.TextBox txtEDIAccount;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.TextBox txtCompanyName;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCompanyNoBox;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
         private System.Windows.Forms.DataGridView dgvList;
         private UserControls.DisplayItemLabel displayItemLabel1;
@@ -1032,7 +1034,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_BY;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATE_MESSAGE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_AT_RAW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT_RAW;
         private System.Windows.Forms.DataGridViewTextBoxColumn ROW_ID;
     }
 }

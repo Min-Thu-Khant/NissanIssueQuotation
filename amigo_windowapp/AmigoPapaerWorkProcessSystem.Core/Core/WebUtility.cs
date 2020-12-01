@@ -70,23 +70,20 @@ namespace AmigoPaperWorkProcessSystem.Core
 
         public async static Task<bool> Download(string url, string destination)
         {
-            HttpClient client = makeAuthHeader();
-            var response = client.GetAsync(url);
-
             try
             {
-                //call methods
-                using (var fs = new FileStream(destination, FileMode.Create))
-                {
-                    await response.Result.Content.CopyToAsync(fs);
-                    return true;
-                }
+                HttpClient client = makeAuthHeader();
+                var response = client.GetAsync(url);
+                byte[] content = response.Result.Content.ReadAsByteArrayAsync().Result;
+                File.WriteAllBytes(destination, content);
+                return true;
             }
             catch (Exception ex)
             {
                 Utility.WriteErrorLog("Download Failed", ex, true);
                 return false;
             }
+
 
         }
 
@@ -98,7 +95,6 @@ namespace AmigoPaperWorkProcessSystem.Core
             return filename;
         }
         #endregion
-
         #endregion
 
         #region PostMethod
@@ -274,6 +270,25 @@ namespace AmigoPaperWorkProcessSystem.Core
 
             return dt;
         }
+        public static DataSet Post(string url)
+        {
+            HttpClient client = makeAuthHeader();
+            var response = client.GetAsync(url);
+
+            //call methods
+            string content = response.Result.Content.ReadAsStringAsync().Result;
+
+            dynamic result = JsonConvert.DeserializeObject(content);
+
+            //log error message
+            if (result.Status == 0)
+            {
+                Utility.WriteErrorLog(result.Message.ToString(), null, true);
+            }
+            string strData = result.Data;
+            DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
+            return dataSet;
+        }
 
         public static DataSet Post(string url, string json, bool dataset)
         {
@@ -296,26 +311,6 @@ namespace AmigoPaperWorkProcessSystem.Core
             }
 
             ////prepare return data
-            string strData = result.Data;
-            DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
-            return dataSet;
-        }
-
-        public static DataSet Post(string url)
-        {
-            HttpClient client = makeAuthHeader();
-            var response = client.GetAsync(url);
-
-            //call methods
-            string content = response.Result.Content.ReadAsStringAsync().Result;
-
-            dynamic result = JsonConvert.DeserializeObject(content);
-
-            //log error message
-            if (result.Status == 0)
-            {
-                Utility.WriteErrorLog(result.Message.ToString(), null, true);
-            }
             string strData = result.Data;
             DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
             return dataSet;

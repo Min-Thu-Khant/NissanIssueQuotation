@@ -180,6 +180,10 @@
     <Setting Name="UpdateCustomerMasterList" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_CustomerMasterMaintenance.asmx/Update</Value>
     </Setting>
+<<<<<<< HEAD
+    <Setting Name="getMonthlySaleAggregationlist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_MonthlySaleAggregationList.asmx/getMonthlySaleAggregationList?strDate=@YEARMOHTH</Value>
+=======
     <Setting Name="ApplicationApproval_GetInitialData" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/GetClientCertificateList</Value>
     </Setting>
@@ -191,6 +195,10 @@
     </Setting>
     <Setting Name="ApplicationApproval_Approve" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Approve</Value>
+    </Setting>
+    <Setting Name="GetTempFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFIle</Value>
+>>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
     </Setting>
   </Settings>
 </SettingsFile>

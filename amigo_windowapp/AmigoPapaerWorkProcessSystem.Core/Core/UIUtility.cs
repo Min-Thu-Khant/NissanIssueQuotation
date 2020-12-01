@@ -229,9 +229,11 @@ namespace AmigoPaperWorkProcessSystem.Core
         public void GDCombo(ComboBox cboGD)
         {
             var displaycount = new[] {
-                                    new { Text = "無し", Value = "0" },
-                                    new { Text = "確認依頼中", Value = "1" },
-                                    new { Text = "確認済み", Value = "2" },
+                                    new { Text = "", Value = "" },
+                                    new { Text = "未確認", Value = "0" },
+                                    new { Text = "設定依頼中", Value = "1" },
+                                    new { Text = "設定済み", Value = "2" },
+                                    new { Text = "無し", Value = "9" }
                                   };
 
             cboGD.DataSource = displaycount;
@@ -245,6 +247,7 @@ namespace AmigoPaperWorkProcessSystem.Core
         public void AppStatusCombo(ComboBox cboApplicationStatus)
         {
             var displaycount = new[] {
+                                    new { Text = "", Value = "" },
                                     new { Text = "申請中", Value = "1" },
                                     new { Text = "承認済", Value = "2" },
                                     new { Text = "申請取消", Value = "9" },
@@ -261,8 +264,8 @@ namespace AmigoPaperWorkProcessSystem.Core
         public void SystemSettingStatusCombo(ComboBox cboSettingStatus)
         {
             var displaycount = new[] {
-                                    new { Text = "", Value = "0"},
-                                    new { Text = "依頼中", Value = "1" },
+                                    new { Text = "", Value = ""},
+                                    new { Text = "設定依頼中", Value = "1" },
                                     new { Text = "設定済み", Value = "2" },
                                   };
 
@@ -630,7 +633,7 @@ namespace AmigoPaperWorkProcessSystem.Core
                     {
                         //get MK value
                         string MK_value = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString();
-                        if (!String.IsNullOrEmpty(MK_value))
+                        if (!String.IsNullOrEmpty(MK_value.Trim()))
                         {
                             switch (MK_value)
                             {
@@ -715,53 +718,69 @@ namespace AmigoPaperWorkProcessSystem.Core
             //commit changes
             dgvList.CommitEdit(DataGridViewDataErrorContexts.Commit);
 
-            for (int i = 0; i < dgvList.Rows.Count; i++)
+            if (checkSelectedRow())
             {
 
-                bool status = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim() == "" ? false : bool.Parse(dgvList.Rows[i].Cells["colCK"].Value.ToString());
-                if (status)
+                for (int i = 0; i < dgvList.Rows.Count; i++)
                 {
+
+                    bool status = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim() == "" ? false : bool.Parse(dgvList.Rows[i].Cells["colCK"].Value.ToString());
+                    if (status)
+                    {
+                        try
+                        {
+                            string operation = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
+                            DataRow dr = dtList.Rows[i];
+
+                            switch (operation)
+                            {
+                                case "I":
+                                    dr.Delete(); //delete row
+                                    i--;
+                                    break;
+                                case "C":
+                                    dr.Delete(); //delete row
+                                    i--;
+                                    break;
+                                case "M":
+                                    //get index number by no
+                                    int index = OriginFindIndexByKeyNumber(int.Parse(dgvList.Rows[i].Cells["ROW_ID"].Value.ToString()));
+
+                                    //change MK value to trigger event
+                                    dgvList.Rows[i].Cells["colMK"].Value = dtOrigin.Rows[index]["MK"].ToString();
+
+                                    //replace modified datarow with original datarow
+                                    dtList.Rows[i].ItemArray = dtOrigin.Rows[index].ItemArray;
+                                    dgvList.Rows[i].Cells["colCK"].Value = "True";
+                                    break;
+                                case "D":
+                                    //set MK to empty
+                                    dgvList.Rows[i].Cells["colMK"].Value = " ";
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ResetReadOnlyProperty();
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                    }
                     try
                     {
-                        string operation = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
-                        DataRow dr = dtList.Rows[i];
-
-                        switch (operation)
-                        {
-                            case "I":
-                                dr.Delete(); //delete row
-                                i--;
-                                break;
-                            case "C":
-                                dr.Delete(); //delete row
-                                i--;
-                                break;
-                            case "M":
-                                //get index number by no
-                                int index = OriginFindIndexByKeyNumber(int.Parse(dgvList.Rows[i].Cells["ROW_ID"].Value.ToString()));
-
-                                //change MK value to trigger event
-                                dgvList.Rows[i].Cells["colMK"].Value = dtOrigin.Rows[index]["MK"].ToString();
-
-                                //replace modified datarow with original datarow
-                                dtList.Rows[i].ItemArray = dtOrigin.Rows[index].ItemArray;
-                                dgvList.Rows[i].Cells["colCK"].Value = "True";
-                                break;
-                            case "D":
-                                //set MK to empty
-                                dgvList.Rows[i].Cells["colMK"].Value = " ";
-                                break;
-                            default:
-                                break;
-                        }
-                        ResetReadOnlyProperty();
+                        dgvList.Rows[i].Cells["colCK"].Value = " ";
                     }
                     catch (Exception)
                     {
-
                     }
 
                 }
+            }
+            else
+            {
+                MetroMessageBox.Show(dgvList.Parent, "\n" + JimugoMessages.E000ZZ004, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         #endregion
@@ -933,6 +952,13 @@ namespace AmigoPaperWorkProcessSystem.Core
         #region CommonGridManage
         public void CommonGridManage(string operation)
         {
+            //if there is no row in datagrid view and insert button is clicked
+            bool Ischecked = checkSelectedRow();
+            if ((dgvList.Rows.Count <= 0 && operation == "I") || (!Ischecked && operation == "I"))
+            {
+                InsertInitialRow(operation);
+            }
+
             if (checkSelectedRow())
             {
                 for (int i = 0; i < dgvList.Rows.Count; i++)
@@ -967,11 +993,25 @@ namespace AmigoPaperWorkProcessSystem.Core
                                 break;
                             case "C":
                                 CopyMode(operation, dgvList.Rows[i], true);
+                                try
+                                {
+                                    dgvList.Rows[i].Cells["colCK"].Value = " ";
+                                }
+                                catch (Exception)
+                                {
+                                }
                                 i++;
                                 break;
                             default:
                                 break;
                         }
+                    }
+                    try
+                    {
+                        dgvList.Rows[i].Cells["colCK"].Value = " ";
+                    }
+                    catch (Exception)
+                    {
                     }
                 }
             }
@@ -982,14 +1022,6 @@ namespace AmigoPaperWorkProcessSystem.Core
                     MetroMessageBox.Show(dgvList.Parent, "\n" + JimugoMessages.E000ZZ004, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
-            //if there is no row in datagrid view and insert button is clicked
-            bool Ischecked = checkSelectedRow();
-            if ((dgvList.Rows.Count <= 0 && operation == "I") || (!Ischecked && operation == "I"))
-            {
-                InsertInitialRow(operation);
-            }
-
         }
         #endregion
 

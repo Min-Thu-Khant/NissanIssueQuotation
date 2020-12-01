@@ -367,7 +367,7 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 必須入力です。.
+        ///   Looks up a localized string similar to {0}は必須入力です。.
         /// </summary>
         internal static string E000ZZ001 {
             get {
@@ -376,7 +376,7 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to データの型が間違っています。.
+        ///   Looks up a localized string similar to {0}はデータの型が間違っています。.
         /// </summary>
         internal static string E000ZZ002 {
             get {
@@ -403,7 +403,7 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 桁数オーバーです。.
+        ///   Looks up a localized string similar to {0}は桁数オーバーです。.
         /// </summary>
         internal static string E000ZZ005 {
             get {
@@ -412,7 +412,7 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 桁数が足りません。.
+        ///   Looks up a localized string similar to {0}は桁数が足りません。.
         /// </summary>
         internal static string E000ZZ006 {
             get {
@@ -421,7 +421,7 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 数値を入力してください。.
+        ///   Looks up a localized string similar to {0}は数値を入力してください。.
         /// </summary>
         internal static string E000ZZ007 {
             get {

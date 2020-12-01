@@ -254,11 +254,11 @@
     <comment>{0} has been entered. \ In this case, you need to select one of {1}.</comment>
   </data>
   <data name="E000ZZ001" xml:space="preserve">
-    <value>必須入力です。</value>
+    <value>{0}は必須入力です。</value>
     <comment>Mandatory input</comment>
   </data>
   <data name="E000ZZ002" xml:space="preserve">
-    <value>データの型が間違っています。</value>
+    <value>{0}はデータの型が間違っています。</value>
     <comment>The data type is incorrect.</comment>
   </data>
   <data name="E000ZZ003" xml:space="preserve">
@@ -270,15 +270,15 @@
     <comment>Please select line.</comment>
   </data>
   <data name="E000ZZ005" xml:space="preserve">
-    <value>桁数オーバーです。</value>
+    <value>{0}は桁数オーバーです。</value>
     <comment>The number of digits is over.</comment>
   </data>
   <data name="E000ZZ006" xml:space="preserve">
-    <value>桁数が足りません。</value>
+    <value>{0}は桁数が足りません。</value>
     <comment>There are not enough digits.</comment>
   </data>
   <data name="E000ZZ007" xml:space="preserve">
-    <value>数値を入力してください。</value>
+    <value>{0}は数値を入力してください。</value>
     <comment>Please enter a number.</comment>
   </data>
   <data name="E000ZZ008" xml:space="preserve">

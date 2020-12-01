@@ -77,17 +77,17 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             //uIUtility.ResetCheckBoxSize();
             dgvList1.Columns["colNO"].Width = 35;
-            dgvList1.Columns["colCONTRACT_CODE"].Width = 150;
-            dgvList1.Columns["colCONTRACT_CONTENT"].Width = 150;
-            dgvList1.Columns["colUNIT_PRICE"].Width = 130;
-            dgvList1.Columns["colQUANTITY"].Width = 130;
-            dgvList1.Columns["colTOTAL"].Width = 130;
-            dgvList1.Columns["colUnitPrice1"].Width = 130;
-            dgvList1.Columns["colQuantity1"].Width = 130;
-            dgvList1.Columns["colTOTAL1"].Width = 130;
-            dgvList1.Columns["colUnitPrice2"].Width = 130;
-            dgvList1.Columns["colQuantity2"].Width = 130;
-            dgvList1.Columns["colTOTAL2"].Width = 130;
+            dgvList1.Columns["colCONTRACT_CODE"].Width = 148;
+            dgvList1.Columns["colCONTRACT_CONTENT"].Width = 148;
+            dgvList1.Columns["colUNIT_PRICE"].Width = 102;
+            dgvList1.Columns["colQUANTITY"].Width = 102;
+            dgvList1.Columns["colTOTAL"].Width = 102;
+            dgvList1.Columns["colUnitPrice1"].Width = 102;
+            dgvList1.Columns["colQuantity1"].Width = 102;
+            dgvList1.Columns["colTOTAL1"].Width = 102;
+            dgvList1.Columns["colUnitPrice2"].Width = 102;
+            dgvList1.Columns["colQuantity2"].Width = 102;
+            dgvList1.Columns["colTOTAL2"].Width = 102;
         }
         #endregion
 
@@ -180,12 +180,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             try
             {
-                if (Convert.ToDecimal(e.Value) < 0)
-                {
-                    dgvList.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color.Red;
-                }
+                dgvList.Rows[1].DefaultCellStyle.ForeColor = Color.Red;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
             }
@@ -198,7 +195,5 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.Close();
         }
         #endregion
-
-  
     }
 }

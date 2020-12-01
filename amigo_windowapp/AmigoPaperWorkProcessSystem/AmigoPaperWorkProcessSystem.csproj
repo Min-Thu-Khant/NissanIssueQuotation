@@ -38,7 +38,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>preview</LangVersion>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -107,8 +106,12 @@
     <Compile Include="Controllers\frm36Controller.cs" />
     <Compile Include="Controllers\frm37Controller.cs" />
     <Compile Include="Controllers\frm38Controller.cs" />
-    <Compile Include="Controllers\Jimugo\frmClientCertificateListController.cs" />
+<<<<<<< HEAD
+    <Compile Include="Controllers\FrmMonthlySaleAggregationController.cs" />
+=======
     <Compile Include="Controllers\Jimugo\frmApplicationApprovalController.cs" />
+>>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
+    <Compile Include="Controllers\Jimugo\frmClientCertificateListController.cs" />
     <Compile Include="Controllers\Jimugo\frmCompanyCodeListController.cs" />
     <Compile Include="Controllers\Jimugo\frmCustomerMasterMaintenanceController.cs" />
     <Compile Include="Controllers\Jimugo\frmJimugoMenuController.cs" />
@@ -175,22 +178,28 @@
     <Compile Include="Forms\frm38.Designer.cs">
       <DependentUpon>frm38.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.designer.cs">
+      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.Designer.cs">
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.designer.cs">
       <DependentUpon>frmErrrorNotification.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.Designer.cs">
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmServiceDesk.designer.cs">
       <DependentUpon>frmServiceDesk.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.Designer.cs">
+    <Compile Include="Forms\Jimugo\ApplicationApproval\frmUsageChargeBreakDown.designer.cs">
       <DependentUpon>frmUsageChargeBreakDown.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.cs">
@@ -198,12 +207,6 @@
     </Compile>
     <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.designer.cs">
       <DependentUpon>frmCustomerMasterPopup.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.Designer.cs">
-      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\frmClientCertificateList.cs">
       <SubType>Form</SubType>
@@ -240,6 +243,12 @@
     </Compile>
     <Compile Include="Forms\Jimugo\frmMailLoading.designer.cs">
       <DependentUpon>frmMailLoading.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\FrmMonthlySaleAggregationList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\FrmMonthlySaleAggregationList.Designer.cs">
+      <DependentUpon>FrmMonthlySaleAggregationList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\frmUsageChargeMaster.cs">
       <SubType>Form</SubType>
@@ -355,6 +364,9 @@
       <DependentUpon>frm38.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.resx">
+      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmErrrorNotification.resx">
       <DependentUpon>frmErrrorNotification.cs</DependentUpon>
     </EmbeddedResource>
@@ -366,9 +378,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterPopup.resx">
       <DependentUpon>frmCustomerMasterPopup.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Jimugo\ApplicationApproval\frmApplicationApproval.resx">
-      <DependentUpon>frmApplicationApproval.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmClientCertificateList.resx">
       <DependentUpon>frmClientCertificateList.cs</DependentUpon>
@@ -387,6 +396,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmMailLoading.resx">
       <DependentUpon>frmMailLoading.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\FrmMonthlySaleAggregationList.resx">
+      <DependentUpon>FrmMonthlySaleAggregationList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmUsageChargeMaster.resx">
       <DependentUpon>frmUsageChargeMaster.cs</DependentUpon>

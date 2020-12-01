@@ -190,12 +190,12 @@
             this.ERROR_NOTIFICATION = new System.Windows.Forms.DataGridViewLinkColumn();
             this.colUPDATED_AT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UPDATED_BY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.更新メッセージ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UPDATE_MESSAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.REQ_SEQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.INPUT_PERSON_EMAIL_ADDRESS_ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAIL_SENDING_TARGET_FLG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAIL_DESTINATION = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -216,9 +216,9 @@
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(19, 12);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(126, 21);
+            this.lblMenu.Size = new System.Drawing.Size(132, 27);
             this.lblMenu.TabIndex = 0;
-            this.lblMenu.Text = "Jimugo - Menu";
+            this.lblMenu.Text = "XXXXXXXX";
             // 
             // btnApproveCancel
             // 
@@ -270,7 +270,7 @@
             this.txtCompanyNoBox.Location = new System.Drawing.Point(127, 111);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(131, 21);
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(131, 25);
             this.txtCompanyNoBox.TabIndex = 14;
             // 
             // label2
@@ -292,7 +292,7 @@
             this.txtItemChanged.Location = new System.Drawing.Point(127, 145);
             this.txtItemChanged.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtItemChanged.Name = "txtItemChanged";
-            this.txtItemChanged.Size = new System.Drawing.Size(1145, 21);
+            this.txtItemChanged.Size = new System.Drawing.Size(1145, 25);
             this.txtItemChanged.TabIndex = 16;
             // 
             // label3
@@ -311,8 +311,9 @@
             this.txtSystemEffectiveDate.Location = new System.Drawing.Point(127, 179);
             this.txtSystemEffectiveDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSystemEffectiveDate.Name = "txtSystemEffectiveDate";
-            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(131, 21);
+            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(131, 25);
             this.txtSystemEffectiveDate.TabIndex = 18;
+            this.txtSystemEffectiveDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -330,8 +331,9 @@
             this.txtRegDeadline.Location = new System.Drawing.Point(391, 179);
             this.txtRegDeadline.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtRegDeadline.Name = "txtRegDeadline";
-            this.txtRegDeadline.Size = new System.Drawing.Size(131, 21);
+            this.txtRegDeadline.Size = new System.Drawing.Size(131, 25);
             this.txtRegDeadline.TabIndex = 20;
+            this.txtRegDeadline.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dgvList
             // 
@@ -418,12 +420,12 @@
             this.ERROR_NOTIFICATION,
             this.colUPDATED_AT,
             this.UPDATED_BY,
-            this.更新メッセージ,
+            this.UPDATE_MESSAGE,
             this.REQ_SEQ,
             this.INPUT_PERSON_EMAIL_ADDRESS_,
             this.MAIL_SENDING_TARGET_FLG,
             this.MAIL_DESTINATION,
-            this.UPDATED_AT_RAW});
+            this.colUPDATED_AT_RAW});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(16, 223);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -450,7 +452,7 @@
             // DISTINGUISH
             // 
             this.DISTINGUISH.DataPropertyName = "DISTINGUISH";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DISTINGUISH.DefaultCellStyle = dataGridViewCellStyle1;
             this.DISTINGUISH.Frozen = true;
             this.DISTINGUISH.HeaderText = "区分";
@@ -466,7 +468,7 @@
             this.REQ_TYPE.Frozen = true;
             this.REQ_TYPE.HeaderText = "申請区分";
             this.REQ_TYPE.Name = "REQ_TYPE";
-            this.REQ_TYPE.Width = 55;
+            this.REQ_TYPE.Width = 60;
             // 
             // REQ_STATUS
             // 
@@ -477,7 +479,7 @@
             this.REQ_STATUS.HeaderText = "申請状況";
             this.REQ_STATUS.Name = "REQ_STATUS";
             this.REQ_STATUS.ReadOnly = true;
-            this.REQ_STATUS.Width = 55;
+            this.REQ_STATUS.Width = 60;
             // 
             // TRANSACTION_TYPE
             // 
@@ -901,7 +903,7 @@
             this.BILL_BANK_ACCOUNT_NUMBER_1.DataPropertyName = "BILL_BANK_ACCOUNT_NUMBER_1";
             dataGridViewCellStyle41.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.BILL_BANK_ACCOUNT_NUMBER_1.DefaultCellStyle = dataGridViewCellStyle41;
-            this.BILL_BANK_ACCOUNT_NUMBER_1.HeaderText = "座番号";
+            this.BILL_BANK_ACCOUNT_NUMBER_1.HeaderText = "口座番号";
             this.BILL_BANK_ACCOUNT_NUMBER_1.Name = "BILL_BANK_ACCOUNT_NUMBER_1";
             this.BILL_BANK_ACCOUNT_NUMBER_1.ReadOnly = true;
             this.BILL_BANK_ACCOUNT_NUMBER_1.Width = 120;
@@ -970,6 +972,7 @@
             // 
             this.INITIAL_COST.DataPropertyName = "INITIAL_COST";
             dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle48.Format = "N0";
             this.INITIAL_COST.DefaultCellStyle = dataGridViewCellStyle48;
             this.INITIAL_COST.HeaderText = "初期費用";
             this.INITIAL_COST.Name = "INITIAL_COST";
@@ -980,6 +983,7 @@
             // 
             this.MONTHLY_COST.DataPropertyName = "MONTHLY_COST";
             dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle49.Format = "N0";
             this.MONTHLY_COST.DefaultCellStyle = dataGridViewCellStyle49;
             this.MONTHLY_COST.HeaderText = "月額利用料";
             this.MONTHLY_COST.Name = "MONTHLY_COST";
@@ -990,6 +994,7 @@
             // 
             this.YEAR_COST.DataPropertyName = "YEAR_COST";
             dataGridViewCellStyle50.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle50.Format = "N0";
             this.YEAR_COST.DefaultCellStyle = dataGridViewCellStyle50;
             this.YEAR_COST.HeaderText = "年額利用料";
             this.YEAR_COST.Name = "YEAR_COST";
@@ -999,7 +1004,7 @@
             // BREAKDOWN
             // 
             this.BREAKDOWN.DataPropertyName = "BREAKDOWN";
-            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle51.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.BREAKDOWN.DefaultCellStyle = dataGridViewCellStyle51;
             this.BREAKDOWN.HeaderText = "内訳";
             this.BREAKDOWN.Name = "BREAKDOWN";
@@ -1026,7 +1031,6 @@
             this.PLAN_AMIGO_CAI.HeaderText = "CAI利用者数";
             this.PLAN_AMIGO_CAI.Name = "PLAN_AMIGO_CAI";
             this.PLAN_AMIGO_CAI.ReadOnly = true;
-            this.PLAN_AMIGO_CAI.Width = 60;
             // 
             // PLAN_AMIGO_BIZ
             // 
@@ -1036,14 +1040,13 @@
             this.PLAN_AMIGO_BIZ.HeaderText = "Biz利用者数";
             this.PLAN_AMIGO_BIZ.Name = "PLAN_AMIGO_BIZ";
             this.PLAN_AMIGO_BIZ.ReadOnly = true;
-            this.PLAN_AMIGO_BIZ.Width = 45;
             // 
             // BOX_SIZE
             // 
             this.BOX_SIZE.DataPropertyName = "BOX_SIZE";
             dataGridViewCellStyle55.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.BOX_SIZE.DefaultCellStyle = dataGridViewCellStyle55;
-            this.BOX_SIZE.HeaderText = "BOXサイズ (GD)";
+            this.BOX_SIZE.HeaderText = "BOXサイズ (GB)";
             this.BOX_SIZE.Name = "BOX_SIZE";
             this.BOX_SIZE.ReadOnly = true;
             this.BOX_SIZE.Width = 105;
@@ -1212,15 +1215,15 @@
             this.UPDATED_BY.ReadOnly = true;
             this.UPDATED_BY.Width = 120;
             // 
-            // 更新メッセージ
+            // UPDATE_MESSAGE
             // 
-            this.更新メッセージ.DataPropertyName = "UPDATE_MESSAGE";
+            this.UPDATE_MESSAGE.DataPropertyName = "UPDATE_MESSAGE";
             dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.更新メッセージ.DefaultCellStyle = dataGridViewCellStyle72;
-            this.更新メッセージ.HeaderText = "更新メッセージ";
-            this.更新メッセージ.Name = "更新メッセージ";
-            this.更新メッセージ.ReadOnly = true;
-            this.更新メッセージ.Width = 350;
+            this.UPDATE_MESSAGE.DefaultCellStyle = dataGridViewCellStyle72;
+            this.UPDATE_MESSAGE.HeaderText = "更新メッセージ";
+            this.UPDATE_MESSAGE.Name = "UPDATE_MESSAGE";
+            this.UPDATE_MESSAGE.ReadOnly = true;
+            this.UPDATE_MESSAGE.Width = 350;
             // 
             // REQ_SEQ
             // 
@@ -1256,14 +1259,14 @@
             // 
             // UPDATED_AT_RAW
             // 
-            this.UPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Name = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Visible = false;
+            this.colUPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Name = "colUPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Visible = false;
             // 
             // frmApplicationApproval
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.dgvList);
@@ -1281,7 +1284,8 @@
             this.Controls.Add(this.pTitle);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmApplicationApproval";
-            this.Text = "[CTS030] 利用申請書承認画面";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmApplicationApproval_FormClosing);
             this.Load += new System.EventHandler(this.FrmApplicationApproval_Load);
             this.pTitle.ResumeLayout(false);
             this.pTitle.PerformLayout();
@@ -1383,11 +1387,11 @@
         private System.Windows.Forms.DataGridViewLinkColumn ERROR_NOTIFICATION;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_BY;
-        private System.Windows.Forms.DataGridViewTextBoxColumn 更新メッセージ;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UPDATE_MESSAGE;
         private System.Windows.Forms.DataGridViewTextBoxColumn REQ_SEQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn INPUT_PERSON_EMAIL_ADDRESS_;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAIL_SENDING_TARGET_FLG;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAIL_DESTINATION;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_AT_RAW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT_RAW;
     }
 }

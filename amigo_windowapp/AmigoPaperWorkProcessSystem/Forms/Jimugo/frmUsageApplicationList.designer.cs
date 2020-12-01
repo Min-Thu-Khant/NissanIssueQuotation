@@ -72,9 +72,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
+            this.lblCompanyNoBox = new System.Windows.Forms.Label();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -120,7 +120,7 @@
             this.colUPDATED_AT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATED_BY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATE_MESSAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colUPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ROW_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -352,7 +352,7 @@
             this.colUPDATED_AT,
             this.colUPDATED_BY,
             this.colUPDATE_MESSAGE,
-            this.UPDATED_AT_RAW,
+            this.colUPDATED_AT_RAW,
             this.ROW_ID});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(17, 267);
@@ -455,16 +455,16 @@
             this.label11.Text = "~";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label13
+            // lblCompanyNoBox
             // 
-            this.label13.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label13.Location = new System.Drawing.Point(18, 108);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(100, 21);
-            this.label13.TabIndex = 170;
-            this.label13.Text = "会社番号＋BOX";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyNoBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyNoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyNoBox.Location = new System.Drawing.Point(18, 108);
+            this.lblCompanyNoBox.Name = "lblCompanyNoBox";
+            this.lblCompanyNoBox.Size = new System.Drawing.Size(100, 21);
+            this.lblCompanyNoBox.TabIndex = 170;
+            this.lblCompanyNoBox.Text = "会社番号＋BOX";
+            this.lblCompanyNoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyNoBox
             // 
@@ -474,16 +474,16 @@
             this.txtCompanyNoBox.Size = new System.Drawing.Size(112, 21);
             this.txtCompanyNoBox.TabIndex = 169;
             // 
-            // label15
+            // lblCompanyName
             // 
-            this.label15.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label15.Location = new System.Drawing.Point(244, 107);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(64, 21);
-            this.label15.TabIndex = 172;
-            this.label15.Text = "会社名";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyName.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyName.Location = new System.Drawing.Point(244, 107);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(64, 21);
+            this.lblCompanyName.TabIndex = 172;
+            this.lblCompanyName.Text = "会社名";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyName
             // 
@@ -718,7 +718,9 @@
             // displayItemLabel1
             // 
             this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.displayItemLabel1.LabelText = " 表示件数";
             this.displayItemLabel1.Location = new System.Drawing.Point(18, 188);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.displayItemLabel1.Name = "displayItemLabel1";
             this.displayItemLabel1.Size = new System.Drawing.Size(88, 22);
             this.displayItemLabel1.TabIndex = 180;
@@ -762,6 +764,7 @@
             this.colCOMPANY_NO_BOX.Frozen = true;
             this.colCOMPANY_NO_BOX.HeaderText = "会社番号＋BOX";
             this.colCOMPANY_NO_BOX.Name = "colCOMPANY_NO_BOX";
+            this.colCOMPANY_NO_BOX.Width = 110;
             // 
             // colREQ_SEQ
             // 
@@ -774,6 +777,7 @@
             this.colREQ_SEQ.ReadOnly = true;
             this.colREQ_SEQ.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colREQ_SEQ.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colREQ_SEQ.Width = 40;
             // 
             // colCOMPANY_NAME
             // 
@@ -786,6 +790,7 @@
             this.colCOMPANY_NAME.ReadOnly = true;
             this.colCOMPANY_NAME.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCOMPANY_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCOMPANY_NAME.Width = 150;
             // 
             // colCLOSE_FLG
             // 
@@ -814,6 +819,7 @@
             this.colGD.ReadOnly = true;
             this.colGD.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colGD.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.colGD.Width = 105;
             // 
             // colREQ_TYPE
             // 
@@ -843,6 +849,7 @@
             this.colREQ_DATE.HeaderText = "申請日時";
             this.colREQ_DATE.Name = "colREQ_DATE";
             this.colREQ_DATE.ReadOnly = true;
+            this.colREQ_DATE.Width = 145;
             // 
             // colQUOTATION_DATE
             // 
@@ -874,6 +881,7 @@
             this.colSYSTEM_EFFECTIVE_DATE.HeaderText = "有効日";
             this.colSYSTEM_EFFECTIVE_DATE.Name = "colSYSTEM_EFFECTIVE_DATE";
             this.colSYSTEM_EFFECTIVE_DATE.ReadOnly = true;
+            this.colSYSTEM_EFFECTIVE_DATE.Width = 145;
             // 
             // colSYSTEM_SETTING_STATUS
             // 
@@ -882,6 +890,7 @@
             this.colSYSTEM_SETTING_STATUS.DefaultCellStyle = dataGridViewCellStyle13;
             this.colSYSTEM_SETTING_STATUS.HeaderText = "状況";
             this.colSYSTEM_SETTING_STATUS.Name = "colSYSTEM_SETTING_STATUS";
+            this.colSYSTEM_SETTING_STATUS.Width = 105;
             // 
             // colCOMPLETION_NOTIFICATION_DATE
             // 
@@ -946,25 +955,28 @@
             this.colUPDATED_AT.DefaultCellStyle = dataGridViewCellStyle15;
             this.colUPDATED_AT.HeaderText = "更新日時";
             this.colUPDATED_AT.Name = "colUPDATED_AT";
+            this.colUPDATED_AT.Width = 145;
             // 
             // colUPDATED_BY
             // 
             this.colUPDATED_BY.DataPropertyName = "UPDATED_BY";
             this.colUPDATED_BY.HeaderText = "更新ユーザーID";
             this.colUPDATED_BY.Name = "colUPDATED_BY";
+            this.colUPDATED_BY.Width = 120;
             // 
             // colUPDATE_MESSAGE
             // 
             this.colUPDATE_MESSAGE.DataPropertyName = "UPDATE_MESSAGE";
             this.colUPDATE_MESSAGE.HeaderText = "更新メッセージ";
             this.colUPDATE_MESSAGE.Name = "colUPDATE_MESSAGE";
+            this.colUPDATE_MESSAGE.Width = 350;
             // 
-            // UPDATED_AT_RAW
+            // colUPDATED_AT_RAW
             // 
-            this.UPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Name = "UPDATED_AT_RAW";
-            this.UPDATED_AT_RAW.Visible = false;
+            this.colUPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Name = "colUPDATED_AT_RAW";
+            this.colUPDATED_AT_RAW.Visible = false;
             // 
             // ROW_ID
             // 
@@ -995,9 +1007,9 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.txtCompanyName);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.lblCompanyNoBox);
             this.Controls.Add(this.txtCompanyNoBox);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label16);
@@ -1063,9 +1075,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lblCompanyNoBox;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.TextBox txtCompanyName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -1111,7 +1123,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_BY;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATE_MESSAGE;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_AT_RAW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT_RAW;
         private System.Windows.Forms.DataGridViewTextBoxColumn ROW_ID;
     }
 }

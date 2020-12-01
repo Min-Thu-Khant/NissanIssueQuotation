@@ -12,7 +12,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 {
     public partial class frmRegisterCompleteNotification : Form
     {
-
+        #region Declare
         private UIUtility uIUtility;
         private string programID = "";
         private string programName = "";
@@ -20,9 +20,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         private string REQ_SEQ = "";
         private string QUOTATION_DATE = "";
         private string ORDER_DATE = "";
-        private string COMPLETION_NOTIFICATION_DATE = "";
         private string COMPANY_NAME = "";
-        private string pdfLink = "";
+        #endregion
+
+        #region Properties
+        public string COMPLETION_NOTIFICATION_DATE { get; set; }
+        public DialogResult Dialog { get; set; }
+        public string UPDATED_AT { get; set; }
+        public string UPDATED_AT_RAW { get; set; }
+        #endregion
 
         #region Constructor
         public frmRegisterCompleteNotification()
@@ -50,7 +56,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
             this.COMPANY_NAME = company_name;
         }
         #endregion
-
+        
         #region BindGrid
         private void BindGrid()
         {
@@ -97,6 +103,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 
             //set title
             lblMenu.Text = this.programName;
+            this.Text = "[" + programID + "] " + programName;
 
             //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
@@ -112,6 +119,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 
             uIUtility = new UIUtility();
             BindGrid();
+            Dialog = DialogResult.Cancel;
         }
         #endregion
 
@@ -119,7 +127,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         private async void BtnPreview_Click(object sender, EventArgs e)
         {
            
-            if(CheckUtility.SearchConditionCheck(this, txtDestinationMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
+            if(CheckUtility.SearchConditionCheck(this, lblDestinationMailAddress.Text, txtDestinationMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
             {
                 frmRegisterCompleteNotificationController oController = new frmRegisterCompleteNotificationController();
                 try
@@ -135,10 +143,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                     {
 
                     }
-
+                    string FILENAME = "";
                     if (string.IsNullOrEmpty(return_message))
                     {
-                        pdfLink = result.Rows[0]["DownloadLink"].ToString();
+                        FILENAME = result.Rows[0]["FILENAME"].ToString();
                         MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB001, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -146,7 +154,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                         MetroMessageBox.Show(this, "\n" + return_message, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
 
-                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, pdfLink);
+                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, FILENAME);
 
                     #region CallPreviewScreen
                     string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp";
@@ -159,15 +167,18 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                     //delete temp files
                     Utility.DeleteFiles(temp_deirectory);
 
-                    string destinationpath = temp_deirectory + "/temp.pdf";
+                    string destinationpath = temp_deirectory + "/" + FILENAME;
                     btnPreview.Enabled = false;
-                    bool success = await Core.WebUtility.Download(pdfLink, destinationpath);
+                    bool success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + FILENAME, destinationpath);
                     if (success)
                     {
                         frmRegisterCompleteNotificationPreview frm = new frmRegisterCompleteNotificationPreview(dt);
                         frm.ShowDialog();
                         this.Show();
-                        //BindGrid(fromDate, toDate);
+                        UPDATED_AT = frm.UPDATED_AT;
+                        UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
+                        COMPLETION_NOTIFICATION_DATE = txtRegisterCompleteNotificationDate.Text.Trim();
+                        Dialog = DialogResult.OK;
                         this.BringToFront();
                     }
                     btnPreview.Enabled = true;
@@ -180,7 +191,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 }
 
             }
-                
                 
         }
         #endregion
@@ -197,7 +207,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
             dt.Columns.Add("COMPANY_NAME");
             dt.Columns.Add("EMAIL_ADDRESS");
             dt.Columns.Add("EDI_ACCOUNT");
-            dt.Columns.Add("DOWNLOAD_LINK");
+            dt.Columns.Add("FILENAME");
 
             dt.Rows.Add(companyNoBox,reqSeq,quotationDate, orderDate, completionNotificationDate, companyName, emailAddress, ediAccount, downloadLink);
 
@@ -209,11 +219,19 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         private void BtnClientCertificate_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmClientCertificateList frm = new frmClientCertificateList(txtCompanyNoBox.Text, "CTS080", "クライアント証明書一覧");
+            string year = DateTime.Now.Year.ToString();
+            frmClientCertificateList frm = new frmClientCertificateList(year,txtCompanyNoBox.Text, "CTS080", "クライアント証明書一覧");
             frm.ShowDialog();
             this.Show();
             //BindGrid(fromDate, toDate);
             this.BringToFront();
+        }
+        #endregion
+
+        #region FormClosing
+        private void FrmRegisterCompleteNotification_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = Dialog;
         }
         #endregion
     }

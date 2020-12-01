@@ -30,8 +30,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
             new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = true, Max = 255 },
             new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = false, Require = false, Initial = "0", Max = 100, Min=0},
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 6 },
-            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "*" , Max = 1 },
+            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 100 },
+            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = " " , Max = 1 },
             new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 },
             new Validate{ Name = "colPASSWORD_SET_DATE", Type = Utility.DataType.DATE_RANGE, Edit=true, Require = false, Max = 16, Min = 16 , Data1="colPASSWORD_SET_DATE", Data2="colPASSWORD_EXPIRATION_DATE"},
             new Validate{ Name = "colCOMPANY_NO", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 },
@@ -46,8 +46,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
             new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = true, Max = 255 },
             new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = false, Require = false, Initial = "0", Max = 100, Min=0 },
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 6 },
-            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "*" , Max = 1 },
+            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 100 },
+            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = " " , Max = 1 },
             new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 },
             new Validate{ Name = "colCOMPANY_NO", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 },
             new Validate{ Name = "colCOMPANY_BOX",Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 }
@@ -60,7 +60,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
             new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = false, Max = 255 },
             new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = true, Require = true,Max = 100, Min=0},
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 6 },
+            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 100 },
             new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=true, Require=false, Max = 1 },
             new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 }
         };
@@ -120,11 +120,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             //set title
             lblMenu.Text = programName;
+            this.Text = "[" + programID + "] " + programName;
 
             //utility
             uIUtility = new UIUtility(dgvList, Insertable, Copyable, Modifiable, dummyColumns);
             uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
-            SetDefaultColumnWidths(); //adjust checkbox sizes
+
+            uIUtility.ResetCheckBoxSize();//adjust checkbox sizes
             uIUtility.DummyTable();// add dummy table to merge columns
             uIUtility.DisableAutoSort();//disable autosort
             PopulateDropdowns();
@@ -186,17 +188,17 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 string company_no_box , company_name,  email ;
 
-                if (!CheckUtility.SearchConditionCheck(this, txtCompanyNoBox.Text, false, Utility.DataType.HALF_KANA_ALPHA_NUMERIC, 10, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblCompanyNoBox.Text, txtCompanyNoBox.Text, false, Utility.DataType.HALF_KANA_ALPHA_NUMERIC, 10, 0))
                 {
                     return;
                 }
 
-                if (!CheckUtility.SearchConditionCheck(this, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblCompanyName.Text, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
                 {
                     return;
                 }
 
-                if (!CheckUtility.SearchConditionCheck(this, txtEmail.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 255, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblEmail.Text, txtEmail.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 255, 0))
                 {
                     return;
                 }
@@ -260,10 +262,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             txtCompanyNoBox.Text = "";
             txtEmail.Text = "";
             cboLimit.SelectedIndex = 0;
-            uIUtility.ClearDataGrid();
-            lblTotalRecords.Text = "";
-            lblTotalPages.Text = "0";
-            lblcurrentPage.Text = "0";
         }
 
         #endregion
@@ -426,6 +424,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region CommonGridManage
         public void CommonGridManage(string operation)
         {
+            //if there is no row in datagrid view and insert button is clicked
+            bool Ischecked = uIUtility.checkSelectedRow();
+            if ((dgvList.Rows.Count <= 0 && operation == "I") || (!Ischecked && operation == "I"))
+            {
+                uIUtility.InsertInitialRow(operation);
+            }
+
             if (uIUtility.checkSelectedRow())
             {
                 for (int i = 0; i < dgvList.Rows.Count; i++)
@@ -461,12 +466,21 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                             case "C":
                                 uIUtility.CopyMode(operation, dgvList.Rows[i], true);
                                 IncreaseCompanyNoBox(i);
+                                try
+                                {
+                                    dgvList.Rows[i].Cells["colCK"].Value = " ";
+                                }
+                                catch (Exception)
+                                {
+                                }
                                 i++;
                                 break;
                             default:
                                 break;
                         }
                     }
+
+                    dgvList.Rows[i].Cells["colCK"].Value = " ";
                 }
             }
             else
@@ -476,14 +490,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                     MetroMessageBox.Show(dgvList.Parent, "\n" + JimugoMessages.E000ZZ004, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
-            //if there is no row in datagrid view and insert button is clicked
-            bool Ischecked = uIUtility.checkSelectedRow();
-            if ((dgvList.Rows.Count <= 0 && operation == "I") || (!Ischecked && operation == "I"))
-            {
-                uIUtility.InsertInitialRow(operation);
-            }
-
         }
         #endregion
 
@@ -649,7 +655,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region ShowMailLoading
         private void ShowMailLoading()
         {
-            Application.Run(new frmMailLoading());
+            Application.Run(new frmMailLoading("Test Demo"));
         }
         #endregion
         #endregion

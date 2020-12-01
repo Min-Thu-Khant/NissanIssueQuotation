@@ -72,7 +72,7 @@ namespace AmigoProcessManagement.Jimugo
             }
             else
             {
-                Controller.ControllerRegisterCompleteNotificationSending completeNotificationSending = new Controller.ControllerRegisterCompleteNotificationSending();
+                Controller.ControllerRegisterCompleteNotificationSending completeNotificationSending = new Controller.ControllerRegisterCompleteNotificationSending(authHeader);
                 MetaResponse response = completeNotificationSending.NotiSendingPreview(COMPANY_NAME,COMPANY_NO_BOX,REQ_SEQ,EDI_ACCOUNT,authHeader);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
@@ -104,8 +104,8 @@ namespace AmigoProcessManagement.Jimugo
             }
             else
             {
-                Controller.ControllerRegisterCompleteNotificationSending completeNotiController = new Controller.ControllerRegisterCompleteNotificationSending();
-                MetaResponse response = completeNotiController.SendMailCreate(List, authHeader);
+                Controller.ControllerRegisterCompleteNotificationSending completeNotiController = new Controller.ControllerRegisterCompleteNotificationSending(authHeader);
+                MetaResponse response = completeNotiController.SendMailCreate(List);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();

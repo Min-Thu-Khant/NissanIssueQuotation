@@ -16,6 +16,9 @@ namespace AmigoPaperWorkProcessSystem.Forms
 
         #region Properties
         public string ORDER_DATE { get; set; }
+        public DialogResult Dialog { get; set; }
+        public string UPDATED_AT { get; set; }
+        public string UPDATED_AT_RAW { get; set; }
         #endregion
 
         #region Constructor
@@ -55,7 +58,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             txtSystemEffectiveDate.Text = GetParameterByName("SYSTEM_EFFECTIVE_DATE");
             txtSystemRegisterDeadline.Text = GetParameterByName("SYSTEM_REGISTER_DEADLINE");
             txtTransactionType.Text = GetParameterByName("TRANSACTION_TYPE");
-            txtREQ_SEQ.Text = GetParameterByName("REQ_SEQ");
+            txtREQ_TYPE.Text = GetParameterByName("REQ_TYPE");
             txtStartUseDate.Text = GetParameterByName("START_USE_DATE");
         }
         #endregion
@@ -63,6 +66,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         #region FormLoad
         private void FrmRegisterPreview_Load(object sender, EventArgs e)
         {
+            Dialog = DialogResult.Cancel;
             uIUtility = new UIUtility();
 
             //theme
@@ -90,6 +94,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         private void FrmOrderRegistrationPreview_FormClosing(object sender, FormClosingEventArgs e)
         {
             this.pdfDocViewer.Dispose();
+            this.DialogResult = Dialog;
         }
         #endregion
 
@@ -115,14 +120,16 @@ namespace AmigoPaperWorkProcessSystem.Forms
 
                     if (!string.IsNullOrEmpty(result.Rows[0]["Message"].ToString()))
                     {
-                        this.DialogResult = DialogResult.OK;
+                        Dialog = DialogResult.OK;
                         this.ORDER_DATE = txtOrderDate.Text.Trim();
+                        this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
+                        this.UPDATED_AT_RAW = result.Rows[0]["UPDATED_AT_RAW"].ToString();
                         MetroMessageBox.Show(this, "\n" + message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
                     if (!string.IsNullOrEmpty(result.Rows[0]["Error Message"].ToString()))
                     {
-                        //this.DialogResult = DialogResult.Cancel;
+                        Dialog = DialogResult.Cancel;
                         this.ORDER_DATE = null;
                         MetroMessageBox.Show(this, "\n" + error_message , "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
@@ -144,37 +151,37 @@ namespace AmigoPaperWorkProcessSystem.Forms
             string SYSTEM_EFFECTIVE_DATE = txtSystemEffectiveDate.Text.Trim();
             string SYSTEM_REGISTER_DEADLINE = txtSystemRegisterDeadline.Text.Trim();
             string TRANSACTION_TYPE = txtTransactionType.Text.Trim();
-            string REQ_SEQ = txtREQ_SEQ.Text.Trim();
+            string REQ_TYPE = txtREQ_TYPE.Text.Trim();
             string START_USE_DATE = txtStartUseDate.Text.Trim();
 
             //validate
 
-            if (!CheckUtility.SearchConditionCheck(this, ORDER_DATE, true, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblOrderDate.Text, ORDER_DATE, true, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, SYSTEM_EFFECTIVE_DATE, true, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblSystemEffectiveDate.Text, SYSTEM_EFFECTIVE_DATE, true, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, SYSTEM_REGISTER_DEADLINE, true, Utility.DataType.TIMESTAMP, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblSystemRegisterDeadline.Text, SYSTEM_REGISTER_DEADLINE, true, Utility.DataType.TIMESTAMP, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, TRANSACTION_TYPE, true, Utility.DataType.HALF_NUMBER, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblTransactionType.Text, TRANSACTION_TYPE, true, Utility.DataType.HALF_NUMBER, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, REQ_SEQ, true, Utility.DataType.HALF_NUMBER, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblREQ_TYPE.Text, REQ_TYPE, true, Utility.DataType.HALF_NUMBER, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, START_USE_DATE, true, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblStartUseDate.Text, START_USE_DATE, true, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
@@ -184,7 +191,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             PARAMETERS.Rows[0]["SYSTEM_EFFECTIVE_DATE"] = SYSTEM_EFFECTIVE_DATE;
             PARAMETERS.Rows[0]["SYSTEM_REGISTER_DEADLINE"] = SYSTEM_REGISTER_DEADLINE;
             PARAMETERS.Rows[0]["TRANSACTION_TYPE"] = TRANSACTION_TYPE;
-            PARAMETERS.Rows[0]["REQ_SEQ"] = REQ_SEQ;
+            PARAMETERS.Rows[0]["REQ_TYPE"] = REQ_TYPE;
             PARAMETERS.Rows[0]["START_USE_DATE"] = START_USE_DATE;
 
             return true;

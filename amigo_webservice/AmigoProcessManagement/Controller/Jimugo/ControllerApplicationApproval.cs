@@ -189,7 +189,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Approve
-        public MetaResponse Approve(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string List)
+        public MetaResponse Approve(string COMPANY_NO_BOX, int REQ_TYPE, string REQ_TYPE_RAW, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string List)
         {
 
             try
@@ -264,7 +264,6 @@ namespace AmigoProcessManagement.Controller
                         if (REQ_TYPE == 2 || REQ_TYPE == 9)
                         {
                             LatestCustomer =  DAL_CUSTOMER_MASTER.GetTopCustomerByKeys(oREQUEST_DETAIL.COMPANY_NO_BOX, TRANSACTION_TYPE, START_USE_DATE, out msg);
-
                         }
 
                         #region CONDUCT NEW CUSTOMER MASTER
@@ -320,34 +319,34 @@ namespace AmigoProcessManagement.Controller
                     bool mailSuccess = false;
                     if (EMIAL_SENDING_TARGET_FLG == "*" && MAIL_DESTINATION == "1")
                     {
-                        mailSuccess = SendMailToMaintenance(COMPANY_NO_BOX, REQ_TYPE.ToString(), row["COMPANY_NAME"].ToString(), CHANGED_ITEMS, SYSTEM_REGIST_DEADLINE, out dtMail);
+                        mailSuccess = SendMailToMaintenance(COMPANY_NO_BOX, REQ_TYPE_RAW, row["COMPANY_NAME"].ToString(), CHANGED_ITEMS, SYSTEM_REGIST_DEADLINE, out dtMail);
+                        if (mailSuccess)
+                        {
+                            dbTxn.Complete();
+                            return SetSuccessMessage(row, Listing, dtMail, ds);
+                        }
+                        else
+                        {
+                            return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                        }
                     }
                     else if (EMIAL_SENDING_TARGET_FLG == "*" && MAIL_DESTINATION == "2")
                     {
                         mailSuccess = SendMailToSupplier(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_MAIL_ADDRESS"].ToString(), out dtMail);
-                    }
 
-                    if (mailSuccess)
-                    {
-                        response.Status = 1;
-                        row["UPDATED_AT"] = UPDATED_AT_DATETIME;
-                        row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
-                        row["UPDATED_BY"] = CURRENT_USER;
-                        row["UPDATE_MESSAGE"] = string.Format(Messages.Jimugo.I000ZZ016, "承認");
-                        Listing.TableName = "LISTING";
-                        ds.Tables.Add(Listing.Copy());
-                        dtMail.TableName = "MAIL";
-                        ds.Tables.Add(dtMail.Copy());
-                    }
-                    else
-                    {
-                        return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                        if (mailSuccess)
+                        {
+                            dbTxn.Complete();
+                            return SetSuccessMessage(row, Listing, dtMail, ds);
+                        }
+                        else
+                        {
+                            return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                        }
                     }
                     dbTxn.Complete();
-                    response.Data = Utility.Utility_Component.DsToJSon(ds, "Approval");
-                    timer.Stop();
-                    response.Meta.Duration = timer.Elapsed.TotalSeconds;
-                    return response;
+                    return SetSuccessMessage(row, Listing, dtMail, ds);
+
                 }
                 
             }
@@ -355,6 +354,26 @@ namespace AmigoProcessManagement.Controller
             {
                 return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
             }
+        }
+        #endregion
+
+        #region CheckMailProcess
+        private MetaResponse SetSuccessMessage(DataRow row, DataTable Listing, DataTable dtMail, DataSet ds)
+        {
+            response.Status = 1;
+            row["UPDATED_AT"] = UPDATED_AT_DATETIME;
+            row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
+            row["UPDATED_BY"] = CURRENT_USER;
+            row["UPDATE_MESSAGE"] = string.Format(Messages.Jimugo.I000ZZ016, "承認");
+            Listing.TableName = "LISTING";
+            ds.Tables.Add(Listing.Copy());
+            dtMail.TableName = "MAIL";
+            ds.Tables.Add(dtMail.Copy());
+            response.Data = Utility.Utility_Component.DsToJSon(ds, "Approval");
+            timer.Stop();
+            response.Meta.Duration = timer.Elapsed.TotalSeconds;
+            return response;
+
         }
         #endregion
 
@@ -477,6 +496,10 @@ namespace AmigoProcessManagement.Controller
                         ds.Tables.Add(Listing.Copy());
                         dtMail.TableName = "MAIL";
                         ds.Tables.Add(dtMail.Copy());
+                    }
+                    else
+                    {
+                        return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
                     }
                 }
                 else

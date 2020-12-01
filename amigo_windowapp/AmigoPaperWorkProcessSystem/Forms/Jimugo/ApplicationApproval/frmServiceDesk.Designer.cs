@@ -37,13 +37,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.dgvCurrent = new System.Windows.Forms.DataGridView();
-            this.dgvChange = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CONTACT_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAIL_ADDRESS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PHONE_NUMBER = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvChange = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,7 +55,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(29, 48);
+            this.label1.Location = new System.Drawing.Point(21, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 15);
             this.label1.TabIndex = 2;
@@ -77,51 +76,28 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Meiryo UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(506, 49);
+            this.label2.Location = new System.Drawing.Point(504, 16);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(31, 15);
             this.label2.TabIndex = 4;
             this.label2.Text = "変更";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 12);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 17);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "サービスデスク";
-            // 
             // dgvCurrent
             // 
             this.dgvCurrent.AllowUserToAddRows = false;
-            this.dgvCurrent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCurrent.ColumnHeadersHeight = 20;
+            this.dgvCurrent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCurrent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dataGridViewTextBoxColumn1,
             this.CONTACT_NAME,
             this.MAIL_ADDRESS,
             this.PHONE_NUMBER});
-            this.dgvCurrent.Location = new System.Drawing.Point(32, 69);
+            this.dgvCurrent.EnableHeadersVisualStyles = false;
+            this.dgvCurrent.Location = new System.Drawing.Point(24, 36);
             this.dgvCurrent.Name = "dgvCurrent";
             this.dgvCurrent.RowHeadersVisible = false;
-            this.dgvCurrent.Size = new System.Drawing.Size(450, 260);
+            this.dgvCurrent.Size = new System.Drawing.Size(450, 298);
             this.dgvCurrent.TabIndex = 6;
-            // 
-            // dgvChange
-            // 
-            this.dgvChange.AllowUserToAddRows = false;
-            this.dgvChange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn2,
-            this.dataGridViewTextBoxColumn3,
-            this.dataGridViewTextBoxColumn4,
-            this.dataGridViewTextBoxColumn5});
-            this.dgvChange.Location = new System.Drawing.Point(509, 69);
-            this.dgvChange.Name = "dgvChange";
-            this.dgvChange.RowHeadersVisible = false;
-            this.dgvChange.Size = new System.Drawing.Size(450, 260);
-            this.dgvChange.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -160,6 +136,23 @@
             this.PHONE_NUMBER.Name = "PHONE_NUMBER";
             this.PHONE_NUMBER.ReadOnly = true;
             this.PHONE_NUMBER.Width = 110;
+            // 
+            // dgvChange
+            // 
+            this.dgvChange.AllowUserToAddRows = false;
+            this.dgvChange.ColumnHeadersHeight = 20;
+            this.dgvChange.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvChange.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn5});
+            this.dgvChange.EnableHeadersVisualStyles = false;
+            this.dgvChange.Location = new System.Drawing.Point(507, 36);
+            this.dgvChange.Name = "dgvChange";
+            this.dgvChange.RowHeadersVisible = false;
+            this.dgvChange.Size = new System.Drawing.Size(450, 298);
+            this.dgvChange.TabIndex = 7;
             // 
             // dataGridViewTextBoxColumn2
             // 
@@ -206,12 +199,12 @@
             this.ClientSize = new System.Drawing.Size(984, 390);
             this.Controls.Add(this.dgvChange);
             this.Controls.Add(this.dgvCurrent);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "frmServiceDesk";
+            this.Text = "サービスデスク";
             this.Load += new System.EventHandler(this.FrmServiceDesk_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChange)).EndInit();
@@ -224,7 +217,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvCurrent;
         private System.Windows.Forms.DataGridView dgvChange;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;

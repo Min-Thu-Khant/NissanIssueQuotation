@@ -69,8 +69,8 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnFirst = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCONSTRACT_NAME = new System.Windows.Forms.Label();
+            this.lblCONTRACT_CODE = new System.Windows.Forms.Label();
             this.txtCONSTRACT_NAME = new System.Windows.Forms.TextBox();
             this.txtCONTRACT_CODE = new System.Windows.Forms.TextBox();
             this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
@@ -106,7 +106,7 @@
             this.cboLimit.Location = new System.Drawing.Point(90, 149);
             this.cboLimit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboLimit.Name = "cboLimit";
-            this.cboLimit.Size = new System.Drawing.Size(139, 22);
+            this.cboLimit.Size = new System.Drawing.Size(139, 26);
             this.cboLimit.TabIndex = 78;
             this.cboLimit.SelectedIndexChanged += new System.EventHandler(this.CboLimit_SelectedIndexChanged);
             // 
@@ -149,7 +149,7 @@
             this.lblMenu.Location = new System.Drawing.Point(12, 9);
             this.lblMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(126, 21);
+            this.lblMenu.Size = new System.Drawing.Size(160, 27);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -161,7 +161,7 @@
             this.lblClear.Location = new System.Drawing.Point(240, 154);
             this.lblClear.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(82, 14);
+            this.lblClear.Size = new System.Drawing.Size(104, 18);
             this.lblClear.TabIndex = 81;
             this.lblClear.Text = "検索条件のクリア";
             this.lblClear.Click += new System.EventHandler(this.LblClear_Click);
@@ -293,7 +293,7 @@
             this.lblTotalRecords.AutoSize = true;
             this.lblTotalRecords.Location = new System.Drawing.Point(3, 11);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalRecords.Size = new System.Drawing.Size(0, 18);
             this.lblTotalRecords.TabIndex = 36;
             // 
             // btnCheck
@@ -330,7 +330,7 @@
             this.lblTotalPages.AutoSize = true;
             this.lblTotalPages.Location = new System.Drawing.Point(1092, 11);
             this.lblTotalPages.Name = "lblTotalPages";
-            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
+            this.lblTotalPages.Size = new System.Drawing.Size(17, 18);
             this.lblTotalPages.TabIndex = 31;
             this.lblTotalPages.Text = "0";
             // 
@@ -340,7 +340,7 @@
             this.lblcurrentPage.AutoSize = true;
             this.lblcurrentPage.Location = new System.Drawing.Point(997, 11);
             this.lblcurrentPage.Name = "lblcurrentPage";
-            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
+            this.lblcurrentPage.Size = new System.Drawing.Size(17, 18);
             this.lblcurrentPage.TabIndex = 30;
             this.lblcurrentPage.Text = "0";
             // 
@@ -364,7 +364,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1044, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(19, 14);
+            this.label6.Size = new System.Drawing.Size(24, 18);
             this.label6.TabIndex = 25;
             this.label6.Text = "Of";
             // 
@@ -410,34 +410,34 @@
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
             // 
-            // label2
+            // lblCONSTRACT_NAME
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(241, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 21);
-            this.label2.TabIndex = 110;
-            this.label2.Text = "契約内容";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCONSTRACT_NAME.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCONSTRACT_NAME.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCONSTRACT_NAME.Location = new System.Drawing.Point(241, 110);
+            this.lblCONSTRACT_NAME.Name = "lblCONSTRACT_NAME";
+            this.lblCONSTRACT_NAME.Size = new System.Drawing.Size(79, 21);
+            this.lblCONSTRACT_NAME.TabIndex = 110;
+            this.lblCONSTRACT_NAME.Text = "契約内容";
+            this.lblCONSTRACT_NAME.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label3
+            // lblCONTRACT_CODE
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(16, 110);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(75, 21);
-            this.label3.TabIndex = 109;
-            this.label3.Text = "契約コード";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCONTRACT_CODE.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCONTRACT_CODE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCONTRACT_CODE.Location = new System.Drawing.Point(16, 110);
+            this.lblCONTRACT_CODE.Name = "lblCONTRACT_CODE";
+            this.lblCONTRACT_CODE.Size = new System.Drawing.Size(75, 21);
+            this.lblCONTRACT_CODE.TabIndex = 109;
+            this.lblCONTRACT_CODE.Text = "契約コード";
+            this.lblCONTRACT_CODE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCONSTRACT_NAME
             // 
             this.txtCONSTRACT_NAME.Location = new System.Drawing.Point(319, 110);
             this.txtCONSTRACT_NAME.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCONSTRACT_NAME.Name = "txtCONSTRACT_NAME";
-            this.txtCONSTRACT_NAME.Size = new System.Drawing.Size(132, 21);
+            this.txtCONSTRACT_NAME.Size = new System.Drawing.Size(132, 25);
             this.txtCONSTRACT_NAME.TabIndex = 108;
             // 
             // txtCONTRACT_CODE
@@ -445,13 +445,15 @@
             this.txtCONTRACT_CODE.Location = new System.Drawing.Point(90, 110);
             this.txtCONTRACT_CODE.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCONTRACT_CODE.Name = "txtCONTRACT_CODE";
-            this.txtCONTRACT_CODE.Size = new System.Drawing.Size(139, 21);
+            this.txtCONTRACT_CODE.Size = new System.Drawing.Size(139, 25);
             this.txtCONTRACT_CODE.TabIndex = 107;
             // 
             // displayItemLabel1
             // 
             this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.displayItemLabel1.LabelText = " 表示件数";
             this.displayItemLabel1.Location = new System.Drawing.Point(16, 149);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.displayItemLabel1.Name = "displayItemLabel1";
             this.displayItemLabel1.Size = new System.Drawing.Size(75, 22);
             this.displayItemLabel1.TabIndex = 112;
@@ -503,6 +505,7 @@
             this.colFEE_STRUCTURE.Name = "colFEE_STRUCTURE";
             this.colFEE_STRUCTURE.ReadOnly = true;
             this.colFEE_STRUCTURE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.colFEE_STRUCTURE.Width = 110;
             // 
             // colCONTRACT_CODE
             // 
@@ -515,6 +518,7 @@
             this.colCONTRACT_CODE.ReadOnly = true;
             this.colCONTRACT_CODE.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCONTRACT_CODE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCONTRACT_CODE.Width = 80;
             // 
             // colCONTRACT_NAME
             // 
@@ -526,6 +530,7 @@
             this.colCONTRACT_NAME.ReadOnly = true;
             this.colCONTRACT_NAME.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.colCONTRACT_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCONTRACT_NAME.Width = 155;
             // 
             // colCONTRACT_QTY
             // 
@@ -536,6 +541,7 @@
             this.colCONTRACT_QTY.Name = "colCONTRACT_QTY";
             this.colCONTRACT_QTY.ReadOnly = true;
             this.colCONTRACT_QTY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCONTRACT_QTY.Width = 40;
             // 
             // colCONTRACT_UNIT
             // 
@@ -546,6 +552,7 @@
             this.colCONTRACT_UNIT.Name = "colCONTRACT_UNIT";
             this.colCONTRACT_UNIT.ReadOnly = true;
             this.colCONTRACT_UNIT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colCONTRACT_UNIT.Width = 40;
             // 
             // colADOPTION_DATE
             // 
@@ -563,6 +570,7 @@
             // 
             this.colINITIAL_COST.DataPropertyName = "INITIAL_COST";
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
             this.colINITIAL_COST.DefaultCellStyle = dataGridViewCellStyle9;
             this.colINITIAL_COST.HeaderText = "初期費用";
             this.colINITIAL_COST.Name = "colINITIAL_COST";
@@ -573,6 +581,7 @@
             // 
             this.colMONTHLY_COST.DataPropertyName = "MONTHLY_COST";
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
             this.colMONTHLY_COST.DefaultCellStyle = dataGridViewCellStyle10;
             this.colMONTHLY_COST.HeaderText = "月額利用料";
             this.colMONTHLY_COST.Name = "colMONTHLY_COST";
@@ -602,6 +611,7 @@
             this.colNUMBER_DEFAULT.Name = "colNUMBER_DEFAULT";
             this.colNUMBER_DEFAULT.ReadOnly = true;
             this.colNUMBER_DEFAULT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colNUMBER_DEFAULT.Width = 50;
             // 
             // colMEMO
             // 
@@ -612,6 +622,7 @@
             this.colMEMO.Name = "colMEMO";
             this.colMEMO.ReadOnly = true;
             this.colMEMO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colMEMO.Width = 200;
             // 
             // colDISPLAY_ORDER
             // 
@@ -622,6 +633,7 @@
             this.colDISPLAY_ORDER.Name = "colDISPLAY_ORDER";
             this.colDISPLAY_ORDER.ReadOnly = true;
             this.colDISPLAY_ORDER.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colDISPLAY_ORDER.Width = 60;
             // 
             // colUPDATED_AT
             // 
@@ -632,6 +644,7 @@
             this.colUPDATED_AT.Name = "colUPDATED_AT";
             this.colUPDATED_AT.ReadOnly = true;
             this.colUPDATED_AT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUPDATED_AT.Width = 145;
             // 
             // colUPDATED_BY
             // 
@@ -642,6 +655,7 @@
             this.colUPDATED_BY.Name = "colUPDATED_BY";
             this.colUPDATED_BY.ReadOnly = true;
             this.colUPDATED_BY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUPDATED_BY.Width = 120;
             // 
             // colUPDATE_MESSAGE
             // 
@@ -652,6 +666,7 @@
             this.colUPDATE_MESSAGE.Name = "colUPDATE_MESSAGE";
             this.colUPDATE_MESSAGE.ReadOnly = true;
             this.colUPDATE_MESSAGE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.colUPDATE_MESSAGE.Width = 350;
             // 
             // UPDATED_AT_RAW
             // 
@@ -671,12 +686,12 @@
             // 
             // frmUsageChargeMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.displayItemLabel1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblCONSTRACT_NAME);
+            this.Controls.Add(this.lblCONTRACT_CODE);
             this.Controls.Add(this.txtCONSTRACT_NAME);
             this.Controls.Add(this.txtCONTRACT_CODE);
             this.Controls.Add(this.panel1);
@@ -733,8 +748,8 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnFirst;
         private System.Windows.Forms.Button btnPrev;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCONSTRACT_NAME;
+        private System.Windows.Forms.Label lblCONTRACT_CODE;
         private System.Windows.Forms.TextBox txtCONSTRACT_NAME;
         private System.Windows.Forms.TextBox txtCONTRACT_CODE;
         private UserControls.DisplayItemLabel displayItemLabel1;

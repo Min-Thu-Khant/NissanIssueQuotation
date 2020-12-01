@@ -30,8 +30,6 @@
         {
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.pTitle = new System.Windows.Forms.Panel();
-            this.lblMenu = new System.Windows.Forms.Label();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnClientCertificate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,13 +37,15 @@
             this.txtQuotationIssueDate = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblDestinationMailAddress = new System.Windows.Forms.Label();
             this.txtDestinationMailAddress = new System.Windows.Forms.TextBox();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
             this.txtEDIAccount = new System.Windows.Forms.TextBox();
             this.txtOrderDate = new System.Windows.Forms.TextBox();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
             this.txtRegisterCompleteNotificationDate = new System.Windows.Forms.TextBox();
+            this.pTitle = new System.Windows.Forms.Panel();
+            this.lblMenu = new System.Windows.Forms.Label();
             this.pTitle.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -70,27 +70,6 @@
             this.label3.TabIndex = 121;
             this.label3.Text = "会社番号+BOX ";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // pTitle
-            // 
-            this.pTitle.Controls.Add(this.lblMenu);
-            this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pTitle.Location = new System.Drawing.Point(0, 0);
-            this.pTitle.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.pTitle.Name = "pTitle";
-            this.pTitle.Size = new System.Drawing.Size(1284, 50);
-            this.pTitle.TabIndex = 111;
-            // 
-            // lblMenu
-            // 
-            this.lblMenu.AutoSize = true;
-            this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMenu.Location = new System.Drawing.Point(12, 14);
-            this.lblMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(190, 21);
-            this.lblMenu.TabIndex = 0;
-            this.lblMenu.Text = "登録完了通知送付画面";
             // 
             // btnPreview
             // 
@@ -167,16 +146,16 @@
             this.label6.Text = "会社名";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // lblDestinationMailAddress
             // 
-            this.label8.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(16, 209);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 21);
-            this.label8.TabIndex = 133;
-            this.label8.Text = "送付先メールアドレス";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDestinationMailAddress.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblDestinationMailAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDestinationMailAddress.Location = new System.Drawing.Point(16, 209);
+            this.lblDestinationMailAddress.Name = "lblDestinationMailAddress";
+            this.lblDestinationMailAddress.Size = new System.Drawing.Size(101, 21);
+            this.lblDestinationMailAddress.TabIndex = 133;
+            this.lblDestinationMailAddress.Text = "送付先メールアドレス";
+            this.lblDestinationMailAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDestinationMailAddress
             // 
@@ -231,17 +210,38 @@
             this.txtRegisterCompleteNotificationDate.Size = new System.Drawing.Size(166, 21);
             this.txtRegisterCompleteNotificationDate.TabIndex = 138;
             // 
+            // pTitle
+            // 
+            this.pTitle.Controls.Add(this.lblMenu);
+            this.pTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pTitle.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pTitle.Location = new System.Drawing.Point(0, 0);
+            this.pTitle.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pTitle.Name = "pTitle";
+            this.pTitle.Size = new System.Drawing.Size(1282, 50);
+            this.pTitle.TabIndex = 139;
+            // 
+            // lblMenu
+            // 
+            this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMenu.Location = new System.Drawing.Point(16, 11);
+            this.lblMenu.Name = "lblMenu";
+            this.lblMenu.Size = new System.Drawing.Size(275, 34);
+            this.lblMenu.TabIndex = 0;
+            this.lblMenu.Text = "Jimugo - Menu";
+            // 
             // frmRegisterCompleteNotification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 261);
+            this.ClientSize = new System.Drawing.Size(1282, 253);
+            this.Controls.Add(this.pTitle);
             this.Controls.Add(this.txtRegisterCompleteNotificationDate);
             this.Controls.Add(this.txtCompanyName);
             this.Controls.Add(this.txtOrderDate);
             this.Controls.Add(this.txtEDIAccount);
             this.Controls.Add(this.txtCompanyNoBox);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblDestinationMailAddress);
             this.Controls.Add(this.txtDestinationMailAddress);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
@@ -250,7 +250,6 @@
             this.Controls.Add(this.txtQuotationIssueDate);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.pTitle);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.btnClientCertificate);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -261,9 +260,9 @@
             this.MinimizeBox = false;
             this.Name = "frmRegisterCompleteNotification";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmRegisterCompleteNotification_FormClosing);
             this.Load += new System.EventHandler(this.FrmRegisterCompleteNotification_Load);
             this.pTitle.ResumeLayout(false);
-            this.pTitle.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,8 +272,6 @@
 
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Panel pTitle;
-        private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnClientCertificate;
         private System.Windows.Forms.Label label1;
@@ -282,12 +279,14 @@
         private System.Windows.Forms.TextBox txtQuotationIssueDate;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblDestinationMailAddress;
         private System.Windows.Forms.TextBox txtDestinationMailAddress;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
         private System.Windows.Forms.TextBox txtEDIAccount;
         private System.Windows.Forms.TextBox txtOrderDate;
         private System.Windows.Forms.TextBox txtCompanyName;
         private System.Windows.Forms.TextBox txtRegisterCompleteNotificationDate;
+        private System.Windows.Forms.Panel pTitle;
+        private System.Windows.Forms.Label lblMenu;
     }
 }

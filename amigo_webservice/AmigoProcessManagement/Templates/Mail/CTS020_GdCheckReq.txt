@@ -8,13 +8,13 @@ Amigo保守担当者
 下記サプライヤのGD会社コードをご確認お願い致します。
 
 　会社番号＋BOX：　${companyNoBox}
-　会社名：　${companyName}
+　会社名       ：　${companyName}
 　サプライヤコード
-　　日産    ：　${nmlCodeNissan}
-　　NS      ：　${nmlCodeNs}
-　　JATCO   ：　${nmlCodeJatco}
-　　愛知機械：　${nmlCodeAk}
-　　日産工機：　${nmlCodeNk}
+　　日産       ：　${nmlCodeNissan}
+　　NS         ：　${nmlCodeNs}
+　　JATCO      ：　${nmlCodeJatco}
+　　愛知機械   ：　${nmlCodeAk}
+　　日産工機   ：　${nmlCodeNk}
 
 よろしくお願い致します。
 

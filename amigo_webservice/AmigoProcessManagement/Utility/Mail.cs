@@ -123,7 +123,7 @@ namespace AmigoProcessManagement.Utility
 
             //mail cc
             string[] CcList = cc.Split(',');
-            foreach (string address in toList)
+            foreach (string address in CcList)
             {
                 mail.CC.Add(address.Trim());
             }
@@ -151,7 +151,7 @@ namespace AmigoProcessManagement.Utility
 
             //mail cc
             string[] CcList = cc.Split(',');
-            foreach (string address in toList)
+            foreach (string address in CcList)
             {
                 mail.CC.Add(address.Trim());
             }
@@ -161,9 +161,22 @@ namespace AmigoProcessManagement.Utility
 
                 string path = HttpContext.Current.Server.MapPath("~/" +filePaths[i]);
 
-                foreach (string file in Directory.GetFiles(path))
+                try
                 {
-                    mail.Attachments.Add(new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet));
+                    foreach (string file in Directory.GetFiles(path))
+                    {
+                        mail.Attachments.Add(new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet));
+                    }
+                }
+                catch (Exception)
+                {
+                    try
+                    {
+                        mail.Attachments.Add(new Attachment(path, System.Net.Mime.MediaTypeNames.Application.Octet));
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
 
             }
@@ -191,7 +204,7 @@ namespace AmigoProcessManagement.Utility
 
             //mail cc
             string[] CcList = cc.Split(',');
-            foreach (string address in toList)
+            foreach (string address in CcList)
             {
                 mail.CC.Add(address.Trim());
             }

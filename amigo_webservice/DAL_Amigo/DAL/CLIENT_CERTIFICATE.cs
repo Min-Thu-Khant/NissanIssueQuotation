@@ -17,37 +17,78 @@ namespace DAL_AmigoProcess.DAL
         public string strConnectionString;
         string strMessage;
 
-        string strClientCertificateList = @"SELECT ROW_NUMBER() OVER(ORDER BY A.FY ASC) AS No,
-                                        ' ' as CK,
-                                        '' as MK,
-                                        A.FY,
-                                        A.CLIENT_CERTIFICATE_NO,
-                                        A.PASSWORD,
-                                        FORMAT(A.EXPIRATION_DATE,'yyyy/MM/dd HH:mm') AS EXPIRATION_DATE,
-                                        A.COMPANY_NO_BOX,
-                                        B.COMPANY_NAME,
-                                        B.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS,
-                                        FORMAT(A.DISTRIBUTION_DATE,'yyyy/MM/dd HH:mm') AS DISTRIBUTION_DATE,
-                                        A.UPDATED_AT,A.UPDATED_BY,
-                                        '' AS UPDATE_MESSAGE,
-                                        ROW_NUMBER() OVER(ORDER BY A.COMPANY_NO_BOX  ASC) AS ROW_ID,
-                                        UPDATED_AT AS UPDATED_AT_RAW
-                                        from CLIENT_CERTIFICATE AS A
-                                        left join(select COMPANY_NAME, CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, COMPANY_NO_BOX FROM REQUEST_DETAIL) B
-                                        ON B.COMPANY_NO_BOX=A.COMPANY_NO_BOX
-                                        WHERE A.FY LIKE '%' + @FY + '%'
-                                           AND A.COMPANY_NO_BOX LIKE '%' + @COMPANY_NO_BOX + '%'
-                                           AND A.CLIENT_CERTIFICATE_NO LIKE '%' + @CLIENT_CERTIFICATE_NO + '%'
-                                           AND A.DISTRIBUTION_DATE
-                                        GROUP BY A.FY, A.CLIENT_CERTIFICATE_NO, A.PASSWORD, A.EXPIRATION_DATE, A.COMPANY_NO_BOX, B.COMPANY_NAME, B.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, A.DISTRIBUTION_DATE, A.UPDATED_AT, A.UPDATED_BY 
-                                        ORDER BY No,COMPANY_NO_BOX ASC OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
+        string strClientCertificateList = @"SELECT
+	                                        ROW_NUMBER() OVER(ORDER BY A.FY ASC, A.CLIENT_CERTIFICATE_NO ASC) AS No,
+                                            ' ' as CK,
+                                            '' as MK,
+                                            A.FY
+                                            , A.CLIENT_CERTIFICATE_NO
+                                            , A.PASSWORD
+                                            , FORMAT(A.EXPIRATION_DATE, 'yyyy/MM/dd HH:mm') AS EXPIRATION_DATE
+                                            , A.COMPANY_NO_BOX
+                                            , B.COMPANY_NAME
+                                            , B.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS
+                                            , FORMAT(A.DISTRIBUTION_DATE, 'yyyy/MM/dd HH:mm') AS DISTRIBUTION_DATE
+                                            , A.UPDATED_AT
+                                            , A.UPDATED_BY
+	                                        , '' AS UPDATE_MESSAGE,
+                                            ROW_NUMBER() OVER(ORDER BY A.COMPANY_NO_BOX  ASC) AS ROW_ID,
+                                            UPDATED_AT AS UPDATED_AT_RAW
+                                            FROM
+                                            CLIENT_CERTIFICATE AS A 
+                                            LEFT JOIN ( 
+                                            SELECT
+                                            T1.COMPANY_NO_BOX
+                                            , T1.COMPANY_NAME
+                                            , T1.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS 
+                                            FROM
+                                            REQUEST_DETAIL T1 
+                                            INNER JOIN ( 
+                                                        SELECT COMPANY_NO_BOX
+                                                        , MAX(REQ_SEQ) as REQ_SEQ 
+                                                        FROM REQUEST_DETAIL 
+                                                        GROUP BY COMPANY_NO_BOX
+                                                        ) T2 
+                                            ON T1.COMPANY_NO_BOX = T2.COMPANY_NO_BOX 
+                                            AND T1.REQ_SEQ = T2.REQ_SEQ 
+                                            WHERE REQ_STATUS = 2 ) B 
+                                            ON B.COMPANY_NO_BOX = A.COMPANY_NO_BOX 
+		                                    WHERE ISNULL(A.FY,'') LIKE '%' + @FY + '%'
+                                            AND ISNULL(A.COMPANY_NO_BOX,'') LIKE '%' + @COMPANY_NO_BOX + '%'
+                                            AND ISNULL(A.CLIENT_CERTIFICATE_NO,'') LIKE '%' + @CLIENT_CERTIFICATE_NO + '%'
+                                            @DISTRIBUTION_DATE
+                                            ORDER BY A.FY ASC, A.CLIENT_CERTIFICATE_NO ASC OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
 
-        string strClientCertificateListTotal = @"SELECT COUNT(COMPANY_NO_BOX) 
-                                           FROM CLIENT_CERTIFICATE
-                                           WHERE FY LIKE '%' + @FY + '%'
-                                           AND COMPANY_NO_BOX LIKE '%' + @COMPANY_NO_BOX + '%'
-                                           AND DISTRIBUTION_DATE
-                                           AND CLIENT_CERTIFICATE_NO LIKE '%' + @CLIENT_CERTIFICATE_NO + '%'";
+        string strClientCertificateListTotal = @"SELECT
+	                                            COUNT(A.COMPANY_NO_BOX)
+                                                FROM
+                                                CLIENT_CERTIFICATE AS A 
+                                                LEFT JOIN ( 
+                                                SELECT
+                                                    T1.COMPANY_NO_BOX
+                                                    , T1.COMPANY_NAME
+                                                    , T1.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS 
+                                                from
+                                                REQUEST_DETAIL T1 
+                                                INNER JOIN ( 
+                                                            SELECT
+                                                            COMPANY_NO_BOX
+                                                            , MAX(REQ_SEQ) as REQ_SEQ 
+                                                            FROM
+                                                            REQUEST_DETAIL 
+                                                            GROUP BY
+                                                            COMPANY_NO_BOX
+                                                            ) T2 
+                                                ON T1.COMPANY_NO_BOX = T2.COMPANY_NO_BOX 
+                                                AND T1.REQ_SEQ = T2.REQ_SEQ 
+                                                WHERE
+                                                REQ_STATUS = 2
+                                                ) B 
+                                                ON B.COMPANY_NO_BOX = A.COMPANY_NO_BOX 
+		                                        WHERE ISNULL(A.FY,'') LIKE '%' + @FY + '%'
+                                                AND ISNULL(A.COMPANY_NO_BOX,'') LIKE '%' + @COMPANY_NO_BOX + '%'
+                                                AND ISNULL(A.CLIENT_CERTIFICATE_NO,'') LIKE '%' + @CLIENT_CERTIFICATE_NO + '%'
+                                                @DISTRIBUTION_DATE";
 
         string strSearchWithKeyAndUpdated_at = @"SELECT COUNT(COMPANY_NO_BOX) AS COUNT
                                                 FROM CLIENT_CERTIFICATE 
@@ -134,18 +175,18 @@ namespace DAL_AmigoProcess.DAL
             {
                 if (DISTRIBUTION_STATUS == "全て")
                 {
-                    strClientCertificateList = strClientCertificateList.Replace("AND A.DISTRIBUTION_DATE", " ");
-                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("AND DISTRIBUTION_DATE", "");
+                    strClientCertificateList = strClientCertificateList.Replace("@DISTRIBUTION_DATE", " ");
+                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("@DISTRIBUTION_DATE", "");
                 }
                 if (DISTRIBUTION_STATUS == "未送信")
                 {
-                    strClientCertificateList = strClientCertificateList.Replace("AND A.DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NUll");
-                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("AND DISTRIBUTION_DATE", "AND DISTRIBUTION_DATE IS NOT NUll");
+                    strClientCertificateList = strClientCertificateList.Replace("@DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NUll");
+                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("@DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NUll");
                 }
                 if (DISTRIBUTION_STATUS == "送信済")
                 {
-                    strClientCertificateList = strClientCertificateList.Replace("AND A.DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NOT NUll");
-                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("AND DISTRIBUTION_DATE", "AND DISTRIBUTION_DATE IS NOT NUll");
+                    strClientCertificateList = strClientCertificateList.Replace("@DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NOT NUll");
+                    strClientCertificateListTotal = strClientCertificateListTotal.Replace("@DISTRIBUTION_DATE", "AND A.DISTRIBUTION_DATE IS NOT NUll");
                 }
             }
 

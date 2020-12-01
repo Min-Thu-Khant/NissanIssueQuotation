@@ -104,8 +104,8 @@ namespace AmigoProcessManagement
             }
             else
             {
-                Controller.ControllerUsageInfoRegistrationList UsageInfoList = new Controller.ControllerUsageInfoRegistrationList();
-                MetaResponse response = UsageInfoList.SettingCompleteMail(List, authHeader);
+                Controller.ControllerUsageInfoRegistrationList UsageInfoList = new Controller.ControllerUsageInfoRegistrationList(authHeader);
+                MetaResponse response = UsageInfoList.SettingCompleteMail(List);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();

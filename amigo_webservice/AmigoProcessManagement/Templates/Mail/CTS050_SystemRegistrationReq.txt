@@ -14,7 +14,7 @@ Amigo連携項目変更： ${changedItem}
 
 よろしくお願い致します。
 
-営業更新者：${userId}
+営業
 更新者：${userId}
 
 

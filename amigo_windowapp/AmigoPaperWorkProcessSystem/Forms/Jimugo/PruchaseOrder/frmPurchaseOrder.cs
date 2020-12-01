@@ -20,6 +20,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         public string REQ_SEQ { get; set; }
         public string CONTRACT_PLAN { get; set; }
         public string AMIGO_COOPERATION_CHENGED_ITEMS { get; set; }
+        public DialogResult Dialog { get; set; }
+        public string UPDATED_AT { get; set; }
+        public string UPDATED_AT_RAW { get; set; }
+
         #endregion
 
         #region Constructor
@@ -44,8 +48,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         #region FormLoad
         private void FrmOrderRegistration_Load(object sender, EventArgs e)
         {
+            Dialog = DialogResult.Cancel;
             //set title
-            //lblMenu.Text = this.ProgramName;
+            lblMenu.Text = this.ProgramName;
+            this.Text = "[" + ProgramID + "] " + ProgramName;
 
             //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
@@ -65,6 +71,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
             uIUtility = new UIUtility();
             //get initial data from web service
             BindData(txtCompanyNoBox.Text, REQ_SEQ);
+            Dialog = DialogResult.Cancel;
         }
         #endregion
 
@@ -83,20 +90,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
                     if (openFile.ShowDialog() == DialogResult.OK) // save as dialog
                     {
                         parameters.Rows[0]["PDF_FILE_PATH"] = openFile.FileName;
-                   
+
                         frmPurchaseOrderPreview frm = new frmPurchaseOrderPreview(parameters);
                         if (frm.ShowDialog() == DialogResult.OK)
                         {
                             this.ORDER_DATE = frm.ORDER_DATE;
-                            this.DialogResult = DialogResult.OK;
+                            Dialog = DialogResult.OK;
                             txtOrderDate.Text = this.ORDER_DATE;
+                            UPDATED_AT = frm.UPDATED_AT;
+                            UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
                         }
                         else
                         {
                             this.ORDER_DATE = null;
-                            this.DialogResult = DialogResult.Cancel;
+                            Dialog = DialogResult.Cancel;
                         }
-                        
+
                         this.BringToFront();
                     }
                 }
@@ -161,16 +170,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
             dt.Columns.Add("REQ_SEQ");
             dt.Columns.Add("ORDER_DATE");
             dt.Columns.Add("SYSTEM_EFFECTIVE_DATE");
-            dt.Columns.Add("EFFECTIVE_DATE");
             dt.Columns.Add("SYSTEM_REGISTER_DEADLINE");
             dt.Columns.Add("PDF_FILE_PATH");
             dt.Columns.Add("AMIGO_COOPERATION_CHENGED_ITEMS");
             dt.Columns.Add("CONTRACT_PLAN");
 
             //validate inputs
-            string COMPANY_NO_BOX, COMPANY_NAME, TRANSACTION_TYPE, REQ_TYPE, ORDER_DATE, EFFECTIVE_DATE, REGISTERATION_DAEADLINE;
+            string COMPANY_NO_BOX, COMPANY_NAME, TRANSACTION_TYPE, REQ_TYPE, ORDER_DATE, EFFECTIVE_DATE, REGISTERATION_DAEADLINE, START_USE_DATE;
 
-            if (ValidateInputs(out ORDER_DATE, out EFFECTIVE_DATE, out REGISTERATION_DAEADLINE, out COMPANY_NO_BOX, out COMPANY_NAME, out TRANSACTION_TYPE, out REQ_TYPE))
+            if (ValidateInputs(out ORDER_DATE, out EFFECTIVE_DATE, out REGISTERATION_DAEADLINE, out COMPANY_NO_BOX, out COMPANY_NAME, out TRANSACTION_TYPE, out REQ_TYPE, out START_USE_DATE))
             {
                 valid = true;
             }
@@ -182,12 +190,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
             dr["REQ_TYPE"] = REQ_TYPE;
             dr["REQ_SEQ"] = REQ_SEQ;
             dr["ORDER_DATE"] = ORDER_DATE;
-            dr["SYSTEM_EFFECTIVE_DATE"] = "";
-            dr["EFFECTIVE_DATE"] = EFFECTIVE_DATE;
+            dr["SYSTEM_EFFECTIVE_DATE"] = EFFECTIVE_DATE;
             dr["SYSTEM_REGISTER_DEADLINE"] = REGISTERATION_DAEADLINE;
             dr["PDF_FILE_PATH"] = "";
             dr["AMIGO_COOPERATION_CHENGED_ITEMS"] = "";
-            dr["CONTRACT_PLAN"] = "";
+            dr["CONTRACT_PLAN"] = CONTRACT_PLAN;
+            dr["START_USE_DATE"] = START_USE_DATE;
 
             dt.Rows.Add(dr);
             return dt;
@@ -195,7 +203,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         #endregion
 
         #region Validate Inputs
-        private bool ValidateInputs(out string ORDER_DATE, out string EFFECTIVE_DATE, out string REGISTERATION_DAEADLINE, out string COMPANY_NO_BOX, out string COMPANY_NAME, out string TRANSACTION_TYPE, out string REQ_TYPE)
+        private bool ValidateInputs(out string ORDER_DATE, out string EFFECTIVE_DATE, out string REGISTERATION_DAEADLINE, out string COMPANY_NO_BOX, out string COMPANY_NAME, out string TRANSACTION_TYPE, out string REQ_TYPE, out string START_USE_DATE)
         {
             ORDER_DATE = txtOrderDate.Text.Trim();
             EFFECTIVE_DATE = txtSystemEffectiveDate.Text.Trim();
@@ -204,18 +212,24 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
             COMPANY_NAME = txtCompanyName.Text.Trim();
             TRANSACTION_TYPE = txtTransactionType.Text.Trim();
             REQ_TYPE = txtREQ_TYPE.Text.Trim();
+            START_USE_DATE = txtStartUseDate.Text.Trim();
 
-            if (!CheckUtility.SearchConditionCheck(this, ORDER_DATE, false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblOrderDate.Text, ORDER_DATE, false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, EFFECTIVE_DATE, false, Utility.DataType.DATE, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblSystemEffectiveDate.Text, EFFECTIVE_DATE, false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, REGISTERATION_DAEADLINE, false, Utility.DataType.TIMESTAMP, -1, -1))
+            if (!CheckUtility.SearchConditionCheck(this, lblSystemRegisterDeadline.Text, REGISTERATION_DAEADLINE, false, Utility.DataType.TIMESTAMP, -1, -1))
+            {
+                return false;
+            }
+
+            if (!CheckUtility.SearchConditionCheck(this, lblStartUseDate.Text, START_USE_DATE, false, Utility.DataType.DATE, -1, -1))
             {
                 return false;
             }
@@ -229,8 +243,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         #region FormClosing
         private void FrmOrderRegistration_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            this.DialogResult = Dialog;
         }
-        #endregion  
+        #endregion
     }
 }

@@ -48,12 +48,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             string ID = txtID.Text.Trim();
             string Password = txtPwd.Text.Trim();
 
-            if (!CheckUtility.SearchConditionCheck(this, ID, false, Utility.DataType.HALF_ALPHA_NUMERIC, 6, 0))
+            if (!CheckUtility.SearchConditionCheck(this,"ID", ID, false, Utility.DataType.HALF_ALPHA_NUMERIC, 6, 0))
             {
                 return;
             }
 
-            if (!CheckUtility.SearchConditionCheck(this, Password, false, Utility.DataType.HALF_ALPHA_NUMERIC, 20, 0))
+            if (!CheckUtility.SearchConditionCheck(this,"Password", Password, false, Utility.DataType.HALF_ALPHA_NUMERIC, 20, 0))
             {
                 return;
             }
@@ -206,6 +206,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 case "CMS010": // customer master maintence
                     OpenCustomerMasterMaintenance(programID, programName);
                     break;
+
+                case "CTG010": // Monthly Sale Aggregation
+                    OpenMonthlySaleAggregationList(programID, programName);
+                    break;
+
                 default:
                     break;
             }
@@ -444,6 +449,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         private void TrvMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             openForm(e.Node.Name, e.Node.Text);
+        }
+        #endregion
+
+        #region OpenCustomerMasterMaintenance
+        private void OpenMonthlySaleAggregationList(string programID, string programName)
+        {
+            if (!(Application.OpenForms.OfType<FrmMonthlySaleAggregationList>().Count() == 1))
+            {
+                FrmMonthlySaleAggregationList form = new FrmMonthlySaleAggregationList(programID, programName);
+                form.Show();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.DepositConfirmationMenu.ProcessAlreadyRunning, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //need change after message list
+            }
         }
         #endregion
     }

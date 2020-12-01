@@ -13,6 +13,11 @@ namespace AmigoPaperWorkProcessSystem.Jimugo
 {
     public partial class frmMailLoading : Form
     {
+        public frmMailLoading(string strMessage):this()
+        {
+            lblMessage.Text = strMessage;
+        }
+
         public frmMailLoading()
         {
             InitializeComponent();

@@ -41,6 +41,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.ApplicationApproval
         #region FormLoad
         private void FrmServiceDesk_Load(object sender, EventArgs e)
         {
+            //theme
+            this.dgvCurrent.ColumnHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.GridHeaderColor;
+            this.dgvCurrent.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.GridHeaderFontColor;
+
+            this.dgvChange.ColumnHeadersDefaultCellStyle.BackColor = Properties.Settings.Default.GridHeaderColor;
+            this.dgvChange.ColumnHeadersDefaultCellStyle.ForeColor = Properties.Settings.Default.GridHeaderFontColor;
+
+            this.Font = Properties.Settings.Default.jimugoFont;
+
             this.dgvCurrent.DataSource = this.dtCurrent;
             this.dgvChange.DataSource = this.dtChange;
         }

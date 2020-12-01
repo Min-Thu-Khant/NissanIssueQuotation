@@ -27,7 +27,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region Approve
-        public DataSet Approve(string COMPANY_NO_BOX, string REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
+        public DataSet Approve(string COMPANY_NO_BOX, string REQ_TYPE, string REQ_TYPE_RAW, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string LIST)
         {
 
             string url = Properties.Settings.Default.ApplicationApproval_Approve;
@@ -36,6 +36,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
             {
                 COMPANY_NO_BOX = COMPANY_NO_BOX,
                 REQ_TYPE = REQ_TYPE,
+                REQ_TYPE_RAW = REQ_TYPE_RAW,
                 CHANGED_ITEMS = CHANGED_ITEMS,
                 SYSTEM_EFFECTIVE_DATE = SYSTEM_EFFECTIVE_DATE,
                 SYSTEM_REGIST_DEADLINE = SYSTEM_REGIST_DEADLINE,

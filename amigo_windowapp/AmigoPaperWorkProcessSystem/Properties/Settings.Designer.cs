@@ -12,7 +12,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -760,6 +760,16 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_MonthlySaleAggregationList.asmx/getMonthlySaleAg" +
+            "gregationList?strDate=@YEARMOHTH")]
+        public string getMonthlySaleAggregationlist {
+            get {
+                return ((string)(this["getMonthlySaleAggregationlist"]));
+            }
+            set {
+                this["getMonthlySaleAggregationlist"] = value;
+=======
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/GetClientCertificateLis" +
             "t")]
         public string ApplicationApproval_GetInitialData {
@@ -804,6 +814,19 @@ namespace AmigoPaperWorkProcessSystem.Properties {
             }
             set {
                 this["ApplicationApproval_Approve"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFIle")]
+        public string GetTempFile {
+            get {
+                return ((string)(this["GetTempFile"]));
+            }
+            set {
+                this["GetTempFile"] = value;
+>>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             }
         }
     }

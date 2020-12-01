@@ -17,6 +17,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.ApplicationApproval
         private DataTable dtCurrent;
         private DataTable dtChange;
         #endregion
+
         #region Constructor
         public frmUsageChargeBreakDown()
         {
@@ -63,6 +64,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.ApplicationApproval
 
         }
         #endregion
+
         #region AdjustTables
         private void AdjustTables(DataGridView dgv, int width)
         {

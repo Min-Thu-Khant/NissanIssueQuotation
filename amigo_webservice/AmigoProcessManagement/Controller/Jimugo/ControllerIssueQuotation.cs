@@ -23,10 +23,10 @@ namespace AmigoProcessManagement.Controller
         MetaResponse response;
         Stopwatch timer;
         string con = Properties.Settings.Default.MyConnection;
-        DateTime TEMP;
+        String UPDATED_AT_DATETIME;
         string CURRENT_DATETIME;
         string CURRENT_USER;
-
+        DateTime TEMP = DateTime.Now;
         #endregion
 
         #region Constructor
@@ -36,7 +36,7 @@ namespace AmigoProcessManagement.Controller
             timer.Start();
             response = new MetaResponse();
             //UPDATED_AT
-            TEMP = DateTime.Now;
+            UPDATED_AT_DATETIME = TEMP.ToString("yyyy/MM/dd HH:mm");
             CURRENT_DATETIME = TEMP.ToString("yyyyMMddHHmmss");
         }
         public ControllerIssueQuotation(string authHeader) : this()
@@ -118,7 +118,7 @@ namespace AmigoProcessManagement.Controller
             DataTable result = new DataTable();
             result.Clear();
             result.Columns.Add("ExportType");
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("Created Time");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
@@ -149,13 +149,11 @@ namespace AmigoProcessManagement.Controller
                 }
 
                 result.Rows.Add(strExportType,
-                    single_result.Rows.Count > 0 ? single_result.Rows[0]["DownloadLink"] : "",
+                    single_result.Rows.Count > 0 ? single_result.Rows[0]["FILENAME"] : "",
                     CURRENT_DATETIME,
                     single_result.Rows.Count > 0 ? single_result.Rows[0]["Message"] : "",
                     single_result.Rows.Count > 0 ? single_result.Rows[0]["Error Message"] : "");
             }
-
-
 
             response.Data = Utility.Utility_Component.DtToJSon(result, "pdfData");
             response.Status = 1;
@@ -169,7 +167,7 @@ namespace AmigoProcessManagement.Controller
         {
             DataTable result = new DataTable();
             result.Clear();
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
 
@@ -372,15 +370,14 @@ namespace AmigoProcessManagement.Controller
 
                 BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
                 String tempStorageFolder = config.getStringValue("temp.dir");
-                string savePath = "/" + tempStorageFolder + "/" + FILENAME + ".pdf";
+                string savePath = tempStorageFolder + "/" + FILENAME + ".pdf";
 
                 //Save excel file to pdf file.  
-                string DownloadLink = HttpContext.Current.Server.MapPath("~" + savePath);
-                workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF);
+                workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF);
 
 
                 DataRow dr = result.NewRow();
-                dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+                dr["FILENAME"] = FILENAME + ".pdf";
                 result.Rows.Add(dr);
             }
             else
@@ -399,7 +396,7 @@ namespace AmigoProcessManagement.Controller
         {
             DataTable result = new DataTable();
             result.Clear();
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
 
@@ -593,15 +590,14 @@ namespace AmigoProcessManagement.Controller
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
             String tempStorageFolder = config.getStringValue("temp.dir");
-            string savePath = "/" + tempStorageFolder + "/" + FILENAME + ".pdf";
+            string savePath = tempStorageFolder + "/" + FILENAME + ".pdf";
 
             //Save excel file to pdf file.  
-            string DownloadLink = HttpContext.Current.Server.MapPath("~" + savePath);
-            workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF);
+            workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF);
 
 
             DataRow dr = result.NewRow();
-            dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+            dr["FILENAME"] = FILENAME + ".pdf";
             result.Rows.Add(dr);
 
             return result;
@@ -769,19 +765,19 @@ namespace AmigoProcessManagement.Controller
 
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
             String tempStorageFolder = config.getStringValue("temp.dir");
-            string savePath = "/" + tempStorageFolder + "/" + FILENAME + ".pdf";
+            string savePath = tempStorageFolder + "/" + FILENAME + ".pdf";
 
             //Save excel file to pdf file.  
-            string DownloadLink = HttpContext.Current.Server.MapPath("~" + savePath);
-            workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF);
+            workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF);
+
 
             DataTable result = new DataTable();
             result.Clear();
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
             DataRow dr = result.NewRow();
-            dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+            dr["FILENAME"] = FILENAME + ".pdf";
             result.Rows.Add(dr);
 
             return result;
@@ -793,7 +789,7 @@ namespace AmigoProcessManagement.Controller
         {
             DataTable result = new DataTable();
             result.Clear();
-            result.Columns.Add("DownloadLink");
+            result.Columns.Add("FILENAME");
             result.Columns.Add("Message");
             result.Columns.Add("Error Message");
 
@@ -848,7 +844,7 @@ namespace AmigoProcessManagement.Controller
 
                 BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
                 String tempStorageFolder = config.getStringValue("temp.dir");
-                string savePath = "/" + tempStorageFolder + "/" + FILENAME + ".pdf";
+                string savePath = tempStorageFolder + "/" + FILENAME + ".pdf";
 
                 #region Header Information
 
@@ -1020,11 +1016,11 @@ namespace AmigoProcessManagement.Controller
                     #endregion
 
                     //Save excel file to pdf file.  
-                    string DownloadLink = HttpContext.Current.Server.MapPath("~" + savePath);
-                    workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF);
+                    workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF);
+
 
                     DataRow dr = result.NewRow();
-                    dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+                    dr["FILENAME"] = FILENAME + ".pdf";
                     result.Rows.Add(dr);
                 }
                 else if (CONTRACT_PLAN == "PRODUCT") //PIBrowsing
@@ -1159,11 +1155,10 @@ namespace AmigoProcessManagement.Controller
                     #endregion
 
                     //Save excel file to pdf file.  
-                    string DownloadLink = HttpContext.Current.Server.MapPath("~" + savePath);
-                    workbook.SaveToFile(DownloadLink, Spire.Xls.FileFormat.PDF);
+                    workbook.SaveToFile(savePath, Spire.Xls.FileFormat.PDF);
 
                     DataRow dr = result.NewRow();
-                    dr["DownloadLink"] = HttpContext.Current.Request.Url.GetLeftPart(System.UriPartial.Authority) + savePath;
+                    dr["FILENAME"] = FILENAME + ".pdf";
                     result.Rows.Add(dr);
                 }
             }
@@ -1178,7 +1173,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region MailCreate
-        public MetaResponse QuotationMailCreate(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)  //add more parameter
+        public MetaResponse QuotationMailCreate(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)  //add more parameter
         {
             #region Parameters
             //message for pop up
@@ -1188,8 +1183,9 @@ namespace AmigoProcessManagement.Controller
             message.Columns.Add("EmailAddressCC");
             message.Columns.Add("TemplateString");
             message.Columns.Add("SubjectString");
-
-
+            message.Columns.Add("UPDATED_AT");
+            message.Columns.Add("UPDATED_AT_RAW");
+            
             DataTable dtExportInfo = Utility_Component.JsonToDt(ExportInfo);
             #endregion
             string msg = "";
@@ -1359,15 +1355,12 @@ namespace AmigoProcessManagement.Controller
                     BOL_CONFIG config = new BOL_CONFIG("CTS040", con);
                     BOL_CONFIG systemConfig = new BOL_CONFIG("SYSTEM", con);
 
-
-                    
-
                     for (int i = 0; i < dtExportInfo.Rows.Count; i++)
                     {
                         int REPORT_TYPE = Convert.ToInt32(dtExportInfo.Rows[i]["ExportType"]);
                         string FILE_NAME = dtExportInfo.Rows[i]["FileName"].ToString();
                         string destinationpath = "";
-                        String tempPath = HttpContext.Current.Server.MapPath("~/" + systemConfig.getStringValue("temp.dir"));
+                        String tempPath = systemConfig.getStringValue("temp.dir");
                         if (REPORT_TYPE != 4) //NOT PI BROWSING
                         {
                             if (dtExportInfo.Rows[i]["ExportType"].ToString() == "3")
@@ -1378,7 +1371,7 @@ namespace AmigoProcessManagement.Controller
                             {
                                 destinationpath = config.getStringValue("fileSavePath.send.initialQuote");
                             }
-                            destinationpath = HttpContext.Current.Server.MapPath("~/" + destinationpath) + @"\" + FILE_NAME;
+                            destinationpath =  destinationpath + "/" + FILE_NAME;
                             //move file
                             tempPath = tempPath + @"/" + FILE_NAME;
                             if (!MoveTempPDF(tempPath, destinationpath))
@@ -1394,13 +1387,15 @@ namespace AmigoProcessManagement.Controller
                     }
                     #endregion
 
-                    string template = PrepareMailTemplate(COMPANY_NO_BOX, INPUT_PERSON);
+                    string template = PrepareMailTemplate(COMPANY_NAME, INPUT_PERSON);
 
                     message.Clear();
                     DataRow dtRow = message.NewRow();
                     dtRow["EmailAddressCC"] = config.getStringValue("emailAddress.cc");
                     dtRow["TemplateString"] = template;
                     dtRow["SubjectString"] = config.getStringValue("emailSubject.sendForms");
+                    dtRow["UPDATED_AT"] = CURRENT_DATETIME;
+                    dtRow["UPDATED_AT_RAW"] = UPDATED_AT_DATETIME;
 
                     message.Rows.Add(dtRow);
                     dbtnx.Complete();

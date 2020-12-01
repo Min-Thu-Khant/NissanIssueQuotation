@@ -46,12 +46,13 @@ namespace DAL_AmigoProcess.DAL
                                     ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
                                     FROM USAGE_FEE_MASTER
                                     WHERE ADOPTION_DATE <= GETDATE()) AS USAGE_FEE_MASTER
-                                    WHERE REQ_USAGE_FEE.COMPANY_NO_BOX = USAGE_FEE_MASTER.CONTRACT_CODE
+                                    WHERE REQ_USAGE_FEE.CONTRACT_CODE = USAGE_FEE_MASTER.CONTRACT_CODE
+                                    AND num=1
                                     AND COMPANY_NO_BOX = @COMPANY_NO_BOX
                                     AND REQ_SEQ = @REQ_SEQ) AS TBL
                                     GROUP BY CONTRACT_CODE,CONTRACT_NAME,DISPLAY_ORDER";
 
-        string strUpdate = @"UPDATE [dbo].[REQ_USAGE_FEE]
+        string strUpdate = @"UPDATE [REQ_USAGE_FEE]
                                SET [UNIT_PRICE] = @UNIT_PRICE
                                   ,[AMOUNT] = @AMOUNT
                                   ,[UPDATED_AT] = @UPDATED_AT

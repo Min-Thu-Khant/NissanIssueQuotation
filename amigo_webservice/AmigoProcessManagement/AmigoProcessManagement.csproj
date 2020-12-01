@@ -88,8 +88,10 @@
     <Content Include="Jimugo\opt_ClientCertificateList.asmx" />
     <Content Include="Jimugo\opt_CompanyCodeList.asmx" />
     <Content Include="Jimugo\opt_CustomerMasterMaintenance.asmx" />
+    <Content Include="Jimugo\opt_FileServices.asmx" />
     <Content Include="Jimugo\opt_IssueQuotation.asmx" />
     <Content Include="Jimugo\opt_jimugo.asmx" />
+    <Content Include="Jimugo\opt_MonthlySaleAggregationList.asmx" />
     <Content Include="Jimugo\opt_PurchaseOrder.asmx" />
     <Content Include="Jimugo\opt_RegisterCompleteNotificationSending.asmx" />
     <Content Include="Jimugo\opt_UsageApplicationList.asmx" />
@@ -129,14 +131,16 @@
     <Compile Include="Controller\Controller35.cs" />
     <Compile Include="Controller\Controller36.cs" />
     <Compile Include="Controller\Controller37.cs" />
-    <Compile Include="Controller\Jimugo\ControllerClientCertificateList.cs" />
     <Compile Include="Controller\Jimugo\ControllerApplicationApproval.cs" />
+    <Compile Include="Controller\Jimugo\ControllerClientCertificateList.cs" />
     <Compile Include="Controller\Jimugo\ControllerCompanyCodeList.cs" />
     <Compile Include="Controller\Jimugo\ControllerCustomerMasterMaintenance.cs" />
     <Compile Include="Controller\Jimugo\ControllerEDICandicate.cs" />
+    <Compile Include="Controller\Jimugo\ControllerFiles.cs" />
     <Compile Include="Controller\Jimugo\ControllerIssueQuotation.cs" />
     <Compile Include="Controller\Jimugo\ControllerJimugo.cs" />
     <Compile Include="Controller\Jimugo\ControllerJimugoMenu.cs" />
+    <Compile Include="Controller\Jimugo\ControllerMonthlySaleAggregation.cs" />
     <Compile Include="Controller\Jimugo\ControllerPurchaseOrder.cs" />
     <Compile Include="Controller\Jimugo\ControllerRegisterCompleteNotificationSending.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageApplicationList.cs" />
@@ -158,12 +162,20 @@
       <DependentUpon>opt_CustomerMasterMaintenance.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Jimugo\opt_FileServices.asmx.cs">
+      <DependentUpon>opt_FileServices.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Jimugo\opt_IssueQuotation.asmx.cs">
       <DependentUpon>opt_IssueQuotation.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Jimugo\opt_jimugo.asmx.cs">
       <DependentUpon>opt_jimugo.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Jimugo\opt_MonthlySaleAggregationList.asmx.cs">
+      <DependentUpon>opt_MonthlySaleAggregationList.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Jimugo\opt_PurchaseOrder.asmx.cs">
@@ -274,6 +286,9 @@
     <Content Include="Templates\Excel\InitialQuotation_Template.xlsx" />
     <Content Include="Templates\Excel\MonthlyQuotation_Template.xlsx" />
     <Content Include="Templates\Excel\PurchaseOrder_Template.xlsx" />
+    <Content Include="Storage\PDF\ClientCertificate\Temp\doc_sample.pdf" />
+    <Content Include="Storage\PDF\ClientCertificate\2015\client_sample 2.pdf" />
+    <Content Include="Storage\PDF\ClientCertificate\2015\client_sample.pdf" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

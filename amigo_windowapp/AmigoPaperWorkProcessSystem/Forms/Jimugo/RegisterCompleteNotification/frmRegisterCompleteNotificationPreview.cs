@@ -33,7 +33,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         string COMPANY_NAME = "";
         string EMAIL_ADDRESS = "";
         string EDI_ACCOUNT = "";
-        string DOWNLOAD_LINK = "";
+        string FILENAME = "";
         #endregion
 
         #region Constructors
@@ -55,11 +55,17 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 COMPANY_NAME = row["COMPANY_NAME"].ToString();
                 EMAIL_ADDRESS = row["EMAIL_ADDRESS"].ToString();
                 EDI_ACCOUNT = row["EDI_ACCOUNT"].ToString();
-                DOWNLOAD_LINK = row["DOWNLOAD_LINK"].ToString();
+                FILENAME = row["FILENAME"].ToString();
 
             }
         }
 
+        #endregion
+
+        #region Properties
+        public DialogResult Dialog { get; set; }
+        public string UPDATED_AT { get; set; }
+        public string UPDATED_AT_RAW { get; set; }
         #endregion
 
         #region FormLoad
@@ -72,15 +78,15 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
 
                 uIUtility = new UIUtility();
-                string pdf_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp/temp.pdf";
+                string pdf_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp/" + FILENAME;
                 pdfDocumentViewer.LoadFromFile(pdf_deirectory);
             }
             catch (Exception ex)
             {
                 Utility.WriteErrorLog(ex.Message, ex, false);
             }
-            
 
+            Dialog = DialogResult.Cancel;
         }
         #endregion
 
@@ -88,8 +94,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         private async void BtnCreateMail_Click(object sender, EventArgs e)
         {
 
-            string filename = WebUtility.GetFileNamefromURL(DOWNLOAD_LINK);
-            DataTable dt = DTRequestDetailUpdate(COMPANY_NO_BOX, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, EMAIL_ADDRESS, EDI_ACCOUNT, filename);
+            DataTable dt = DTRequestDetailUpdate(COMPANY_NO_BOX, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, EMAIL_ADDRESS, EDI_ACCOUNT, FILENAME);
 
             //send to web service
             frmRegisterCompleteNotificationPreviewController oController = new frmRegisterCompleteNotificationPreviewController();
@@ -120,14 +125,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 if (string.IsNullOrEmpty(return_message))
                 {
                     //download zip file
-                    string zipDownloadLink = result.Rows[0]["ZipDownloadLink"].ToString();
-                    filename = WebUtility.GetFileNamefromURL(zipDownloadLink);
+                    string ZipFileName = result.Rows[0]["ZipFileName"].ToString();
                     string emailAddressCC = result.Rows[0]["EmailAddressCC"].ToString();
                     string templateString = result.Rows[0]["TemplateString"].ToString();
                     string subjectString = result.Rows[0]["SubjectString"].ToString();
 
-                    string FIleAttachment = temp_deirectory + "/" + filename;
-                    bool success = await Core.WebUtility.Download(zipDownloadLink, FIleAttachment);
+                    string FIleAttachment = temp_deirectory + "/" + ZipFileName;
+                    bool success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + ZipFileName, FIleAttachment);
 
                     if (success)
                     {
@@ -156,6 +160,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 
                         mailItem.Display(true);
                         #endregion
+                        Dialog = DialogResult.OK;
+                        this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
+                        this.UPDATED_AT_RAW = result.Rows[0]["UPDATED_AT_RAW"].ToString();
                     }
 
 
@@ -164,9 +171,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                 {
                     MetroMessageBox.Show(this, "\n" + return_message, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-
-                
             }
 
             catch (Exception ex)
@@ -175,7 +179,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
             }
         }
         #endregion
-
 
         #region Parametere
         public DataTable DTRequestDetailUpdate(string COMPANY_NO_BOX, string REQ_SEQ, string QUOTATION_DATE, string ORDER_DATE, string COMPLETION_NOTIFICATION_DATE, string COMPANY_NAME, string EMAIL_ADDRESS, string EDI_ACCOUNT,String DOWNLOAD_LINK)
@@ -189,7 +192,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
             dt.Columns.Add("COMPANY_NAME");
             dt.Columns.Add("EMAIL_ADDRESS");
             dt.Columns.Add("EDI_ACCOUNT");
-            dt.Columns.Add("DOWNLOAD_LINK");
+            dt.Columns.Add("FILENAME");
             dt.Rows.Add(COMPANY_NO_BOX,  REQ_SEQ,  QUOTATION_DATE,  ORDER_DATE,  COMPLETION_NOTIFICATION_DATE,  COMPANY_NAME,  EMAIL_ADDRESS,  EDI_ACCOUNT, DOWNLOAD_LINK);
 
             return dt;
@@ -199,12 +202,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 
         private void BtnBack_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Dialog = DialogResult.Cancel;
+            this.Close();
         }
 
         private void FrmPreviewScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
             pdfDocumentViewer.Dispose();
+            this.DialogResult = Dialog;
         }
     }
 }

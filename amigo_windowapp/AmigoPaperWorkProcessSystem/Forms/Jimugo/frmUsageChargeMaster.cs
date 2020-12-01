@@ -88,6 +88,14 @@ namespace AmigoPaperWorkProcessSystem.Forms
             "ROW_ID"
         };
 
+        private string[] alignBottoms = {
+                "colCONTRACT_NAME",
+                "colCONTRACT_QTY",
+                "coLCONTRACT_UNIT",
+                "colINITIAL_COST",
+                "colMONTHLY_COST"
+        };
+
         #endregion
 
         #region Constructors
@@ -107,18 +115,32 @@ namespace AmigoPaperWorkProcessSystem.Forms
 
         #endregion
 
+        #region AlignBottomHeaders
+        private void AlignBottomHeaders()
+        {
+            foreach (string item in alignBottoms)
+            {
+                dgvList.Columns[item].HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+            }
+        }
+        #endregion
+
         #region FormLoad
         private void FrmUsageChargeMaster_Load(object sender, EventArgs e)
         {
             //set title
             lblMenu.Text = programName;
+            this.Text = "[" + programID + "] " + programName;
+
 
             uIUtility = new UIUtility(dgvList, Insertable, Copyable, Modifiable, dummyColumns);
             uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
-            SetDefaultColumnWidths(); //adjust checkbox sizes
-            uIUtility.DummyTable();// add dummy table to merge columns
-            uIUtility.DisableAutoSort();//disable autosort
+
+            uIUtility.ResetCheckBoxSize(); //adjust checkbox sizes
+            uIUtility.DummyTable(); // add dummy table to merge columns
+            uIUtility.DisableAutoSort(); //disable autosort
             PopulateDropdowns();
+            AlignBottomHeaders(); //adjust column headers
 
             //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
@@ -189,8 +211,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
                 string company_name = txtCONSTRACT_NAME.Text;
                 //string email = txtEmail.Text;
 
-                if (CheckUtility.SearchConditionCheck(this, txtCONTRACT_CODE.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 0) &&
-                    CheckUtility.SearchConditionCheck(this, txtCONSTRACT_NAME.Text, false, Utility.DataType.FULL_WIDTH, 80, 0)
+                if (CheckUtility.SearchConditionCheck(this, lblCONTRACT_CODE.Text, txtCONTRACT_CODE.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 0) &&
+                    CheckUtility.SearchConditionCheck(this, lblCONSTRACT_NAME.Text, txtCONSTRACT_NAME.Text, false, Utility.DataType.FULL_WIDTH, 80, 0)
                     )
                 {
 
@@ -247,10 +269,6 @@ namespace AmigoPaperWorkProcessSystem.Forms
             txtCONTRACT_CODE.Text = "";
             txtCONSTRACT_NAME.Text = "";
             cboLimit.SelectedIndex = 0;
-            uIUtility.ClearDataGrid();
-            lblTotalRecords.Text = "";
-            lblTotalPages.Text = "0";
-            lblcurrentPage.Text = "0";
         }
 
 
@@ -326,7 +344,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         #region ModifyButton
         private void BtnModify_Click(object sender, EventArgs e)
         {
-            CommonGridManage("M");
+           uIUtility.CommonGridManage("M");
         }
 
         #endregion
@@ -334,7 +352,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         #region InsertButton
         private void BtnInsert_Click(object sender, EventArgs e)
         {
-            CommonGridManage("I");
+            uIUtility.CommonGridManage("I");
         }
 
         #endregion
@@ -342,7 +360,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         #region DeleteButton
         private void BtnDelete_Click(object sender, EventArgs e)
         {
-            CommonGridManage("D");
+            uIUtility.CommonGridManage("D");
         }
 
         #endregion
@@ -358,7 +376,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         #region CopyButton
         private void BtnCopy_Click(object sender, EventArgs e)
         {
-            CommonGridManage("C");
+            uIUtility.CommonGridManage("C");
         }
 
         #endregion
@@ -439,126 +457,6 @@ namespace AmigoPaperWorkProcessSystem.Forms
             }
 
         }
-        #endregion
-
-        #region CommonGridManage
-        public void CommonGridManage(string operation)
-        {
-            //commit changes
-            dgvList.CommitEdit(DataGridViewDataErrorContexts.Commit);
-
-            #region close
-            //if (uIUtility.checkSelectedRow())
-            //{
-            //    for (int i = 0; i < dgvList.Rows.Count; i++)
-            //    {
-            //        string originalvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString();
-            //        string checkvalue = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim();
-
-            //        if (String.IsNullOrEmpty(checkvalue) ? false : true)
-            //        {
-            //            switch (operation)
-            //            {
-            //                case "I":
-            //                    uIUtility.InsertMode(operation, dgvList.Rows[i], true);
-            //                    i++;
-            //                    break;
-            //                case "M":
-            //                    if (originalvalue == "D" || String.IsNullOrEmpty(originalvalue == null ? null : originalvalue.Trim()))
-            //                    {
-            //                        dgvList.Rows[i].Cells["colMK"].Value = operation;
-            //                    }
-            //                    break;
-            //                case "D":
-            //                    if (originalvalue == "I" || originalvalue == "C")
-            //                    {
-            //                        uIUtility.dtList.Rows[i].Delete(); //delete row
-            //                        i--;
-            //                    }
-            //                    else
-            //                    {
-            //                        dgvList.Rows[i].Cells["colMK"].Value = operation;
-            //                    }
-            //                    break;
-            //                case "C":
-            //                    uIUtility.CopyMode(operation, dgvList.Rows[i], true);
-            //                    break;
-            //                default:
-            //                    break;
-            //            }
-            //        }
-            //    }
-            //}
-
-            ////if there is no row in datagrid view and insert button is clicked
-
-            //if (dgvList.Rows.Count <= 0 && operation == "I")
-            //{
-            //    uIUtility.InsertInitialRow(operation);
-            //}
-            #endregion
-
-            if (uIUtility.checkSelectedRow())
-            {
-                for (int i = 0; i < dgvList.Rows.Count; i++)
-                {
-                    string originalvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString();
-                    string checkvalue = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim();
-
-                    if (String.IsNullOrEmpty(checkvalue) ? false : true)
-                    {
-                        switch (operation)
-                        {
-                            case "I":
-                                uIUtility.InsertMode(operation, dgvList.Rows[i], true);
-                                i++;
-                                break;
-                            case "M":
-                                if (originalvalue != "D" || String.IsNullOrEmpty(originalvalue == null ? null : originalvalue.Trim()) || originalvalue == "O" || originalvalue == "X")
-                                {
-                                    dgvList.Rows[i].Cells["colMK"].Value = operation;
-                                }
-                                break;
-                            case "D":
-                                if (originalvalue == "I" || originalvalue == "C")
-                                {
-                                    uIUtility.dtList.Rows[i].Delete(); //delete row
-                                    i--;
-                                }
-                                else
-                                {
-                                    dgvList.Rows[i].Cells["colMK"].Value = operation;
-                                }
-                                break;
-                            case "C":
-                                uIUtility.CopyMode(operation, dgvList.Rows[i], true);
-                                i++;
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                if ((operation != "I"))
-                {
-                    MetroMessageBox.Show(dgvList.Parent, "\n" + JimugoMessages.E000ZZ004, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-
-            //if there is no row in datagrid view and insert button is clicked
-            bool Ischecked = uIUtility.checkSelectedRow();
-            if ((dgvList.Rows.Count <= 0 && operation == "I") || (!Ischecked && operation == "I"))
-            {
-                uIUtility.InsertInitialRow(operation);
-            }
-
-        }
-
-
-
         #endregion
 
         #region NextButton

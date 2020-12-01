@@ -37,6 +37,8 @@ namespace AmigoProcessManagement.Controller
             BodyMessage = new DataTable();
             BodyMessage.Columns.Add("Message");
             BodyMessage.Columns.Add("Error Message");
+            BodyMessage.Columns.Add("UPDATED_AT");
+            BodyMessage.Columns.Add("UPDATED_AT_RAW");
         }
 
         public ControllerPurchaseOrder(string authHeader) : this()
@@ -96,7 +98,7 @@ namespace AmigoProcessManagement.Controller
             oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE = Utility_Component.dtColumnToDateTime(GetParameterByKey("SYSTEM_EFFECTIVE_DATE"));
             oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE = Utility_Component.dtColumnToDateTime(GetParameterByKey("SYSTEM_REGISTER_DEADLINE"));
             oREQUEST_DETAIL.COMPANY_NO_BOX = GetParameterByKey("COMPANY_NO_BOX");
-            oREQUEST_DETAIL.REQ_SEQ = Utility_Component.dtColumnToInt(GetParameterByKey("SYSTEM_REGISTER_DEADLINE"));
+            oREQUEST_DETAIL.REQ_SEQ = Utility_Component.dtColumnToInt(GetParameterByKey("REQ_SEQ"));
             return oREQUEST_DETAIL;
         }
         #endregion
@@ -167,7 +169,7 @@ namespace AmigoProcessManagement.Controller
         {
             try
             {
-                file.SaveAs(HttpContext.Current.Server.MapPath("~/" + destination) + "/" + filename);
+                file.SaveAs(destination + "/" + filename);
                 msg = "";
             }
             catch (Exception ex)
@@ -222,7 +224,7 @@ namespace AmigoProcessManagement.Controller
                     {
                         BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
 
-                        if (REQ_SEQ == 2)
+                        if (REQ_TYPE == 2)
                         {
                             DataTable CustomerList = DAL_CUSTOMER_MASTER.GetTopCustomerByKeys(COMPANY_NO_BOX, TRANSACTION_TYPE, START_USE_DATE, out msg);
 
@@ -238,12 +240,9 @@ namespace AmigoProcessManagement.Controller
                             }
                             
                         }
-                        if (REQ_SEQ == 1) //if REQ_SEQ == 1
+                        if (REQ_TYPE == 1) 
                         {
-                            if (oCUSTOMER_MASTER.UPDATE_CONTENT != 1)
-                            {
-                                oCUSTOMER_MASTER.UPDATE_CONTENT = 3;
-                            }
+                            oCUSTOMER_MASTER.UPDATE_CONTENT = 1;
                         }
                         //insert info form screen
                         oCUSTOMER_MASTER.COMPANY_NO_BOX = COMPANY_NO_BOX;
@@ -316,7 +315,7 @@ namespace AmigoProcessManagement.Controller
 
                     oREPORT_HISTORY.REPORT_HISTORY_SEQ = HISTORY_SEQ;
                     oREPORT_HISTORY.OUTPUT_AT = Utility_Component.dtColumnToDateTime(DateTime.Now.ToString());
-                    oREPORT_HISTORY.OUTPUT_FILE = COMPANY_NO_BOX + "-1-" + REQ_SEQ + "注文書" + COMPANY_NAME + "様.pdf";
+                    oREPORT_HISTORY.OUTPUT_FILE = COMPANY_NO_BOX + "-1-" + REQ_SEQ + "_注文書_" + COMPANY_NAME + "様.pdf";
                     oREPORT_HISTORY.EMAIL_ADDRESS = null;
 
                     DAL_REPORT_HISTORY.Insert(oREPORT_HISTORY, CURRENT_DATETIME, CURRENT_USER, out msg);
@@ -361,14 +360,14 @@ namespace AmigoProcessManagement.Controller
                     }
                     #endregion
 
-                   
-
                     //all process success
                     dbTxn.Complete();
                     response.Status = 1;
                     response.Message = string.Format(Utility.Messages.Jimugo.I000ZZ016, "注文登録");
                     DataRow dr = BodyMessage.NewRow();
                     dr["Message"] = response.Message;
+                    dr["UPDATED_AT"] = UPDATED_AT_DATETIME;
+                    dr["UPDATED_AT_RAW"] = CURRENT_DATETIME;
                     BodyMessage.Rows.Add(dr);
                     response.Data = Utility_Component.DtToJSon(BodyMessage, "Message");
                     timer.Stop();

@@ -11,7 +11,7 @@ namespace DAL_AmigoProcess.DAL
         #region ConnectionSetUp
 
         public string strConnectionString;
-
+        
         string strGetInitialData = @"SELECT TOP 1
                                     REQUEST_DETAIL.COMPANY_NO_BOX, REQUEST_DETAIL.REQ_SEQ,
                                     EDI_ACCOUNT.EDI_ACCOUNT,
@@ -68,9 +68,9 @@ namespace DAL_AmigoProcess.DAL
                             EDI_ACCOUNT.EDI_ACCOUNT,
                             EDI_ACCOUNT.COMPANY_NO_BOX,
                             REQUEST_DETAIL.REQ_SEQ
-                            FROM REQUEST_DETAIL,EDI_ACCOUNT
-                            WHERE REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
-                            AND REQUEST_DETAIL.COMPANY_NO_BOX= @COMPANY_NO_BOX
+                            FROM REQUEST_DETAIL LEFT JOIN EDI_ACCOUNT
+                            ON REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
+                            WHERE REQUEST_DETAIL.COMPANY_NO_BOX= @COMPANY_NO_BOX
                             AND REQUEST_DETAIL.REQ_SEQ= @REQ_SEQ";
         #endregion
 
@@ -90,6 +90,7 @@ namespace DAL_AmigoProcess.DAL
                                            AND REQUEST_DETAIL.CLOSE_FLG LIKE '%' + @CLOSE_FLG + '%'
                                            AND REQUEST_ID.GD LIKE '%' + @GD + '%'
                                            AND REQUEST_DETAIL.REQ_STATUS LIKE '%' + @REQ_STATUS + '%'
+                                           AND REQUEST_DETAIL.REQ_STATUS != 0
                                            @REQ_DATE_FromCondition
                                            @REQ_DATE_ToCondition
                                            @QUOTATION_DATE_FromCondition
@@ -154,7 +155,7 @@ namespace DAL_AmigoProcess.DAL
 											CASE 
 												WHEN  REQUEST_DETAIL.REQ_STATUS = 2 OR REQUEST_DETAIL.REQ_STATUS = 9 THEN 
 												 CASE SYSTEM_SETTING_STATUS
-													WHEN 0 THEN ''
+													WHEN 0 THEN '*'
 													WHEN 1 THEN N'依頼中'
 													WHEN 2 THEN N'設定済み'
 													END 
@@ -163,6 +164,7 @@ namespace DAL_AmigoProcess.DAL
 										   CASE 
 												WHEN  REQUEST_DETAIL.REQ_STATUS = 2 OR REQUEST_DETAIL.REQ_STATUS = 9 THEN 
 													CASE WHEN ISNULL(REQUEST_DETAIL.COMPLETION_NOTIFICATION_DATE, '') <> '' THEN FORMAT(COMPLETION_NOTIFICATION_DATE,'yyyy/MM/dd') 
+                                                    ELSE '*'
 												END
 											END
                                              COMPLETION_NOTIFICATION_DATE,
@@ -185,6 +187,7 @@ namespace DAL_AmigoProcess.DAL
                                            AND REQUEST_DETAIL.CLOSE_FLG LIKE '%' + @CLOSE_FLG + '%'
                                            AND REQUEST_ID.GD LIKE '%' + @GD + '%'
                                            AND REQUEST_DETAIL.REQ_STATUS LIKE '%' + @REQ_STATUS + '%'
+                                           AND REQUEST_DETAIL.REQ_STATUS != 0
                                            @REQ_DATE_FromCondition
                                            @REQ_DATE_ToCondition
                                            @QUOTATION_DATE_FromCondition
@@ -233,9 +236,27 @@ namespace DAL_AmigoProcess.DAL
                                                 WHERE  REQUEST_DETAIL.COMPANY_NO_BOX = @COMPANY_NO_BOX
                                                 AND REQUEST_DETAIL.REQ_SEQ=@REQ_SEQ";
 
-        string strGetPdfData = @"select TOP 1 EDI_ACCOUNT.MAKER1,REQUEST_DETAIL.CONTRACT_PLAN,
+        string strGetPdfData = @"select TOP 1 EDI_ACCOUNT.MAKER1,
+                                (CASE TRIM(REQUEST_DETAIL.CONTRACT_PLAN) 
+                                        WHEN 'SERVER' THEN N'サーバー' 
+                                        WHEN 'SERVERRIGHT' THEN N'サーバーライト' 
+                                        WHEN 'BROWSERAUTO' THEN N'ブラウザ自動' 
+                                        WHEN 'BROWSER' THEN N'ブラウザ' 
+                                        WHEN 'PRODUCT' THEN N'生産情報閲覧' 
+                                        END) CONTRACT_PLAN,
                                 REQUEST_DETAIL.BOX_SIZE, REQUEST_DETAIL.PLAN_AMIGO_CAI,
-                                REQUEST_DETAIL.PLAN_AMIGO_BIZ, REQUEST_DETAIL.OP_FLAT, REQUEST_DETAIL.CONTRACT_CSP,OP_CLIENT,
+                                REQUEST_DETAIL.PLAN_AMIGO_BIZ,
+                                (CASE REQUEST_DETAIL.OP_FLAT 
+                                        WHEN 0 THEN N'無し' 
+                                        WHEN 1 THEN N'有り' 
+                                        END) OP_FLAT,
+                                (CASE REQUEST_DETAIL.CONTRACT_CSP 
+                                        WHEN 1 THEN N'日本情報通信' 
+                                        WHEN 2 THEN N'ソフトバンク' 
+                                        WHEN 3 THEN N'ﾄﾖﾀﾃﾞｼﾞﾀﾙｸﾙｰｽﾞ' 
+                                        WHEN null THEN N'無し' 
+                                        END) CONTRACT_CSP,
+                                (case when REQUEST_DETAIL.OP_CLIENT= '0' then N'無し'  else REQUEST_DETAIL.OP_CLIENT end) OP_CLIENT,
                                 OP_BASIC_SERVICE+OP_ADD_SERVICE AS OP_SERVICE,
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.sftp' AND CONFIG_SEQ= 1) as A,
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.https' AND CONFIG_SEQ= 1) as B,
@@ -310,6 +331,7 @@ namespace DAL_AmigoProcess.DAL
                                     ON UM.CONTRACT_CODE = REQ.CONTRACT_CODE
                                     WHERE REQ.COMPANY_NO_BOX = @COMPANY_NO_BOX
                                     AND REQ.REQ_SEQ = @REQ_SEQ
+                                    AND num = 1
                                     @Extra_Condition
                                     ORDER BY REQ.Type, UM.DISPLAY_ORDER";
 
@@ -423,7 +445,13 @@ namespace DAL_AmigoProcess.DAL
                                                 REQUEST_DETAIL.MONTHLY_COST,
                                                 REQUEST_DETAIL.YEAR_COST,
                                                 '*' AS BREAKDOWN ,
-                                                REQUEST_DETAIL.CONTRACT_PLAN,
+                                                (CASE TRIM(REQUEST_DETAIL.CONTRACT_PLAN) 
+                                                WHEN 'SERVER' THEN N'サーバー' 
+                                                WHEN 'SERVERRIGHT' THEN N'サーバーライト' 
+                                                WHEN 'BROWSERAUTO' THEN N'ブラウザ自動' 
+                                                WHEN 'BROWSER' THEN N'ブラウザ' 
+                                                WHEN 'PRODUCT' THEN N'生産情報閲覧' 
+                                                END) CONTRACT_PLAN,
                                                 REQUEST_DETAIL.PLAN_AMIGO_CAI,
                                                 REQUEST_DETAIL.PLAN_AMIGO_BIZ,
                                                 REQUEST_DETAIL.BOX_SIZE,
@@ -437,8 +465,16 @@ namespace DAL_AmigoProcess.DAL
                                                 REQUEST_DETAIL.OP_ADD_SERVICE,
                                                 '*' AS SERVICE_DESK,
                                                 REQUEST_DETAIL.CAI_SERVER_IP_ADDRESS,
-                                                REQUEST_DETAIL.CAI_NETWORK,
-                                                REQUEST_DETAIL.CONTRACT_CSP,
+                                                (CASE REQUEST_DETAIL.CAI_NETWORK
+                                                WHEN '0' THEN N'Both' 
+                                                WHEN '1' THEN N'JNX' 
+                                                WHEN '2' THEN N'INTERNET' 
+                                                END) CAI_NETWORK,
+                                                (CASE REQUEST_DETAIL.CONTRACT_CSP 
+												WHEN '1' THEN N'日本情報通信' 
+												WHEN '2' THEN N'ソフトバンク' 
+												WHEN '3' THEN N'ﾄﾖﾀﾃﾞｼﾞﾀﾙｸﾙｰｽﾞ' 
+												END) CONTRACT_CSP,
                                                 REQUEST_DETAIL.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS,
                                                 '*' AS ERROR_NOTIFICATION,
                                                 REQUEST_DETAIL.UPDATED_AT,
@@ -506,6 +542,16 @@ namespace DAL_AmigoProcess.DAL
                                                 WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
                                                 AND REQ_SEQ = @REQ_SEQ";
         #endregion
+
+
+        #region UpdateSystemSettingStatus
+        string strUpdateSystemSettingStatus = @"UPDATE REQUEST_DETAIL 
+		                                        SET SYSTEM_SETTING_STATUS = @SYSTEM_SETTING_STATUS,
+		                                        UPDATED_AT = @UPDATED_AT,
+		                                        UPDATED_BY= @UPDATED_BY		
+		                                        WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX AND REQ_SEQ = (SELECT MAX(REQ_SEQ) FROM REQUEST_DETAIL WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX)";
+        #endregion
+
         #endregion
 
         #region Constructors
@@ -986,19 +1032,19 @@ namespace DAL_AmigoProcess.DAL
         #region GetInitialDataForApproval
         public DataTable GetInitialDataForApproval(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_STATUS, int REQ_TYPE, out string strMsg)
         {
-            if (REQ_TYPE == 2 && REQ_STATUS < 2)
+            if (REQ_TYPE == 2)
             {
                 strGetInitialDataForApproval = strGetInitialDataForApproval.Replace("@REQ_SEQ_", @"AND ( 
                                                 REQUEST_DETAIL.REQ_SEQ = @REQ_SEQ
                                                 OR
-                                                REQUEST_DETAIL.REQ_SEQ = (SELECT MAX(REQ_SEQ) FROM REQUEST_DETAIL WHERE REQ_STATUS < 2 AND COMPANY_NO_BOX = @COMPANY_NO_BOX)
+                                                REQUEST_DETAIL.REQ_SEQ = (SELECT MAX(REQ_SEQ) FROM REQUEST_DETAIL WHERE REQ_SEQ < @REQ_SEQ AND REQ_STATUS = 2 AND COMPANY_NO_BOX = @COMPANY_NO_BOX)
                                                 )");
             }
             else
             {
                 strGetInitialDataForApproval = strGetInitialDataForApproval.Replace("@REQ_SEQ_", "AND REQUEST_DETAIL.REQ_SEQ=@REQ_SEQ");
             }
-            
+
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetInitialDataForApproval);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
@@ -1017,6 +1063,18 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
+        #endregion
+
+        #region UpdateSystemSettingStatus
+        public void UpdateSystemSettingStatus(int SYSTEM_SETTING_STATUS, string COMPANY_NO_BOX, string CURRENT_USER, string CURRENT_DATETIME, out String strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strUpdateSystemSettingStatus);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_SETTING_STATUS", SYSTEM_SETTING_STATUS));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", CURRENT_DATETIME));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", CURRENT_USER));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.ExcuteQuery(2, out strMsg);
+        }
         #endregion
     }
     #endregion

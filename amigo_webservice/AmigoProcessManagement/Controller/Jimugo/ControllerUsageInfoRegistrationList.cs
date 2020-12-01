@@ -133,7 +133,7 @@ namespace AmigoProcessManagement.Controller
         private USAGE_INFO_REGISTRATION CAST_TO_USAGE_INFO_REGISTRATION(DataRow row)
         {
             USAGE_INFO_REGISTRATION oUsageInfoReg = new USAGE_INFO_REGISTRATION();
-            oUsageInfoReg.EDI_ACCOUNT = row["EDI_ACCOUNT"].ToString().Replace("@","");
+            oUsageInfoReg.EDI_ACCOUNT = row["EDI_ACCOUNT"].ToString();
             oUsageInfoReg.COMPNAY_NO_BOX = row["COMPANY_NO_BOX"].ToString();
             oUsageInfoReg.COMPANY_NAME = row["COMPANY_NAME"].ToString();
             oUsageInfoReg.GD_CODE = row["GD_CODE"].ToString();
@@ -203,10 +203,11 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region SettingCompleteMail
-        public MetaResponse SettingCompleteMail(string UsageInfoRegList, string authHeader)
+        public MetaResponse SettingCompleteMail(string UsageInfoRegList)
         {
             try
             {
+                string msg = "";
                 DataTable dgvList = Utility.Utility_Component.JsonToDt(UsageInfoRegList);
 
                 for (int i = 0; i < dgvList.Rows.Count; i++)
@@ -214,17 +215,28 @@ namespace AmigoProcessManagement.Controller
                     USAGE_INFO_REGISTRATION oUSAGE_INFO_REG = new USAGE_INFO_REGISTRATION();
                     oUSAGE_INFO_REG = CAST_TO_USAGE_INFO_REGISTRATION(dgvList.Rows[i]);
 
-                    bool mailSuccess = PrepareAndSendMail(oUSAGE_INFO_REG);
+                    REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
+                    DAL_REQUEST_DETAIL.UpdateSystemSettingStatus(2, oUSAGE_INFO_REG.COMPNAY_NO_BOX, CURRENT_USER, CURRENT_DATETIME, out msg);
 
-                    if (mailSuccess)
+                    if (string.IsNullOrEmpty(msg))
                     {
-                        ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i]);
-              
+                        bool mailSuccess = PrepareAndSendMail(oUSAGE_INFO_REG);
+
+                        if (mailSuccess)
+                        {
+                            ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i]);
+
+                        }
+                        else
+                        {
+                            ResponseUtility.MailSendingFail(dgvList.Rows[i]);
+                        }
                     }
                     else
                     {
                         ResponseUtility.MailSendingFail(dgvList.Rows[i]);
                     }
+                    
                 }
 
                 response.Data = Utility.Utility_Component.DtToJSon(dgvList, "Mail status"); ;
@@ -277,7 +289,6 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-
         #region HandleInsert
         private void HandleInsert(USAGE_INFO_REGISTRATION oUSAGE_INFO_REG, string OPERATION, DataRow row)
         {
@@ -323,14 +334,14 @@ namespace AmigoProcessManagement.Controller
 
                 if (DAL_EDI_ACCOUNT.IsCompanyNoBoxAlreadyRegistered(oEDI_ACCOUNT.COMPANY_NO_BOX, out strMsg))
                 {
-                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ039, "COMPANY NO BOX"));
+                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ038, "会社番号+BOX"));
                     return;
                     
                 }
 
                 if (DAL_EDI_ACCOUNT.IsEDIAccountAlreadyRegistered(oEDI_ACCOUNT.EDI_ACCOUNT, out strMsg))
                 {
-                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ039, "EDI ACCOUNT"));
+                    ResponseUtility.ReturnFailMessage(row, String.Format(Utility.Messages.Jimugo.E000ZZ038, "EDIアカウント"));
                     return;
                 }
 

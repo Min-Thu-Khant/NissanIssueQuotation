@@ -13,7 +13,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
     class frmIssuQuotationPreviewController
     {
         #region GetQuotationMail
-        public DataTable GetQuotationMail(string COMPANY_NO_BOX, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, 
+        public DataTable GetQuotationMail(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, string CONSUMPTION_TAX, string INITIAL_SPECIAL_DISCOUNTS, string MONTHLY_SPECIAL_DISCOUNTS, string YEARLY_SPECIAL_DISCOUNT, 
                                           string INPUT_PERSON, string ExportInfo, string CONTRACT_PLAN, string CREATED_TIME)
         {
             string url = Properties.Settings.Default.QuotationMailCreate;
@@ -21,6 +21,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
             String json = JsonConvert.SerializeObject(new
             {
                 COMPANY_NO_BOX = COMPANY_NO_BOX,
+                COMPANY_NAME = COMPANY_NAME,
                 REQ_SEQ = REQ_SEQ,
                 CONSUMPTION_TAX = string.IsNullOrEmpty(CONSUMPTION_TAX) ? "0": CONSUMPTION_TAX,
                 INITIAL_SPECIAL_DISCOUNTS = string.IsNullOrEmpty(INITIAL_SPECIAL_DISCOUNTS) ? "0" : INITIAL_SPECIAL_DISCOUNTS,

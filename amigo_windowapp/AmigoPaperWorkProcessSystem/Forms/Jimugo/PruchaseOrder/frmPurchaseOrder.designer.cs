@@ -42,16 +42,16 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblQuotationIssueDate = new System.Windows.Forms.Label();
+            this.lblOrderDate = new System.Windows.Forms.Label();
+            this.lblSystemEffectiveDate = new System.Windows.Forms.Label();
+            this.lblSystemRegisterDeadline = new System.Windows.Forms.Label();
+            this.lblCompleteNotificationDate = new System.Windows.Forms.Label();
+            this.lblTransactionType = new System.Windows.Forms.Label();
             this.txtTransactionType = new System.Windows.Forms.TextBox();
             this.txtREQ_TYPE = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblREQ_TYPE = new System.Windows.Forms.Label();
+            this.lblStartUseDate = new System.Windows.Forms.Label();
             this.txtStartUseDate = new System.Windows.Forms.TextBox();
             this.pTitle.SuspendLayout();
             this.SuspendLayout();
@@ -69,11 +69,14 @@
             // 
             // txtCompleteNotificationDate
             // 
+            this.txtCompleteNotificationDate.Enabled = false;
             this.txtCompleteNotificationDate.Location = new System.Drawing.Point(115, 192);
             this.txtCompleteNotificationDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompleteNotificationDate.Name = "txtCompleteNotificationDate";
+            this.txtCompleteNotificationDate.ReadOnly = true;
             this.txtCompleteNotificationDate.Size = new System.Drawing.Size(170, 21);
             this.txtCompleteNotificationDate.TabIndex = 49;
+            this.txtCompleteNotificationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSystemRegisterDeadline
             // 
@@ -82,6 +85,7 @@
             this.txtSystemRegisterDeadline.Name = "txtSystemRegisterDeadline";
             this.txtSystemRegisterDeadline.Size = new System.Drawing.Size(168, 21);
             this.txtSystemRegisterDeadline.TabIndex = 47;
+            this.txtSystemRegisterDeadline.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSystemEffectiveDate
             // 
@@ -90,6 +94,7 @@
             this.txtSystemEffectiveDate.Name = "txtSystemEffectiveDate";
             this.txtSystemEffectiveDate.Size = new System.Drawing.Size(170, 21);
             this.txtSystemEffectiveDate.TabIndex = 45;
+            this.txtSystemEffectiveDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtOrderDate
             // 
@@ -98,6 +103,7 @@
             this.txtOrderDate.Name = "txtOrderDate";
             this.txtOrderDate.Size = new System.Drawing.Size(170, 21);
             this.txtOrderDate.TabIndex = 43;
+            this.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtQuotationIssueDate
             // 
@@ -108,6 +114,7 @@
             this.txtQuotationIssueDate.ReadOnly = true;
             this.txtQuotationIssueDate.Size = new System.Drawing.Size(170, 21);
             this.txtQuotationIssueDate.TabIndex = 41;
+            this.txtQuotationIssueDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtEDIAccount
             // 
@@ -192,134 +199,143 @@
             this.label1.Text = "EDIアカウント";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // lblQuotationIssueDate
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(22, 151);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 21);
-            this.label2.TabIndex = 56;
-            this.label2.Text = "見積書発行日";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQuotationIssueDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblQuotationIssueDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblQuotationIssueDate.Location = new System.Drawing.Point(22, 151);
+            this.lblQuotationIssueDate.Name = "lblQuotationIssueDate";
+            this.lblQuotationIssueDate.Size = new System.Drawing.Size(94, 21);
+            this.lblQuotationIssueDate.TabIndex = 56;
+            this.lblQuotationIssueDate.Text = "見積書発行日";
+            this.lblQuotationIssueDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label4
+            // lblOrderDate
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(326, 151);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 21);
-            this.label4.TabIndex = 57;
-            this.label4.Text = "注文日";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblOrderDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOrderDate.Location = new System.Drawing.Point(326, 151);
+            this.lblOrderDate.Name = "lblOrderDate";
+            this.lblOrderDate.Size = new System.Drawing.Size(67, 21);
+            this.lblOrderDate.TabIndex = 57;
+            this.lblOrderDate.Text = "注文日";
+            this.lblOrderDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label5
+            // lblSystemEffectiveDate
             // 
-            this.label5.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(599, 151);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(89, 21);
-            this.label5.TabIndex = 58;
-            this.label5.Text = "システム有効日";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSystemEffectiveDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblSystemEffectiveDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSystemEffectiveDate.Location = new System.Drawing.Point(599, 151);
+            this.lblSystemEffectiveDate.Name = "lblSystemEffectiveDate";
+            this.lblSystemEffectiveDate.Size = new System.Drawing.Size(89, 21);
+            this.lblSystemEffectiveDate.TabIndex = 58;
+            this.lblSystemEffectiveDate.Text = "システム有効日";
+            this.lblSystemEffectiveDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label6
+            // lblSystemRegisterDeadline
             // 
-            this.label6.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(892, 151);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 21);
-            this.label6.TabIndex = 59;
-            this.label6.Text = "システム登録期限";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSystemRegisterDeadline.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblSystemRegisterDeadline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblSystemRegisterDeadline.Location = new System.Drawing.Point(892, 151);
+            this.lblSystemRegisterDeadline.Name = "lblSystemRegisterDeadline";
+            this.lblSystemRegisterDeadline.Size = new System.Drawing.Size(102, 21);
+            this.lblSystemRegisterDeadline.TabIndex = 59;
+            this.lblSystemRegisterDeadline.Text = "システム登録期限";
+            this.lblSystemRegisterDeadline.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label7
+            // lblCompleteNotificationDate
             // 
-            this.label7.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label7.Location = new System.Drawing.Point(22, 192);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(94, 21);
-            this.label7.TabIndex = 60;
-            this.label7.Text = "登録完了通知日";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompleteNotificationDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompleteNotificationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompleteNotificationDate.Location = new System.Drawing.Point(22, 192);
+            this.lblCompleteNotificationDate.Name = "lblCompleteNotificationDate";
+            this.lblCompleteNotificationDate.Size = new System.Drawing.Size(94, 21);
+            this.lblCompleteNotificationDate.TabIndex = 60;
+            this.lblCompleteNotificationDate.Text = "登録完了通知日";
+            this.lblCompleteNotificationDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // lblTransactionType
             // 
-            this.label8.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(327, 191);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 21);
-            this.label8.TabIndex = 61;
-            this.label8.Text = "取引区分";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTransactionType.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblTransactionType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTransactionType.Location = new System.Drawing.Point(327, 191);
+            this.lblTransactionType.Name = "lblTransactionType";
+            this.lblTransactionType.Size = new System.Drawing.Size(67, 21);
+            this.lblTransactionType.TabIndex = 61;
+            this.lblTransactionType.Text = "取引区分";
+            this.lblTransactionType.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtTransactionType
             // 
+            this.txtTransactionType.Enabled = false;
             this.txtTransactionType.Location = new System.Drawing.Point(391, 191);
             this.txtTransactionType.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTransactionType.Name = "txtTransactionType";
+            this.txtTransactionType.ReadOnly = true;
             this.txtTransactionType.Size = new System.Drawing.Size(83, 21);
             this.txtTransactionType.TabIndex = 62;
+            this.txtTransactionType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtREQ_TYPE
             // 
+            this.txtREQ_TYPE.Enabled = false;
             this.txtREQ_TYPE.Location = new System.Drawing.Point(665, 192);
             this.txtREQ_TYPE.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtREQ_TYPE.Name = "txtREQ_TYPE";
+            this.txtREQ_TYPE.ReadOnly = true;
             this.txtREQ_TYPE.Size = new System.Drawing.Size(83, 21);
             this.txtREQ_TYPE.TabIndex = 64;
+            this.txtREQ_TYPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label10
+            // lblREQ_TYPE
             // 
-            this.label10.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(599, 192);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(67, 21);
-            this.label10.TabIndex = 63;
-            this.label10.Text = "申請区分";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblREQ_TYPE.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblREQ_TYPE.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblREQ_TYPE.Location = new System.Drawing.Point(599, 192);
+            this.lblREQ_TYPE.Name = "lblREQ_TYPE";
+            this.lblREQ_TYPE.Size = new System.Drawing.Size(67, 21);
+            this.lblREQ_TYPE.TabIndex = 63;
+            this.lblREQ_TYPE.Text = "申請区分";
+            this.lblREQ_TYPE.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
+            // lblStartUseDate
             // 
-            this.label11.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Location = new System.Drawing.Point(892, 192);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(102, 21);
-            this.label11.TabIndex = 66;
-            this.label11.Text = "利用開始年月日";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblStartUseDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblStartUseDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblStartUseDate.Location = new System.Drawing.Point(892, 192);
+            this.lblStartUseDate.Name = "lblStartUseDate";
+            this.lblStartUseDate.Size = new System.Drawing.Size(102, 21);
+            this.lblStartUseDate.TabIndex = 66;
+            this.lblStartUseDate.Text = "利用開始年月日";
+            this.lblStartUseDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtStartUseDate
             // 
+            this.txtStartUseDate.Enabled = false;
             this.txtStartUseDate.Location = new System.Drawing.Point(993, 192);
             this.txtStartUseDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtStartUseDate.Name = "txtStartUseDate";
+            this.txtStartUseDate.ReadOnly = true;
             this.txtStartUseDate.Size = new System.Drawing.Size(168, 21);
             this.txtStartUseDate.TabIndex = 65;
+            this.txtStartUseDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmPurchaseOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 241);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lblStartUseDate);
             this.Controls.Add(this.txtStartUseDate);
             this.Controls.Add(this.txtREQ_TYPE);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblREQ_TYPE);
             this.Controls.Add(this.txtTransactionType);
-            this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblTransactionType);
+            this.Controls.Add(this.lblCompleteNotificationDate);
+            this.Controls.Add(this.lblSystemRegisterDeadline);
+            this.Controls.Add(this.lblSystemEffectiveDate);
+            this.Controls.Add(this.lblOrderDate);
+            this.Controls.Add(this.lblQuotationIssueDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label9);
@@ -341,6 +357,7 @@
             this.MinimumSize = new System.Drawing.Size(1300, 280);
             this.Name = "frmPurchaseOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmOrderRegistration_FormClosing);
             this.Load += new System.EventHandler(this.FrmOrderRegistration_Load);
             this.pTitle.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -364,16 +381,16 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblQuotationIssueDate;
+        private System.Windows.Forms.Label lblOrderDate;
+        private System.Windows.Forms.Label lblSystemEffectiveDate;
+        private System.Windows.Forms.Label lblSystemRegisterDeadline;
+        private System.Windows.Forms.Label lblCompleteNotificationDate;
+        private System.Windows.Forms.Label lblTransactionType;
         private System.Windows.Forms.TextBox txtTransactionType;
         private System.Windows.Forms.TextBox txtREQ_TYPE;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblREQ_TYPE;
+        private System.Windows.Forms.Label lblStartUseDate;
         private System.Windows.Forms.TextBox txtStartUseDate;
     }
 }

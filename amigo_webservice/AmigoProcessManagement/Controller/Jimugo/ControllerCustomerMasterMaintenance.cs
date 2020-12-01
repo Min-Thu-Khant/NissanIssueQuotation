@@ -122,8 +122,7 @@ namespace AmigoProcessManagement.Controller
         {
             string strMsg = "";
             CUSTOMER_MASTER DAL_CUSTOMER_MASTER = new CUSTOMER_MASTER(con);
-            if (DAL_CUSTOMER_MASTER.IsAlreadyExist(oCUSTOMER_MASTER, out strMsg))
-            {
+            
                 using (TransactionScope dbTxn = new TransactionScope())
                 {
                     
@@ -177,14 +176,6 @@ namespace AmigoProcessManagement.Controller
                     }
                     #endregion
                 }
-            }
-            else
-            {
-                row["UPDATE_MESSAGE"] = Utility.Messages.Jimugo.E000ZZ050;
-                row["MK"] = "X";
-            }
-
-
 
         }
         #endregion
@@ -269,6 +260,7 @@ namespace AmigoProcessManagement.Controller
             oCUSTOMER_MASTER.UPDATED_AT = row["UPDATED_AT"].ToString().Length >= 1 ? row["UPDATED_AT"].ToString() : null;
             oCUSTOMER_MASTER.UPDATED_AT_RAW = row["UPDATED_AT_RAW"].ToString() == "" ? null : row["UPDATED_AT_RAW"].ToString();
             oCUSTOMER_MASTER.UPDATED_BY = row["UPDATED_BY"].ToString().Length >= 1 ? row["UPDATED_BY"].ToString() : null;
+            oCUSTOMER_MASTER.REQ_SEQ = Utility_Component.dtColumnToInt(row["NCS_CUSTOMER_CODE"].ToString());
             return oCUSTOMER_MASTER;
         }
         #endregion
@@ -310,7 +302,6 @@ namespace AmigoProcessManagement.Controller
                 dtREQUEST_DETAIL.Columns.Add("DISCOUNT", typeof(decimal));
                 dtREQUEST_DETAIL.Columns.Add("DIFFERENT", typeof(decimal));
 
-
                 REQ_USAGE_FEE DAL_REQ_USAGE_FEE = new REQ_USAGE_FEE(con);
                 DataTable dtUSAGE_FEE_MASTER = DAL_REQ_USAGE_FEE.getPopUpScreenData(COMPANY_NO_BOX, REQ_SEQ);
 
@@ -320,22 +311,70 @@ namespace AmigoProcessManagement.Controller
                     {
                         DataRow newRow = dtREQUEST_DETAIL.NewRow();
                         newRow["COST"] = row["INITIAL_COST"];
-                        newRow["DISCOUNT"] = row["INITIAL_COST_DISCOUNTS"];
-                        newRow["DIFFERENT"] = row["INITIAL_COST_DIFF"];
+                        newRow["DISCOUNT"] = row["MONTHLY_COST"];
+                        newRow["DIFFERENT"] = row["YEAR_COST"];
                         dtREQUEST_DETAIL.Rows.Add(newRow);
 
                         DataRow newRow1 = dtREQUEST_DETAIL.NewRow();
-                        newRow1["COST"] = row["MONTHLY_COST"];
-                        newRow1["DISCOUNT"] = row["MONTHLY_COST_DISCOUNTS"];
-                        newRow1["DIFFERENT"] = row["MONTHLY_COST_DIFF"];
+                        string initial = row["INITIAL_COST_DISCOUNTS"].ToString();
+                        string monthly = row["MONTHLY_COST_DISCOUNTS"].ToString();
+                        string year = row["YEAR_COST_DISCOUNTS"].ToString();
+                        if(initial != "0")
+                        {
+                            newRow1["COST"] = "-" + row["INITIAL_COST_DISCOUNTS"];
+
+                        }
+                        else
+                        {
+                            newRow1["COST"] = row["INITIAL_COST_DISCOUNTS"];
+                        }
+
+                        if (monthly != "0")
+                        {
+                            newRow1["DISCOUNT"] = "-" + row["MONTHLY_COST_DISCOUNTS"];
+                        }
+                        else
+                        {
+                            newRow1["DISCOUNT"] = row["MONTHLY_COST_DISCOUNTS"];
+                        }
+
+                        if (year != "0")
+                        {
+                            newRow1["DIFFERENT"] = "-" + row["YEAR_COST_DISCOUNTS"];
+                        }
+                        else
+                        {
+                            newRow1["DIFFERENT"] = row["YEAR_COST_DISCOUNTS"];
+                        }
                         dtREQUEST_DETAIL.Rows.Add(newRow1);
 
                         DataRow newRow2 = dtREQUEST_DETAIL.NewRow();
-                        newRow2["COST"] = row["YEAR_COST"];
-                        newRow2["DISCOUNT"] = row["YEAR_COST_DISCOUNTS"];
+                        newRow2["COST"] = row["INITIAL_COST_DIFF"];
+                        newRow2["DISCOUNT"] = row["MONTHLY_COST_DIFF"];
                         newRow2["DIFFERENT"] = row["YEAR_COST_DIFF"];
                         dtREQUEST_DETAIL.Rows.Add(newRow2);
                     }
+
+                    //foreach (DataRow row in dt.Rows)
+                    //{
+                    //    DataRow newRow = dtREQUEST_DETAIL.NewRow();
+                    //    newRow["COST"] = row["INITIAL_COST"];
+                    //    newRow["DISCOUNT"] = row["INITIAL_COST_DISCOUNTS"];
+                    //    newRow["DIFFERENT"] = row["INITIAL_COST_DIFF"];
+                    //    dtREQUEST_DETAIL.Rows.Add(newRow);
+
+                    //    DataRow newRow1 = dtREQUEST_DETAIL.NewRow();
+                    //    newRow1["COST"] = row["MONTHLY_COST"];
+                    //    newRow1["DISCOUNT"] = row["MONTHLY_COST_DISCOUNTS"];
+                    //    newRow1["DIFFERENT"] = row["MONTHLY_COST_DIFF"];
+                    //    dtREQUEST_DETAIL.Rows.Add(newRow1);
+
+                    //    DataRow newRow2 = dtREQUEST_DETAIL.NewRow();
+                    //    newRow2["COST"] = row["YEAR_COST"];
+                    //    newRow2["DISCOUNT"] = row["YEAR_COST_DISCOUNTS"];
+                    //    newRow2["DIFFERENT"] = row["YEAR_COST_DIFF"];
+                    //    dtREQUEST_DETAIL.Rows.Add(newRow2);
+                    //}
                 }
 
                 DataSet ds = new DataSet();

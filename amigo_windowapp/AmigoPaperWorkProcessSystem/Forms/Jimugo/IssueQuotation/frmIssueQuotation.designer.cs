@@ -31,33 +31,33 @@
             this.pTitle = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
             this.btnPreview = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCompanNoBox = new System.Windows.Forms.Label();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblEDIAccount = new System.Windows.Forms.Label();
             this.txtEDIAccount = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblIssueDate = new System.Windows.Forms.Label();
             this.txtIssueDate = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblOrderDate = new System.Windows.Forms.Label();
             this.txtOrderDate = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblNotificationDate = new System.Windows.Forms.Label();
             this.txtNotificationDate = new System.Windows.Forms.TextBox();
             this.chkInitialQuot = new System.Windows.Forms.CheckBox();
             this.chkMonthlyQuote = new System.Windows.Forms.CheckBox();
             this.chkProductionInfo = new System.Windows.Forms.CheckBox();
             this.chkOrderForm = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblQuotationStartDate = new System.Windows.Forms.Label();
             this.txtQuotationStartDate = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
+            this.lblQuotationExpireDay = new System.Windows.Forms.Label();
             this.txtQuotationExpireDay = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblInitialSpecialDiscount = new System.Windows.Forms.Label();
             this.txtInitialSpecialDiscount = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.lblMonthlySpecialDiscount = new System.Windows.Forms.Label();
             this.txtMonthlySpecialDiscount = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.lblDestinationEmail = new System.Windows.Forms.Label();
             this.txtDestinationMail = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.lblPeriod = new System.Windows.Forms.Label();
             this.txtPeriodFrom = new System.Windows.Forms.TextBox();
             this.txtPeriodTo = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
@@ -70,9 +70,9 @@
             this.txtOrderRemark = new System.Windows.Forms.TextBox();
             this.tbOrderRemark = new System.Windows.Forms.TabPage();
             this.txtProductionInfoRemark = new System.Windows.Forms.TextBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.lblTax = new System.Windows.Forms.Label();
             this.txtTax = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
+            this.lblYearlySpecialDiscount = new System.Windows.Forms.Label();
             this.txtYearlySpecialDiscount = new System.Windows.Forms.TextBox();
             this.pTitle.SuspendLayout();
             this.tbParent.SuspendLayout();
@@ -112,16 +112,16 @@
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.BtnPreview_Click);
             // 
-            // label3
+            // lblCompanNoBox
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(16, 108);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 21);
-            this.label3.TabIndex = 19;
-            this.label3.Text = "会社番号+BOX";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanNoBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanNoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanNoBox.Location = new System.Drawing.Point(16, 108);
+            this.lblCompanNoBox.Name = "lblCompanNoBox";
+            this.lblCompanNoBox.Size = new System.Drawing.Size(101, 21);
+            this.lblCompanNoBox.TabIndex = 19;
+            this.lblCompanNoBox.Text = "会社番号+BOX";
+            this.lblCompanNoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyNoBox
             // 
@@ -132,16 +132,16 @@
             this.txtCompanyNoBox.Size = new System.Drawing.Size(130, 21);
             this.txtCompanyNoBox.TabIndex = 18;
             // 
-            // label1
+            // lblEDIAccount
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(275, 109);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(81, 21);
-            this.label1.TabIndex = 21;
-            this.label1.Text = "EDIアカウント";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEDIAccount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblEDIAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEDIAccount.Location = new System.Drawing.Point(275, 109);
+            this.lblEDIAccount.Name = "lblEDIAccount";
+            this.lblEDIAccount.Size = new System.Drawing.Size(81, 21);
+            this.lblEDIAccount.TabIndex = 21;
+            this.lblEDIAccount.Text = "EDIアカウント";
+            this.lblEDIAccount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtEDIAccount
             // 
@@ -152,16 +152,16 @@
             this.txtEDIAccount.Size = new System.Drawing.Size(130, 21);
             this.txtEDIAccount.TabIndex = 20;
             // 
-            // label2
+            // lblCompanyName
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(513, 109);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 21);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "会社名";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyName.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyName.Location = new System.Drawing.Point(513, 109);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(101, 21);
+            this.lblCompanyName.TabIndex = 23;
+            this.lblCompanyName.Text = "会社名";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyName
             // 
@@ -172,16 +172,16 @@
             this.txtCompanyName.Size = new System.Drawing.Size(130, 21);
             this.txtCompanyName.TabIndex = 22;
             // 
-            // label4
+            // lblIssueDate
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(16, 148);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 21);
-            this.label4.TabIndex = 25;
-            this.label4.Text = "見積書発行日";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblIssueDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblIssueDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblIssueDate.Location = new System.Drawing.Point(16, 148);
+            this.lblIssueDate.Name = "lblIssueDate";
+            this.lblIssueDate.Size = new System.Drawing.Size(101, 21);
+            this.lblIssueDate.TabIndex = 25;
+            this.lblIssueDate.Text = "見積書発行日";
+            this.lblIssueDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtIssueDate
             // 
@@ -193,16 +193,16 @@
             this.txtIssueDate.TabIndex = 24;
             this.txtIssueDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label5
+            // lblOrderDate
             // 
-            this.label5.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(275, 148);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 21);
-            this.label5.TabIndex = 27;
-            this.label5.Text = "注文日";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblOrderDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblOrderDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblOrderDate.Location = new System.Drawing.Point(275, 148);
+            this.lblOrderDate.Name = "lblOrderDate";
+            this.lblOrderDate.Size = new System.Drawing.Size(81, 21);
+            this.lblOrderDate.TabIndex = 27;
+            this.lblOrderDate.Text = "注文日";
+            this.lblOrderDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtOrderDate
             // 
@@ -214,16 +214,16 @@
             this.txtOrderDate.TabIndex = 26;
             this.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label6
+            // lblNotificationDate
             // 
-            this.label6.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label6.Location = new System.Drawing.Point(513, 149);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 21);
-            this.label6.TabIndex = 29;
-            this.label6.Text = "登録完了通知日";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNotificationDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblNotificationDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblNotificationDate.Location = new System.Drawing.Point(513, 149);
+            this.lblNotificationDate.Name = "lblNotificationDate";
+            this.lblNotificationDate.Size = new System.Drawing.Size(101, 21);
+            this.lblNotificationDate.TabIndex = 29;
+            this.lblNotificationDate.Text = "登録完了通知日";
+            this.lblNotificationDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtNotificationDate
             // 
@@ -283,16 +283,16 @@
             this.chkOrderForm.Text = "注文書";
             this.chkOrderForm.UseVisualStyleBackColor = true;
             // 
-            // label7
+            // lblQuotationStartDate
             // 
-            this.label7.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label7.Location = new System.Drawing.Point(771, 189);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(101, 21);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "見積開始日";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQuotationStartDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblQuotationStartDate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblQuotationStartDate.Location = new System.Drawing.Point(771, 189);
+            this.lblQuotationStartDate.Name = "lblQuotationStartDate";
+            this.lblQuotationStartDate.Size = new System.Drawing.Size(101, 21);
+            this.lblQuotationStartDate.TabIndex = 35;
+            this.lblQuotationStartDate.Text = "見積開始日";
+            this.lblQuotationStartDate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtQuotationStartDate
             // 
@@ -303,16 +303,16 @@
             this.txtQuotationStartDate.TabIndex = 34;
             this.txtQuotationStartDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // label8
+            // lblQuotationExpireDay
             // 
-            this.label8.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label8.Location = new System.Drawing.Point(1026, 189);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(101, 21);
-            this.label8.TabIndex = 37;
-            this.label8.Text = "見積有効期限(日)";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQuotationExpireDay.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblQuotationExpireDay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblQuotationExpireDay.Location = new System.Drawing.Point(1026, 189);
+            this.lblQuotationExpireDay.Name = "lblQuotationExpireDay";
+            this.lblQuotationExpireDay.Size = new System.Drawing.Size(101, 21);
+            this.lblQuotationExpireDay.TabIndex = 37;
+            this.lblQuotationExpireDay.Text = "見積有効期限(日)";
+            this.lblQuotationExpireDay.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtQuotationExpireDay
             // 
@@ -321,18 +321,18 @@
             this.txtQuotationExpireDay.Name = "txtQuotationExpireDay";
             this.txtQuotationExpireDay.Size = new System.Drawing.Size(130, 21);
             this.txtQuotationExpireDay.TabIndex = 36;
-            this.txtQuotationExpireDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtQuotationExpireDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label9
+            // lblInitialSpecialDiscount
             // 
-            this.label9.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label9.Location = new System.Drawing.Point(16, 231);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(109, 21);
-            this.label9.TabIndex = 39;
-            this.label9.Text = "特別値引き額(初期)";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblInitialSpecialDiscount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblInitialSpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblInitialSpecialDiscount.Location = new System.Drawing.Point(16, 231);
+            this.lblInitialSpecialDiscount.Name = "lblInitialSpecialDiscount";
+            this.lblInitialSpecialDiscount.Size = new System.Drawing.Size(109, 21);
+            this.lblInitialSpecialDiscount.TabIndex = 39;
+            this.lblInitialSpecialDiscount.Text = "特別値引き額(初期)";
+            this.lblInitialSpecialDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtInitialSpecialDiscount
             // 
@@ -343,16 +343,16 @@
             this.txtInitialSpecialDiscount.TabIndex = 38;
             this.txtInitialSpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label10
+            // lblMonthlySpecialDiscount
             // 
-            this.label10.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label10.Location = new System.Drawing.Point(275, 231);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(109, 21);
-            this.label10.TabIndex = 41;
-            this.label10.Text = "特別値引き額(月額)";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMonthlySpecialDiscount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblMonthlySpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblMonthlySpecialDiscount.Location = new System.Drawing.Point(275, 231);
+            this.lblMonthlySpecialDiscount.Name = "lblMonthlySpecialDiscount";
+            this.lblMonthlySpecialDiscount.Size = new System.Drawing.Size(109, 21);
+            this.lblMonthlySpecialDiscount.TabIndex = 41;
+            this.lblMonthlySpecialDiscount.Text = "特別値引き額(月額)";
+            this.lblMonthlySpecialDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtMonthlySpecialDiscount
             // 
@@ -363,16 +363,16 @@
             this.txtMonthlySpecialDiscount.TabIndex = 40;
             this.txtMonthlySpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label11
+            // lblDestinationEmail
             // 
-            this.label11.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label11.Location = new System.Drawing.Point(16, 273);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(109, 21);
-            this.label11.TabIndex = 43;
-            this.label11.Text = "送付先メールアドレス";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDestinationEmail.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblDestinationEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblDestinationEmail.Location = new System.Drawing.Point(16, 273);
+            this.lblDestinationEmail.Name = "lblDestinationEmail";
+            this.lblDestinationEmail.Size = new System.Drawing.Size(109, 21);
+            this.lblDestinationEmail.TabIndex = 43;
+            this.lblDestinationEmail.Text = "送付先メールアドレス";
+            this.lblDestinationEmail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDestinationMail
             // 
@@ -382,16 +382,16 @@
             this.txtDestinationMail.Size = new System.Drawing.Size(361, 21);
             this.txtDestinationMail.TabIndex = 42;
             // 
-            // label12
+            // lblPeriod
             // 
-            this.label12.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label12.Location = new System.Drawing.Point(16, 316);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(130, 21);
-            this.label12.TabIndex = 45;
-            this.label12.Text = "クライアント証明書の期間";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPeriod.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblPeriod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblPeriod.Location = new System.Drawing.Point(16, 316);
+            this.lblPeriod.Name = "lblPeriod";
+            this.lblPeriod.Size = new System.Drawing.Size(130, 21);
+            this.lblPeriod.TabIndex = 45;
+            this.lblPeriod.Text = "クライアント証明書の期間";
+            this.lblPeriod.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtPeriodFrom
             // 
@@ -515,16 +515,16 @@
             this.txtProductionInfoRemark.Size = new System.Drawing.Size(1245, 272);
             this.txtProductionInfoRemark.TabIndex = 0;
             // 
-            // label14
+            // lblTax
             // 
-            this.label14.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label14.Location = new System.Drawing.Point(513, 189);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(101, 21);
-            this.label14.TabIndex = 50;
-            this.label14.Text = "消費税(%)";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTax.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblTax.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTax.Location = new System.Drawing.Point(513, 189);
+            this.lblTax.Name = "lblTax";
+            this.lblTax.Size = new System.Drawing.Size(101, 21);
+            this.lblTax.TabIndex = 50;
+            this.lblTax.Text = "消費税(%)";
+            this.lblTax.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtTax
             // 
@@ -533,18 +533,18 @@
             this.txtTax.Name = "txtTax";
             this.txtTax.Size = new System.Drawing.Size(130, 21);
             this.txtTax.TabIndex = 49;
-            this.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // label15
+            // lblYearlySpecialDiscount
             // 
-            this.label15.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label15.Location = new System.Drawing.Point(513, 231);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(109, 21);
-            this.label15.TabIndex = 52;
-            this.label15.Text = "特別値引き額(年額)";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblYearlySpecialDiscount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblYearlySpecialDiscount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblYearlySpecialDiscount.Location = new System.Drawing.Point(513, 231);
+            this.lblYearlySpecialDiscount.Name = "lblYearlySpecialDiscount";
+            this.lblYearlySpecialDiscount.Size = new System.Drawing.Size(109, 21);
+            this.lblYearlySpecialDiscount.TabIndex = 52;
+            this.lblYearlySpecialDiscount.Text = "特別値引き額(年額)";
+            this.lblYearlySpecialDiscount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtYearlySpecialDiscount
             // 
@@ -560,48 +560,48 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 681);
-            this.Controls.Add(this.label15);
+            this.Controls.Add(this.lblYearlySpecialDiscount);
             this.Controls.Add(this.txtYearlySpecialDiscount);
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.lblTax);
             this.Controls.Add(this.txtTax);
             this.Controls.Add(this.tbParent);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtPeriodTo);
-            this.Controls.Add(this.label12);
+            this.Controls.Add(this.lblPeriod);
             this.Controls.Add(this.txtPeriodFrom);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.lblDestinationEmail);
             this.Controls.Add(this.txtDestinationMail);
-            this.Controls.Add(this.label10);
+            this.Controls.Add(this.lblMonthlySpecialDiscount);
             this.Controls.Add(this.txtMonthlySpecialDiscount);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblInitialSpecialDiscount);
             this.Controls.Add(this.txtInitialSpecialDiscount);
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lblQuotationExpireDay);
             this.Controls.Add(this.txtQuotationExpireDay);
-            this.Controls.Add(this.label7);
+            this.Controls.Add(this.lblQuotationStartDate);
             this.Controls.Add(this.txtQuotationStartDate);
             this.Controls.Add(this.chkOrderForm);
             this.Controls.Add(this.chkProductionInfo);
             this.Controls.Add(this.chkMonthlyQuote);
             this.Controls.Add(this.chkInitialQuot);
-            this.Controls.Add(this.label6);
+            this.Controls.Add(this.lblNotificationDate);
             this.Controls.Add(this.txtNotificationDate);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblOrderDate);
             this.Controls.Add(this.txtOrderDate);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblIssueDate);
             this.Controls.Add(this.txtIssueDate);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.txtCompanyName);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEDIAccount);
             this.Controls.Add(this.txtEDIAccount);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblCompanNoBox);
             this.Controls.Add(this.txtCompanyNoBox);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.pTitle);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F);
             this.MinimumSize = new System.Drawing.Size(1300, 720);
             this.Name = "frmIssueQuotation";
-            this.Text = "[CTS040] 見積書発行画面";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmIssueQuotation_FormClosing);
             this.Load += new System.EventHandler(this.FrmIssueQuotation_Load);
             this.pTitle.ResumeLayout(false);
             this.tbParent.ResumeLayout(false);
@@ -623,33 +623,33 @@
         private System.Windows.Forms.Panel pTitle;
         private System.Windows.Forms.Label lblMenu;
         private System.Windows.Forms.Button btnPreview;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCompanNoBox;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblEDIAccount;
         private System.Windows.Forms.TextBox txtEDIAccount;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.TextBox txtCompanyName;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblIssueDate;
         private System.Windows.Forms.TextBox txtIssueDate;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblOrderDate;
         private System.Windows.Forms.TextBox txtOrderDate;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblNotificationDate;
         private System.Windows.Forms.TextBox txtNotificationDate;
         private System.Windows.Forms.CheckBox chkInitialQuot;
         private System.Windows.Forms.CheckBox chkMonthlyQuote;
         private System.Windows.Forms.CheckBox chkProductionInfo;
         private System.Windows.Forms.CheckBox chkOrderForm;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblQuotationStartDate;
         private System.Windows.Forms.TextBox txtQuotationStartDate;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label lblQuotationExpireDay;
         private System.Windows.Forms.TextBox txtQuotationExpireDay;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblInitialSpecialDiscount;
         private System.Windows.Forms.TextBox txtInitialSpecialDiscount;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lblMonthlySpecialDiscount;
         private System.Windows.Forms.TextBox txtMonthlySpecialDiscount;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblDestinationEmail;
         private System.Windows.Forms.TextBox txtDestinationMail;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label lblPeriod;
         private System.Windows.Forms.TextBox txtPeriodFrom;
         private System.Windows.Forms.TextBox txtPeriodTo;
         private System.Windows.Forms.Label label13;
@@ -658,13 +658,13 @@
         private System.Windows.Forms.TabPage tbMonthlyRemark;
         private System.Windows.Forms.TabPage tbProductionInfoRemark;
         private System.Windows.Forms.TabPage tbOrderRemark;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label lblTax;
         private System.Windows.Forms.TextBox txtTax;
         private System.Windows.Forms.TextBox txtInitialRemark;
         private System.Windows.Forms.TextBox txtMonthlyRemark;
         private System.Windows.Forms.TextBox txtOrderRemark;
         private System.Windows.Forms.TextBox txtProductionInfoRemark;
-        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lblYearlySpecialDiscount;
         private System.Windows.Forms.TextBox txtYearlySpecialDiscount;
     }
 }

@@ -26,7 +26,7 @@ namespace DAL_AmigoProcess.DAL
                                     WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
                                     AND REQ_SEQ = @REQ_SEQ";
 
-        string strBankAccountMasterUpdate = @"UPDATE [dbo].[BANK_ACCOUNT_MASTER]
+        string strBankAccountMasterUpdate = @"UPDATE [BANK_ACCOUNT_MASTER]
                                SET [BILL_BANK_ACCOUNT_NAME-1] = @BILL_BANK_ACCOUNT_NAME_1,
                                    [BILL_BANK_ACCOUNT_NAME-2] = @BILL_BANK_ACCOUNT_NAME_2,
                                    [BILL_BANK_ACCOUNT_NAME-3] = @BILL_BANK_ACCOUNT_NAME_3,

@@ -26,7 +26,7 @@ namespace DAL_AmigoProcess.DAL
                                   where COMPANY_NO_BOX= @COMPANY_NO_BOX
                                   AND REQ_SEQ= @REQ_SEQ
                                   AND TYPE=4";
-        #region ApplicationApproval
+        #region Application Approval
         string strGetServiceDeskPopUp = @"SELECT 
                                         REQ_ADDRESS_SEQ NO,
                                         CONTACT_NAME,
@@ -48,7 +48,7 @@ namespace DAL_AmigoProcess.DAL
                                     MAIL_ADDRESS";
         string strGetUsageChargeBreakDownPopUp = @"SELECT 
                                                 ROW_NUMBER() OVER (ORDER BY DISPLAY_ORDER) NO,
-                                                TBL.CONTRACT_CODE, 
+                                                TBL.CONTRACT_NAME, 
                                                 SUM(TBL.INITIAL_UNIT_PRICE) INITIAL_UNIT_PRICE,
                                                 SUM(TBL.INITIAL_QUANTITY) INITIAL_QUANTITY,
                                                 SUM(TBL.INITIAL_AMOUNT) INITIAL_AMOUNT,
@@ -109,7 +109,8 @@ namespace DAL_AmigoProcess.DAL
                                                 WHERE ADOPTION_DATE <= GETDATE()) USAGE_FEE_MASTER
                                                 ON REQ_USAGE_FEE.CONTRACT_CODE = USAGE_FEE_MASTER.CONTRACT_CODE
                                                 WHERE COMPANY_NO_BOX=@COMPANY_NO_BOX
-                                                AND REQ_SEQ = @REQ_SEQ) TBL
+                                                AND REQ_SEQ = @REQ_SEQ
+                                                AND num = 1) TBL
                                                 GROUP BY TBL.CONTRACT_CODE, TBL.CONTRACT_NAME, TBL.DISPLAY_ORDER";
         #endregion
         #endregion
@@ -149,6 +150,7 @@ namespace DAL_AmigoProcess.DAL
         }
         #endregion
 
+        #region Application Approval
         #region GetServiceDeskPopUp
         public System.Data.DataTable GetServiceDeskPopUp(string COMPANY_NO_BOX, string REQ_SEQ, out string strMsg)
         {
@@ -184,6 +186,6 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
-
+        #endregion
     }
 }
