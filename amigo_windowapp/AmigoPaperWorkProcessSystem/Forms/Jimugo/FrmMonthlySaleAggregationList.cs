@@ -129,11 +129,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             //utility
             uIUtility = new UIUtility(dgvList, null, null, null, dummyColumns);
-            //uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
-            //SetDefaultColumnWidths(); //adjust checkbox sizes
             uIUtility.DummyTable();// add dummy table to merge columns
-                                   //uIUtility.DisableAutoSort();//disable autosort
-                                   //PopulateDropdowns();
             AlignBottomHeaders();
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
             this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
@@ -157,22 +153,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Search
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            //uIUtility.MetaData.Offset = 0;
-            //try
-            //{
-            //    uIUtility.MetaData.Limit = int.Parse(cboLimit.SelectedValue.ToString());
-
-            //}
-            //catch (Exception)
-            //{
-            //    uIUtility.MetaData.Limit = 0;
-            //}
             try
             {
-                //if (!uIUtility.IsInModifyMode())
-                //{
                 BindGrid();
-                //}
             }
             catch (Exception)
             {
@@ -187,7 +170,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 string strDate;
                 strDate = txtDate.Text.Trim();
-                if (!CheckUtility.SearchConditionCheck(this, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+                if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
                 {
                     return;
                 }
@@ -204,38 +187,25 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                     strNext = strDatePlus + "月";
                 }
                 FrmMonthlySaleAggregationController oController = new FrmMonthlySaleAggregationController();
-                //DataTable dt = oController.GetCompanyCodeList(strDate, company_name, email, uIUtility.MetaData.Offset, uIUtility.MetaData.Limit, out uIUtility.MetaData);
-                //Show  progress message
                 Thread datathread = new Thread(new ThreadStart(ShowGridViewLoading));
                 datathread.Start();
                 //
-                DataTable dt = oController.GetMonthlySaleAggregationList(strDate, out uIUtility.MetaData);
+                DataTable dt = oController.GetMonthlySaleAggregationList(strDate);
                 if (dt.Rows.Count > 0)
                 {
                     uIUtility.dtList = dt;
                     dgvList.DataSource = uIUtility.dtList;
 
-                    // uIUtility.dtOrigin = uIUtility.dtList.Copy();
-                    //close mail dialog
-                    datathread.Abort();
-                    datathread = null;
-
-                    //pagination
-                    // uIUtility.CalculatePagination(lblcurrentPage, lblTotalPages, lblTotalRecords);
                 }
                 else
                 {
                     //clear data except headers
                     uIUtility.ClearDataGrid();
-                    //uIUtility.CalculatePagination(lblcurrentPage, lblTotalPages, lblTotalRecords);
                 }
-
-                //uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
-
-                //check for disable flag
-                //uIUtility.CheckForDisableField();
-                //uIUtility.FormatUpdatedat();
-
+                Thread.Sleep(1000);
+                //close mail dialog
+                datathread.Abort();
+                
             }
             catch (System.TimeoutException)
             {
@@ -312,7 +282,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region ShowGridViewLoading
         private void ShowGridViewLoading()
         {
-            Application.Run(new frmMailLoading("処理中です。"));
+            try
+            {
+                Application.Run(new frmMailLoading(JimugoMessages.I000ZZ023));
+            }
+            catch (ThreadAbortException)
+            {
+
+            }
         }
         #endregion
 

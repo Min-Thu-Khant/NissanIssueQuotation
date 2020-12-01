@@ -557,6 +557,9 @@
     <value>メール作成処理が正常に終了しました。</value>
     <comment>The mail composition process was completed normally.</comment>
   </data>
+  <data name="I000ZZ023" xml:space="preserve">
+    <value>処理中です。</value>
+  </data>
   <data name="I199WA001" xml:space="preserve">
     <value>ログインしました。会社番号＋BOX={0}</value>
     <comment>You are now logged. Company number + BOX = {0}</comment>

@@ -1051,6 +1051,15 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 処理中です。.
+        /// </summary>
+        internal static string I000ZZ023 {
+            get {
+                return ResourceManager.GetString("I000ZZ023", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ログインしました。会社番号＋BOX={0}.
         /// </summary>
         internal static string I199WA001 {

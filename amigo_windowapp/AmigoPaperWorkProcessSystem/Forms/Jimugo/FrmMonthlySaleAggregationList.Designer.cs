@@ -29,16 +29,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvList = new System.Windows.Forms.DataGridView();
             this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.売上 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,7 +57,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.btnSearch = new System.Windows.Forms.Button();
             this.pTitle = new System.Windows.Forms.Panel();
             this.txtDate = new System.Windows.Forms.TextBox();
-            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
+            this.lblDate = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.pTitle.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +82,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.入金予定3,
             this.入金実績3});
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(16, 241);
+            this.dgvList.Location = new System.Drawing.Point(16, 165);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
@@ -91,7 +91,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.dgvList.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvList.ShowCellToolTips = false;
-            this.dgvList.Size = new System.Drawing.Size(1250, 353);
+            this.dgvList.Size = new System.Drawing.Size(1250, 429);
             this.dgvList.TabIndex = 43;
             this.dgvList.TabStop = false;
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
@@ -101,8 +101,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // TotalAmount
             // 
             this.TotalAmount.DataPropertyName = "TotalAmount";
-            dataGridViewCellStyle71.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.TotalAmount.DefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TotalAmount.DefaultCellStyle = dataGridViewCellStyle1;
             this.TotalAmount.HeaderText = "";
             this.TotalAmount.MinimumWidth = 8;
             this.TotalAmount.Name = "TotalAmount";
@@ -113,9 +113,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 売上
             // 
             this.売上.DataPropertyName = "ReduceSales";
-            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle72.Format = "N0";
-            this.売上.DefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N0";
+            this.売上.DefaultCellStyle = dataGridViewCellStyle2;
             this.売上.HeaderText = "売上";
             this.売上.MinimumWidth = 8;
             this.売上.Name = "売上";
@@ -126,9 +126,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金予定
             // 
             this.入金予定.DataPropertyName = "ReducePlanDeposit";
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle73.Format = "N0";
-            this.入金予定.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N0";
+            this.入金予定.DefaultCellStyle = dataGridViewCellStyle3;
             this.入金予定.HeaderText = "入金予定";
             this.入金予定.MinimumWidth = 8;
             this.入金予定.Name = "入金予定";
@@ -139,9 +139,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金実績
             // 
             this.入金実績.DataPropertyName = "ReduceAcutualDeposit";
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle74.Format = "N0";
-            this.入金実績.DefaultCellStyle = dataGridViewCellStyle74;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            this.入金実績.DefaultCellStyle = dataGridViewCellStyle4;
             this.入金実績.HeaderText = "入金実績";
             this.入金実績.MinimumWidth = 8;
             this.入金実績.Name = "入金実績";
@@ -152,9 +152,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 売上2
             // 
             this.売上2.DataPropertyName = "CurrentSales";
-            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle75.Format = "N0";
-            this.売上2.DefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N0";
+            this.売上2.DefaultCellStyle = dataGridViewCellStyle5;
             this.売上2.HeaderText = "売上";
             this.売上2.MinimumWidth = 8;
             this.売上2.Name = "売上2";
@@ -165,9 +165,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金予定2
             // 
             this.入金予定2.DataPropertyName = "CureentPlanDeposit";
-            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle76.Format = "N0";
-            this.入金予定2.DefaultCellStyle = dataGridViewCellStyle76;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N0";
+            this.入金予定2.DefaultCellStyle = dataGridViewCellStyle6;
             this.入金予定2.HeaderText = "入金予定";
             this.入金予定2.MinimumWidth = 8;
             this.入金予定2.Name = "入金予定2";
@@ -178,9 +178,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金実績2
             // 
             this.入金実績2.DataPropertyName = "CurrentAcutualDeposit";
-            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle77.Format = "N0";
-            this.入金実績2.DefaultCellStyle = dataGridViewCellStyle77;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N0";
+            this.入金実績2.DefaultCellStyle = dataGridViewCellStyle7;
             this.入金実績2.HeaderText = "入金実績";
             this.入金実績2.MinimumWidth = 8;
             this.入金実績2.Name = "入金実績2";
@@ -191,9 +191,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 売上3
             // 
             this.売上3.DataPropertyName = "PlusSales";
-            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle78.Format = "N0";
-            this.売上3.DefaultCellStyle = dataGridViewCellStyle78;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N0";
+            this.売上3.DefaultCellStyle = dataGridViewCellStyle8;
             this.売上3.HeaderText = "売上";
             this.売上3.MinimumWidth = 8;
             this.売上3.Name = "売上3";
@@ -204,9 +204,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金予定3
             // 
             this.入金予定3.DataPropertyName = "PlusPlanDeposit";
-            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle79.Format = "N0";
-            this.入金予定3.DefaultCellStyle = dataGridViewCellStyle79;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.入金予定3.DefaultCellStyle = dataGridViewCellStyle9;
             this.入金予定3.HeaderText = "入金予定";
             this.入金予定3.MinimumWidth = 8;
             this.入金予定3.Name = "入金予定3";
@@ -217,9 +217,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 入金実績3
             // 
             this.入金実績3.DataPropertyName = "PlusAcutualDeposit";
-            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle80.Format = "N0";
-            this.入金実績3.DefaultCellStyle = dataGridViewCellStyle80;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.入金実績3.DefaultCellStyle = dataGridViewCellStyle10;
             this.入金実績3.HeaderText = "入金実績";
             this.入金実績3.MinimumWidth = 8;
             this.入金実績3.Name = "入金実績3";
@@ -233,7 +233,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(16, 11);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(193, 32);
+            this.lblMenu.Size = new System.Drawing.Size(126, 21);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -296,26 +296,26 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.txtDate.Location = new System.Drawing.Point(76, 120);
             this.txtDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(70, 28);
+            this.txtDate.Size = new System.Drawing.Size(77, 21);
             this.txtDate.TabIndex = 45;
             // 
-            // displayItemLabel1
+            // lblDate
             // 
-            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.displayItemLabel1.LabelText = "締め年月";
-            this.displayItemLabel1.Location = new System.Drawing.Point(17, 120);
-            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.displayItemLabel1.Name = "displayItemLabel1";
-            this.displayItemLabel1.Size = new System.Drawing.Size(60, 21);
-            this.displayItemLabel1.TabIndex = 44;
+            this.lblDate.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblDate.LabelText = "締め年月";
+            this.lblDate.Location = new System.Drawing.Point(17, 120);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.lblDate.Name = "lblDate";
+            this.lblDate.Size = new System.Drawing.Size(60, 21);
+            this.lblDate.TabIndex = 44;
             // 
             // FrmMonthlySaleAggregationList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.txtDate);
-            this.Controls.Add(this.displayItemLabel1);
+            this.Controls.Add(this.lblDate);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnNextMonthDiff);
@@ -341,7 +341,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         private System.Windows.Forms.Button btnPreMonthDiff;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Panel pTitle;
-        private UserControls.DisplayItemLabel displayItemLabel1;
+        private UserControls.DisplayItemLabel lblDate;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn 売上;

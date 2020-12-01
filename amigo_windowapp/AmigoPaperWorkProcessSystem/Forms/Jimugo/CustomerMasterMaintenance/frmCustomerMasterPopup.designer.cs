@@ -97,7 +97,6 @@
             this.dgvList1.Margin = new System.Windows.Forms.Padding(2);
             this.dgvList1.Name = "dgvList1";
             this.dgvList1.RowHeadersVisible = false;
-            this.dgvList1.RowHeadersWidth = 62;
             this.dgvList1.RowTemplate.Height = 24;
             this.dgvList1.Size = new System.Drawing.Size(1245, 245);
             this.dgvList1.TabIndex = 41;
@@ -106,148 +105,6 @@
             this.dgvList1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList1_Scroll);
             this.dgvList1.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList1_Paint);
             // 
-<<<<<<< HEAD
-            // colNO
-            // 
-            this.colNO.DataPropertyName = "No";
-            this.colNO.HeaderText = "NO";
-            this.colNO.MinimumWidth = 8;
-            this.colNO.Name = "colNO";
-            this.colNO.Width = 150;
-            // 
-            // colCONTRACT_CODE
-            // 
-            this.colCONTRACT_CODE.DataPropertyName = "CONTRACT_CODE";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colCONTRACT_CODE.DefaultCellStyle = dataGridViewCellStyle1;
-            this.colCONTRACT_CODE.HeaderText = "契約コード";
-            this.colCONTRACT_CODE.MinimumWidth = 8;
-            this.colCONTRACT_CODE.Name = "colCONTRACT_CODE";
-            this.colCONTRACT_CODE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCONTRACT_CODE.Width = 200;
-            // 
-            // colCONTRACT_CONTENT
-            // 
-            this.colCONTRACT_CONTENT.DataPropertyName = "CONTRACT_NAME";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.colCONTRACT_CONTENT.DefaultCellStyle = dataGridViewCellStyle2;
-            this.colCONTRACT_CONTENT.HeaderText = "契約内容 ";
-            this.colCONTRACT_CONTENT.MinimumWidth = 8;
-            this.colCONTRACT_CONTENT.Name = "colCONTRACT_CONTENT";
-            this.colCONTRACT_CONTENT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colCONTRACT_CONTENT.Width = 200;
-            // 
-            // colUNIT_PRICE
-            // 
-            this.colUNIT_PRICE.DataPropertyName = "INITIAL_UNIT_PRICE";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            this.colUNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle3;
-            this.colUNIT_PRICE.HeaderText = "単価";
-            this.colUNIT_PRICE.MinimumWidth = 8;
-            this.colUNIT_PRICE.Name = "colUNIT_PRICE";
-            this.colUNIT_PRICE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUNIT_PRICE.Width = 150;
-            // 
-            // colQUANTITY
-            // 
-            this.colQUANTITY.DataPropertyName = "INITIAL_QUANTITY";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            this.colQUANTITY.DefaultCellStyle = dataGridViewCellStyle4;
-            this.colQUANTITY.HeaderText = "数量";
-            this.colQUANTITY.MinimumWidth = 8;
-            this.colQUANTITY.Name = "colQUANTITY";
-            this.colQUANTITY.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colQUANTITY.Width = 150;
-            // 
-            // colTOTAL
-            // 
-            this.colTOTAL.DataPropertyName = "INITIAL_AMOUNT";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            dataGridViewCellStyle5.NullValue = null;
-            this.colTOTAL.DefaultCellStyle = dataGridViewCellStyle5;
-            this.colTOTAL.HeaderText = "合計";
-            this.colTOTAL.MinimumWidth = 8;
-            this.colTOTAL.Name = "colTOTAL";
-            this.colTOTAL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTOTAL.Width = 150;
-            // 
-            // colUnitPrice1
-            // 
-            this.colUnitPrice1.DataPropertyName = "MONTHLY_UNIT_PRICE";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N0";
-            this.colUnitPrice1.DefaultCellStyle = dataGridViewCellStyle6;
-            this.colUnitPrice1.HeaderText = "単価";
-            this.colUnitPrice1.MinimumWidth = 8;
-            this.colUnitPrice1.Name = "colUnitPrice1";
-            this.colUnitPrice1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnitPrice1.Width = 150;
-            // 
-            // colQuantity1
-            // 
-            this.colQuantity1.DataPropertyName = "MONTHLY_QUANTITY";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N0";
-            this.colQuantity1.DefaultCellStyle = dataGridViewCellStyle7;
-            this.colQuantity1.HeaderText = "数量";
-            this.colQuantity1.MinimumWidth = 8;
-            this.colQuantity1.Name = "colQuantity1";
-            this.colQuantity1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colQuantity1.Width = 150;
-            // 
-            // colTotal1
-            // 
-            this.colTotal1.DataPropertyName = "MONTHLY_AMOUNT";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N0";
-            this.colTotal1.DefaultCellStyle = dataGridViewCellStyle8;
-            this.colTotal1.HeaderText = "合計";
-            this.colTotal1.MinimumWidth = 8;
-            this.colTotal1.Name = "colTotal1";
-            this.colTotal1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal1.Width = 150;
-            // 
-            // colUnitPrice2
-            // 
-            this.colUnitPrice2.DataPropertyName = "YEAR_UNIT_PRICE";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            this.colUnitPrice2.DefaultCellStyle = dataGridViewCellStyle9;
-            this.colUnitPrice2.HeaderText = "単価";
-            this.colUnitPrice2.MinimumWidth = 8;
-            this.colUnitPrice2.Name = "colUnitPrice2";
-            this.colUnitPrice2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colUnitPrice2.Width = 150;
-            // 
-            // colQuantity2
-            // 
-            this.colQuantity2.DataPropertyName = "YEAR_QUANTITY";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.colQuantity2.DefaultCellStyle = dataGridViewCellStyle10;
-            this.colQuantity2.HeaderText = "数量";
-            this.colQuantity2.MinimumWidth = 8;
-            this.colQuantity2.Name = "colQuantity2";
-            this.colQuantity2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colQuantity2.Width = 150;
-            // 
-            // colTotal2
-            // 
-            this.colTotal2.DataPropertyName = "YEAR_AMOUNT";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N0";
-            this.colTotal2.DefaultCellStyle = dataGridViewCellStyle11;
-            this.colTotal2.HeaderText = "合計";
-            this.colTotal2.MinimumWidth = 8;
-            this.colTotal2.Name = "colTotal2";
-            this.colTotal2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.colTotal2.Width = 150;
-            // 
-=======
->>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             // label3
             // 
             this.label3.BackColor = System.Drawing.SystemColors.AppWorkspace;
@@ -337,7 +194,6 @@
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
             this.dgvList.RowHeadersVisible = false;
-            this.dgvList.RowHeadersWidth = 62;
             this.dgvList.RowTemplate.Height = 24;
             this.dgvList.Size = new System.Drawing.Size(440, 96);
             this.dgvList.TabIndex = 33;
@@ -352,7 +208,6 @@
             dataGridViewCellStyle13.NullValue = null;
             this.colFirst.DefaultCellStyle = dataGridViewCellStyle13;
             this.colFirst.HeaderText = "First";
-            this.colFirst.MinimumWidth = 8;
             this.colFirst.Name = "colFirst";
             this.colFirst.ReadOnly = true;
             this.colFirst.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -365,7 +220,6 @@
             dataGridViewCellStyle14.Format = "N0";
             this.colSecond.DefaultCellStyle = dataGridViewCellStyle14;
             this.colSecond.HeaderText = "Second";
-            this.colSecond.MinimumWidth = 8;
             this.colSecond.Name = "colSecond";
             this.colSecond.ReadOnly = true;
             this.colSecond.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -378,7 +232,6 @@
             dataGridViewCellStyle15.Format = "N0";
             this.colThird.DefaultCellStyle = dataGridViewCellStyle15;
             this.colThird.HeaderText = "Third";
-            this.colThird.MinimumWidth = 8;
             this.colThird.Name = "colThird";
             this.colThird.ReadOnly = true;
             this.colThird.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
@@ -387,14 +240,10 @@
             // 
             this.btnModify.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnModify.AutoSize = true;
-<<<<<<< HEAD
-            this.btnModify.Location = new System.Drawing.Point(423, 421);
-=======
             this.btnModify.Location = new System.Drawing.Point(573, 423);
->>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             this.btnModify.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(100, 32);
+            this.btnModify.Size = new System.Drawing.Size(100, 30);
             this.btnModify.TabIndex = 42;
             this.btnModify.Text = "OK";
             this.btnModify.UseVisualStyleBackColor = true;
@@ -522,13 +371,9 @@
             // 
             // frmCustomerMasterPopup
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-<<<<<<< HEAD
-            this.ClientSize = new System.Drawing.Size(978, 444);
-=======
             this.ClientSize = new System.Drawing.Size(1282, 453);
->>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             this.Controls.Add(this.btnModify);
             this.Controls.Add(this.dgvList1);
             this.Controls.Add(this.label3);

@@ -37,10 +37,9 @@
             this.displayItemAsteriskLabel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.displayItemAsteriskLabel1.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.displayItemAsteriskLabel1.ForeColor = System.Drawing.Color.Red;
-            this.displayItemAsteriskLabel1.Location = new System.Drawing.Point(1184, 0);
-            this.displayItemAsteriskLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.displayItemAsteriskLabel1.Location = new System.Drawing.Point(789, 0);
             this.displayItemAsteriskLabel1.Name = "displayItemAsteriskLabel1";
-            this.displayItemAsteriskLabel1.Size = new System.Drawing.Size(22, 252);
+            this.displayItemAsteriskLabel1.Size = new System.Drawing.Size(15, 81);
             this.displayItemAsteriskLabel1.TabIndex = 0;
             this.displayItemAsteriskLabel1.Text = "*";
             // 
@@ -49,31 +48,21 @@
             this.lbl.Dock = System.Windows.Forms.DockStyle.Left;
             this.lbl.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl.Location = new System.Drawing.Point(0, 0);
-<<<<<<< HEAD
-            this.lbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lbl.Name = "lbl";
-            this.lbl.Size = new System.Drawing.Size(1191, 252);
-=======
             this.lbl.Name = "lbl";
             this.lbl.Size = new System.Drawing.Size(790, 81);
->>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             this.lbl.TabIndex = 1;
             this.lbl.Text = " 表示件数";
             this.lbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // DisplayItemLabel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.Controls.Add(this.displayItemAsteriskLabel1);
             this.Controls.Add(this.lbl);
-<<<<<<< HEAD
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-=======
->>>>>>> 358b84bbf60ffb754b125476bf7c2d5a50d88e82
             this.Name = "DisplayItemLabel";
-            this.Size = new System.Drawing.Size(1206, 252);
+            this.Size = new System.Drawing.Size(804, 81);
             this.ResumeLayout(false);
 
         }

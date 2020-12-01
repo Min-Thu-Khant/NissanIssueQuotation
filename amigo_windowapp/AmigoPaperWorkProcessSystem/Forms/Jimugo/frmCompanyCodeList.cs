@@ -655,7 +655,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region ShowMailLoading
         private void ShowMailLoading()
         {
-            Application.Run(new frmMailLoading("Test Demo"));
+            Application.Run(new frmMailLoading());
         }
         #endregion
         #endregion
