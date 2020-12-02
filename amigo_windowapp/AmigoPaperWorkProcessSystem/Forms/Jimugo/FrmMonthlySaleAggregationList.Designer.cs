@@ -94,6 +94,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.dgvList.Size = new System.Drawing.Size(1250, 429);
             this.dgvList.TabIndex = 43;
             this.dgvList.TabStop = false;
+            this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvList_CellFormatting);
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
@@ -233,7 +234,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(16, 11);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(126, 21);
+            this.lblMenu.Size = new System.Drawing.Size(193, 32);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -296,7 +297,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.txtDate.Location = new System.Drawing.Point(76, 120);
             this.txtDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(77, 21);
+            this.txtDate.Size = new System.Drawing.Size(77, 28);
             this.txtDate.TabIndex = 45;
             // 
             // lblDate
@@ -311,7 +312,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 
             // FrmMonthlySaleAggregationList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.txtDate);

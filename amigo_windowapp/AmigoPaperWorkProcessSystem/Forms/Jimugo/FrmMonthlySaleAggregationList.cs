@@ -293,6 +293,20 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
+        #region CellFormatting
+        private void DgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            try
+            {
+                dgvList.Rows[4].DefaultCellStyle.BackColor = Color.DimGray;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+        #endregion
+
         #region Back Button
         private void btnBack_Click(object sender, EventArgs e)
         {
