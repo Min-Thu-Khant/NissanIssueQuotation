@@ -25,49 +25,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         private string strCurrent;
         private string strNext;
         private UIUtility uIUtility;
-        private List<Validate> Insertable = new List<Validate>{
-            new Validate{ Name = "colAUTO_INDEX_ID", Type = Utility.DataType.TEXT, Edit = true, Require = true, Initial ="サプライヤ", Max = 10, },
-            new Validate{ Name = "colCOMPANY_NAME", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = true, Max = 80},
-            new Validate{ Name = "colPASSWORD_", Type = Utility.DataType.TEXT, Edit = false, Require = true, Max = 100 },
-            new Validate{ Name = "colPASSWORD_SET_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = false, Max = 16, Min = 16 ,},
-            new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
-            new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = true, Max = 255 },
-            new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = false, Require = false, Initial = "0", Max = 100, Min=0},
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Max = 6 },
-            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "*" , Max = 1 },
-            new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 },
-            new Validate{ Name = "colPASSWORD_SET_DATE", Type = Utility.DataType.DATE_RANGE, Edit=true, Require = false, Max = 16, Min = 16 , Data1="colPASSWORD_SET_DATE", Data2="colPASSWORD_EXPIRATION_DATE"},
-            new Validate{ Name = "colCOMPANY_NO", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 },
-            new Validate{ Name = "colCOMPANY_BOX",Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 }
-        };
-
-        private List<Validate> Copyable = new List<Validate>{
-            new Validate{ Name = "colAUTO_INDEX_ID", Type = Utility.DataType.TEXT, Edit = false, Require = false, Initial ="copy", Max = 10, },
-            new Validate{ Name = "colCOMPANY_NAME", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = true, Initial ="copy", Max = 80},
-            new Validate{ Name = "colPASSWORD_", Type = Utility.DataType.TEXT, Edit = false, Require = true, Max = 100 },
-            new Validate{ Name = "colPASSWORD_SET_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = false, Max = 16, Min = 16 ,},
-            new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
-            new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = true, Max = 255 },
-            new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = false, Require = false, Initial = "0", Max = 100, Min=0 },
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 6 },
-            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "*" , Max = 1 },
-            new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 },
-            new Validate{ Name = "colCOMPANY_NO", Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 },
-            new Validate{ Name = "colCOMPANY_BOX",Type = Utility.DataType.TEXT, Edit=false, Require=false, Initial = "copy" , Max = 255 }
-        };
-
-        private List<Validate> Modifiable = new List<Validate>{
-            new Validate{ Name = "colCOMPANY_NAME", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = true, Max = 80},
-            new Validate{ Name = "colPASSWORD_", Type = Utility.DataType.TEXT, Edit = false, Require = true, Max = 100 },
-            new Validate{ Name = "colPASSWORD_SET_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = false, Max = 16, Min = 16 ,},
-            new Validate{ Name = "colPASSWORD_EXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit = true, Require = false, Max = 16, Min = 16},
-            new Validate{ Name = "colEMAIL_ADDRESS", Type = Utility.DataType.EMAIL, Edit = true, Require = false, Max = 255 },
-            new Validate{ Name = "colLOGIN_FAIL_COUNT", Type = Utility.DataType.HALF_NUMBER, Edit = true, Require = true,Max = 100, Min=0},
-            new Validate{ Name = "colGD_CODE", Type = Utility.DataType.HALF_ALPHA_NUMERIC, Edit = true, Require = false, Initial="copy", Max = 6 },
-            new Validate{ Name = "colDISABLED_FLG", Type = Utility.DataType.TEXT, Edit=true, Require=false, Max = 1 },
-            new Validate{ Name = "colMEMO", Type = Utility.DataType.FULL_WIDTH, Edit = true, Require = false, Max = 50 }
-        };
-
+   
         private string[] dummyColumns = {
             "TotalAmount",
             "ReduceSales",
