@@ -224,10 +224,10 @@ namespace DAL_AmigoProcess.DAL
                                                         FROM INVOICE_INFO WHERE STATUS_PLAN_DEPOSIT_YYMM=@YEARMOHTH and TRANSACTION_TYPE in (12,21,22,32)
                                                         UNION ALL
                                                         SELECT 
-                                                        (CASE WHEN Ref.TRANSACTION_TYPE = '12' THEN Ref.INITIAL_COST - Ref.INITIAL_COST_DISCOUNTS +  Ref.MONTHLY_COST - Ref.MONTHLY_COST_DISCOUNTS ELSE 0 END) MAKER_AMOUNT,
+                                                        (CASE WHEN Ref.BILL_TYPE = '12' THEN Ref.INITIAL_COST - Ref.INITIAL_COST_DISCOUNTS +  Ref.MONTHLY_COST - Ref.MONTHLY_COST_DISCOUNTS ELSE 0 END) MAKER_AMOUNT,
                                                         (CASE WHEN FORMAT(DATEADD(MONTH,1,REQUEST_DETAIL.COMPLETION_NOTIFICATION_DATE),'yyMM') = @YEARMOHTH THEN Ref.INITIAL_COST-Ref.INITIAL_COST_DISCOUNTS ELSE 0 END)SUPPLIER_INTIAL_AMOUNT,
-                                                        (CASE WHEN Ref.TRANSACTION_TYPE = '22' THEN  Ref.MONTHLY_COST-Ref.MONTHLY_COST_DISCOUNTS ELSE 0 END) SUPPLIER_MONTHLY_AMOUNT,
-                                                        (CASE WHEN Ref.TRANSACTION_TYPE = '32'
+                                                        (CASE WHEN Ref.BILL_TYPE = '22' THEN  Ref.MONTHLY_COST-Ref.MONTHLY_COST_DISCOUNTS ELSE 0 END) SUPPLIER_MONTHLY_AMOUNT,
+                                                        (CASE WHEN Ref.BILL_TYPE = '32'
 		                                                        THEN CASE WHEN FORMAT(DATEADD(MONTH,1,REQUEST_DETAIL.COMPLETION_NOTIFICATION_DATE),'yyMM')=@YEARMOHTH
 					                                                        THEN Ref.INITIAL_COST-Ref.INITIAL_COST_DISCOUNTS + Ref.YEAR_COST-Ref.YEAR_COST_DISCOUNTS
 					                                                        ELSE 0 END

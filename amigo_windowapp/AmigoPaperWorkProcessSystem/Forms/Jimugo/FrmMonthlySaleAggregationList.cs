@@ -124,7 +124,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             //set title
             lblMenu.Text = programName;
-
+            this.Text = "[" + programID + "] " + programName;
             txtDate.Text = DateTime.Now.ToString("yyyy/MM");
 
             //utility

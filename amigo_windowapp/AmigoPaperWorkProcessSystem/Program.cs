@@ -32,9 +32,7 @@ namespace AmigoPaperWorkProcessSystem
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Utility.Id = "000001";
-            Utility.Password = "password";
-            Application.Run(new FrmMonthlySaleAggregationList());
+            Application.Run(new frmJimugo());
         }
     }
 }
