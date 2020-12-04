@@ -198,5 +198,9 @@
     <Setting Name="getMonthlySaleAggregationlist" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_MonthlySaleAggregationList.asmx/getMonthlySaleAggregationList</Value>
     </Setting>
+    <Setting Name="getMonthlySaleComparisonlist" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/MonthlySaleComparisonList.asmx/getMonthlySaleComparisonList?YEAR_MONTH1=@strYYYMM1&amp;YEAR_MONTH2=@strYYMM2&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT
+</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

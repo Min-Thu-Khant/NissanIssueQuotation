@@ -211,6 +211,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                     OpenMonthlySaleAggregationList(programID, programName);
                     break;
 
+                case "CTG020": // Monthly Sale Comparison
+                    OpenMonthlySaleComparisonList(programID, programName);
+                    break;
+
                 default:
                     break;
             }
@@ -458,6 +462,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             if (!(Application.OpenForms.OfType<FrmMonthlySaleAggregationList>().Count() == 1))
             {
                 FrmMonthlySaleAggregationList form = new FrmMonthlySaleAggregationList(programID, programName);
+                form.Show();
+            }
+            else
+            {
+                MetroMessageBox.Show(this, "\n" + Messages.DepositConfirmationMenu.ProcessAlreadyRunning, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //need change after message list
+            }
+        }
+        #endregion
+
+        #region OpenMonthlySaleComparisonList
+        private void OpenMonthlySaleComparisonList(string programID, string programName)
+        {
+            if (!(Application.OpenForms.OfType<frmMonthlySaleComparisonList>().Count() == 1))
+            {
+                frmMonthlySaleComparisonList form = new frmMonthlySaleComparisonList(programID, programName);
                 form.Show();
             }
             else

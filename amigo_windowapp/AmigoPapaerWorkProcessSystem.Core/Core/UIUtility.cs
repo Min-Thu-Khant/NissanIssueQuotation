@@ -72,7 +72,27 @@ namespace AmigoPaperWorkProcessSystem.Core
             index_key = MetaData.Total;
             ResetReadOnlyProperty();
         }
+
         #endregion
+
+        public void CalculatePaginationNew(Label lblcurrentPage, Label lblTotalPages, Label lblTotalRecords)
+        {
+            lblTotalRecords.Text = MetaData.Total + " 件見つかりました。( " + Math.Round(MetaData.Duration, 2).ToString() + " 秒 )";
+            int currentPage = 0;
+            if (MetaData.Total != 0)
+            {
+                currentPage = MetaData.Offset == 0 ? 1 : (MetaData.Offset / MetaData.Limit) + 1;
+            }
+            else
+            {
+                currentPage = 0;
+            }
+            lblcurrentPage.Text = currentPage.ToString();
+            lblTotalPages.Text = (Math.Ceiling((decimal)MetaData.Total / (decimal)MetaData.Limit).ToString()) + " Pages";
+            index_key = MetaData.Total;
+            //ResetReadOnlyProperty();
+        }
+
 
         #region ResetReadOnlyProperty
         private void ResetReadOnlyProperty()
@@ -213,7 +233,7 @@ namespace AmigoPaperWorkProcessSystem.Core
         public void DisplayCountCombo(ComboBox cboLimit)
         {
             var displaycount = new[] {
-                                    new { Text = "100", Value = "100" },
+                                    new { Text = "2", Value = "2" },
                                     new { Text = "500", Value = "500" },
                                   };
 

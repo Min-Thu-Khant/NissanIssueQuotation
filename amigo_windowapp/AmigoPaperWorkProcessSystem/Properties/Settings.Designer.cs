@@ -12,7 +12,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -829,6 +829,20 @@ namespace AmigoPaperWorkProcessSystem.Properties {
             }
             set {
                 this["getMonthlySaleAggregationlist"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/MonthlySaleComparisonList.asmx/getMonthlySaleCompari" +
+            "sonList?YEAR_MONTH1=@strYYYMM1&YEAR_MONTH2=@strYYMM2&OFFSET=@OFFSET&LIMIT=@LIMIT" +
+            "\r\n")]
+        public string getMonthlySaleComparisonlist {
+            get {
+                return ((string)(this["getMonthlySaleComparisonlist"]));
+            }
+            set {
+                this["getMonthlySaleComparisonlist"] = value;
             }
         }
     }

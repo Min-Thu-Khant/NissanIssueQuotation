@@ -409,6 +409,452 @@ namespace DAL_AmigoProcess.DAL
                                                     AND [EFFECTIVE_DATE] = @ORG_EFFECTIVE_DATE
                                                     AND [REQ_SEQ] = @REQ_SEQ
 							                        AND [UPDATED_AT] @UPDATED_AT";
+
+        string strMonthlySaleComparisonTotal = @"SELECT 
+                                                COUNT(TBL.[TYPE])
+                                                FROM
+                                                (
+                                                SELECT 
+                                                TBL1.[TYPE] AS [TYPE], 
+                                                TBL1.[BILL_SUPPLIER_NAME] AS [BILL_SUPPLIER_NAME],
+                                                TBL1.[UPDATE_CONTENT],
+                                                CASE WHEN TBL1.[TYPE] in (1) THEN TBL1.[INITIAL_COST]+TBL1.[MONTHLY_COST]-TBL2.[MONTHLY_COST]
+                                                     WHEN TBL1.[TYPE] in (2,4) THEN TBL1.[INITIAL_COST]
+                                                     WHEN TBL1.[TYPE] in (3) THEN TBL1.[MONTHLY_COST]-TBL2.[MONTHLY_COST]
+                                                     WHEN TBL1.[TYPE] in (5) THEN TBL1.[YEAR_COST]-TBL2.[YEAR_COST]
+                                                     ELSE 0
+                                                END [DIFF],
+                                                TBL1.[SERVER]-TBL2.[SERVER] AS [SERVER],
+                                                TBL1.[SERVERRIGHT]-TBL2.[SERVERRIGHT] AS [SERVERRIGHT],
+                                                TBL1.[BROWSERAUTO]-TBL2.[BROWSERAUTO] AS [BROWSERAUTO],
+                                                TBL1.[BROWSER]-TBL2.[BROWSER] AS [BROWSER],
+                                                TBL1.[PRODUCT]-TBL2.[PRODUCT] AS [PRODUCT],
+                                                TBL1.[PLAN_AMIGO_CAI]-TBL2.[PLAN_AMIGO_CAI] AS [PLAN_AMIGO_CAI],
+                                                TBL1.[PLAN_AMIGO_BIZ]-TBL2.[PLAN_AMIGO_BIZ] AS [PLAN_AMIGO_BIZ],
+                                                TBL1.[OP_BOX_SERVER]-TBL2.[OP_BOX_SERVER] AS [OP_BOX_SERVER],
+                                                TBL1.[OP_BOX_BROWSER]-TBL2.[OP_BOX_BROWSER] AS [OP_BOX_BROWSER],
+                                                TBL1.[OP_FLAT]-TBL2.[OP_FLAT] AS [OP_FLAT],
+                                                TBL1.[OP_CLIENT]-TBL2.[OP_CLIENT] AS [OP_CLIENT],
+                                                TBL1.[OP_BASIC_SERVICE]-TBL2.[OP_BASIC_SERVICE] AS [OP_BASIC_SERVICE] ,
+                                                TBL1.[OP_ADD_SERVICE]-TBL2.[OP_ADD_SERVICE] AS [OP_ADD_SERVICE],
+                                                TBL1.[COMPANY_NO_BOX]
+                                                FROM
+                                                (SELECT
+                                                A.[TYPE],
+                                                A.[BILL_SUPPLIER_NAME],
+                                                A.[UPDATE_CONTENT],
+                                                A.[INITIAL_COST],
+                                                A.[MONTHLY_COST],
+                                                A.[YEAR_COST],
+                                                A.[SERVER],
+                                                A.[SERVERRIGHT],
+                                                A.[BROWSERAUTO],
+                                                A.[BROWSER],
+                                                A.[PRODUCT],
+                                                A.[PLAN_AMIGO_CAI],
+                                                A.[PLAN_AMIGO_BIZ],
+                                                A.[OP_BOX_SERVER],
+                                                A.[OP_BOX_BROWSER],
+                                                A.[OP_FLAT],
+                                                A.[OP_CLIENT],
+                                                A.[OP_BASIC_SERVICE],
+                                                A.[OP_ADD_SERVICE],
+                                                A.[COMPANY_NO_BOX],
+                                                A.num
+                                                FROM
+                                                (SELECT　
+                                                CASE BILL_TYPE WHEN '12' THEN '1'
+                                                WHEN '22' THEN '3'
+                                                WHEN '32' THEN '5'
+                                                ELSE ''
+                                                END [TYPE],
+                                                BILL_SUPPLIER_NAME,
+                                                UPDATE_CONTENT,
+                                                CASE WHEN [UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE CASE WHEN format(DATEADD(month,1,[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                                THEN [INITIAL_COST]-[INITIAL_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END
+                                                END [INITIAL_COST],
+                                                CASE WHEN [UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE [MONTHLY_COST]-[MONTHLY_COST_DISCOUNTS]
+                                                END [MONTHLY_COST],
+                                                CASE WHEN [UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE CASE WHEN format(DATEADD(month,1,[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                                THEN [YEAR_COST]-[YEAR_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END
+                                                END [YEAR_COST],
+                                                CASE WHEN [CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                                CASE WHEN [CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                                CASE WHEN [CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                                CASE WHEN [CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                                CASE WHEN [CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                                [PLAN_AMIGO_CAI],
+                                                [PLAN_AMIGO_BIZ],
+                                                [OP_BOX_SERVER],
+                                                [OP_BOX_BROWSER],
+                                                [OP_FLAT],
+                                                [OP_CLIENT],
+                                                [OP_BASIC_SERVICE],
+                                                [OP_ADD_SERVICE],
+                                                [COMPANY_NO_BOX],
+                                                ROW_NUMBER() OVER(PARTITION BY COMPANY_NO_BOX ORDER BY COMPANY_NO_BOX, EFFECTIVE_DATE DESC, REQ_SEQ DESC) num
+                                                FROM CUSTOMER_MASTER_VIEW WHERE FORMAT(CUSTOMER_MASTER_VIEW.[EFFECTIVE_DATE],'yyMM') <=@YYMM_1 AND [BILL_TYPE] in(12,22,32)
+                                                UNION ALL
+                                                SELECT
+                                                CASE CV.[BILL_TYPE] WHEN '22' THEN '2'
+                                                WHEN '32' THEN '4'
+                                                ELSE ''
+                                                END [TYPE],
+                                                CV.[BILL_SUPPLIER_NAME],
+                                                CV.[UPDATE_CONTENT],
+                                                CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE CASE WHEN format(DATEADD(month,1,RD.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                                THEN CV.[INITIAL_COST]-CV.[INITIAL_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END
+                                                END [INITIAL_COST],
+                                                CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE CV.[MONTHLY_COST]-CV.[MONTHLY_COST_DISCOUNTS]
+                                                END [MONTHLY_COST],
+                                                CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                                THEN 0
+                                                ELSE CASE WHEN FORMAT(DATEADD(month,1,RD.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                                THEN CV.[YEAR_COST]-CV.[YEAR_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END
+                                                END [YEAR_COST],
+                                                CASE WHEN CV.[CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                                CASE WHEN CV.[CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                                CASE WHEN CV.[CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                                case WHEN CV.[CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                                case WHEN CV.[CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                                CV.[PLAN_AMIGO_CAI],
+                                                CV.[PLAN_AMIGO_BIZ],
+                                                CV.[OP_BOX_SERVER],
+                                                CV.[OP_BOX_BROWSER],
+                                                CV.[OP_FLAT],
+                                                CV.[OP_CLIENT],
+                                                CV.[OP_BASIC_SERVICE],
+                                                CV.[OP_ADD_SERVICE],
+                                                CV.[COMPANY_NO_BOX],
+                                                ROW_NUMBER() OVER(PARTITION BY CV.[COMPANY_NO_BOX] ORDER BY CV.[COMPANY_NO_BOX], CV.[EFFECTIVE_DATE] DESC) num
+                                                FROM CUSTOMER_MASTER_VIEW CV LEFT JOIN [REQUEST_DETAIL] RD ON CV.[COMPANY_NO_BOX] = RD.[COMPANY_NO_BOX] AND CV.[REQ_SEQ]=RD.[REQ_SEQ]
+                                                WHERE FORMAT(CV.[EFFECTIVE_DATE],'yyMM') <= @YYMM_1
+                                                AND CV.[BILL_TYPE] IN (22,32)
+                                                ) A WHERE A.num = 1
+                                                ) AS TBL1
+                                                LEFT JOIN
+                                                (
+                                                SELECT
+                                                B.INITIAL_COST,
+                                                B.MONTHLY_COST,
+                                                B.YEAR_COST,
+                                                B.[SERVER],
+                                                B.SERVERRIGHT,
+                                                B.BROWSERAUTO,
+                                                B.BROWSER,
+                                                B.PRODUCT,
+                                                B.PLAN_AMIGO_CAI,
+                                                B.PLAN_AMIGO_BIZ,
+                                                B.OP_BOX_SERVER,
+                                                B.OP_BOX_BROWSER,
+                                                B.OP_FLAT,
+                                                B.OP_CLIENT,
+                                                B.OP_BASIC_SERVICE,
+                                                B.OP_ADD_SERVICE,
+                                                B.[COMPANY_NO_BOX]
+                                                FROM
+                                                (
+                                                SELECT
+                                                CASE WHEN FORMAT(DATEADD(month,1,req.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_2
+                                                THEN cust.[INITIAL_COST]-cust.[INITIAL_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END [INITIAL_COST],
+                                                cust.[MONTHLY_COST]-cust.[MONTHLY_COST_DISCOUNTS] AS [MONTHLY_COST],
+                                                CASE WHEN FORMAT(DATEADD(month,1,req.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_2
+                                                THEN cust.[YEAR_COST]-cust.[YEAR_COST_DISCOUNTS]
+                                                ELSE 0
+                                                END [YEAR_COST],
+                                                CASE WHEN cust.[CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                                CASE WHEN cust.[CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                                CASE WHEN cust.[CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                                CASE WHEN cust.[CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                                CASE WHEN cust.[CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                                cust.[PLAN_AMIGO_CAI],
+                                                cust.[PLAN_AMIGO_BIZ],
+                                                cust.[OP_BOX_SERVER],
+                                                cust.[OP_BOX_BROWSER],
+                                                cust.[OP_FLAT],
+                                                cust.[OP_CLIENT],
+                                                cust.[OP_BASIC_SERVICE],
+                                                cust.[OP_ADD_SERVICE],
+                                                cust.[COMPANY_NO_BOX],
+                                                ROW_NUMBER() OVER(PARTITION BY cust.[COMPANY_NO_BOX] ORDER BY cust.[COMPANY_NO_BOX], cust.[EFFECTIVE_DATE] DESC) num
+                                                from CUSTOMER_MASTER_VIEW cust
+                                                LEFT JOIN REQUEST_DETAIL req ON cust.COMPANY_NO_BOX = req.COMPANY_NO_BOX and cust.REQ_SEQ=req.REQ_SEQ
+                                                WHERE FORMAT(cust.[EFFECTIVE_DATE],'yyMM') <= @YYMM_2 and cust.[BILL_TYPE] in(12,22,32)
+                                                ) B WHERE B.num = 1
+                                                ) AS TBL2
+                                                ON TBL1.COMPANY_NO_BOX=TBL2.COMPANY_NO_BOX
+                                                ) AS TBL
+                                                WHERE
+                                                TBL.[SERVER] <> 0 OR
+                                                TBL.[SERVERRIGHT] <> 0 OR
+                                                TBL.[BROWSERAUTO] <> 0 OR
+                                                TBL.[BROWSER] <> 0 OR
+                                                TBL.[PRODUCT] <> 0 OR
+                                                TBL.[PLAN_AMIGO_CAI] <> 0 OR
+                                                TBL.[PLAN_AMIGO_BIZ] <> 0 OR
+                                                TBl.[OP_BOX_SERVER] <> 0 OR
+                                                TBL.[OP_BOX_BROWSER] <> 0 OR
+                                                TBL.[OP_FLAT] <> 0 OR
+                                                TBL.[OP_CLIENT] <> 0 OR
+                                                TBL.[OP_BASIC_SERVICE] <> 0 OR
+                                                TBL.[OP_ADD_SERVICE] <> 0 ";
+
+        string strMonthlySaleComparison = @"SELECT 
+                                            ROW_NUMBER() OVER(ORDER BY TBL.[TYPE] ASC) AS No,
+                                            CASE TBL.[TYPE] WHEN 1 THEN N'要元'
+                                                            WHEN 2 THEN N'初期費'
+				                                            WHEN 3 THEN N'月額利用料'
+				                                            WHEN 4 THEN N'生産情報閲覧(初期費)'
+				                                            WHEN 5 THEN N'生産情報閲覧'
+                                            END [TYPE],
+                                            TBL.[BILL_SUPPLIER_NAME],
+                                            CASE TBL.[UPDATE_CONTENT] WHEN 1 THEN N'新規'
+                                                                      WHEN 2 THEN N'更新'
+						                                              WHEN 3 THEN N'更新'
+						                                              WHEN 99 THEN N'解約'
+                                            END [UPDATE_CONTENT],
+                                            TBL.[DIFF],
+                                            CONVERT(varchar(10),TBL.[SERVER]) AS [SERVER],
+                                            CONVERT(varchar(10),TBL.[SERVERRIGHT]) AS [SERVERRIGHT],
+                                            CONVERT(varchar(10),TBL.[BROWSERAUTO]) AS [BROWSERAUTO],
+                                            CONVERT(varchar(10),TBL.[BROWSER]) AS [BROWSER],
+                                            CONVERT(varchar(10),TBL.[PRODUCT]) AS [PRODUCT],
+                                            CONVERT(varchar(10),TBL.[PLAN_AMIGO_CAI]) AS [PLAN_AMIGO_CAI],
+                                            CONVERT(varchar(10),TBL.[PLAN_AMIGO_BIZ]) AS [PLAN_AMIGO_BIZ],
+                                            CONVERT(varchar(10),TBL.[OP_BOX_SERVER]) AS [OP_BOX_SERVER],
+                                            CONVERT(varchar(10),TBL.[OP_BOX_BROWSER]) AS [OP_BOX_BROWSER],
+                                            CONVERT(varchar(10),TBL.[OP_FLAT]) AS [OP_FLAT],
+                                            CONVERT(varchar(10),TBL.[OP_CLIENT]) AS [OP_CLIENT],
+                                            CONVERT(varchar(10),TBL.[OP_BASIC_SERVICE]) AS [OP_BASIC_SERVICE],
+                                            CONVERT(varchar(10),TBL.[OP_ADD_SERVICE]) AS [OP_ADD_SERVICE]
+                                            FROM
+                                            (
+                                            SELECT 
+                                            TBL1.[TYPE] AS [TYPE], 
+                                            TBL1.[BILL_SUPPLIER_NAME] AS [BILL_SUPPLIER_NAME],
+                                            TBL1.[UPDATE_CONTENT],
+                                            CASE WHEN TBL1.[TYPE] in (1) THEN TBL1.[INITIAL_COST]+TBL1.[MONTHLY_COST]-TBL2.[MONTHLY_COST]
+                                                 WHEN TBL1.[TYPE] in (2,4) THEN TBL1.[INITIAL_COST]
+                                                 WHEN TBL1.[TYPE] in (3) THEN TBL1.[MONTHLY_COST]-TBL2.[MONTHLY_COST]
+                                                 WHEN TBL1.[TYPE] in (5) THEN TBL1.[YEAR_COST]-TBL2.[YEAR_COST]
+                                                 ELSE 0
+                                            END [DIFF],
+                                            TBL1.[SERVER]-TBL2.[SERVER] AS [SERVER],
+                                            TBL1.[SERVERRIGHT]-TBL2.[SERVERRIGHT] AS [SERVERRIGHT],
+                                            TBL1.[BROWSERAUTO]-TBL2.[BROWSERAUTO] AS [BROWSERAUTO],
+                                            TBL1.[BROWSER]-TBL2.[BROWSER] AS [BROWSER],
+                                            TBL1.[PRODUCT]-TBL2.[PRODUCT] AS [PRODUCT],
+                                            TBL1.[PLAN_AMIGO_CAI]-TBL2.[PLAN_AMIGO_CAI] AS [PLAN_AMIGO_CAI],
+                                            TBL1.[PLAN_AMIGO_BIZ]-TBL2.[PLAN_AMIGO_BIZ] AS [PLAN_AMIGO_BIZ],
+                                            TBL1.[OP_BOX_SERVER]-TBL2.[OP_BOX_SERVER] AS [OP_BOX_SERVER],
+                                            TBL1.[OP_BOX_BROWSER]-TBL2.[OP_BOX_BROWSER] AS [OP_BOX_BROWSER],
+                                            TBL1.[OP_FLAT]-TBL2.[OP_FLAT] AS [OP_FLAT],
+                                            TBL1.[OP_CLIENT]-TBL2.[OP_CLIENT] AS [OP_CLIENT],
+                                            TBL1.[OP_BASIC_SERVICE]-TBL2.[OP_BASIC_SERVICE] AS [OP_BASIC_SERVICE] ,
+                                            TBL1.[OP_ADD_SERVICE]-TBL2.[OP_ADD_SERVICE] AS [OP_ADD_SERVICE],
+                                            TBL1.[COMPANY_NO_BOX]
+                                            FROM
+                                            (SELECT
+                                            A.[TYPE],
+                                            A.[BILL_SUPPLIER_NAME],
+                                            A.[UPDATE_CONTENT],
+                                            A.[INITIAL_COST],
+                                            A.[MONTHLY_COST],
+                                            A.[YEAR_COST],
+                                            A.[SERVER],
+                                            A.[SERVERRIGHT],
+                                            A.[BROWSERAUTO],
+                                            A.[BROWSER],
+                                            A.[PRODUCT],
+                                            A.[PLAN_AMIGO_CAI],
+                                            A.[PLAN_AMIGO_BIZ],
+                                            A.[OP_BOX_SERVER],
+                                            A.[OP_BOX_BROWSER],
+                                            A.[OP_FLAT],
+                                            A.[OP_CLIENT],
+                                            A.[OP_BASIC_SERVICE],
+                                            A.[OP_ADD_SERVICE],
+                                            A.[COMPANY_NO_BOX],
+                                            A.num
+                                            FROM
+                                            (SELECT　
+                                            CASE BILL_TYPE WHEN '12' THEN '1'
+                                            WHEN '22' THEN '3'
+                                            WHEN '32' THEN '5'
+                                            ELSE ''
+                                            END [TYPE],
+                                            BILL_SUPPLIER_NAME,
+                                            UPDATE_CONTENT,
+                                            CASE WHEN [UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE CASE WHEN format(DATEADD(month,1,[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                            THEN [INITIAL_COST]-[INITIAL_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END
+                                            END [INITIAL_COST],
+                                            CASE WHEN [UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE [MONTHLY_COST]-[MONTHLY_COST_DISCOUNTS]
+                                            END [MONTHLY_COST],
+                                            CASE WHEN [UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE CASE WHEN format(DATEADD(month,1,[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                            THEN [YEAR_COST]-[YEAR_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END
+                                            END [YEAR_COST],
+                                            CASE WHEN [CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                            CASE WHEN [CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                            CASE WHEN [CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                            CASE WHEN [CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                            CASE WHEN [CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                            [PLAN_AMIGO_CAI],
+                                            [PLAN_AMIGO_BIZ],
+                                            [OP_BOX_SERVER],
+                                            [OP_BOX_BROWSER],
+                                            [OP_FLAT],
+                                            [OP_CLIENT],
+                                            [OP_BASIC_SERVICE],
+                                            [OP_ADD_SERVICE],
+                                            [COMPANY_NO_BOX],
+                                            ROW_NUMBER() OVER(PARTITION BY COMPANY_NO_BOX ORDER BY COMPANY_NO_BOX, EFFECTIVE_DATE DESC, REQ_SEQ DESC) num
+                                            FROM CUSTOMER_MASTER_VIEW WHERE FORMAT(CUSTOMER_MASTER_VIEW.[EFFECTIVE_DATE],'yyMM') <=@YYMM_1 AND [BILL_TYPE] in(12,22,32)
+                                            UNION ALL
+                                            SELECT
+                                            CASE CV.[BILL_TYPE] WHEN '22' THEN '2'
+                                            WHEN '32' THEN '4'
+                                            ELSE ''
+                                            END [TYPE],
+                                            CV.[BILL_SUPPLIER_NAME],
+                                            CV.[UPDATE_CONTENT],
+                                            CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE CASE WHEN format(DATEADD(month,1,RD.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                            THEN CV.[INITIAL_COST]-CV.[INITIAL_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END
+                                            END [INITIAL_COST],
+                                            CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE CV.[MONTHLY_COST]-CV.[MONTHLY_COST_DISCOUNTS]
+                                            END [MONTHLY_COST],
+                                            CASE WHEN CV.[UPDATE_CONTENT] = 99
+                                            THEN 0
+                                            ELSE CASE WHEN FORMAT(DATEADD(month,1,RD.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_1
+                                            THEN CV.[YEAR_COST]-CV.[YEAR_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END
+                                            END [YEAR_COST],
+                                            CASE WHEN CV.[CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                            CASE WHEN CV.[CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                            CASE WHEN CV.[CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                            case WHEN CV.[CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                            case WHEN CV.[CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                            CV.[PLAN_AMIGO_CAI],
+                                            CV.[PLAN_AMIGO_BIZ],
+                                            CV.[OP_BOX_SERVER],
+                                            CV.[OP_BOX_BROWSER],
+                                            CV.[OP_FLAT],
+                                            CV.[OP_CLIENT],
+                                            CV.[OP_BASIC_SERVICE],
+                                            CV.[OP_ADD_SERVICE],
+                                            CV.[COMPANY_NO_BOX],
+                                            ROW_NUMBER() OVER(PARTITION BY CV.[COMPANY_NO_BOX] ORDER BY CV.[COMPANY_NO_BOX], CV.[EFFECTIVE_DATE] DESC) num
+                                            FROM CUSTOMER_MASTER_VIEW CV LEFT JOIN [REQUEST_DETAIL] RD ON CV.[COMPANY_NO_BOX] = RD.[COMPANY_NO_BOX] AND CV.[REQ_SEQ]=RD.[REQ_SEQ]
+                                            WHERE FORMAT(CV.[EFFECTIVE_DATE],'yyMM') <= @YYMM_1
+                                            AND CV.[BILL_TYPE] IN (22,32)
+                                            ) A WHERE A.num = 1
+                                            ) AS TBL1
+                                            LEFT JOIN
+                                            (
+                                            SELECT
+                                            B.INITIAL_COST,
+                                            B.MONTHLY_COST,
+                                            B.YEAR_COST,
+                                            B.[SERVER],
+                                            B.SERVERRIGHT,
+                                            B.BROWSERAUTO,
+                                            B.BROWSER,
+                                            B.PRODUCT,
+                                            B.PLAN_AMIGO_CAI,
+                                            B.PLAN_AMIGO_BIZ,
+                                            B.OP_BOX_SERVER,
+                                            B.OP_BOX_BROWSER,
+                                            B.OP_FLAT,
+                                            B.OP_CLIENT,
+                                            B.OP_BASIC_SERVICE,
+                                            B.OP_ADD_SERVICE,
+                                            B.[COMPANY_NO_BOX]
+                                            FROM
+                                            (
+                                            SELECT
+                                            CASE WHEN FORMAT(DATEADD(month,1,req.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_2
+                                            THEN cust.[INITIAL_COST]-cust.[INITIAL_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END [INITIAL_COST],
+                                            cust.[MONTHLY_COST]-cust.[MONTHLY_COST_DISCOUNTS] AS [MONTHLY_COST],
+                                            CASE WHEN FORMAT(DATEADD(month,1,req.[COMPLETION_NOTIFICATION_DATE]),'yyMM') = @YYMM_2
+                                            THEN cust.[YEAR_COST]-cust.[YEAR_COST_DISCOUNTS]
+                                            ELSE 0
+                                            END [YEAR_COST],
+                                            CASE WHEN cust.[CONTRACT_PLAN] = 'SERVER' THEN 1 ELSE 0 END [SERVER],
+                                            CASE WHEN cust.[CONTRACT_PLAN] = 'SERVERRIGHT' THEN 1 ELSE 0 END [SERVERRIGHT],
+                                            CASE WHEN cust.[CONTRACT_PLAN] = 'BROWSERAUTO' THEN 1 ELSE 0 END [BROWSERAUTO],
+                                            CASE WHEN cust.[CONTRACT_PLAN] = 'BROWSER' THEN 1 ELSE 0 END [BROWSER],
+                                            CASE WHEN cust.[CONTRACT_PLAN] = 'PRODUCT' THEN 1 ELSE 0 END [PRODUCT],
+                                            cust.[PLAN_AMIGO_CAI],
+                                            cust.[PLAN_AMIGO_BIZ],
+                                            cust.[OP_BOX_SERVER],
+                                            cust.[OP_BOX_BROWSER],
+                                            cust.[OP_FLAT],
+                                            cust.[OP_CLIENT],
+                                            cust.[OP_BASIC_SERVICE],
+                                            cust.[OP_ADD_SERVICE],
+                                            cust.[COMPANY_NO_BOX],
+                                            ROW_NUMBER() OVER(PARTITION BY cust.[COMPANY_NO_BOX] ORDER BY cust.[COMPANY_NO_BOX], cust.[EFFECTIVE_DATE] DESC) num
+                                            from CUSTOMER_MASTER_VIEW cust
+                                            LEFT JOIN REQUEST_DETAIL req ON cust.COMPANY_NO_BOX = req.COMPANY_NO_BOX and cust.REQ_SEQ=req.REQ_SEQ
+                                            WHERE FORMAT(cust.[EFFECTIVE_DATE],'yyMM') <= @YYMM_2 and cust.[BILL_TYPE] in(12,22,32)
+                                            ) B WHERE B.num = 1
+                                            ) AS TBL2
+                                            ON TBL1.COMPANY_NO_BOX=TBL2.COMPANY_NO_BOX
+                                            ) AS TBL
+                                            WHERE
+                                            TBL.[SERVER] <> 0 OR
+                                            TBL.[SERVERRIGHT] <> 0 OR
+                                            TBL.[BROWSERAUTO] <> 0 OR
+                                            TBL.[BROWSER] <> 0 OR
+                                            TBL.[PRODUCT] <> 0 OR
+                                            TBL.[PLAN_AMIGO_CAI] <> 0 OR
+                                            TBL.[PLAN_AMIGO_BIZ] <> 0 OR
+                                            TBl.[OP_BOX_SERVER] <> 0 OR
+                                            TBL.[OP_BOX_BROWSER] <> 0 OR
+                                            TBL.[OP_FLAT] <> 0 OR
+                                            TBL.[OP_CLIENT] <> 0 OR
+                                            TBL.[OP_BASIC_SERVICE] <> 0 OR
+                                            TBL.[OP_ADD_SERVICE] <> 0 
+                                            ORDER BY TBL.[TYPE],TBL.[UPDATE_CONTENT] ASC OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
+
         #region IsAlreadyUpdate
         public bool IsAlreadyUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out string strMsg)
         {
@@ -685,6 +1131,30 @@ namespace DAL_AmigoProcess.DAL
             oMaster.ExcuteQuery(2, out strMsg);
         }
         #endregion
+
+        #region getMonthlySaleComparisonList
+        public DataTable getMonthlySaleComparisonList(string strYYYYMM1, string strYYYYMM2, int OFFSET, int LIMIT, out string strMsg, out int total)
+        {
+           
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strMonthlySaleComparisonTotal);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_1", strYYYYMM1));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_2", strYYYYMM2));
+            oMaster.ExcuteQuery(4, out strMsg);
+            total = int.Parse(oMaster.dtExcuted.Rows[0][0].ToString());
+
+            //result
+            oMaster = new ConnectionMaster(strConnectionString, strMonthlySaleComparison);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_1", strYYYYMM1));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_2", strYYYYMM2));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@OFFSET", OFFSET));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@LIMIT", LIMIT));
+            oMaster.ExcuteQuery(4, out strMsg);
+
+            return oMaster.dtExcuted;
+
+        }
+        #endregion
+
     }
     #endregion
 

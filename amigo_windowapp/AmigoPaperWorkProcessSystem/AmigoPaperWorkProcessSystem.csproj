@@ -112,6 +112,7 @@
     <Compile Include="Controllers\Jimugo\frmCustomerMasterMaintenanceController.cs" />
     <Compile Include="Controllers\Jimugo\frmJimugoMenuController.cs" />
     <Compile Include="Controllers\Jimugo\FrmMonthlySaleAggregationController.cs" />
+    <Compile Include="Controllers\Jimugo\frmMonthlySaleComparisonListController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssueQuotationController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssuQuotationPreviewController.cs" />
     <Compile Include="Controllers\Jimugo\RegisterCompleteNotification\frmRegisterCompleteNotificationPreviewController.cs" />
@@ -246,6 +247,12 @@
     </Compile>
     <Compile Include="Forms\Jimugo\FrmMonthlySaleAggregationList.designer.cs">
       <DependentUpon>FrmMonthlySaleAggregationList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmMonthlySaleComparisonList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmMonthlySaleComparisonList.Designer.cs">
+      <DependentUpon>frmMonthlySaleComparisonList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\frmUsageChargeMaster.cs">
       <SubType>Form</SubType>
@@ -396,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\FrmMonthlySaleAggregationList.resx">
       <DependentUpon>FrmMonthlySaleAggregationList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmMonthlySaleComparisonList.resx">
+      <DependentUpon>frmMonthlySaleComparisonList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmUsageChargeMaster.resx">
       <DependentUpon>frmUsageChargeMaster.cs</DependentUpon>

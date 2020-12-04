@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Jimugo\MonthlySaleComparisonList.asmx" />
     <Content Include="Jimugo\opt_ApplicationApproval.asmx" />
     <Content Include="Jimugo\opt_ClientCertificateList.asmx" />
     <Content Include="Jimugo\opt_CompanyCodeList.asmx" />
@@ -141,11 +142,16 @@
     <Compile Include="Controller\Jimugo\ControllerJimugo.cs" />
     <Compile Include="Controller\Jimugo\ControllerJimugoMenu.cs" />
     <Compile Include="Controller\Jimugo\ControllerMonthlySaleAggregation.cs" />
+    <Compile Include="Controller\Jimugo\ControllerMonthlySaleComparisonList.cs" />
     <Compile Include="Controller\Jimugo\ControllerPurchaseOrder.cs" />
     <Compile Include="Controller\Jimugo\ControllerRegisterCompleteNotificationSending.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageApplicationList.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageChargeMaster.cs" />
     <Compile Include="Controller\Jimugo\ControllerUsageInfoRegistrationList.cs" />
+    <Compile Include="Jimugo\MonthlySaleComparisonList.asmx.cs">
+      <DependentUpon>MonthlySaleComparisonList.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Jimugo\opt_ApplicationApproval.asmx.cs">
       <DependentUpon>opt_ApplicationApproval.asmx</DependentUpon>
       <SubType>Component</SubType>

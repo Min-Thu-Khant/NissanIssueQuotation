@@ -25,7 +25,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         private string strCurrent;
         private string strNext;
         private UIUtility uIUtility;
-   
+
         private string[] dummyColumns = {
             "TotalAmount",
             "ReduceSales",
@@ -163,7 +163,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 Thread.Sleep(1000);
                 //close mail dialog
                 datathread.Abort();
-                
+
             }
             catch (System.TimeoutException)
             {
@@ -275,14 +275,30 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Previous Month
         private void btnPreMonthDiff_Click(object sender, EventArgs e)
         {
-
+            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+            {
+                return;
+            }
+            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較 Monthly sales comparison", "Previous", txtDate.Text.Trim());
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();
+            }
         }
         #endregion
 
         #region Next Month
         private void btnNextMonthDiff_Click(object sender, EventArgs e)
         {
-
+            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+            {
+                return;
+            }
+            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較 Monthly sales comparison", "Next", txtDate.Text.Trim());
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                this.Show();
+            }
         }
         #endregion
 
