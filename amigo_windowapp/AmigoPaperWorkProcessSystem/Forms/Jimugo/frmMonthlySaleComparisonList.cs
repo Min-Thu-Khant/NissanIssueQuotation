@@ -210,7 +210,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 e.PaintBackground(e.CellBounds, true);
                 e.Graphics.TranslateTransform(e.CellBounds.Left, e.CellBounds.Bottom);
                 e.Graphics.RotateTransform(270);
-                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Gray, 12, 12);
+                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Gray, 2, 12);
                 e.Graphics.ResetTransform();
                 e.Handled = true;
 
