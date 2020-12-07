@@ -29,27 +29,26 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle34 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle35 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle36 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFirst = new System.Windows.Forms.Button();
             this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
-            this.lblClear = new System.Windows.Forms.Label();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
@@ -112,17 +111,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.displayItemLabel1.Name = "displayItemLabel1";
             this.displayItemLabel1.Size = new System.Drawing.Size(77, 22);
             this.displayItemLabel1.TabIndex = 45;
-            // 
-            // lblClear
-            // 
-            this.lblClear.AutoSize = true;
-            this.lblClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lblClear.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.lblClear.Location = new System.Drawing.Point(259, 189);
-            this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(127, 22);
-            this.lblClear.TabIndex = 44;
-            this.lblClear.Text = "検索条件のクリア";
             // 
             // btnLast
             // 
@@ -341,8 +329,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // No
             // 
             this.No.DataPropertyName = "No";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.No.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.No.DefaultCellStyle = dataGridViewCellStyle19;
             this.No.Frozen = true;
             this.No.HeaderText = "No";
             this.No.MinimumWidth = 8;
@@ -354,52 +342,51 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // Type
             // 
             this.Type.DataPropertyName = "Type";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.Type.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.Type.DefaultCellStyle = dataGridViewCellStyle20;
             this.Type.Frozen = true;
-            this.Type.HeaderText = "Type";
+            this.Type.HeaderText = "区分";
             this.Type.MinimumWidth = 8;
             this.Type.Name = "Type";
             this.Type.ReadOnly = true;
             this.Type.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Type.Width = 150;
+            this.Type.Width = 300;
             // 
             // BILL_SUPPLIER_NAME
             // 
             this.BILL_SUPPLIER_NAME.DataPropertyName = "BILL_SUPPLIER_NAME";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.BILL_SUPPLIER_NAME.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.BILL_SUPPLIER_NAME.DefaultCellStyle = dataGridViewCellStyle21;
             this.BILL_SUPPLIER_NAME.Frozen = true;
-            this.BILL_SUPPLIER_NAME.HeaderText = "Supplier name";
+            this.BILL_SUPPLIER_NAME.HeaderText = "サプライヤ名";
             this.BILL_SUPPLIER_NAME.MinimumWidth = 8;
             this.BILL_SUPPLIER_NAME.Name = "BILL_SUPPLIER_NAME";
             this.BILL_SUPPLIER_NAME.ReadOnly = true;
             this.BILL_SUPPLIER_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.BILL_SUPPLIER_NAME.Width = 250;
+            this.BILL_SUPPLIER_NAME.Width = 300;
             // 
             // UPDATE_CONTENT
             // 
             this.UPDATE_CONTENT.DataPropertyName = "UPDATE_CONTENT";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.UPDATE_CONTENT.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.UPDATE_CONTENT.DefaultCellStyle = dataGridViewCellStyle22;
             this.UPDATE_CONTENT.Frozen = true;
-            this.UPDATE_CONTENT.HeaderText = "Contents";
+            this.UPDATE_CONTENT.HeaderText = "内容";
             this.UPDATE_CONTENT.MinimumWidth = 8;
             this.UPDATE_CONTENT.Name = "UPDATE_CONTENT";
             this.UPDATE_CONTENT.ReadOnly = true;
-            this.UPDATE_CONTENT.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.UPDATE_CONTENT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.UPDATE_CONTENT.Width = 150;
             // 
             // DIFF
             // 
             this.DIFF.DataPropertyName = "DIFF";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            this.DIFF.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "N0";
+            this.DIFF.DefaultCellStyle = dataGridViewCellStyle23;
             this.DIFF.Frozen = true;
-            this.DIFF.HeaderText = "Difference";
+            this.DIFF.HeaderText = "差異";
             this.DIFF.MinimumWidth = 8;
             this.DIFF.Name = "DIFF";
             this.DIFF.ReadOnly = true;
@@ -409,8 +396,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // Server
             // 
             this.Server.DataPropertyName = "SERVER";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.Server.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.Server.DefaultCellStyle = dataGridViewCellStyle24;
             this.Server.HeaderText = "サーバー";
             this.Server.MinimumWidth = 8;
             this.Server.Name = "Server";
@@ -421,8 +408,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // SERVERRIGHT
             // 
             this.SERVERRIGHT.DataPropertyName = "SERVERRIGHT";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.SERVERRIGHT.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.SERVERRIGHT.DefaultCellStyle = dataGridViewCellStyle25;
             this.SERVERRIGHT.HeaderText = "サーバーライト";
             this.SERVERRIGHT.MinimumWidth = 8;
             this.SERVERRIGHT.Name = "SERVERRIGHT";
@@ -433,8 +420,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // BROWSERAUTO
             // 
             this.BROWSERAUTO.DataPropertyName = "BROWSERAUTO";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BROWSERAUTO.DefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BROWSERAUTO.DefaultCellStyle = dataGridViewCellStyle26;
             this.BROWSERAUTO.HeaderText = "ブラウザ自動";
             this.BROWSERAUTO.MinimumWidth = 8;
             this.BROWSERAUTO.Name = "BROWSERAUTO";
@@ -445,8 +432,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // BROWSER
             // 
             this.BROWSER.DataPropertyName = "BROWSER";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.BROWSER.DefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.BROWSER.DefaultCellStyle = dataGridViewCellStyle27;
             this.BROWSER.HeaderText = "ブラウザ";
             this.BROWSER.MinimumWidth = 8;
             this.BROWSER.Name = "BROWSER";
@@ -457,8 +444,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // PRODUCT
             // 
             this.PRODUCT.DataPropertyName = "PRODUCT";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PRODUCT.DefaultCellStyle = dataGridViewCellStyle10;
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PRODUCT.DefaultCellStyle = dataGridViewCellStyle28;
             this.PRODUCT.HeaderText = "生産情報閲覧";
             this.PRODUCT.MinimumWidth = 8;
             this.PRODUCT.Name = "PRODUCT";
@@ -469,8 +456,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // PLAN_AMIGO_CAI
             // 
             this.PLAN_AMIGO_CAI.DataPropertyName = "PLAN_AMIGO_CAI";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PLAN_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle11;
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PLAN_AMIGO_CAI.DefaultCellStyle = dataGridViewCellStyle29;
             this.PLAN_AMIGO_CAI.HeaderText = "Amigo-CAI権限";
             this.PLAN_AMIGO_CAI.MinimumWidth = 8;
             this.PLAN_AMIGO_CAI.Name = "PLAN_AMIGO_CAI";
@@ -481,8 +468,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // PLAN_AMIGO_BIZ
             // 
             this.PLAN_AMIGO_BIZ.DataPropertyName = "PLAN_AMIGO_BIZ";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.PLAN_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.PLAN_AMIGO_BIZ.DefaultCellStyle = dataGridViewCellStyle30;
             this.PLAN_AMIGO_BIZ.HeaderText = "Amigo-BiZ権限";
             this.PLAN_AMIGO_BIZ.MinimumWidth = 8;
             this.PLAN_AMIGO_BIZ.Name = "PLAN_AMIGO_BIZ";
@@ -493,8 +480,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_BOX_SERVER
             // 
             this.OP_BOX_SERVER.DataPropertyName = "OP_BOX_SERVER";
-            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BOX_SERVER.DefaultCellStyle = dataGridViewCellStyle13;
+            dataGridViewCellStyle31.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BOX_SERVER.DefaultCellStyle = dataGridViewCellStyle31;
             this.OP_BOX_SERVER.HeaderText = "拡張BOX サーバー";
             this.OP_BOX_SERVER.MinimumWidth = 8;
             this.OP_BOX_SERVER.Name = "OP_BOX_SERVER";
@@ -505,8 +492,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_BOX_BROWSER
             // 
             this.OP_BOX_BROWSER.DataPropertyName = "OP_BOX_BROWSER";
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BOX_BROWSER.DefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle32.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BOX_BROWSER.DefaultCellStyle = dataGridViewCellStyle32;
             this.OP_BOX_BROWSER.HeaderText = "拡張BOX ブラウザ";
             this.OP_BOX_BROWSER.MinimumWidth = 8;
             this.OP_BOX_BROWSER.Name = "OP_BOX_BROWSER";
@@ -517,8 +504,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_FLAT
             // 
             this.OP_FLAT.DataPropertyName = "OP_FLAT";
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_FLAT.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle33.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_FLAT.DefaultCellStyle = dataGridViewCellStyle33;
             this.OP_FLAT.HeaderText = "FLAT変換";
             this.OP_FLAT.MinimumWidth = 8;
             this.OP_FLAT.Name = "OP_FLAT";
@@ -529,8 +516,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_CLIENT
             // 
             this.OP_CLIENT.DataPropertyName = "OP_CLIENT";
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_CLIENT.DefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_CLIENT.DefaultCellStyle = dataGridViewCellStyle34;
             this.OP_CLIENT.HeaderText = "クライアント証明";
             this.OP_CLIENT.MinimumWidth = 8;
             this.OP_CLIENT.Name = "OP_CLIENT";
@@ -541,8 +528,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_BASIC_SERVICE
             // 
             this.OP_BASIC_SERVICE.DataPropertyName = "OP_BASIC_SERVICE";
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_BASIC_SERVICE.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle35.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_BASIC_SERVICE.DefaultCellStyle = dataGridViewCellStyle35;
             this.OP_BASIC_SERVICE.HeaderText = "サービスデスク基本";
             this.OP_BASIC_SERVICE.MinimumWidth = 8;
             this.OP_BASIC_SERVICE.Name = "OP_BASIC_SERVICE";
@@ -553,8 +540,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // OP_ADD_SERVICE
             // 
             this.OP_ADD_SERVICE.DataPropertyName = "OP_ADD_SERVICE";
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.OP_ADD_SERVICE.DefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle36.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.OP_ADD_SERVICE.DefaultCellStyle = dataGridViewCellStyle36;
             this.OP_ADD_SERVICE.HeaderText = "サービスデスク追加";
             this.OP_ADD_SERVICE.MinimumWidth = 8;
             this.OP_ADD_SERVICE.Name = "OP_ADD_SERVICE";
@@ -569,7 +556,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.ClientSize = new System.Drawing.Size(1284, 619);
             this.Controls.Add(this.lbldifference);
             this.Controls.Add(this.displayItemLabel1);
-            this.Controls.Add(this.lblClear);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.cboLimit);
@@ -596,7 +582,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         private System.Windows.Forms.Button btnFirst;
         private UserControls.DisplayItemLabel displayItemLabel1;
-        private System.Windows.Forms.Label lblClear;
         private System.Windows.Forms.Button btnLast;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnPrev;

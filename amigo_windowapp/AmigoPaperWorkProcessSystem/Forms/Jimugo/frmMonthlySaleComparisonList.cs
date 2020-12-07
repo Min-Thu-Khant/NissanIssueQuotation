@@ -146,13 +146,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 {
                     strYYYYMM1 = dtDate.ToString("yyMM");
                     strYYYYMM2 = dtDate.AddMonths(-1).ToString("yyMM");
-                    strDifference = dtDate.AddMonths(-1).ToString("yyyyMM");
+                    strDifference = dtDate.AddMonths(-1).ToString("yyyy/MM");
                 }
                 else
                 {
                     strYYYYMM1 = dtDate.AddMonths(1).ToString("yyMM");
                     strYYYYMM2 = dtDate.ToString("yyMM");
-                    strDifference = dtDate.AddMonths(1).ToString("yyyyMM");
+                    strDifference = dtDate.AddMonths(1).ToString("yyyy/MM");
                 }
                 lbldifference.Text = "次月売上比較：" + strDifference + "分差異";
 
@@ -210,7 +210,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 e.PaintBackground(e.CellBounds, true);
                 e.Graphics.TranslateTransform(e.CellBounds.Left, e.CellBounds.Bottom);
                 e.Graphics.RotateTransform(270);
-                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Gray, 10, 2);
+                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Gray, 10, 10);
                 e.Graphics.ResetTransform();
                 e.Handled = true;
 

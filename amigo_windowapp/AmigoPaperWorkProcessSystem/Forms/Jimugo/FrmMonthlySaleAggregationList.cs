@@ -279,7 +279,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 return;
             }
-            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較 Monthly sales comparison", "Previous", txtDate.Text.Trim());
+            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較", "Previous", txtDate.Text.Trim());
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 this.Show();
@@ -294,7 +294,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 return;
             }
-            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較 Monthly sales comparison", "Next", txtDate.Text.Trim());
+            frmMonthlySaleComparisonList frm = new frmMonthlySaleComparisonList("CTG020", "月次売上比較", "Next", txtDate.Text.Trim());
             if (frm.ShowDialog() == DialogResult.OK)
             {
                 this.Show();
