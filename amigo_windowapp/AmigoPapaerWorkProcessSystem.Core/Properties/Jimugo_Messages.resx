@@ -469,6 +469,10 @@
     <value>顧客マスタが同一利用申請連番で2行以上取得されました。</value>
     <comment>Two or more lines of the customer master have been acquired with the same usage application serial number.</comment>
   </data>
+  <data name="I000WE001" xml:space="preserve">
+    <value>差異がありませんでした。</value>
+    <comment>There is no difference.</comment>
+  </data>
   <data name="I000ZZ001" xml:space="preserve">
     <value>登録しますか？</value>
     <comment>Do you want to register?</comment>

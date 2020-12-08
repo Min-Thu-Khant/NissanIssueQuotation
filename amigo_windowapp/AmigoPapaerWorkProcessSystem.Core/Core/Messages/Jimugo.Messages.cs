@@ -1085,5 +1085,14 @@ namespace AmigoPaperWorkProcessSystem.Core
                 return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.I000ZZ023;
             }
         }
+
+        public static string I000WE001
+        {
+            get
+            {
+                //return message
+                return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.I000WE001;
+            }
+        }
     }
 }

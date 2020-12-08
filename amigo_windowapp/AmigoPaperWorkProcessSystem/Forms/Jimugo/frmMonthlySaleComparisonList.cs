@@ -142,6 +142,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 string strYYYYMM1, strYYYYMM2;
                 DateTime dtDate = Convert.ToDateTime(txtDate.Text.Trim());
                 string strDifference = "";
+
                 if (checkState == "Previous")
                 {
                     strYYYYMM1 = dtDate.ToString("yyMM");
@@ -161,15 +162,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 DataTable dt = oController.GetMonthlySaleComparisonList(strYYYYMM1, strYYYYMM2, uIUtility.MetaData.Offset, uIUtility.MetaData.Limit, out uIUtility.MetaData);
                 if (dt.Rows.Count > 0)
                 {
+                   
+
                     uIUtility.dtList = dt;
                     dgvList.DataSource = uIUtility.dtList;
-
 
                     //pagination
                     uIUtility.CalculatePaginationNew(lblcurrentPage, lblTotalPages, lblTotalRecords);
                 }
                 else
                 {
+                    if (dt.Rows.Count == 0)
+                    {
+                        MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WE001, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                    }
+
                     //clear data except headers
                     uIUtility.ClearDataGrid();
                     uIUtility.CalculatePaginationNew(lblcurrentPage, lblTotalPages, lblTotalRecords);
@@ -202,6 +210,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         #endregion
 
+        #region CellPainting
         private void dgvList_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             // Vertical text from column 0, or adjust below, if first column(s) to be skipped
@@ -219,6 +228,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
 
         }
+        #endregion
+
         #region AlignBottomHeaders
         private void AlignBottomHeaders()
         {
@@ -228,6 +239,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             }
         }
         #endregion
+
         #region CellFormating
         private void dgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
@@ -312,6 +324,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         }
         #endregion
+
         #region Back Button
         private void btnBack_Click(object sender, EventArgs e)
         {

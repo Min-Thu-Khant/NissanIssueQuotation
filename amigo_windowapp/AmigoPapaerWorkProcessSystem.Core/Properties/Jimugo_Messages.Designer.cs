@@ -853,6 +853,15 @@ namespace AmigoPapaerWorkProcessSystem.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 差異がありませんでした。.
+        /// </summary>
+        internal static string I000WE001 {
+            get {
+                return ResourceManager.GetString("I000WE001", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 登録しますか？.
         /// </summary>
         internal static string I000ZZ001 {
