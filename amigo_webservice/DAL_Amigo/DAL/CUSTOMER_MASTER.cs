@@ -779,7 +779,7 @@ namespace DAL_AmigoProcess.DAL
                                             CV.[OP_BASIC_SERVICE],
                                             CV.[OP_ADD_SERVICE],
                                             CV.[COMPANY_NO_BOX],
-                                            ROW_NUMBER() OVER(PARTITION BY CV.[COMPANY_NO_BOX] ORDER BY CV.[COMPANY_NO_BOX], CV.[EFFECTIVE_DATE] DESC) num
+                                            ROW_NUMBER() OVER(PARTITION BY CV.[COMPANY_NO_BOX] ORDER BY CV.[COMPANY_NO_BOX], CV.[EFFECTIVE_DATE] DESC,CV.REQ_SEQ DESC) num
                                             FROM CUSTOMER_MASTER_VIEW CV LEFT JOIN [REQUEST_DETAIL] RD ON CV.[COMPANY_NO_BOX] = RD.[COMPANY_NO_BOX] AND CV.[REQ_SEQ]=RD.[REQ_SEQ]
                                             WHERE FORMAT(CV.[EFFECTIVE_DATE],'yyMM') <= @YYMM_1
                                             AND CV.[BILL_TYPE] IN (22,32)
