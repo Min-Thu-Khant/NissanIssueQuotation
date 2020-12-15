@@ -98,6 +98,7 @@
             this.colCOMPANY_BOX = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ROW_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMK_ORIGIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
@@ -468,7 +469,8 @@
             this.colCOMPANY_NO,
             this.colCOMPANY_BOX,
             this.ROW_ID,
-            this.UPDATED_AT_RAW});
+            this.UPDATED_AT_RAW,
+            this.colMK_ORIGIN});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(16, 234);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -765,6 +767,13 @@
             this.UPDATED_AT_RAW.Name = "UPDATED_AT_RAW";
             this.UPDATED_AT_RAW.Visible = false;
             // 
+            // colMK_ORIGIN
+            // 
+            this.colMK_ORIGIN.DataPropertyName = "MK_ORIGIN";
+            this.colMK_ORIGIN.HeaderText = "MK_ORIGIN";
+            this.colMK_ORIGIN.Name = "colMK_ORIGIN";
+            this.colMK_ORIGIN.Visible = false;
+            // 
             // frmCompanyCodeList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -871,5 +880,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colCOMPANY_BOX;
         private System.Windows.Forms.DataGridViewTextBoxColumn ROW_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_AT_RAW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMK_ORIGIN;
     }
 }

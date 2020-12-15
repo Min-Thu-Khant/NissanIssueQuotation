@@ -46,6 +46,7 @@
             this.txtFromDate = new MetroFramework.Controls.MetroTextBox();
             this.txtToDate = new MetroFramework.Controls.MetroTextBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.tmr3B = new System.Windows.Forms.Timer(this.components);
             this.colCheck = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,7 +55,6 @@
             this.colMatching = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPayment = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDateTimeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tmr3B = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,7 +62,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Candara", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(220, 96);
+            this.label3.Location = new System.Drawing.Point(220, 89);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(14, 15);
             this.label3.TabIndex = 596;
@@ -70,9 +70,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(445, 94);
+            this.btnSearch.Location = new System.Drawing.Point(445, 87);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(178, 28);
+            this.btnSearch.Size = new System.Drawing.Size(178, 26);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseSelectable = true;
@@ -81,9 +81,9 @@
             // btnBack
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1208, 56);
+            this.btnBack.Location = new System.Drawing.Point(1208, 52);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 28);
+            this.btnBack.Size = new System.Drawing.Size(75, 26);
             this.btnBack.TabIndex = 7;
             this.btnBack.Text = "戻る";
             this.btnBack.UseSelectable = true;
@@ -92,9 +92,9 @@
             // btn3B
             // 
             this.btn3B.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn3B.Location = new System.Drawing.Point(1092, 133);
+            this.btn3B.Location = new System.Drawing.Point(1092, 123);
             this.btn3B.Name = "btn3B";
-            this.btn3B.Size = new System.Drawing.Size(191, 28);
+            this.btn3B.Size = new System.Drawing.Size(191, 26);
             this.btn3B.TabIndex = 6;
             this.btn3B.Text = "請求書突合処理起動";
             this.btn3B.UseSelectable = true;
@@ -103,9 +103,9 @@
             // btnChecktheResult
             // 
             this.btnChecktheResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnChecktheResult.Location = new System.Drawing.Point(1092, 94);
+            this.btnChecktheResult.Location = new System.Drawing.Point(1092, 87);
             this.btnChecktheResult.Name = "btnChecktheResult";
-            this.btnChecktheResult.Size = new System.Drawing.Size(191, 28);
+            this.btnChecktheResult.Size = new System.Drawing.Size(191, 26);
             this.btnChecktheResult.TabIndex = 4;
             this.btnChecktheResult.Text = "突合結果確認";
             this.btnChecktheResult.UseSelectable = true;
@@ -114,9 +114,9 @@
             // btnCheckAmigoData
             // 
             this.btnCheckAmigoData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckAmigoData.Location = new System.Drawing.Point(893, 95);
+            this.btnCheckAmigoData.Location = new System.Drawing.Point(893, 88);
             this.btnCheckAmigoData.Name = "btnCheckAmigoData";
-            this.btnCheckAmigoData.Size = new System.Drawing.Size(191, 28);
+            this.btnCheckAmigoData.Size = new System.Drawing.Size(191, 26);
             this.btnCheckAmigoData.TabIndex = 3;
             this.btnCheckAmigoData.Text = "Amigoデータ確認";
             this.btnCheckAmigoData.UseSelectable = true;
@@ -125,9 +125,9 @@
             // btnNoneAmigoCheckData
             // 
             this.btnNoneAmigoCheckData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnNoneAmigoCheckData.Location = new System.Drawing.Point(893, 133);
+            this.btnNoneAmigoCheckData.Location = new System.Drawing.Point(893, 123);
             this.btnNoneAmigoCheckData.Name = "btnNoneAmigoCheckData";
-            this.btnNoneAmigoCheckData.Size = new System.Drawing.Size(191, 28);
+            this.btnNoneAmigoCheckData.Size = new System.Drawing.Size(191, 26);
             this.btnNoneAmigoCheckData.TabIndex = 5;
             this.btnNoneAmigoCheckData.Text = "Amigo外データ確認";
             this.btnNoneAmigoCheckData.UseSelectable = true;
@@ -138,9 +138,9 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(28, 75);
+            this.metroLabel1.Location = new System.Drawing.Point(28, 69);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(84, 15);
+            this.metroLabel1.Size = new System.Drawing.Size(87, 15);
             this.metroLabel1.TabIndex = 603;
             this.metroLabel1.Text = "取込日(FROM)";
             // 
@@ -149,9 +149,9 @@
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontSize = MetroFramework.MetroLabelSize.Small;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(235, 75);
+            this.metroLabel2.Location = new System.Drawing.Point(235, 69);
             this.metroLabel2.Name = "metroLabel2";
-            this.metroLabel2.Size = new System.Drawing.Size(65, 15);
+            this.metroLabel2.Size = new System.Drawing.Size(68, 15);
             this.metroLabel2.TabIndex = 604;
             this.metroLabel2.Text = "取込日(TO)";
             // 
@@ -161,16 +161,16 @@
             // 
             // 
             this.txtFromDate.CustomButton.Image = null;
-            this.txtFromDate.CustomButton.Location = new System.Drawing.Point(169, 1);
+            this.txtFromDate.CustomButton.Location = new System.Drawing.Point(171, 1);
             this.txtFromDate.CustomButton.Name = "";
-            this.txtFromDate.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtFromDate.CustomButton.Size = new System.Drawing.Size(19, 18);
             this.txtFromDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtFromDate.CustomButton.TabIndex = 1;
             this.txtFromDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtFromDate.CustomButton.UseSelectable = true;
             this.txtFromDate.CustomButton.Visible = false;
             this.txtFromDate.Lines = new string[0];
-            this.txtFromDate.Location = new System.Drawing.Point(28, 96);
+            this.txtFromDate.Location = new System.Drawing.Point(28, 89);
             this.txtFromDate.MaxLength = 32767;
             this.txtFromDate.Name = "txtFromDate";
             this.txtFromDate.PasswordChar = '\0';
@@ -180,7 +180,7 @@
             this.txtFromDate.SelectionLength = 0;
             this.txtFromDate.SelectionStart = 0;
             this.txtFromDate.ShortcutsEnabled = true;
-            this.txtFromDate.Size = new System.Drawing.Size(191, 23);
+            this.txtFromDate.Size = new System.Drawing.Size(191, 21);
             this.txtFromDate.TabIndex = 0;
             this.txtFromDate.UseSelectable = true;
             this.txtFromDate.WaterMark = "YYYY/MM/DD";
@@ -193,16 +193,16 @@
             // 
             // 
             this.txtToDate.CustomButton.Image = null;
-            this.txtToDate.CustomButton.Location = new System.Drawing.Point(169, 1);
+            this.txtToDate.CustomButton.Location = new System.Drawing.Point(171, 1);
             this.txtToDate.CustomButton.Name = "";
-            this.txtToDate.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtToDate.CustomButton.Size = new System.Drawing.Size(19, 18);
             this.txtToDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtToDate.CustomButton.TabIndex = 1;
             this.txtToDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtToDate.CustomButton.UseSelectable = true;
             this.txtToDate.CustomButton.Visible = false;
             this.txtToDate.Lines = new string[0];
-            this.txtToDate.Location = new System.Drawing.Point(235, 96);
+            this.txtToDate.Location = new System.Drawing.Point(235, 89);
             this.txtToDate.MaxLength = 32767;
             this.txtToDate.Name = "txtToDate";
             this.txtToDate.PasswordChar = '\0';
@@ -212,7 +212,7 @@
             this.txtToDate.SelectionLength = 0;
             this.txtToDate.SelectionStart = 0;
             this.txtToDate.ShortcutsEnabled = true;
-            this.txtToDate.Size = new System.Drawing.Size(191, 23);
+            this.txtToDate.Size = new System.Drawing.Size(191, 21);
             this.txtToDate.TabIndex = 1;
             this.txtToDate.UseSelectable = true;
             this.txtToDate.WaterMark = "YYYY/MM/DD";
@@ -239,16 +239,21 @@
             this.colPayment,
             this.colDateTimeID});
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(18, 179);
+            this.dgvList.Location = new System.Drawing.Point(18, 165);
             this.dgvList.Name = "dgvList";
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.RowHeadersWidth = 10;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvList.Size = new System.Drawing.Size(1265, 474);
+            this.dgvList.Size = new System.Drawing.Size(1265, 438);
             this.dgvList.TabIndex = 8;
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
+            // 
+            // tmr3B
+            // 
+            this.tmr3B.Interval = 10000;
+            this.tmr3B.Tick += new System.EventHandler(this.Tmr3B_Tick);
             // 
             // colCheck
             // 
@@ -263,6 +268,7 @@
             this.colDate.HeaderText = "取込日";
             this.colDate.Name = "colDate";
             this.colDate.ReadOnly = true;
+            this.colDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colTime
             // 
@@ -272,6 +278,7 @@
             this.colTime.HeaderText = "時間";
             this.colTime.Name = "colTime";
             this.colTime.ReadOnly = true;
+            this.colTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAmigodata
             // 
@@ -284,6 +291,7 @@
             this.colAmigodata.HeaderText = "入金データ件数";
             this.colAmigodata.Name = "colAmigodata";
             this.colAmigodata.ReadOnly = true;
+            this.colAmigodata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colNonAmigodata
             // 
@@ -296,6 +304,7 @@
             this.colNonAmigodata.HeaderText = "入金データ件数";
             this.colNonAmigodata.Name = "colNonAmigodata";
             this.colNonAmigodata.ReadOnly = true;
+            this.colNonAmigodata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colMatching
             // 
@@ -306,6 +315,7 @@
             this.colMatching.HeaderText = "突合わせ処理実績日";
             this.colMatching.Name = "colMatching";
             this.colMatching.ReadOnly = true;
+            this.colMatching.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colPayment
             // 
@@ -313,6 +323,7 @@
             this.colPayment.HeaderText = "PAYMENT DAY";
             this.colPayment.Name = "colPayment";
             this.colPayment.ReadOnly = true;
+            this.colPayment.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colPayment.Visible = false;
             // 
             // colDateTimeID
@@ -321,18 +332,14 @@
             this.colDateTimeID.HeaderText = "DateTimeID";
             this.colDateTimeID.Name = "colDateTimeID";
             this.colDateTimeID.ReadOnly = true;
+            this.colDateTimeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colDateTimeID.Visible = false;
-            // 
-            // tmr3B
-            // 
-            this.tmr3B.Interval = 10000;
-            this.tmr3B.Tick += new System.EventHandler(this.Tmr3B_Tick);
             // 
             // frm31
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 670);
+            this.ClientSize = new System.Drawing.Size(1300, 618);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.txtToDate);
             this.Controls.Add(this.txtFromDate);
@@ -347,6 +354,7 @@
             this.Controls.Add(this.label3);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "frm31";
+            this.Padding = new System.Windows.Forms.Padding(20, 55, 20, 18);
             this.Resizable = false;
             this.Text = "3-1.銀行振込情報取込結果確認\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\r\n";
             this.Load += new System.EventHandler(this.Frm31_Load);

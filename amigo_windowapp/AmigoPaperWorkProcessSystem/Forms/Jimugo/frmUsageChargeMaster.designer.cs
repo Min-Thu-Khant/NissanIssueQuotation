@@ -94,6 +94,7 @@
             this.colUPDATE_MESSAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ROW_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMK_ORIGIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
@@ -106,8 +107,8 @@
             this.cboLimit.Location = new System.Drawing.Point(90, 149);
             this.cboLimit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboLimit.Name = "cboLimit";
-            this.cboLimit.Size = new System.Drawing.Size(139, 26);
-            this.cboLimit.TabIndex = 78;
+            this.cboLimit.Size = new System.Drawing.Size(139, 22);
+            this.cboLimit.TabIndex = 10;
             this.cboLimit.SelectedIndexChanged += new System.EventHandler(this.CboLimit_SelectedIndexChanged);
             // 
             // btnSubmit
@@ -116,7 +117,7 @@
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(100, 30);
-            this.btnSubmit.TabIndex = 72;
+            this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "更新";
             this.btnSubmit.UseVisualStyleBackColor = true;
             this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_Click);
@@ -127,7 +128,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
-            this.btnCancel.TabIndex = 71;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -149,7 +150,7 @@
             this.lblMenu.Location = new System.Drawing.Point(12, 9);
             this.lblMenu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(160, 27);
+            this.lblMenu.Size = new System.Drawing.Size(126, 21);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -161,8 +162,8 @@
             this.lblClear.Location = new System.Drawing.Point(240, 154);
             this.lblClear.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(104, 18);
-            this.lblClear.TabIndex = 81;
+            this.lblClear.Size = new System.Drawing.Size(82, 14);
+            this.lblClear.TabIndex = 11;
             this.lblClear.Text = "検索条件のクリア";
             this.lblClear.Click += new System.EventHandler(this.LblClear_Click);
             // 
@@ -172,7 +173,7 @@
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 30);
-            this.btnSearch.TabIndex = 66;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
@@ -205,7 +206,8 @@
             this.colUPDATED_BY,
             this.colUPDATE_MESSAGE,
             this.UPDATED_AT_RAW,
-            this.ROW_ID});
+            this.ROW_ID,
+            this.colMK_ORIGIN});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(16, 227);
             this.dgvList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -214,7 +216,7 @@
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvList.ShowCellToolTips = false;
             this.dgvList.Size = new System.Drawing.Size(1243, 362);
-            this.dgvList.TabIndex = 80;
+            this.dgvList.TabIndex = 18;
             this.dgvList.DataSourceChanged += new System.EventHandler(this.DgvList_DataSourceChanged);
             this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellContentClick);
             this.dgvList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellValueChanged);
@@ -229,7 +231,7 @@
             this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(100, 30);
-            this.btnDelete.TabIndex = 70;
+            this.btnDelete.TabIndex = 5;
             this.btnDelete.Text = "削除";
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.BtnDelete_Click);
@@ -240,7 +242,7 @@
             this.btnCopy.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(100, 30);
-            this.btnCopy.TabIndex = 69;
+            this.btnCopy.TabIndex = 4;
             this.btnCopy.Text = "行増成";
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.BtnCopy_Click);
@@ -251,7 +253,7 @@
             this.btnInsert.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnInsert.Name = "btnInsert";
             this.btnInsert.Size = new System.Drawing.Size(100, 30);
-            this.btnInsert.TabIndex = 68;
+            this.btnInsert.TabIndex = 3;
             this.btnInsert.Text = "行挿入";
             this.btnInsert.UseVisualStyleBackColor = true;
             this.btnInsert.Click += new System.EventHandler(this.BtnInsert_Click);
@@ -262,7 +264,7 @@
             this.btnModify.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(100, 30);
-            this.btnModify.TabIndex = 67;
+            this.btnModify.TabIndex = 2;
             this.btnModify.Text = "修正";
             this.btnModify.UseVisualStyleBackColor = true;
             this.btnModify.Click += new System.EventHandler(this.BtnModify_Click);
@@ -293,7 +295,7 @@
             this.lblTotalRecords.AutoSize = true;
             this.lblTotalRecords.Location = new System.Drawing.Point(3, 11);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(0, 18);
+            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
             this.lblTotalRecords.TabIndex = 36;
             // 
             // btnCheck
@@ -306,7 +308,7 @@
             this.btnCheck.Location = new System.Drawing.Point(819, 3);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnCheck.TabIndex = 33;
+            this.btnCheck.TabIndex = 12;
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
             // 
@@ -320,7 +322,7 @@
             this.btnUnCheck.Location = new System.Drawing.Point(857, 3);
             this.btnUnCheck.Name = "btnUnCheck";
             this.btnUnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnUnCheck.TabIndex = 32;
+            this.btnUnCheck.TabIndex = 13;
             this.btnUnCheck.UseVisualStyleBackColor = true;
             this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
             // 
@@ -330,7 +332,7 @@
             this.lblTotalPages.AutoSize = true;
             this.lblTotalPages.Location = new System.Drawing.Point(1092, 11);
             this.lblTotalPages.Name = "lblTotalPages";
-            this.lblTotalPages.Size = new System.Drawing.Size(17, 18);
+            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
             this.lblTotalPages.TabIndex = 31;
             this.lblTotalPages.Text = "0";
             // 
@@ -340,7 +342,7 @@
             this.lblcurrentPage.AutoSize = true;
             this.lblcurrentPage.Location = new System.Drawing.Point(997, 11);
             this.lblcurrentPage.Name = "lblcurrentPage";
-            this.lblcurrentPage.Size = new System.Drawing.Size(17, 18);
+            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
             this.lblcurrentPage.TabIndex = 30;
             this.lblcurrentPage.Text = "0";
             // 
@@ -354,7 +356,7 @@
             this.btnLast.Location = new System.Drawing.Point(1190, 3);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(35, 28);
-            this.btnLast.TabIndex = 28;
+            this.btnLast.TabIndex = 17;
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
             // 
@@ -364,7 +366,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1044, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(24, 18);
+            this.label6.Size = new System.Drawing.Size(19, 14);
             this.label6.TabIndex = 25;
             this.label6.Text = "Of";
             // 
@@ -378,7 +380,7 @@
             this.btnNext.Location = new System.Drawing.Point(1148, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(35, 28);
-            this.btnNext.TabIndex = 26;
+            this.btnNext.TabIndex = 16;
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
@@ -392,7 +394,7 @@
             this.btnFirst.Location = new System.Drawing.Point(906, 3);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(35, 28);
-            this.btnFirst.TabIndex = 29;
+            this.btnFirst.TabIndex = 14;
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.BtnFirst_Click);
             // 
@@ -406,7 +408,7 @@
             this.btnPrev.Location = new System.Drawing.Point(948, 3);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(35, 28);
-            this.btnPrev.TabIndex = 27;
+            this.btnPrev.TabIndex = 15;
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
             // 
@@ -437,23 +439,23 @@
             this.txtCONSTRACT_NAME.Location = new System.Drawing.Point(319, 110);
             this.txtCONSTRACT_NAME.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCONSTRACT_NAME.Name = "txtCONSTRACT_NAME";
-            this.txtCONSTRACT_NAME.Size = new System.Drawing.Size(132, 25);
-            this.txtCONSTRACT_NAME.TabIndex = 108;
+            this.txtCONSTRACT_NAME.Size = new System.Drawing.Size(132, 21);
+            this.txtCONSTRACT_NAME.TabIndex = 9;
             // 
             // txtCONTRACT_CODE
             // 
             this.txtCONTRACT_CODE.Location = new System.Drawing.Point(90, 110);
             this.txtCONTRACT_CODE.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCONTRACT_CODE.Name = "txtCONTRACT_CODE";
-            this.txtCONTRACT_CODE.Size = new System.Drawing.Size(139, 25);
-            this.txtCONTRACT_CODE.TabIndex = 107;
+            this.txtCONTRACT_CODE.Size = new System.Drawing.Size(139, 21);
+            this.txtCONTRACT_CODE.TabIndex = 8;
             // 
             // displayItemLabel1
             // 
             this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.displayItemLabel1.LabelText = " 表示件数";
             this.displayItemLabel1.Location = new System.Drawing.Point(16, 149);
-            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
             this.displayItemLabel1.Name = "displayItemLabel1";
             this.displayItemLabel1.Size = new System.Drawing.Size(75, 22);
             this.displayItemLabel1.TabIndex = 112;
@@ -684,9 +686,16 @@
             this.ROW_ID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.ROW_ID.Visible = false;
             // 
+            // colMK_ORIGIN
+            // 
+            this.colMK_ORIGIN.DataPropertyName = "MK_ORIGIN";
+            this.colMK_ORIGIN.HeaderText = "MK_ORIGIN";
+            this.colMK_ORIGIN.Name = "colMK_ORIGIN";
+            this.colMK_ORIGIN.Visible = false;
+            // 
             // frmUsageChargeMaster
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.displayItemLabel1);
@@ -773,5 +782,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATE_MESSAGE;
         private System.Windows.Forms.DataGridViewTextBoxColumn UPDATED_AT_RAW;
         private System.Windows.Forms.DataGridViewTextBoxColumn ROW_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMK_ORIGIN;
     }
 }

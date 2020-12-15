@@ -189,7 +189,6 @@ namespace AmigoProcessManagement.Controller
                     AUTO_INDEX DAL_AUTO_INDEX = new AUTO_INDEX(con);
                     DataTable result = DAL_AUTO_INDEX.GetByAutoIndexID(oREQUEST_ID.AUTO_INDEX_ID, out strMsg);
 
-
                     //parepare AUTO_INDEX object
                     BOL_AUTO_INDEX oAUTO_INDEX = new BOL_AUTO_INDEX();
                     oAUTO_INDEX = Cast_AUTO_INDEX(result.Rows[0]);
@@ -298,6 +297,8 @@ namespace AmigoProcessManagement.Controller
                 oREQUEST_ID.GD = string.IsNullOrEmpty(oREQUEST_ID.GD_CODE) ? 0 : 2;
                 oREQUEST_ID.PASSWORD_EXPIRATION_DATE = oREQUEST_ID.DISABLED_FLG == "*" ? null : oREQUEST_ID.PASSWORD_EXPIRATION_DATE;
                 oREQUEST_ID.PASSWORD_SET_DATE = oREQUEST_ID.DISABLED_FLG == "*" ? null : oREQUEST_ID.PASSWORD_SET_DATE;
+                //generate hashed password
+                oREQUEST_ID.PASSWORD_HASHED = Crypto.HashPassword(oREQUEST_ID.PASSWORD);
                 DAL_REQUEST_ID.Update(oREQUEST_ID, CURRENT_DATETIME, CURRENT_USER, out strMsg);
             }
             else
@@ -395,9 +396,12 @@ namespace AmigoProcessManagement.Controller
                 dt.Columns.Add("PASSWORD_EXPIRATION_DATE");
                 #endregion
 
+                //get expire date from config tbl
+                BOL_CONFIG config = new BOL_CONFIG("CTS010", con);
+
                 //add row and data
                 DateTime startDate = DateTime.Now;
-                DateTime stopDate = DateTime.Today.AddDays(7).AddTicks(-1);
+                DateTime stopDate = DateTime.Today.AddDays(config.getIntValue("password.days.add") + 1).AddTicks(-1);
 
                 DataRow dr = dt.NewRow();
                 dr["PASSWORD"] = raw_password;
@@ -451,7 +455,7 @@ namespace AmigoProcessManagement.Controller
                             {
                                 //success message
                                 dgvList.Rows[i]["EMAIL_SEND_DATE"] = UPDATED_AT_DATETIME;
-                                ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i]);
+                                ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i], UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
                             }
                             else
                             {
@@ -494,7 +498,7 @@ namespace AmigoProcessManagement.Controller
             Dictionary<string, string> map = new Dictionary<string, string>() {
                         { "${companyName}", oREQUEST_ID.COMPANY_NAME },
                         { "${aventailUserName}", config.getStringValue("email.aventail.user.name")},// come from config table
-                        { "${aventailPassword}", config.getStringValue("email.aventail.user.id")},// come from config table
+                        { "${aventailPassword}", config.getStringValue("email.aventail.user.password")},// come from config table
                         { "${companyNoBox}", oREQUEST_ID.COMPANY_NO_BOX},
                         { "${password}", oREQUEST_ID.PASSWORD},
                         { "${limitDate}",  expire_date},

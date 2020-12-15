@@ -25,7 +25,7 @@ namespace DAL_AmigoProcess.DAL
                                         [BILL_CONTACT_NAME],
                                         [BILL_PHONE_NUMBER],
                                         [BILL_MAIL_ADDRESS],
-                                        EFFECTIVE_DATE FROM CUSTOMER_MASTER_VIEW";
+                                        EFFECTIVE_DATE FROM CUSTOMER_MASTER_VIEW ORDER BY REQ_SEQ";
 
         string strUpdate = @"UPDATE CUSTOMER_MASTER SET 
                             BILL_BILLING_INTERVAL = @BILL_BILLING_INTERVAL,
@@ -35,7 +35,11 @@ namespace DAL_AmigoProcess.DAL
                             UPDATED_AT = @UPDATED_AT,
                             UPDATED_BY = @UPDATED_BY,
                             NCS_CUSTOMER_CODE = @NCS_CUSTOMER_CODE
-                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX AND TRANSACTION_TYPE = @TRANSACTION_TYPE AND FORMAT(EFFECTIVE_DATE, 'yyyyMMdd')=FORMAT(@EFFECTIVE_DATE, 'yyyyMMdd')";
+                            WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX 
+                            AND TRANSACTION_TYPE = @TRANSACTION_TYPE 
+                            AND FORMAT(EFFECTIVE_DATE, 'yyyyMMdd')=FORMAT(@EFFECTIVE_DATE, 'yyyyMMdd')
+                            AND REQ_SEQ = @REQ_SEQ";
+                            
 
         string strgetGridViewData = @"SELECT COMPANY_NAME, BILL_COMPANY_NAME, COMPANY_NO_BOX,
                                         TRIM([BILL_BANK_ACCOUNT_NAME-1]) [BILL_BANK_ACCOUNT_NAME-1],
@@ -65,7 +69,7 @@ namespace DAL_AmigoProcess.DAL
 			                                TRIM(CONVERT(nvarchar(50),CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-3])) = @BANK_ACCOUNT_NAME OR
 			                                TRIM(CONVERT(nvarchar(50),CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-4])) = @BANK_ACCOUNT_NAME) AND
                                             EFFECTIVE_DATE <= GETDATE()
-                                            ORDER BY EFFECTIVE_DATE DESC";
+                                            ORDER BY EFFECTIVE_DATE, REQ_SEQ DESC";
 
         string strMaintenanceList = @"SELECT ROW_NUMBER() OVER(ORDER BY CUSTOMER_MASTER_VIEW.COMPANY_NO_BOX ASC) AS No,
                                         ' ' as CK,
@@ -138,14 +142,14 @@ namespace DAL_AmigoProcess.DAL
 										ELSE 'False'
                                         END BILL_METHOD4,
                                         CUSTOMER_MASTER_VIEW.NCS_CUSTOMER_CODE,
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-1],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-1],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-2],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-2],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-3],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-3],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-4],
-                                        CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-4],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-1]) [BILL_BANK_ACCOUNT_NAME-1],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-1]) [BILL_BANK_ACCOUNT_NUMBER-1],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-2]) [BILL_BANK_ACCOUNT_NAME-2],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-2]) [BILL_BANK_ACCOUNT_NUMBER-2],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-3]) [BILL_BANK_ACCOUNT_NAME-3],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-3]) [BILL_BANK_ACCOUNT_NUMBER-3],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NAME-4]) [BILL_BANK_ACCOUNT_NAME-4],
+                                        TRIM(CUSTOMER_MASTER_VIEW.[BILL_BANK_ACCOUNT_NUMBER-4]) [BILL_BANK_ACCOUNT_NUMBER-4],
                                         (CASE CUSTOMER_MASTER_VIEW.BILL_BILLING_INTERVAL 
                                         WHEN 1 THEN N'月額' 
                                         WHEN 2 THEN N'四半期' 
@@ -157,8 +161,8 @@ namespace DAL_AmigoProcess.DAL
                                         WHEN 1 THEN N'当月' 
                                         WHEN 2 THEN N'翌々月月頭' 
                                         END) BILL_DEPOSIT_RULES,
-                                        CUSTOMER_MASTER_VIEW.BILL_TRANSFER_FEE,
-                                        CUSTOMER_MASTER_VIEW.BILL_EXPENSES,
+                                        CONVERT(VARCHAR, CUSTOMER_MASTER_VIEW.BILL_TRANSFER_FEE) BILL_TRANSFER_FEE,
+                                        CONVERT(VARCHAR, CUSTOMER_MASTER_VIEW.BILL_EXPENSES) BILL_EXPENSES,
                                         CUSTOMER_MASTER_VIEW.PLAN_AMIGO_CAI,
                                         CUSTOMER_MASTER_VIEW.PLAN_AMIGO_BIZ,
                                         CUSTOMER_MASTER_VIEW.BOX_SIZE,
@@ -200,7 +204,8 @@ namespace DAL_AmigoProcess.DAL
                                             ROW_NUMBER() OVER(ORDER BY CUSTOMER_MASTER_VIEW.COMPANY_NO_BOX ASC) AS ROW_ID,
                                         CUSTOMER_MASTER_VIEW.REQ_SEQ,
                                         FORMAT(CUSTOMER_MASTER_VIEW.EFFECTIVE_DATE, 'yyyy/MM/dd') AS ORG_EFFECTIVE_DATE,
-                                        REQUEST_ID.DISABLED_FLG
+                                        REQUEST_ID.DISABLED_FLG,
+                                        '' AS MK_ORIGIN
                                         FROM CUSTOMER_MASTER_VIEW
                                         LEFT JOIN REQUEST_ID
                                         ON CUSTOMER_MASTER_VIEW.COMPANY_NO_BOX = REQUEST_ID.COMPANY_NO_BOX
@@ -212,6 +217,7 @@ namespace DAL_AmigoProcess.DAL
                                         REQ_ADDRESS.MAIL_ADDRESS
                                         FROM REQ_ADDRESS
                                         WHERE REQ_ADDRESS.COMPANY_NO_BOX = REQ1.COMPANY_NO_BOX
+										AND REQ_ADDRESS.REQ_SEQ = REQ1.REQ_SEQ
                                         AND TYPE = 3
                                         FOR XML PATH('')), 1, 2, '') as CONSTRACTOR_SERVICE_DESK_MAIL
                                         FROM REQ_ADDRESS REQ1
@@ -225,6 +231,7 @@ namespace DAL_AmigoProcess.DAL
                                         REQ_ADDRESS.MAIL_ADDRESS
                                         FROM REQ_ADDRESS
                                         WHERE REQ_ADDRESS.COMPANY_NO_BOX = REQ.COMPANY_NO_BOX
+										AND REQ_ADDRESS.REQ_SEQ = REQ.REQ_SEQ
                                         AND TYPE = 4
                                         FOR XML PATH('')), 1, 2, '') as SERVICE_ERROR_NOTIFICATION_MAIL
                                         FROM REQ_ADDRESS REQ
@@ -242,13 +249,7 @@ namespace DAL_AmigoProcess.DAL
                                         ISNULL(EDI_ACCOUNT.EDI_ACCOUNT, '') LIKE '%' + @EDI_ACCOUNT + '%'
                                         AND
                                         (
-                                        ISNULL(CUSTOMER_MASTER_VIEW.CONTRACTOR_MAIL_ADDRESS, '') LIKE '%' + '@CONTRACTOR_MAIL' + '%'
-                                        OR
-                                        ISNULL(CUSTOMER_MASTER_VIEW.BILL_MAIL_ADDRESS, '') LIKE '%' + '@BILL_MAIL' + '%'
-                                        OR
-                                        CONSTRACTOR_SERVICE_DESK_MAIL LIKE '%' + '@SERVICE_DESK_MAIL' + '%'
-                                        OR
-                                        SERVICE_ERROR_NOTIFICATION_MAIL LIKE '%' + '@ERROR_NOTIFICATION_MAIL' + '%'
+                                        @MAIL_CHECK_QUERY
                                         )
                                         ORDER BY CUSTOMER_MASTER_VIEW.COMPANY_NO_BOX, CUSTOMER_MASTER_VIEW.TRANSACTION_TYPE ASC, EFFECTIVE_DATE DESC
                                         OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
@@ -276,7 +277,16 @@ namespace DAL_AmigoProcess.DAL
                                             WHERE COMPANY_NO_BOX= @COMPANY_NO_BOX
                                             AND TRANSACTION_TYPE= @TRANSACTION_TYPE
                                             AND EFFECTIVE_DATE <= @EFFECTIVE_DATE
+                                            AND REQ_SEQ = @REQ_SEQ
                                             ORDER BY EFFECTIVE_DATE, REQ_SEQ DESC";
+
+        string strGetEffectiveDateForNewApplyingTime = @"SELECT TOP 1 EFFECTIVE_DATE
+                                                        FROM CUSTOMER_MASTER
+                                                        WHERE COMPANY_NO_BOX= @COMPANY_NO_BOX
+                                                        AND TRANSACTION_TYPE= @TRANSACTION_TYPE
+                                                        AND EFFECTIVE_DATE <= @EFFECTIVE_DATE
+                                                        AND UPDATE_CONTENT = 1
+                                                        ORDER BY EFFECTIVE_DATE, REQ_SEQ DESC";
 
         string strInsertCustomerMaster = @"INSERT INTO [CUSTOMER_MASTER]
                                            ([COMPANY_NO_BOX]
@@ -365,13 +375,7 @@ namespace DAL_AmigoProcess.DAL
                                         ISNULL(EDI_ACCOUNT.EDI_ACCOUNT, '') LIKE '%' + @EDI_ACCOUNT + '%'
                                         AND
                                         (
-                                        ISNULL(CUSTOMER_MASTER_VIEW.CONTRACTOR_MAIL_ADDRESS, '') LIKE '%' + '@CONTRACTOR_MAIL' + '%'
-                                        OR
-                                        ISNULL(CUSTOMER_MASTER_VIEW.BILL_MAIL_ADDRESS, '') LIKE '%' + '@BILL_MAIL' + '%'
-                                        OR
-                                        CONSTRACTOR_SERVICE_DESK_MAIL LIKE '%' + '@SERVICE_DESK_MAIL' + '%'
-                                        OR
-                                        SERVICE_ERROR_NOTIFICATION_MAIL LIKE '%' + '@ERROR_NOTIFICATION_MAIL' + '%'
+                                        @MAIL_CHECK_QUERY
                                         )";
 
         string strAlreadyUsed = @"SELECT COUNT(COMPANY_NO_BOX) AS COUNT
@@ -409,6 +413,10 @@ namespace DAL_AmigoProcess.DAL
                                                     AND [EFFECTIVE_DATE] = @ORG_EFFECTIVE_DATE
                                                     AND [REQ_SEQ] = @REQ_SEQ
 							                        AND [UPDATED_AT] @UPDATED_AT";
+
+        string strDelete = @"DELETE FROM CUSTOMER_MASTER WHERE
+                            COMPANY_NO_BOX = @COMPANY_NO_BOX
+                            AND REQ_SEQ = @REQ_SEQ";
 
         string strMonthlySaleComparisonTotal = @"SELECT 
                                                 COUNT(TBL.[TYPE])
@@ -855,6 +863,19 @@ namespace DAL_AmigoProcess.DAL
                                             TBL.[OP_ADD_SERVICE] <> 0 
                                             ORDER BY TBL.[TYPE],TBL.[UPDATE_CONTENT] ASC OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
 
+
+        #endregion
+
+        #region Constructors
+
+        public CUSTOMER_MASTER(string con)
+        {            
+            strConnectionString = con;
+            strMessage = "";
+        }
+
+        #endregion
+
         #region IsAlreadyUpdate
         public bool IsAlreadyUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out string strMsg)
         {
@@ -889,18 +910,6 @@ namespace DAL_AmigoProcess.DAL
                 return false;
             }
         }
-        #endregion
-
-        #endregion
-
-        #region Constructors
-
-        public CUSTOMER_MASTER(string con)
-        {            
-            strConnectionString = con;
-            strMessage = "";
-        }
-
         #endregion
 
         #region getData
@@ -960,6 +969,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", B_Customer.TRANSACTION_TYPE));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@NCS_CUSTOMER_CODE", B_Customer.NCS_CUSTOMER_CODE));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", B_Customer.EFFECTIVE_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", B_Customer.REQ_SEQ));
             oMaster.ExcuteQuery(2, out strMessage);
         }
 
@@ -967,12 +977,13 @@ namespace DAL_AmigoProcess.DAL
 
         #region GetCustomerCountByKeys
 
-        public int getCustomerCountByKeys(string COMPANY_NO_BOX, int TRANSACTION_TYPE, DateTime EFFECTIVE_DATE, out string strMsg)
+        public int getCustomerCountByKeys(string COMPANY_NO_BOX, int TRANSACTION_TYPE, DateTime EFFECTIVE_DATE, int REQ_SEQ, out string strMsg)
         {
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetCustomerCountByKeys);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", TRANSACTION_TYPE));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", EFFECTIVE_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
             oMaster.ExcuteQuery(4, out strMsg);
 
             int count = 0;
@@ -1005,7 +1016,7 @@ namespace DAL_AmigoProcess.DAL
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strInsertCustomerMaster);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oCUSTOMER_MASTER.COMPANY_NO_BOX));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", oCUSTOMER_MASTER.TRANSACTION_TYPE));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", oCUSTOMER_MASTER.EFFECTIVE_DATE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", oCUSTOMER_MASTER.EFFECTIVE_DATE != null ? Convert.ToDateTime(oCUSTOMER_MASTER.EFFECTIVE_DATE) : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oCUSTOMER_MASTER.REQ_SEQ));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATE_CONTENT", oCUSTOMER_MASTER.UPDATE_CONTENT != 0 ? oCUSTOMER_MASTER.UPDATE_CONTENT : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CONTRACT_DATE", oCUSTOMER_MASTER.CONTRACT_DATE != null ? oCUSTOMER_MASTER.CONTRACT_DATE : (object)DBNull.Value));
@@ -1032,52 +1043,74 @@ namespace DAL_AmigoProcess.DAL
         #region getMaintenanceList
         public DataTable getMaintenanceList(string COMPANY_NO_BOX, string COMPANY_NAME, string COMPANY_NAME_READING, string EDI_ACCOUNT, string MAIL_ADDRESS, string CONTRACTOR, string INVOICE, string SERVICE_DESK, string NOTIFICATION_DESTINATION, int OFFSET, int LIMIT, out string strMsg, out int total)
         {
-            if (CONTRACTOR.Trim() == "契約先")
-            {
-                strMaintenanceList = strMaintenanceList.Replace("@CONTRACTOR_MAIL", MAIL_ADDRESS);
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@CONTRACTOR_MAIL", MAIL_ADDRESS);
-            }
-            else
-            {
-                strMaintenanceList = strMaintenanceList.Replace("@CONTRACTOR_MAIL", "");
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@CONTRACTOR_MAIL", "");
+            string contractorCheck = "ISNULL(CUSTOMER_MASTER_VIEW.CONTRACTOR_MAIL_ADDRESS, '') LIKE '%' + '" + MAIL_ADDRESS + "' + '%'";
+            string billmailCheck = "ISNULL(CUSTOMER_MASTER_VIEW.BILL_MAIL_ADDRESS, '') LIKE '%' + '" + MAIL_ADDRESS + "' + '%'";
+            string serviceDeskCheck = "CONSTRACTOR_SERVICE_DESK_MAIL LIKE '%' + '" + MAIL_ADDRESS + "' + '%'";
+            string errorNotiMailCheck = "SERVICE_ERROR_NOTIFICATION_MAIL LIKE '%' + '" + MAIL_ADDRESS + "' + '%'";
+            string strQuery = null;
+            int status = 0;
 
-            }
-
-            if (INVOICE.Trim() == "請求書送付先")
+            if (CONTRACTOR.Trim() == "契約先") //contractor check
             {
-                strMaintenanceList = strMaintenanceList.Replace("@BILL_MAIL", MAIL_ADDRESS);
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@BILL_MAIL", MAIL_ADDRESS);
-            }
-            else
-            {
-                strMaintenanceList = strMaintenanceList.Replace("@BILL_MAIL", "");
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@BILL_MAIL", "");
+                if (strQuery == null)
+			    {
+                    strQuery += contractorCheck;
+                }
+                else
+                {
+                    strQuery += " OR " + contractorCheck;
+                }
+                status = 1;
             }
 
-            if (SERVICE_DESK.Trim() == "サービスデスク")
+            if (INVOICE.Trim() == "請求書送付先") //bill check
             {
-                strMaintenanceList = strMaintenanceList.Replace("@SERVICE_DESK_MAIL", MAIL_ADDRESS);
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@SERVICE_DESK_MAIL", MAIL_ADDRESS);
+                if (strQuery == null)
+                {
+                    strQuery += billmailCheck;
+                }
+                else
+                {
+                    strQuery += " OR " + billmailCheck;
+                }
+                status = 1;
+            }
 
-            }
-            else
+            if (SERVICE_DESK.Trim() == "サービスデスク") //serviceDeskCheck check
             {
-                strMaintenanceList = strMaintenanceList.Replace("@SERVICE_DESK_MAIL", "");
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@SERVICE_DESK_MAIL", "");
+                if (strQuery == null)
+                {
+                    strQuery += serviceDeskCheck;
+                }
+                else
+                {
+                    strQuery += " OR " + serviceDeskCheck;
+
+                }
+                status = 1;
             }
 
-            if (NOTIFICATION_DESTINATION.Trim() == "エラー通知先")
+            if (NOTIFICATION_DESTINATION.Trim() == "エラー通知先") //errorNotiMailCheck check
             {
-                strMaintenanceList = strMaintenanceList.Replace("@ERROR_NOTIFICATION_MAIL", MAIL_ADDRESS);
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@ERROR_NOTIFICATION_MAIL", MAIL_ADDRESS);
+                if (strQuery == null)
+                {
+                    strQuery += errorNotiMailCheck;
+                }
+                else
+                {
+                    strQuery += " OR " + errorNotiMailCheck;
 
+                }
+                status = 1;
             }
-            else
+
+            if (status == 0)
             {
-                strMaintenanceList = strMaintenanceList.Replace("@ERROR_NOTIFICATION_MAIL", "");
-                strCustomerMasterTotal = strCustomerMasterTotal.Replace("@ERROR_NOTIFICATION_MAIL", "");
+                strQuery = contractorCheck + " OR " + billmailCheck + " OR " + serviceDeskCheck + " OR " + errorNotiMailCheck;
             }
+
+            strMaintenanceList = strMaintenanceList.Replace("@MAIL_CHECK_QUERY", strQuery);
+            strCustomerMasterTotal = strCustomerMasterTotal.Replace("@MAIL_CHECK_QUERY", strQuery);
 
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strCustomerMasterTotal);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
@@ -1098,7 +1131,6 @@ namespace DAL_AmigoProcess.DAL
             return oMaster.dtExcuted;
         }
         #endregion
-
 
         #region CustomerMasterMaintenanceUpdate
         public void CustomerMasterUpdate(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, string CURRENT_DATETIME, string CURRENT_USER, out String strMsg)
@@ -1132,10 +1164,39 @@ namespace DAL_AmigoProcess.DAL
         }
         #endregion
 
+        #region GetLatestCustomerForNewApplyingTime
+        public string GetEffectiveDateForNewApplyingTime(string COMPANY_NO_BOX, int TRANSACTION_TYPE, DateTime START_USE_DATE, out string strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetEffectiveDateForNewApplyingTime);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@TRANSACTION_TYPE", TRANSACTION_TYPE));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EFFECTIVE_DATE", START_USE_DATE));
+            oMaster.ExcuteQuery(4, out strMsg);
+            if (oMaster.dtExcuted.Rows.Count > 0)
+            {
+                return oMaster.dtExcuted.Rows[0][0].ToString();
+            }
+            else
+            {
+                return DateTime.Now.ToString();
+            }
+        }
+        #endregion
+
+        #region Delete
+        public void Delete(BOL_CUSTOMER_MASTER oCUSTOMER_MASTER, out String strMsg)
+        {
+            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strDelete);
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oCUSTOMER_MASTER.COMPANY_NO_BOX));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", oCUSTOMER_MASTER.REQ_SEQ));
+            oMaster.ExcuteQuery(3, out strMsg);
+        }
+        #endregion
+
         #region getMonthlySaleComparisonList
         public DataTable getMonthlySaleComparisonList(string strYYYYMM1, string strYYYYMM2, int OFFSET, int LIMIT, out string strMsg, out int total)
         {
-           
+
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strMonthlySaleComparisonTotal);
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_1", strYYYYMM1));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@YYMM_2", strYYYYMM2));
@@ -1154,7 +1215,6 @@ namespace DAL_AmigoProcess.DAL
 
         }
         #endregion
-
     }
     #endregion
 

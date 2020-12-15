@@ -98,7 +98,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@REPORT_HISTORY_SEQ", oREPORT_HISTORY.REPORT_HISTORY_SEQ));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@OUTPUT_AT", oREPORT_HISTORY.OUTPUT_AT != null ? oREPORT_HISTORY.OUTPUT_AT : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@OUTPUT_FILE", oREPORT_HISTORY.OUTPUT_FILE));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EMAIL_ADDRESS", oREPORT_HISTORY.EMAIL_ADDRESS !=null ? Convert.ToDateTime(oREPORT_HISTORY.EMAIL_ADDRESS) : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@EMAIL_ADDRESS", oREPORT_HISTORY.EMAIL_ADDRESS !=null ? oREPORT_HISTORY.EMAIL_ADDRESS : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_DATETIME));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
            
@@ -148,27 +148,6 @@ namespace DAL_AmigoProcess.DAL
 
         }
         #endregion
-
-        //#region InsertRegisterCompleteNotificationSending
-        //public void InsertNotiSending(string COMPANY_NO_BOX, string REQ_SEQ, int REPORT_HISTORY_SEQ, string OUTPUT_FILE,string EMAIL_ADDRESS,string LoginID,string DATE, out String strMsg)
-        //{
-        //    ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, ""); //need to fillquery
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@REQ_SEQ", REQ_SEQ));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@REPORT_TYPE", 05));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@REPORT_HISTORY_SEQ", REPORT_HISTORY_SEQ));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@OUTPUT_AT", DATE));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@OUTPUT_BY", LoginID));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@OUTPUT_FILE", OUTPUT_FILE));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@EMAIL_ADDRESS", EMAIL_ADDRESS));
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@CREATED_AT",DATE)); ;
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@CREATED_BY", LoginID)); ;
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", DATE)); ;
-        //    oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_BY", LoginID));
-
-        //    oMaster.ExcuteQuery(1, out strMsg);
-        //}
-        //#endregion
 
         #region InsertRegisterCompleteNotificationSending
         public void InsertNotiSending(string COMPANY_NO_BOX, int REQ_SEQ, int REPORT_HISTORY_SEQ, string OUTPUT_FILE, string EMAIL_ADDRESS, string LoginID, string OUTPUT_AT, string DATE, out String strMsg)

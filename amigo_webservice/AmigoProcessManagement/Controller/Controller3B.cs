@@ -109,6 +109,7 @@ namespace AmigoProcessManagement.Controller
             {
                 BOL_RECEIPT_DETAILS oRECEIPT_DETAILS = new BOL_RECEIPT_DETAILS();
                 oRECEIPT_DETAILS.ALLOCATED_QUANTITY = ALLOCATED_QUANTITY;
+                oRECEIPT_DETAILS.ALLOCATED_MONEY = ALLOCATED_MONEY; //20201117_追加_ALLOCATED_MONEYを初期値でセット
 
                 #region Prepare Invoice, Reserve Info and Receipt Detail
                 for ( int i = 0; i < dtBatch_Invoice.Rows.Count; i++)
@@ -238,7 +239,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region Allocation Manual
-        public Response ManualAllocation(string COMPANY_NO_BOX)
+        public Response ManualAllocation(string COMPANY_NO_BOX, string YEAR_MONTH)
         {
             DateTime run_date = DateTime.Now;
             string strMessage = "";
@@ -260,7 +261,7 @@ namespace AmigoProcessManagement.Controller
 
                         if (COMPANY_NO_BOXES.Contains(COMPANY_NO_BOX)) //IF there is matched COMPANY_NO_BOX
                         {
-                            DataTable dtInvoice = oInv.getInvoiceByCustomerManualAllocate("'" + COMPANY_NO_BOX + "'");
+                            DataTable dtInvoice = oInv.getInvoiceByCustomerManualAllocate("'" + COMPANY_NO_BOX + "'", "'" + YEAR_MONTH + "'");
 
                             if (dtInvoice.Rows.Count > 0)
                             {

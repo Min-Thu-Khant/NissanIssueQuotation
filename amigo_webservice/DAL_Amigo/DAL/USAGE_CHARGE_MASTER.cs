@@ -45,7 +45,8 @@ namespace DAL_AmigoProcess.DAL
                                         UPDATED_BY,
                                         '' AS UPDATE_MESSAGE,
                                         ROW_NUMBER() OVER(ORDER BY CONTRACT_CODE ASC) AS ROW_ID,
-                                        UPDATED_AT AS UPDATED_AT_RAW
+                                        UPDATED_AT AS UPDATED_AT_RAW,
+                                        '' AS MK_ORIGIN
                                         from USAGE_FEE_MASTER 
                                         WHERE CONTRACT_CODE LIKE '%' + @CONTRACT_CODE + '%'
                                            AND CONTRACT_NAME LIKE '%' + @CONTRACT_NAME + '%'
@@ -68,7 +69,7 @@ namespace DAL_AmigoProcess.DAL
 
 
         string strDelete = @"DELETE FROM USAGE_FEE_MASTER 
-                             WHERE CONTRACT_CODE = @CONTRACT_CODE AND ADOPTION_DATE=@ADOPTION_DATE AND UPDATED_AT = '@UPDATED_AT' ";
+                             WHERE CONTRACT_CODE = @CONTRACT_CODE AND ADOPTION_DATE=@ADOPTION_DATE AND UPDATED_AT =@UPDATED_AT";
 
         string strInsert = @"INSERT INTO [USAGE_FEE_MASTER]
                            ([FEE_STRUCTURE]

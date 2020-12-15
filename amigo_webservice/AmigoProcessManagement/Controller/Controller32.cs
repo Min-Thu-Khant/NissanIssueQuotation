@@ -54,7 +54,7 @@ namespace AmigoProcessManagement.Controller
                                                         (myRow.Field<string>("BILL_BANK_ACCOUNT_NAME-3") == null ? null : myRow.Field<string>("BILL_BANK_ACCOUNT_NAME-3").Trim()) == CustomerName ||
                                                         (myRow.Field<string>("BILL_BANK_ACCOUNT_NAME-4") == null ? null : myRow.Field<string>("BILL_BANK_ACCOUNT_NAME-4").Trim()) == CustomerName) && 
                                                          myRow.Field<DateTime>("EFFECTIVE_DATE") < DateTime.Now)
-                                        .OrderByDescending(s => s.Field<DateTime>("EFFECTIVE_DATE"))
+                                        .OrderByDescending(s => s.Field<DateTime>("EFFECTIVE_DATE")).ThenByDescending(s=> s.Field<int>("REQ_SEQ"))
                                         .FirstOrDefault();
 
                         if (result != null)

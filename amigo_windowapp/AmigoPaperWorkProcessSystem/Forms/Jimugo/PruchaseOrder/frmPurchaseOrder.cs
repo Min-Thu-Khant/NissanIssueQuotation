@@ -23,6 +23,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
         public DialogResult Dialog { get; set; }
         public string UPDATED_AT { get; set; }
         public string UPDATED_AT_RAW { get; set; }
+        public string SYSTEM_EFFECTIVE_DATE { get; set; }
 
         #endregion
 
@@ -99,6 +100,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
                             txtOrderDate.Text = this.ORDER_DATE;
                             UPDATED_AT = frm.UPDATED_AT;
                             UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
+                            SYSTEM_EFFECTIVE_DATE = frm.SYSTEM_EFFECTIVE_DATE;
                         }
                         else
                         {
@@ -137,6 +139,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
                     txtREQ_TYPE.Text = dt.Rows[0]["REQ_TYPE"].ToString();
                     AMIGO_COOPERATION_CHENGED_ITEMS = dt.Rows[0]["AMIGO_COOPERATION_CHENGED_ITEMS"].ToString();
                     CONTRACT_PLAN = dt.Rows[0]["CONTRACT_PLAN"].ToString();
+                    txtSystemEffectiveDate.Text = dt.Rows[0]["SYSTEM_EFFECTIVE_DATE"].ToString(); 
                 }
 
             }
@@ -193,7 +196,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.OrderRegistration
             dr["SYSTEM_EFFECTIVE_DATE"] = EFFECTIVE_DATE;
             dr["SYSTEM_REGISTER_DEADLINE"] = REGISTERATION_DAEADLINE;
             dr["PDF_FILE_PATH"] = "";
-            dr["AMIGO_COOPERATION_CHENGED_ITEMS"] = "";
+            dr["AMIGO_COOPERATION_CHENGED_ITEMS"] = AMIGO_COOPERATION_CHENGED_ITEMS;
             dr["CONTRACT_PLAN"] = CONTRACT_PLAN;
             dr["START_USE_DATE"] = START_USE_DATE;
 

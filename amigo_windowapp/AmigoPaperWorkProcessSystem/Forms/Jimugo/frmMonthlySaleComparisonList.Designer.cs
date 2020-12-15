@@ -48,7 +48,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnFirst = new System.Windows.Forms.Button();
-            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.btnLast = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
@@ -65,6 +64,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.btnBack = new System.Windows.Forms.Button();
             this.pTitle = new System.Windows.Forms.Panel();
             this.lbldifference = new System.Windows.Forms.Label();
+            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BILL_SUPPLIER_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,16 +101,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.btnFirst.TabIndex = 29;
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.BtnFirst_Click);
-            // 
-            // displayItemLabel1
-            // 
-            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.displayItemLabel1.LabelText = " 表示件数";
-            this.displayItemLabel1.Location = new System.Drawing.Point(18, 185);
-            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
-            this.displayItemLabel1.Name = "displayItemLabel1";
-            this.displayItemLabel1.Size = new System.Drawing.Size(77, 22);
-            this.displayItemLabel1.TabIndex = 45;
             // 
             // btnLast
             // 
@@ -167,7 +157,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.panel1.Controls.Add(this.btnNext);
             this.panel1.Controls.Add(this.btnFirst);
             this.panel1.Controls.Add(this.btnPrev);
-            this.panel1.Location = new System.Drawing.Point(17, 234);
+            this.panel1.Location = new System.Drawing.Point(17, 213);
             this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1250, 34);
@@ -250,7 +240,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.OP_BASIC_SERVICE,
             this.OP_ADD_SERVICE});
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(17, 272);
+            this.dgvList.Location = new System.Drawing.Point(17, 251);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvList.Name = "dgvList";
             this.dgvList.ReadOnly = true;
@@ -258,7 +248,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.dgvList.RowHeadersWidth = 62;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvList.ShowCellToolTips = false;
-            this.dgvList.Size = new System.Drawing.Size(1250, 293);
+            this.dgvList.Size = new System.Drawing.Size(1250, 328);
             this.dgvList.TabIndex = 43;
             this.dgvList.TabStop = false;
             this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvList_CellFormatting);
@@ -268,7 +258,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 
             this.cboLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboLimit.FormattingEnabled = true;
-            this.cboLimit.Location = new System.Drawing.Point(94, 185);
+            this.cboLimit.Location = new System.Drawing.Point(94, 186);
             this.cboLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboLimit.Name = "cboLimit";
             this.cboLimit.Size = new System.Drawing.Size(155, 30);
@@ -287,7 +277,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(117, 110);
+            this.txtDate.Location = new System.Drawing.Point(116, 110);
             this.txtDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDate.Name = "txtDate";
             this.txtDate.ReadOnly = true;
@@ -317,14 +307,23 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 
             // lbldifference
             // 
-            this.lbldifference.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.lbldifference.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbldifference.BackColor = System.Drawing.SystemColors.Control;
             this.lbldifference.Location = new System.Drawing.Point(18, 145);
             this.lbldifference.Name = "lbldifference";
             this.lbldifference.Size = new System.Drawing.Size(231, 21);
             this.lbldifference.TabIndex = 46;
             this.lbldifference.Text = "Diffence";
             this.lbldifference.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // displayItemLabel1
+            // 
+            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.displayItemLabel1.LabelText = " 表示件数";
+            this.displayItemLabel1.Location = new System.Drawing.Point(18, 186);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
+            this.displayItemLabel1.Name = "displayItemLabel1";
+            this.displayItemLabel1.Size = new System.Drawing.Size(77, 22);
+            this.displayItemLabel1.TabIndex = 45;
             // 
             // No
             // 
@@ -351,7 +350,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.Type.ReadOnly = true;
             this.Type.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Type.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Type.Width = 300;
+            this.Type.Width = 200;
             // 
             // BILL_SUPPLIER_NAME
             // 
@@ -364,7 +363,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.BILL_SUPPLIER_NAME.Name = "BILL_SUPPLIER_NAME";
             this.BILL_SUPPLIER_NAME.ReadOnly = true;
             this.BILL_SUPPLIER_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.BILL_SUPPLIER_NAME.Width = 300;
+            this.BILL_SUPPLIER_NAME.Width = 232;
             // 
             // UPDATE_CONTENT
             // 
@@ -377,7 +376,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.UPDATE_CONTENT.Name = "UPDATE_CONTENT";
             this.UPDATE_CONTENT.ReadOnly = true;
             this.UPDATE_CONTENT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.UPDATE_CONTENT.Width = 170;
             // 
             // DIFF
             // 
@@ -391,7 +389,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.DIFF.Name = "DIFF";
             this.DIFF.ReadOnly = true;
             this.DIFF.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.DIFF.Width = 170;
+            this.DIFF.Width = 150;
             // 
             // Server
             // 
@@ -553,7 +551,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 619);
+            this.ClientSize = new System.Drawing.Size(1284, 592);
             this.Controls.Add(this.lbldifference);
             this.Controls.Add(this.displayItemLabel1);
             this.Controls.Add(this.panel1);

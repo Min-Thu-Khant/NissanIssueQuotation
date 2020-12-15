@@ -56,7 +56,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
             "UPDATE_MESSAGE",
             "UPDATED_AT_RAW",
             "ROW_ID",
-            "REQUEST_ID_UPDATED_AT"
+            "REQUEST_ID_UPDATED_AT",
+            "MK_ORIGIN"
         };
 
         private string[] alignBottoms = {
@@ -817,6 +818,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
                     row.Cells["colORDER_DATE"].Value = frm.ORDER_DATE;
                     row.Cells["colUPDATED_AT"].Value = frm.UPDATED_AT;
                     row.Cells["colUPDATED_AT_RAW"].Value = frm.UPDATED_AT_RAW;
+                    row.Cells["colSYSTEM_EFFECTIVE_DATE"].Value = frm.SYSTEM_EFFECTIVE_DATE;
                     row.Cells["colUPDATED_BY"].Value = Utility.Id;
                     frm.Dispose();
                 }

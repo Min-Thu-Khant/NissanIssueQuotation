@@ -194,9 +194,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 case "CTS080": //client certificate list
                     OpenClientCertificateScreen(programID, programName);
                     break;
-                case "CTS040": //client certificate list
-                    //OpenIssueQuotationScreen(programID, programName);
-                    break;
                 case "CMS020":
                     OpenUsageChargeMaster(programID, programName);
                     break;
@@ -206,15 +203,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 case "CMS010": // customer master maintence
                     OpenCustomerMasterMaintenance(programID, programName);
                     break;
-
                 case "CTG010": // Monthly Sale Aggregation
                     OpenMonthlySaleAggregationList(programID, programName);
                     break;
-
-                case "CTG020": // Monthly Sale Comparison
-                    OpenMonthlySaleComparisonList(programID, programName);
+                case "CTB010": // InvoiceList
+                    OpenInvoiceList(programID, programName);
                     break;
-
                 default:
                     break;
             }
@@ -448,15 +442,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
-
-        #region NodeDoubleClick
-        private void TrvMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            openForm(e.Node.Name, e.Node.Text);
-        }
-        #endregion
-
-        #region OpenCustomerMasterMaintenance
+        #region OpenMonthlySaleAggregationList
         private void OpenMonthlySaleAggregationList(string programID, string programName)
         {
             if (!(Application.OpenForms.OfType<FrmMonthlySaleAggregationList>().Count() == 1))
@@ -472,12 +458,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
-        #region OpenMonthlySaleComparisonList
-        private void OpenMonthlySaleComparisonList(string programID, string programName)
+        #region OpenInvoicedList
+        private void OpenInvoiceList(string programID, string programName)
         {
-            if (!(Application.OpenForms.OfType<frmMonthlySaleComparisonList>().Count() == 1))
+            if (!(Application.OpenForms.OfType<frmInvoiceList>().Count() == 1))
             {
-                frmMonthlySaleComparisonList form = new frmMonthlySaleComparisonList(programID, programName);
+                frmInvoiceList form = new frmInvoiceList(programID, programName);
                 form.Show();
             }
             else
@@ -485,6 +471,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 MetroMessageBox.Show(this, "\n" + Messages.DepositConfirmationMenu.ProcessAlreadyRunning, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 //need change after message list
             }
+        }
+        #endregion
+
+        #region NodeDoubleClick
+        private void TrvMenu_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            openForm(e.Node.Name, e.Node.Text);
         }
         #endregion
     }

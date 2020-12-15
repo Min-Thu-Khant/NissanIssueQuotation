@@ -25,7 +25,7 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region QuotationPreview
-        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDay, string strFromCertificate, string strToCertificate,
+        public DataTable PreviewFunction(string COMPANY_NO_BOX, string COMPANY_NAME, string REQ_SEQ, decimal TaxAmt, string startDate, string expireDay, string strPeroidFrom, string strPeroidTo,
             string strExportInfo, string strContractPlan, string INITIAL_REMARK, string MONTHLY_REMARK, string PI_REMARK, string ORDER_REMARK)
         {
             string url = Properties.Settings.Default.PreviewQuotation;
@@ -38,8 +38,8 @@ namespace AmigoPaperWorkProcessSystem.Controllers
                 TaxAmt = TaxAmt,
                 startDate = startDate,
                 expireDate = expireDay,
-                strFromCertificate = strFromCertificate,
-                strToCertificate = strToCertificate,
+                strPeroidFrom = strPeroidFrom,
+                strPeroidTo = strPeroidTo,
                 strExportInfo = strExportInfo,
                 strContractPlan = strContractPlan,
                 INITIAL_REMARK = INITIAL_REMARK,

@@ -257,6 +257,26 @@
     <value>{0}用の見積情報が無いため、帳票を作成することが出来ません。</value>
     <comment>The record cannot be created because there is no quotation information for {0}.</comment>
   </data>
+  <data name="E000WC001" xml:space="preserve">
+    <value>入金済みの請求データが存在します。この場合、請求リストデータの再作成は出来ません。</value>
+    <comment>There is billing data that has been deposited.  In this case, the billing list data cannot be recreated.</comment>
+  </data>
+  <data name="E000WC002" xml:space="preserve">
+    <value>対象請求年月の請求データが存在しません。請求データ作成ボタンにてデータを作成後にお試しください。</value>
+    <comment>Billing data for the target billing date does not exist. Please try after creating the data with the billing data creation button.</comment>
+  </data>
+  <data name="E000WC003" xml:space="preserve">
+    <value>請求データの削除に失敗しました。処理を終了します。既存の請求データは元の状態で残っています。</value>
+    <comment>Failed to delete billing data. The process ends. The existing billing data remains in its original state.</comment>
+  </data>
+  <data name="E000WC004" xml:space="preserve">
+    <value>請求データの更新に失敗しました。処理を終了します。既存の請求データは更新前の状態で残っています。</value>
+    <comment>Failed to update billing data. The process ends. The existing billing data remains in the state before the update.</comment>
+  </data>
+  <data name="E000WC005" xml:space="preserve">
+    <value>請求リストBASEの作成が失敗しました。</value>
+    <comment>Billing list BASE creation failed.</comment>
+  </data>
   <data name="E000ZZ001" xml:space="preserve">
     <value>必須入力です。</value>
     <comment>Mandatory input</comment>
@@ -468,6 +488,14 @@
   <data name="I000WB005" xml:space="preserve">
     <value>顧客マスタが同一利用申請連番で2行以上取得されました。</value>
     <comment>Two or more lines of the customer master have been acquired with the same usage application serial number.</comment>
+  </data>
+  <data name="I000WC001" xml:space="preserve">
+    <value>既に請求リストデータが作成済みですが再作成しますか？</value>
+    <comment>The billing list data has already been created. Would you like to recreate it?</comment>
+  </data>
+  <data name="I000WC002" xml:space="preserve">
+    <value>請求データの作成が正常に終了しました。{0}件</value>
+    <comment>Billing data creation was completed successfully. \ n {0}</comment>
   </data>
   <data name="I000ZZ001" xml:space="preserve">
     <value>登録しますか？</value>

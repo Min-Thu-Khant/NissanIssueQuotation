@@ -196,6 +196,7 @@
             this.MAIL_SENDING_TARGET_FLG = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MAIL_DESTINATION = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CONTRACT_PLAN_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
@@ -216,7 +217,7 @@
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(19, 12);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(132, 27);
+            this.lblMenu.Size = new System.Drawing.Size(98, 21);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "XXXXXXXX";
             // 
@@ -270,7 +271,7 @@
             this.txtCompanyNoBox.Location = new System.Drawing.Point(127, 111);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(131, 25);
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(131, 21);
             this.txtCompanyNoBox.TabIndex = 14;
             // 
             // label2
@@ -292,7 +293,7 @@
             this.txtItemChanged.Location = new System.Drawing.Point(127, 145);
             this.txtItemChanged.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtItemChanged.Name = "txtItemChanged";
-            this.txtItemChanged.Size = new System.Drawing.Size(1145, 25);
+            this.txtItemChanged.Size = new System.Drawing.Size(1145, 21);
             this.txtItemChanged.TabIndex = 16;
             // 
             // label3
@@ -311,7 +312,7 @@
             this.txtSystemEffectiveDate.Location = new System.Drawing.Point(127, 179);
             this.txtSystemEffectiveDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtSystemEffectiveDate.Name = "txtSystemEffectiveDate";
-            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(131, 25);
+            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(131, 21);
             this.txtSystemEffectiveDate.TabIndex = 18;
             this.txtSystemEffectiveDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -331,7 +332,7 @@
             this.txtRegDeadline.Location = new System.Drawing.Point(391, 179);
             this.txtRegDeadline.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtRegDeadline.Name = "txtRegDeadline";
-            this.txtRegDeadline.Size = new System.Drawing.Size(131, 25);
+            this.txtRegDeadline.Size = new System.Drawing.Size(131, 21);
             this.txtRegDeadline.TabIndex = 20;
             this.txtRegDeadline.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -425,7 +426,8 @@
             this.INPUT_PERSON_EMAIL_ADDRESS_,
             this.MAIL_SENDING_TARGET_FLG,
             this.MAIL_DESTINATION,
-            this.colUPDATED_AT_RAW});
+            this.colUPDATED_AT_RAW,
+            this.CONTRACT_PLAN_RAW});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(16, 223);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -1223,6 +1225,7 @@
             this.UPDATE_MESSAGE.HeaderText = "更新メッセージ";
             this.UPDATE_MESSAGE.Name = "UPDATE_MESSAGE";
             this.UPDATE_MESSAGE.ReadOnly = true;
+            this.UPDATE_MESSAGE.Visible = false;
             this.UPDATE_MESSAGE.Width = 350;
             // 
             // REQ_SEQ
@@ -1257,16 +1260,23 @@
             this.MAIL_DESTINATION.ReadOnly = true;
             this.MAIL_DESTINATION.Visible = false;
             // 
-            // UPDATED_AT_RAW
+            // colUPDATED_AT_RAW
             // 
             this.colUPDATED_AT_RAW.DataPropertyName = "UPDATED_AT_RAW";
             this.colUPDATED_AT_RAW.HeaderText = "UPDATED_AT_RAW";
             this.colUPDATED_AT_RAW.Name = "colUPDATED_AT_RAW";
             this.colUPDATED_AT_RAW.Visible = false;
             // 
+            // CONTRACT_PLAN_RAW
+            // 
+            this.CONTRACT_PLAN_RAW.DataPropertyName = "CONTRACT_PLAN_RAW";
+            this.CONTRACT_PLAN_RAW.HeaderText = "CONTRACT_PLAN_RAW";
+            this.CONTRACT_PLAN_RAW.Name = "CONTRACT_PLAN_RAW";
+            this.CONTRACT_PLAN_RAW.Visible = false;
+            // 
             // frmApplicationApproval
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.dgvList);
@@ -1393,5 +1403,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn MAIL_SENDING_TARGET_FLG;
         private System.Windows.Forms.DataGridViewTextBoxColumn MAIL_DESTINATION;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT_RAW;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CONTRACT_PLAN_RAW;
     }
 }

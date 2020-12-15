@@ -33,14 +33,15 @@ namespace DAL_AmigoProcess.DAL
                                             , A.UPDATED_BY
 	                                        , '' AS UPDATE_MESSAGE,
                                             ROW_NUMBER() OVER(ORDER BY A.COMPANY_NO_BOX  ASC) AS ROW_ID,
-                                            UPDATED_AT AS UPDATED_AT_RAW
+                                            UPDATED_AT AS UPDATED_AT_RAW,
+                                            '' AS MK_ORIGIN
                                             FROM
                                             CLIENT_CERTIFICATE AS A 
                                             LEFT JOIN ( 
                                             SELECT
                                             T1.COMPANY_NO_BOX
                                             , T1.COMPANY_NAME
-                                            , T1.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS 
+                                            , T1.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS
                                             FROM
                                             REQUEST_DETAIL T1 
                                             INNER JOIN ( 
@@ -60,7 +61,7 @@ namespace DAL_AmigoProcess.DAL
                                             ORDER BY A.FY ASC, A.CLIENT_CERTIFICATE_NO ASC OFFSET @OFFSET ROWS FETCH NEXT @LIMIT ROWS ONLY";
 
         string strClientCertificateListTotal = @"SELECT
-	                                            COUNT(A.COMPANY_NO_BOX)
+	                                            COUNT(A.CLIENT_CERTIFICATE_NO)
                                                 FROM
                                                 CLIENT_CERTIFICATE AS A 
                                                 LEFT JOIN ( 
@@ -90,7 +91,7 @@ namespace DAL_AmigoProcess.DAL
                                                 AND ISNULL(A.CLIENT_CERTIFICATE_NO,'') LIKE '%' + @CLIENT_CERTIFICATE_NO + '%'
                                                 @DISTRIBUTION_DATE";
 
-        string strSearchWithKeyAndUpdated_at = @"SELECT COUNT(COMPANY_NO_BOX) AS COUNT
+        string strSearchWithKeyAndUpdated_at = @"SELECT COUNT(CLIENT_CERTIFICATE_NO) AS COUNT
                                                 FROM CLIENT_CERTIFICATE 
                                                 WHERE CLIENT_CERTIFICATE_NO = @CLIENT_CERTIFICATE_NO
                                                 AND UPDATED_AT @UPDATED_AT";
@@ -147,9 +148,10 @@ namespace DAL_AmigoProcess.DAL
                                        GROUP BY COMPANY_NO_BOX,CLIENT_CERTIFICATE_NO,EXPIRATION_DATE";
 
         string strGetClientCertificateNo = @"SELECT TOP 1 CLIENT_CERTIFICATE_NO
-                                                from CLIENT_CERTIFICATE
-                                                where COMPANY_NO_BOX is null
-                                                and FY = @FY";
+                                                FROM CLIENT_CERTIFICATE
+                                                WHERE COMPANY_NO_BOX is null
+                                                AND FY = @FY
+                                                ORDER BY CLIENT_CERTIFICATE_NO ASC";
 
         string strUpdateWithClientCertificateNO = @"UPDATE [CLIENT_CERTIFICATE]
                                                     SET [COMPANY_NO_BOX] = @COMPANY_NO_BOX,

@@ -84,8 +84,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
             //select All
             cboBillingClassification.SelectedIndex = 0;
 
-            //default yearmonth to schedule payment
-            txtSchedulePaymentFrom.Text = DateTime.Now.ToString("yyyy/MM");
+            //default yearmonth to deposit RecordDate
+            txtDepositRecordDateFrom.Text = DateTime.Now.ToString("yyyy/MM/dd");
 
             Utility.DoubleBuffered(dgvList, true);
         }
@@ -195,6 +195,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
             if (status)
             {
                 BindGrid();
+                //検索のタイミングで、更新系ボタンを活性化
+                updateBtnEnabled(true);
             }
             search_or_back = false;
         }
@@ -1231,7 +1233,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
                             }
                             else
                             {
-                                if ((!string.IsNullOrEmpty(receipt_allocation_date)) && (receipt_allocation_date == "3") || 
+                                if ((!string.IsNullOrEmpty(receipt_allocation_date)) && (receipt_type_of_allocation == "3") || 
                                     (!string.IsNullOrEmpty(invoice_allocation_date)) && (invoice_type_of_allocation == "3"))
                                 {
                                     result = oController.ManualAlloactionCompletion(receipt_allocation_date, invoice_allocation_date, seq_no, company_no_box, year_month, false);
@@ -1274,9 +1276,10 @@ namespace AmigoPaperWorkProcessSystem.Forms
                     {
                         string seq_no = row.Cells["SEQ_NO"].Value.ToString().Trim();
                         string company_no_box = row.Cells["COMPANY_NO_BOX"].Value.ToString().Trim();
+                        string year_month = row.Cells["YEAR_MONTH"].Value.ToString();
 
                         Controllers.frm37Controller oController = new Controllers.frm37Controller();
-                        DataTable result = oController.ManualAlloaction(company_no_box);
+                        DataTable result = oController.ManualAlloaction(company_no_box, year_month);
                         if (result.Rows.Count <= 0)
                         {
                             MetroMessageBox.Show(this, "\n" + Messages.ResultOfDepositDatePlan.CannotbeManuallyAllocated, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1297,6 +1300,25 @@ namespace AmigoPaperWorkProcessSystem.Forms
         private void BtnManualCancelAllocate_Click(object sender, EventArgs e)
         {
             AllocationComplete(false);
+        }
+
+        private void DgvList_Sorted(object sender, EventArgs e)
+        {
+            if (dgvList.Rows.Count > 0)
+            {
+                //ソートが行われた場合、更新系ボタンは非活性とする
+                updateBtnEnabled(false);
+            }
+        }
+
+        private void updateBtnEnabled(bool enbaled)
+        {
+            btnRegister.Enabled = enbaled;
+            btnDepositUpdate.Enabled = enbaled;
+            btnReceivableUpdate.Enabled = enbaled;
+            btnManualAllocation.Enabled = enbaled;
+            btnManualAllocateComplete.Enabled = enbaled;
+            btnManualCancelAllocate.Enabled = enbaled;
         }
     }
 

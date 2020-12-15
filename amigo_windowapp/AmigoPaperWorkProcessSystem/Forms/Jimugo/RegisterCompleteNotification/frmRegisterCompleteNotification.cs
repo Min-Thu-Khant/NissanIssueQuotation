@@ -77,7 +77,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                     foreach (DataRow row in dt.Rows)
                     {
                         txtEDIAccount.Text = row["EDI_ACCOUNT"].ToString();
-                        txtDestinationMailAddress.Text = row["EMAIL_ADDRESS"].ToString();
+                        txtDestinationMailAddress.Text = row["INPUT_PERSON_EMAIL_ADDRESS"].ToString();
                     }
                 }
             }
@@ -148,41 +148,40 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                     {
                         FILENAME = result.Rows[0]["FILENAME"].ToString();
                         MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB001, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, FILENAME);
+
+                        #region CallPreviewScreen
+                        string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp";
+
+                        if (!Directory.Exists(temp_deirectory))
+                        {
+                            Directory.CreateDirectory(temp_deirectory);
+                        }
+
+                        //delete temp files
+                        Utility.DeleteFiles(temp_deirectory);
+
+                        string destinationpath = temp_deirectory + "/" + FILENAME;
+                        btnPreview.Enabled = false;
+                        bool success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + FILENAME, destinationpath);
+                        if (success)
+                        {
+                            frmRegisterCompleteNotificationPreview frm = new frmRegisterCompleteNotificationPreview(dt);
+                            frm.ShowDialog();
+                            this.Show();
+                            UPDATED_AT = frm.UPDATED_AT;
+                            UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
+                            COMPLETION_NOTIFICATION_DATE = txtRegisterCompleteNotificationDate.Text.Trim();
+                            Dialog = DialogResult.OK;
+                            this.BringToFront();
+                        }
+                        btnPreview.Enabled = true;
+                        #endregion
                     }
                     else
                     {
                         MetroMessageBox.Show(this, "\n" + return_message, "Fail", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, FILENAME);
-
-                    #region CallPreviewScreen
-                    string temp_deirectory = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"/Temp";
-
-                    if (!Directory.Exists(temp_deirectory))
-                    {
-                        Directory.CreateDirectory(temp_deirectory);
-                    }
-
-                    //delete temp files
-                    Utility.DeleteFiles(temp_deirectory);
-
-                    string destinationpath = temp_deirectory + "/" + FILENAME;
-                    btnPreview.Enabled = false;
-                    bool success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + FILENAME, destinationpath);
-                    if (success)
-                    {
-                        frmRegisterCompleteNotificationPreview frm = new frmRegisterCompleteNotificationPreview(dt);
-                        frm.ShowDialog();
-                        this.Show();
-                        UPDATED_AT = frm.UPDATED_AT;
-                        UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
-                        COMPLETION_NOTIFICATION_DATE = txtRegisterCompleteNotificationDate.Text.Trim();
-                        Dialog = DialogResult.OK;
-                        this.BringToFront();
-                    }
-                    btnPreview.Enabled = true;
-                    #endregion
 
                 }
                 catch (Exception ex)

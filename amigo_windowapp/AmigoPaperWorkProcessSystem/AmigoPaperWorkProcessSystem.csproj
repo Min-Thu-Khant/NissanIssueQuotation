@@ -106,12 +106,13 @@
     <Compile Include="Controllers\frm36Controller.cs" />
     <Compile Include="Controllers\frm37Controller.cs" />
     <Compile Include="Controllers\frm38Controller.cs" />
+    <Compile Include="Controllers\FrmMonthlySaleAggregationController.cs" />
     <Compile Include="Controllers\Jimugo\frmApplicationApprovalController.cs" />
     <Compile Include="Controllers\Jimugo\frmClientCertificateListController.cs" />
     <Compile Include="Controllers\Jimugo\frmCompanyCodeListController.cs" />
     <Compile Include="Controllers\Jimugo\frmCustomerMasterMaintenanceController.cs" />
+    <Compile Include="Controllers\Jimugo\frmInvoiceListController.cs" />
     <Compile Include="Controllers\Jimugo\frmJimugoMenuController.cs" />
-    <Compile Include="Controllers\Jimugo\FrmMonthlySaleAggregationController.cs" />
     <Compile Include="Controllers\Jimugo\frmMonthlySaleComparisonListController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssueQuotationController.cs" />
     <Compile Include="Controllers\Jimugo\IssueQuotation\frmIssuQuotationPreviewController.cs" />
@@ -229,6 +230,12 @@
     </Compile>
     <Compile Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterMaintenance.designer.cs">
       <DependentUpon>frmCustomerMasterMaintenance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmInvoiceList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Jimugo\frmInvoiceList.designer.cs">
+      <DependentUpon>frmInvoiceList.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Jimugo\frmJimugo.cs">
       <SubType>Form</SubType>
@@ -394,6 +401,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\CustomerMasterMaintenance\frmCustomerMasterMaintenance.resx">
       <DependentUpon>frmCustomerMasterMaintenance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Jimugo\frmInvoiceList.resx">
+      <DependentUpon>frmInvoiceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Jimugo\frmJimugo.resx">
       <DependentUpon>frmJimugo.cs</DependentUpon>

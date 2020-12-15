@@ -39,7 +39,6 @@ namespace AmigoProcessManagement.Controller
         }
         #endregion
 
-
         #region getInitialData
         public MetaResponse getInitialData(string COMPANY_NO_BOX, string REQ_SEQ, int REQ_STATUS, int REQ_TYPE)
         {
@@ -146,7 +145,14 @@ namespace AmigoProcessManagement.Controller
                 DataSet ds = new DataSet();
                 DataTable Listing = Utility_Component.JsonToDt(List);
                 DataRow row;
-                row = Listing.Rows[0];
+                if (Listing.Rows.Count > 1)
+                {
+                    row = Listing.Rows[1];
+                }
+                else
+                {
+                    row = Listing.Rows[0];
+                }
 
                 REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
                 //serch with COMPANY_NO_BOX AND REQ_SEQ
@@ -165,6 +171,17 @@ namespace AmigoProcessManagement.Controller
                 }
 
                 DAL_REQUEST_DETAIL.ApproveCancel(COMPANY_NO_BOX, row["REQ_SEQ"].ToString(), CURRENT_USER, CURRENT_DATETIME, out msg);
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                }
+
+                CUSTOMER_MASTER DAL_CUSTOMER_MASTER = new CUSTOMER_MASTER(con);
+                BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
+                oCUSTOMER_MASTER.COMPANY_NO_BOX = COMPANY_NO_BOX;
+                oCUSTOMER_MASTER.REQ_SEQ = Convert.ToInt32(row["REQ_SEQ"]);
+                DAL_CUSTOMER_MASTER.Delete(oCUSTOMER_MASTER, out msg);
+
                 if (!string.IsNullOrEmpty(msg))
                 {
                   return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
@@ -197,7 +214,15 @@ namespace AmigoProcessManagement.Controller
                 DataSet ds = new DataSet();
                 DataTable Listing = Utility_Component.JsonToDt(List);
                 DataRow row;
-                row = Listing.Rows[0];
+                if (Listing.Rows.Count > 1)
+                {
+                    row = Listing.Rows[1];
+                }
+                else
+                {
+                    row = Listing.Rows[0];
+                }
+
                 string EMIAL_SENDING_TARGET_FLG = row["MAIL_SENDING_TARGET_FLG"].ToString().Trim();
                 string MAIL_DESTINATION = row["MAIL_DESTINATION"].ToString().Trim();
                 int TRANSACTION_TYPE = getTRANSACTION_TYPE(row["TRANSACTION_TYPE"].ToString().Trim());
@@ -236,7 +261,7 @@ namespace AmigoProcessManagement.Controller
                     }
                     oREQUEST_DETAIL.REQ_SEQ =int.Parse(row["REQ_SEQ"].ToString());
 
-                    if (EMIAL_SENDING_TARGET_FLG == "*")
+                    if (MAIL_DESTINATION == "1")
                     {
                         oREQUEST_DETAIL.SYSTEM_SETTING_STATUS = 1;
                     }
@@ -257,7 +282,7 @@ namespace AmigoProcessManagement.Controller
                     }
                     #endregion
 
-                    if (EMIAL_SENDING_TARGET_FLG == "*")
+                    if (EMIAL_SENDING_TARGET_FLG == "*" && TRANSACTION_TYPE == 3)
                     {
                         DataTable LatestCustomer = new DataTable();
                         CUSTOMER_MASTER DAL_CUSTOMER_MASTER = new CUSTOMER_MASTER(con);
@@ -278,6 +303,12 @@ namespace AmigoProcessManagement.Controller
                         oCUSTOMER_MASTER.EFFECTIVE_DATE = START_USE_DATE;
                         oCUSTOMER_MASTER.REQ_SEQ = oREQUEST_DETAIL.REQ_SEQ;
                         oCUSTOMER_MASTER.UPDATE_CONTENT = REQ_TYPE;
+                        DAL_CUSTOMER_MASTER.Delete(oCUSTOMER_MASTER, out msg);
+                        if (!string.IsNullOrEmpty(msg))
+                        {
+                            return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+
+                        }
                         DAL_CUSTOMER_MASTER.Insert(oCUSTOMER_MASTER, CURRENT_DATETIME, CURRENT_USER, out msg);
 
                         if (!string.IsNullOrEmpty(msg))
@@ -288,18 +319,20 @@ namespace AmigoProcessManagement.Controller
 
                         #endregion
 
-                        string CONTRACT_PLAN = row["CONTRACT_PLAN"].ToString().ToString();
-                        if (CONTRACT_PLAN == "PRODUCT" && LatestCustomer.Rows.Count > 0)
+                        string CONTRACT_PLAN = row["CONTRACT_PLAN_RAW"].ToString().ToString();
+                        if (CONTRACT_PLAN == "PRODUCT" && REQ_TYPE == 9)
                         {
-                            DateTime EFFECTIVE_DATE = Convert.ToDateTime(LatestCustomer.Rows[0]["EFFECTIVE_DATE"].ToString());
-                            if (EFFECTIVE_DATE.Year != START_USE_DATE.Year)
+                            //get latest customer for new applying time
+                            DateTime NEW_EFFECTIVE_DATE = Convert.ToDateTime(DAL_CUSTOMER_MASTER.GetEffectiveDateForNewApplyingTime(oREQUEST_DETAIL.COMPANY_NO_BOX, TRANSACTION_TYPE, START_USE_DATE, out msg));
+
+                            if ((NEW_EFFECTIVE_DATE.Month + NEW_EFFECTIVE_DATE.Day) != (START_USE_DATE.Month + START_USE_DATE.Day))
                             {
                                 #region Insert Browsing CUSTOMER MASTER
                                 BOL_CUSTOMER_MASTER oCUSTOMER_MASTER_BROWSING = new BOL_CUSTOMER_MASTER();
                                 oCUSTOMER_MASTER_BROWSING = Cast_CUSTOMER_MASTER(LatestCustomer.Rows[0]);
                                 oCUSTOMER_MASTER_BROWSING.COMPANY_NO_BOX = COMPANY_NO_BOX;
                                 oCUSTOMER_MASTER_BROWSING.TRANSACTION_TYPE = TRANSACTION_TYPE;
-                                oCUSTOMER_MASTER_BROWSING.EFFECTIVE_DATE = Convert.ToDateTime(START_USE_DATE.Year +"/" + EFFECTIVE_DATE.Month + "/" + EFFECTIVE_DATE.Day);
+                                oCUSTOMER_MASTER_BROWSING.EFFECTIVE_DATE = Convert.ToDateTime(START_USE_DATE.Year +"/" + NEW_EFFECTIVE_DATE.Month + "/" + NEW_EFFECTIVE_DATE.Day);
                                 oCUSTOMER_MASTER_BROWSING.REQ_SEQ = oREQUEST_DETAIL.REQ_SEQ;
                                 oCUSTOMER_MASTER_BROWSING.UPDATE_CONTENT = REQ_TYPE;
 
@@ -332,7 +365,7 @@ namespace AmigoProcessManagement.Controller
                     }
                     else if (EMIAL_SENDING_TARGET_FLG == "*" && MAIL_DESTINATION == "2")
                     {
-                        mailSuccess = SendMailToSupplier(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_MAIL_ADDRESS"].ToString(), out dtMail);
+                        mailSuccess = SendMailToSupplier(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_EMAIL_ADDRESS"].ToString(), out dtMail);
 
                         if (mailSuccess)
                         {
@@ -349,6 +382,112 @@ namespace AmigoProcessManagement.Controller
 
                 }
                 
+            }
+            catch (Exception ex)
+            {
+                return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
+            }
+        }
+        #endregion
+
+        #region Disapprove
+        public MetaResponse Disapprove(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string List)
+        {
+
+            try
+            {
+                DataSet ds = new DataSet();
+                DataTable Listing = Utility_Component.JsonToDt(List);
+                DataRow row;
+
+                if (Listing.Rows.Count > 1)
+                {
+                    row = Listing.Rows[1];
+                }
+                else
+                {
+                    row = Listing.Rows[0];
+                }
+
+                string msg = "";
+                BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
+                oREQUEST_DETAIL.REQ_STATUS = 3;
+                if (REQ_TYPE == 1 || REQ_TYPE == 9 || (REQ_TYPE == 2 && !string.IsNullOrEmpty(CHANGED_ITEMS.Trim())))
+                {
+                    oREQUEST_DETAIL.AMIGO_COOPERATION = 1;
+                }
+                else
+                {
+                    oREQUEST_DETAIL.AMIGO_COOPERATION = 2;
+                }
+
+                oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS = CHANGED_ITEMS.Trim();
+                try
+                {
+                    oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE = Convert.ToDateTime(SYSTEM_EFFECTIVE_DATE);
+                }
+                catch (Exception)
+                {
+
+                }
+                try
+                {
+                    oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE = Convert.ToDateTime(SYSTEM_REGIST_DEADLINE);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                oREQUEST_DETAIL.REQ_SEQ = int.Parse(row["REQ_SEQ"].ToString());
+                oREQUEST_DETAIL.UPDATED_AT = row["UPDATED_AT_RAW"].ToString();
+                oREQUEST_DETAIL.COMPANY_NO_BOX = COMPANY_NO_BOX;
+
+                REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
+                DAL_REQUEST_DETAIL.Disapprove(oREQUEST_DETAIL, CURRENT_USER, CURRENT_DATETIME, out msg);
+                if (!string.IsNullOrEmpty(msg))
+                {
+                    return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+
+                }
+
+                CUSTOMER_MASTER DAL_CUSTOMER_MASTER = new CUSTOMER_MASTER(con);
+                BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
+                oCUSTOMER_MASTER.COMPANY_NO_BOX = COMPANY_NO_BOX;
+                oCUSTOMER_MASTER.REQ_SEQ = REQ_TYPE;
+                DAL_CUSTOMER_MASTER.Delete(oCUSTOMER_MASTER, out msg);
+                
+                if (string.IsNullOrEmpty(msg))
+                {
+                    DataTable dtMail = new DataTable();
+                    bool success = DisapproveSendMail(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_EMAIL_ADDRESS"].ToString(), out dtMail);
+
+                    if (success)
+                    {
+                        response.Status = 1;
+                        row["UPDATED_AT"] = UPDATED_AT_DATETIME;
+                        row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
+                        row["UPDATED_BY"] = CURRENT_USER;
+                        row["UPDATE_MESSAGE"] = string.Format(Messages.Jimugo.I000ZZ016, "否認");
+                        Listing.TableName = "LISTING";
+                        ds.Tables.Add(Listing.Copy());
+                        dtMail.TableName = "MAIL";
+                        ds.Tables.Add(dtMail.Copy());
+                    }
+                    else
+                    {
+                        return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                    }
+                }
+                else
+                {
+                    return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
+                }
+
+                response.Data = Utility.Utility_Component.DsToJSon(ds, "Approval");
+                timer.Stop();
+                response.Meta.Duration = timer.Elapsed.TotalSeconds;
+                return response;
             }
             catch (Exception ex)
             {
@@ -420,101 +559,6 @@ namespace AmigoProcessManagement.Controller
                     return 19;
                 default:
                     return -1;
-            }
-        }
-        #endregion
-
-        #region Disapprove
-        public MetaResponse Disapprove(string COMPANY_NO_BOX, int REQ_TYPE, string CHANGED_ITEMS, string SYSTEM_EFFECTIVE_DATE, string SYSTEM_REGIST_DEADLINE, string List)
-        {
-
-            try
-            {
-                DataSet ds = new DataSet();
-                DataTable Listing = Utility_Component.JsonToDt(List);
-                DataRow row;
-
-                if (REQ_TYPE == 2)
-                {
-                    row = Listing.Rows[1];
-                }
-                else
-                {
-                    row = Listing.Rows[0];
-                }
-
-                string msg = "";
-                BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
-                oREQUEST_DETAIL.REQ_STATUS = 3;
-                if (REQ_TYPE == 1 || REQ_TYPE ==9 || (REQ_TYPE == 2 && !string.IsNullOrEmpty(CHANGED_ITEMS.Trim())))
-                {
-                    oREQUEST_DETAIL.AMIGO_COOPERATION = 1;
-                }
-                else
-                {
-                    oREQUEST_DETAIL.AMIGO_COOPERATION = 2;
-                }
-
-                oREQUEST_DETAIL.AMIGO_COOPERATION_CHENGED_ITEMS = CHANGED_ITEMS.Trim();
-                try
-                {
-                    oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE = Convert.ToDateTime(SYSTEM_EFFECTIVE_DATE);
-                }
-                catch (Exception)
-                {
-
-                }
-                try
-                {
-                    oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE = Convert.ToDateTime(SYSTEM_REGIST_DEADLINE);
-                }
-                catch (Exception)
-                {
-
-                }
-               
-                oREQUEST_DETAIL.REQ_SEQ = int.Parse(row["REQ_SEQ"].ToString());
-                oREQUEST_DETAIL.UPDATED_AT = row["UPDATED_AT_RAW"].ToString();
-                oREQUEST_DETAIL.COMPANY_NO_BOX = COMPANY_NO_BOX;
-
-                REQUEST_DETAIL DAL_REQUEST_DETAIL = new REQUEST_DETAIL(con);
-                DAL_REQUEST_DETAIL.Disapprove(oREQUEST_DETAIL, CURRENT_USER, CURRENT_DATETIME, out msg);
-
-                if (string.IsNullOrEmpty(msg))
-                {
-                    DataTable dtMail = new DataTable();
-                    bool success = DisapproveSendMail(row["COMPANY_NAME"].ToString(), row["INPUT_PERSON"].ToString(), row["INPUT_PERSON_EMAIL_ADDRESS"].ToString(), out dtMail);
-
-                    if (success)
-                    {
-                        response.Status = 1;
-                        row["UPDATED_AT"] = UPDATED_AT_DATETIME;
-                        row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
-                        row["UPDATED_BY"] = CURRENT_USER;
-                        row["UPDATE_MESSAGE"] = string.Format( Messages.Jimugo.I000ZZ016, "否認");
-                        Listing.TableName = "LISTING";
-                        ds.Tables.Add(Listing.Copy());
-                        dtMail.TableName = "MAIL";
-                        ds.Tables.Add(dtMail.Copy());
-                    }
-                    else
-                    {
-                        return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
-                    }
-                }
-                else
-                {
-                    return ResponseError(response, Utility.Messages.Jimugo.I000ZZ005, Listing, ds, row);
-                }
-                
-                response.Data = Utility.Utility_Component.DsToJSon(ds, "Approval"); 
-                timer.Stop();
-                response.Meta.Duration = timer.Elapsed.TotalSeconds;
-                return response;
-            }
-            catch (Exception ex)
-            {
-                return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
             }
         }
         #endregion

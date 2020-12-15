@@ -260,7 +260,7 @@ namespace AmigoProcessManagement.Controller
             oCUSTOMER_MASTER.UPDATED_AT = row["UPDATED_AT"].ToString().Length >= 1 ? row["UPDATED_AT"].ToString() : null;
             oCUSTOMER_MASTER.UPDATED_AT_RAW = row["UPDATED_AT_RAW"].ToString() == "" ? null : row["UPDATED_AT_RAW"].ToString();
             oCUSTOMER_MASTER.UPDATED_BY = row["UPDATED_BY"].ToString().Length >= 1 ? row["UPDATED_BY"].ToString() : null;
-            oCUSTOMER_MASTER.REQ_SEQ = Utility_Component.dtColumnToInt(row["NCS_CUSTOMER_CODE"].ToString());
+            oCUSTOMER_MASTER.REQ_SEQ = Utility_Component.dtColumnToInt(row["REQ_SEQ"].ToString());
             return oCUSTOMER_MASTER;
         }
         #endregion

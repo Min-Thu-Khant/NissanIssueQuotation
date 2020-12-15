@@ -138,7 +138,7 @@
             this.txtCompanyName.CustomButton.Image = null;
             this.txtCompanyName.CustomButton.Location = new System.Drawing.Point(127, 1);
             this.txtCompanyName.CustomButton.Name = "";
-            this.txtCompanyName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCompanyName.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtCompanyName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCompanyName.CustomButton.TabIndex = 1;
             this.txtCompanyName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -186,7 +186,7 @@
             this.txtBillToCompanyName.CustomButton.Image = null;
             this.txtBillToCompanyName.CustomButton.Location = new System.Drawing.Point(126, 1);
             this.txtBillToCompanyName.CustomButton.Name = "";
-            this.txtBillToCompanyName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBillToCompanyName.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtBillToCompanyName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBillToCompanyName.CustomButton.TabIndex = 1;
             this.txtBillToCompanyName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -225,7 +225,7 @@
             this.txtAccountName.CustomButton.Image = null;
             this.txtAccountName.CustomButton.Location = new System.Drawing.Point(126, 1);
             this.txtAccountName.CustomButton.Name = "";
-            this.txtAccountName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtAccountName.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtAccountName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtAccountName.CustomButton.TabIndex = 1;
             this.txtAccountName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -264,7 +264,7 @@
             this.txtCompanyNumberBox.CustomButton.Image = null;
             this.txtCompanyNumberBox.CustomButton.Location = new System.Drawing.Point(126, 1);
             this.txtCompanyNumberBox.CustomButton.Name = "";
-            this.txtCompanyNumberBox.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCompanyNumberBox.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtCompanyNumberBox.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCompanyNumberBox.CustomButton.TabIndex = 1;
             this.txtCompanyNumberBox.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -303,7 +303,7 @@
             this.txtCompanyNameReading.CustomButton.Image = null;
             this.txtCompanyNameReading.CustomButton.Location = new System.Drawing.Point(126, 1);
             this.txtCompanyNameReading.CustomButton.Name = "";
-            this.txtCompanyNameReading.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtCompanyNameReading.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtCompanyNameReading.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtCompanyNameReading.CustomButton.TabIndex = 1;
             this.txtCompanyNameReading.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
@@ -351,7 +351,6 @@
             this.colCheck.HeaderText = "";
             this.colCheck.Name = "colCheck";
             this.colCheck.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colCheck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colCOMPANY_NAME
             // 
@@ -359,6 +358,7 @@
             this.colCOMPANY_NAME.HeaderText = "会社名";
             this.colCOMPANY_NAME.Name = "colCOMPANY_NAME";
             this.colCOMPANY_NAME.ReadOnly = true;
+            this.colCOMPANY_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_COMPANY_NAME
             // 
@@ -366,6 +366,7 @@
             this.colBILL_COMPANY_NAME.HeaderText = "請求先＿会社名";
             this.colBILL_COMPANY_NAME.Name = "colBILL_COMPANY_NAME";
             this.colBILL_COMPANY_NAME.ReadOnly = true;
+            this.colBILL_COMPANY_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colCOMPANY_NO_BOX
             // 
@@ -373,36 +374,42 @@
             this.colCOMPANY_NO_BOX.HeaderText = "会社番号＋BOX";
             this.colCOMPANY_NO_BOX.Name = "colCOMPANY_NO_BOX";
             this.colCOMPANY_NO_BOX.ReadOnly = true;
+            this.colCOMPANY_NO_BOX.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_BANK_ACCOUNT_NAME_1
             // 
             this.colBILL_BANK_ACCOUNT_NAME_1.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-1";
             this.colBILL_BANK_ACCOUNT_NAME_1.HeaderText = "銀行口座名1";
             this.colBILL_BANK_ACCOUNT_NAME_1.Name = "colBILL_BANK_ACCOUNT_NAME_1";
+            this.colBILL_BANK_ACCOUNT_NAME_1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_BANK_ACCOUNT_NAME_2
             // 
             this.colBILL_BANK_ACCOUNT_NAME_2.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-2";
             this.colBILL_BANK_ACCOUNT_NAME_2.HeaderText = "銀行口座名2";
             this.colBILL_BANK_ACCOUNT_NAME_2.Name = "colBILL_BANK_ACCOUNT_NAME_2";
+            this.colBILL_BANK_ACCOUNT_NAME_2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_BANK_ACCOUNT_NAME_3
             // 
             this.colBILL_BANK_ACCOUNT_NAME_3.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-3";
             this.colBILL_BANK_ACCOUNT_NAME_3.HeaderText = "銀行口座名3";
             this.colBILL_BANK_ACCOUNT_NAME_3.Name = "colBILL_BANK_ACCOUNT_NAME_3";
+            this.colBILL_BANK_ACCOUNT_NAME_3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_BANK_ACCOUNT_NAME_4
             // 
             this.colBILL_BANK_ACCOUNT_NAME_4.DataPropertyName = "BILL_BANK_ACCOUNT_NAME-4";
             this.colBILL_BANK_ACCOUNT_NAME_4.HeaderText = "銀行口座名4";
             this.colBILL_BANK_ACCOUNT_NAME_4.Name = "colBILL_BANK_ACCOUNT_NAME_4";
+            this.colBILL_BANK_ACCOUNT_NAME_4.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colNCS_CUSTOMER_CODE
             // 
             this.colNCS_CUSTOMER_CODE.DataPropertyName = "NCS_CUSTOMER_CODE";
             this.colNCS_CUSTOMER_CODE.HeaderText = "経理取引先コード";
             this.colNCS_CUSTOMER_CODE.Name = "colNCS_CUSTOMER_CODE";
+            this.colNCS_CUSTOMER_CODE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_BILLING_INTERVAL
             // 
@@ -415,7 +422,6 @@
             "年額"});
             this.colBILL_BILLING_INTERVAL.Name = "colBILL_BILLING_INTERVAL";
             this.colBILL_BILLING_INTERVAL.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colBILL_BILLING_INTERVAL.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colBILL_DEPOSIT_RULES
             // 
@@ -427,7 +433,6 @@
             "翌々月月頭"});
             this.colBILL_DEPOSIT_RULES.Name = "colBILL_DEPOSIT_RULES";
             this.colBILL_DEPOSIT_RULES.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colBILL_DEPOSIT_RULES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // colBILL_TRANSFER_FEE
             // 
@@ -438,6 +443,7 @@
             this.colBILL_TRANSFER_FEE.DefaultCellStyle = dataGridViewCellStyle2;
             this.colBILL_TRANSFER_FEE.HeaderText = "銀行振込手数料";
             this.colBILL_TRANSFER_FEE.Name = "colBILL_TRANSFER_FEE";
+            this.colBILL_TRANSFER_FEE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colBILL_EXPENSES
             // 
@@ -448,6 +454,7 @@
             this.colBILL_EXPENSES.DefaultCellStyle = dataGridViewCellStyle3;
             this.colBILL_EXPENSES.HeaderText = "諸経費";
             this.colBILL_EXPENSES.Name = "colBILL_EXPENSES";
+            this.colBILL_EXPENSES.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colEFFECTIVE_DATE
             // 
@@ -455,6 +462,7 @@
             this.colEFFECTIVE_DATE.HeaderText = "EFFECTIVE_DATE";
             this.colEFFECTIVE_DATE.Name = "colEFFECTIVE_DATE";
             this.colEFFECTIVE_DATE.ReadOnly = true;
+            this.colEFFECTIVE_DATE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colEFFECTIVE_DATE.Visible = false;
             // 
             // colTRANSACTION_TYPE
@@ -463,6 +471,7 @@
             this.colTRANSACTION_TYPE.HeaderText = "TRANSACTION_TYPE";
             this.colTRANSACTION_TYPE.Name = "colTRANSACTION_TYPE";
             this.colTRANSACTION_TYPE.ReadOnly = true;
+            this.colTRANSACTION_TYPE.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colTRANSACTION_TYPE.Visible = false;
             // 
             // colREQ_SEQ
@@ -492,6 +501,7 @@
             this.Controls.Add(this.txtCompanyName);
             this.Controls.Add(this.btnBack);
             this.Name = "frm38";
+            this.Padding = new System.Windows.Forms.Padding(20, 65, 20, 20);
             this.Resizable = false;
             this.Text = "3-8. 顧客マスタ口座登録";
             this.Load += new System.EventHandler(this.Frm38_Load);

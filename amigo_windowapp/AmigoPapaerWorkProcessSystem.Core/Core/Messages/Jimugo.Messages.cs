@@ -1076,7 +1076,7 @@ namespace AmigoPaperWorkProcessSystem.Core
                 return AmigoPapaerWorkProcessSystem.Core.Properties.Jimugo_Messages.E000WB035;
             }
         }
-
+        
         public static string I000ZZ023
         {
             get

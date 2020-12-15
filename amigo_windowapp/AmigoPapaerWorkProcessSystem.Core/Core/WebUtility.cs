@@ -270,6 +270,7 @@ namespace AmigoPaperWorkProcessSystem.Core
 
             return dt;
         }
+
         public static DataSet Post(string url)
         {
             HttpClient client = makeAuthHeader();
@@ -286,6 +287,30 @@ namespace AmigoPaperWorkProcessSystem.Core
                 Utility.WriteErrorLog(result.Message.ToString(), null, true);
             }
             string strData = result.Data;
+            DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
+            return dataSet;
+        }
+
+        public static DataSet Post(string url, out Meta MetaData)
+        {
+            HttpClient client = makeAuthHeader();
+            var response = client.GetAsync(url);
+
+            //call methods
+            string content = response.Result.Content.ReadAsStringAsync().Result;
+
+            dynamic result = JsonConvert.DeserializeObject(content);
+
+            //log error message
+            if (result.Status == 0)
+            {
+                Utility.WriteErrorLog(result.Message.ToString(), null, true);
+            }
+            string strData = result.Data;
+
+            //prepare return data
+            MetaData = JsonConvert.DeserializeObject<Meta>(JsonConvert.SerializeObject(result.Meta));
+
             DataSet dataSet = (DataSet)JsonConvert.DeserializeObject<DataSet>(strData);
             return dataSet;
         }

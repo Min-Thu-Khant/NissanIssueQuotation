@@ -602,6 +602,29 @@ namespace AmigoPaperWorkProcessSystem.Core
         }
         #endregion
 
+        #region RemoveTimpStampFromFileName
+        public static string RemoveTimpStampFromFileName(string filename, string extension)
+        {
+            int last_index_of_underscore = filename.LastIndexOf("_") + 1;
+            return filename.Substring(0, filename.Length - (filename.Length - last_index_of_underscore + 1)) + extension;
+        }
+        #endregion
+
+        #region DeleteTempFile
+        public static void DeleteTempFile(string path)
+        {
+            try
+            {
+                System.IO.File.Delete(path);
+            }
+            catch (Exception)
+            {
+
+            }
+            
+        }
+        #endregion
+
         #endregion
     }
 }

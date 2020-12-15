@@ -224,7 +224,8 @@ namespace AmigoProcessManagement.Controller
 
                         if (mailSuccess)
                         {
-                            ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i]);
+                            dgvList.Rows[i]["SYSTEM_SETTING_STATUS"] = 2;
+                            ResponseUtility.ReturnMailSuccessMessage(dgvList.Rows[i],UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
 
                         }
                         else
@@ -299,14 +300,12 @@ namespace AmigoProcessManagement.Controller
             BOL_EDI_CANDIDATE oEDI_CANDIDATE = new BOL_EDI_CANDIDATE();
 
             EDI_CANDIDATE DAL_EDI_CANDICATE = new EDI_CANDIDATE(con);
-            DataTable dtUseFLG = DAL_EDI_CANDICATE.GetUseFLG(oUSAGE_INFO_REG.EDI_ACCOUNT, out strMsg);
+            DataTable dtUseFLG = DAL_EDI_CANDICATE.GetUseFLG(oUSAGE_INFO_REG.EDI_ACCOUNT.Replace("@",""), out strMsg);
 
             using (TransactionScope dbTxn = new TransactionScope())
             {
-
                 //Prepare EDI CANDIDATE 
                 oEDI_CANDIDATE = GetEDI_CANDIDATE(oUSAGE_INFO_REG);
-
 
                 if (dtUseFLG.Rows.Count == 0)
                 {
@@ -445,7 +444,7 @@ namespace AmigoProcessManagement.Controller
         {
             BOL_EDI_CANDIDATE oEDI_CANDIDATE = new BOL_EDI_CANDIDATE();
 
-            oEDI_CANDIDATE.EDI_ACCOUNT = oUSAGE_INFO_REG.EDI_ACCOUNT;
+            oEDI_CANDIDATE.EDI_ACCOUNT = oUSAGE_INFO_REG.EDI_ACCOUNT.Substring(1,3);
             oEDI_CANDIDATE.USED_FLG = "*";
             oEDI_CANDIDATE.CREATED_BY = oUSAGE_INFO_REG.UPDATED_BY;
             oEDI_CANDIDATE.UPDATED_BY = oUSAGE_INFO_REG.UPDATED_BY;

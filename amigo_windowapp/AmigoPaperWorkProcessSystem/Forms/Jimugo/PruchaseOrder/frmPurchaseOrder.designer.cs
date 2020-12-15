@@ -62,7 +62,7 @@
             this.btnPreview.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(117, 32);
-            this.btnPreview.TabIndex = 51;
+            this.btnPreview.TabIndex = 1;
             this.btnPreview.Text = "プレビュー";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.BtnPreview_Click);
@@ -74,8 +74,8 @@
             this.txtCompleteNotificationDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompleteNotificationDate.Name = "txtCompleteNotificationDate";
             this.txtCompleteNotificationDate.ReadOnly = true;
-            this.txtCompleteNotificationDate.Size = new System.Drawing.Size(170, 21);
-            this.txtCompleteNotificationDate.TabIndex = 49;
+            this.txtCompleteNotificationDate.Size = new System.Drawing.Size(170, 25);
+            this.txtCompleteNotificationDate.TabIndex = 13;
             this.txtCompleteNotificationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSystemRegisterDeadline
@@ -83,8 +83,8 @@
             this.txtSystemRegisterDeadline.Location = new System.Drawing.Point(993, 151);
             this.txtSystemRegisterDeadline.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSystemRegisterDeadline.Name = "txtSystemRegisterDeadline";
-            this.txtSystemRegisterDeadline.Size = new System.Drawing.Size(168, 21);
-            this.txtSystemRegisterDeadline.TabIndex = 47;
+            this.txtSystemRegisterDeadline.Size = new System.Drawing.Size(168, 25);
+            this.txtSystemRegisterDeadline.TabIndex = 12;
             this.txtSystemRegisterDeadline.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSystemEffectiveDate
@@ -92,8 +92,8 @@
             this.txtSystemEffectiveDate.Location = new System.Drawing.Point(687, 151);
             this.txtSystemEffectiveDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtSystemEffectiveDate.Name = "txtSystemEffectiveDate";
-            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(170, 21);
-            this.txtSystemEffectiveDate.TabIndex = 45;
+            this.txtSystemEffectiveDate.Size = new System.Drawing.Size(170, 25);
+            this.txtSystemEffectiveDate.TabIndex = 11;
             this.txtSystemEffectiveDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtOrderDate
@@ -101,8 +101,8 @@
             this.txtOrderDate.Location = new System.Drawing.Point(391, 151);
             this.txtOrderDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.Size = new System.Drawing.Size(170, 21);
-            this.txtOrderDate.TabIndex = 43;
+            this.txtOrderDate.Size = new System.Drawing.Size(170, 25);
+            this.txtOrderDate.TabIndex = 10;
             this.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtQuotationIssueDate
@@ -112,8 +112,8 @@
             this.txtQuotationIssueDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtQuotationIssueDate.Name = "txtQuotationIssueDate";
             this.txtQuotationIssueDate.ReadOnly = true;
-            this.txtQuotationIssueDate.Size = new System.Drawing.Size(170, 21);
-            this.txtQuotationIssueDate.TabIndex = 41;
+            this.txtQuotationIssueDate.Size = new System.Drawing.Size(170, 25);
+            this.txtQuotationIssueDate.TabIndex = 9;
             this.txtQuotationIssueDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtEDIAccount
@@ -123,8 +123,8 @@
             this.txtEDIAccount.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtEDIAccount.Name = "txtEDIAccount";
             this.txtEDIAccount.ReadOnly = true;
-            this.txtEDIAccount.Size = new System.Drawing.Size(168, 21);
-            this.txtEDIAccount.TabIndex = 39;
+            this.txtEDIAccount.Size = new System.Drawing.Size(168, 25);
+            this.txtEDIAccount.TabIndex = 4;
             // 
             // txtCompanyName
             // 
@@ -133,8 +133,8 @@
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.ReadOnly = true;
-            this.txtCompanyName.Size = new System.Drawing.Size(170, 21);
-            this.txtCompanyName.TabIndex = 37;
+            this.txtCompanyName.Size = new System.Drawing.Size(170, 25);
+            this.txtCompanyName.TabIndex = 3;
             // 
             // txtCompanyNoBox
             // 
@@ -143,8 +143,8 @@
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
             this.txtCompanyNoBox.ReadOnly = true;
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(170, 21);
-            this.txtCompanyNoBox.TabIndex = 35;
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(170, 25);
+            this.txtCompanyNoBox.TabIndex = 2;
             // 
             // pTitle
             // 
@@ -153,7 +153,7 @@
             this.pTitle.Location = new System.Drawing.Point(0, 0);
             this.pTitle.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.pTitle.Name = "pTitle";
-            this.pTitle.Size = new System.Drawing.Size(1284, 44);
+            this.pTitle.Size = new System.Drawing.Size(1282, 44);
             this.pTitle.TabIndex = 52;
             // 
             // lblMenu
@@ -272,8 +272,8 @@
             this.txtTransactionType.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtTransactionType.Name = "txtTransactionType";
             this.txtTransactionType.ReadOnly = true;
-            this.txtTransactionType.Size = new System.Drawing.Size(83, 21);
-            this.txtTransactionType.TabIndex = 62;
+            this.txtTransactionType.Size = new System.Drawing.Size(83, 25);
+            this.txtTransactionType.TabIndex = 14;
             this.txtTransactionType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // txtREQ_TYPE
@@ -283,8 +283,8 @@
             this.txtREQ_TYPE.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtREQ_TYPE.Name = "txtREQ_TYPE";
             this.txtREQ_TYPE.ReadOnly = true;
-            this.txtREQ_TYPE.Size = new System.Drawing.Size(83, 21);
-            this.txtREQ_TYPE.TabIndex = 64;
+            this.txtREQ_TYPE.Size = new System.Drawing.Size(83, 25);
+            this.txtREQ_TYPE.TabIndex = 15;
             this.txtREQ_TYPE.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblREQ_TYPE
@@ -316,15 +316,15 @@
             this.txtStartUseDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtStartUseDate.Name = "txtStartUseDate";
             this.txtStartUseDate.ReadOnly = true;
-            this.txtStartUseDate.Size = new System.Drawing.Size(168, 21);
-            this.txtStartUseDate.TabIndex = 65;
+            this.txtStartUseDate.Size = new System.Drawing.Size(168, 25);
+            this.txtStartUseDate.TabIndex = 16;
             this.txtStartUseDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // frmPurchaseOrder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1284, 241);
+            this.ClientSize = new System.Drawing.Size(1282, 233);
             this.Controls.Add(this.lblStartUseDate);
             this.Controls.Add(this.txtStartUseDate);
             this.Controls.Add(this.txtREQ_TYPE);

@@ -51,7 +51,7 @@ namespace AmigoProcessManagement
 
         #region Manual Allocation
         [WebMethod]
-        public void do_ManualAllocation(string COMPANY_NO_BOX)
+        public void do_ManualAllocation(string COMPANY_NO_BOX, string YEAR_MONTH)
         {
             //get Authorization header
             HttpContext httpContext = HttpContext.Current;
@@ -70,7 +70,7 @@ namespace AmigoProcessManagement
             else
             {
                 Controller.Controller3B o3B = new Controller.Controller3B();
-                Response response = o3B.ManualAllocation(COMPANY_NO_BOX);
+                Response response = o3B.ManualAllocation(COMPANY_NO_BOX, YEAR_MONTH);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();

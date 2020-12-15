@@ -34,7 +34,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             new Validate{ Name = "colCLIENT_CERTIFICATE_NO", Type = Utility.DataType.TEXT, Edit = true, Require = true, Max = 20},
             new Validate{ Name = "colPASSWORD", Type = Utility.DataType.TEXT, Edit = true, Require = true, Max = 80 },
             new Validate{ Name = "colEXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = true, Max = 160 ,},
-            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = true, Max = 10}
+            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = false, Max = 10}
         };
 
         private List<Validate> Copyable = new List<Validate>{
@@ -42,13 +42,13 @@ namespace AmigoPaperWorkProcessSystem.Forms
             new Validate{ Name = "colCLIENT_CERTIFICATE_NO", Type = Utility.DataType.TEXT, Edit = true, Require = true, Initial="copy", Max = 20},
             new Validate{ Name = "colPASSWORD", Type = Utility.DataType.TEXT, Edit = true, Require = true, Initial="copy", Max = 80 },
             new Validate{ Name = "colEXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = true, Initial="copy", Max = 160 ,},
-            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = true, Initial="copy", Max = 10}
+            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = false, Max = 10}
         };
 
         private List<Validate> Modifiable = new List<Validate>{
             new Validate{ Name = "colPASSWORD", Type = Utility.DataType.TEXT, Edit = true, Require = true, Max = 80 },
             new Validate{ Name = "colEXPIRATION_DATE", Type = Utility.DataType.TIMESTAMP, Edit=true, Require = true, Max = 160 },
-            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = true, Max = 10}
+            new Validate{ Name = "colCOMPANY_NO_BOX", Type = Utility.DataType.TEXT, Edit = true, Require = false, Max = 10}
         };
 
         private string[] dummyColumns = {
@@ -67,7 +67,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
             "UPDATED_BY",
             "UPDATE_MESSAGE",
             "UPDATED_AT_RAW",
-            "ROW_ID"
+            "ROW_ID",
+            "MK_ORIGIN"
         };
 
         #endregion
@@ -225,7 +226,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             {
                 if (CheckUtility.SearchConditionCheck(this, lblFY.Text, txtFY.Text, false, Utility.DataType.HALF_NUMBER, 4, 0) &&
                     CheckUtility.SearchConditionCheck(this, lblCompanyNoBox.Text, txtCompanyNoBox.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 10, 0) &&
-                    CheckUtility.SearchConditionCheck(this, lblClientCertificateNo.Text, txtClientCertificateNo.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 7, 0)
+                    CheckUtility.SearchConditionCheck(this, lblClientCertificateNo.Text, txtClientCertificateNo.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 20, 0)
                     )
                 {
 

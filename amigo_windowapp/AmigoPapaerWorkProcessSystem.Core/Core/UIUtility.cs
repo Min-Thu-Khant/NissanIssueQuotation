@@ -72,27 +72,7 @@ namespace AmigoPaperWorkProcessSystem.Core
             index_key = MetaData.Total;
             ResetReadOnlyProperty();
         }
-
         #endregion
-
-        public void CalculatePaginationNew(Label lblcurrentPage, Label lblTotalPages, Label lblTotalRecords)
-        {
-            lblTotalRecords.Text = MetaData.Total + " 件見つかりました。( " + Math.Round(MetaData.Duration, 2).ToString() + " 秒 )";
-            int currentPage = 0;
-            if (MetaData.Total != 0)
-            {
-                currentPage = MetaData.Offset == 0 ? 1 : (MetaData.Offset / MetaData.Limit) + 1;
-            }
-            else
-            {
-                currentPage = 0;
-            }
-            lblcurrentPage.Text = currentPage.ToString();
-            lblTotalPages.Text = (Math.Ceiling((decimal)MetaData.Total / (decimal)MetaData.Limit).ToString()) + " Pages";
-            index_key = MetaData.Total;
-            //ResetReadOnlyProperty();
-        }
-
 
         #region ResetReadOnlyProperty
         private void ResetReadOnlyProperty()
@@ -251,8 +231,8 @@ namespace AmigoPaperWorkProcessSystem.Core
             var displaycount = new[] {
                                     new { Text = "", Value = "" },
                                     new { Text = "未確認", Value = "0" },
-                                    new { Text = "設定依頼中", Value = "1" },
-                                    new { Text = "設定済み", Value = "2" },
+                                    new { Text = "確認依頼中", Value = "1" },
+                                    new { Text = "確認済み", Value = "2" },
                                     new { Text = "無し", Value = "9" }
                                   };
 
@@ -376,8 +356,8 @@ namespace AmigoPaperWorkProcessSystem.Core
             for (int i = 0; i < dgvList.Rows.Count; i++)
             {
                 string disable_flg = dgvList.Rows[i].Cells["colDISABLED_FLG"].Value.ToString();
-                string ck_value = dgvList.Rows[i].Cells["colCK"].Value == null ? "" : dgvList.Rows[i].Cells["colCK"].Value.ToString();
-                if (disable_flg == "*" && ck_value.Trim() == "")
+                string mk_value = dgvList.Rows[i].Cells["colMK"].Value == null ? "" : dgvList.Rows[i].Cells["colMK"].Value.ToString();
+                if (disable_flg == "*" && string.IsNullOrEmpty(mk_value.Trim()))
                 {
                     ChangeToDisableColor(dgvList.Rows[i]);
                 }
@@ -400,12 +380,9 @@ namespace AmigoPaperWorkProcessSystem.Core
             else
             {
                 dtList.Rows.InsertAt(drToAdd, row.Index + 1);
-                
             }
-            
             dgvList.Rows[row.Index + offset].Cells["colMK"].Value = Mode;
-
-
+            dgvList.Rows[row.Index + offset].Cells["colMK_ORIGIN"].Value = Mode;
         }
         #endregion
 
@@ -427,6 +404,7 @@ namespace AmigoPaperWorkProcessSystem.Core
             drToAdd["ROW_ID"] = index_key;
             dtList.Rows.InsertAt(drToAdd, count);
             dgvList.Rows[count].Cells["colMK"].Value = Mode;
+            dgvList.Rows[count].Cells["colMK_ORIGIN"].Value = Mode;
         }
         #endregion
 
@@ -749,40 +727,35 @@ namespace AmigoPaperWorkProcessSystem.Core
                     {
                         try
                         {
-                            string operation = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
-                            DataRow dr = dtList.Rows[i];
-
-                            switch (operation)
+                            string currentMK = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
+                            string operation_origin = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim();
+                           
+                            switch (operation_origin)
                             {
-                                case "I":
-                                    dr.Delete(); //delete row
-                                    i--;
-                                    break;
-                                case "C":
-                                    dr.Delete(); //delete row
-                                    i--;
-                                    break;
                                 case "M":
+
                                     //get index number by no
                                     int index = OriginFindIndexByKeyNumber(int.Parse(dgvList.Rows[i].Cells["ROW_ID"].Value.ToString()));
 
-                                    //change MK value to trigger event
-                                    dgvList.Rows[i].Cells["colMK"].Value = dtOrigin.Rows[index]["MK"].ToString();
-
                                     //replace modified datarow with original datarow
                                     dtList.Rows[i].ItemArray = dtOrigin.Rows[index].ItemArray;
-                                    dgvList.Rows[i].Cells["colCK"].Value = "True";
-                                    break;
-                                case "D":
-                                    //set MK to empty
-                                    dgvList.Rows[i].Cells["colMK"].Value = " ";
+
                                     break;
                                 default:
                                     break;
                             }
+                            //set MK to empty
+                            if (currentMK == "X" || currentMK == "-")
+                            {
+                                dgvList.Rows[i].Cells["colMK"].Value = operation_origin;
+                            }
+                            else
+                            {
+                                dgvList.Rows[i].Cells["colMK"].Value = " ";
+                            }
                             ResetReadOnlyProperty();
                         }
-                        catch (Exception)
+                        catch (Exception ex)
                         {
 
                         }
@@ -949,6 +922,73 @@ namespace AmigoPaperWorkProcessSystem.Core
             {
             }
         }
+
+        public static void Merge_Header(PaintEventArgs e, int index, int count, string text, DataGridView dgvList, int rowcount, int row, int extra_merge, StringAlignment halignment, StringAlignment valign)
+        {
+            try
+            {
+                //Offsets to adjust the position of the merged Header.
+                int heightOffset = -1;
+                int widthOffset = 0;
+                int xOffset = 1;
+                int yOffset = 2;
+
+                //Index of Header column from where the merging will start.
+                int columnIndex = index;
+
+                //Number of Header columns to be merged.
+                int columnCount = count;
+
+                //Get the position of the Header Cell.
+                Rectangle headerCellRectangle = dgvList.GetCellDisplayRectangle(columnIndex, -1, true);
+
+                //X coordinate  of the merged Header Column.
+                int xCord = headerCellRectangle.Location.X + xOffset;
+
+                //Y coordinate  of the merged Header Column.
+                int yCord = headerCellRectangle.Location.Y + yOffset;
+
+                //Calculate Width of merged Header Column by adding the widths of all Columns to be merged.
+                int all_column_width = 0;
+                for (int i = 0; i < columnCount; i++)
+                {
+                    all_column_width += dgvList.Columns[columnIndex + i].Width;
+                }
+                int mergedHeaderWidth = all_column_width + widthOffset - 2;
+
+                if (row != 0)
+                {
+                    yCord = yCord + (headerCellRectangle.Height / rowcount) * row;
+                }
+                int mergedHeaderHeight = (headerCellRectangle.Height / rowcount) + heightOffset;
+                if (extra_merge != 0)
+                {
+                    mergedHeaderHeight = mergedHeaderHeight + (mergedHeaderHeight * (extra_merge));
+                }
+                //Generate the merged Header Column Rectangle.
+                Rectangle mergedHeaderRect = new Rectangle(xCord, yCord, mergedHeaderWidth, mergedHeaderHeight);
+
+                //draw rectangle border
+                Pen pen = new Pen(Color.Silver, 1);
+                e.Graphics.DrawRectangle(pen, mergedHeaderRect);
+
+                ////Draw the merged Header Column Rectangle.
+                Brush brush = new SolidBrush(Color.FromArgb(64, 64, 64));
+                e.Graphics.FillRectangle(brush, mergedHeaderRect);
+
+                //Draw the merged Header Column Text.
+                StringFormat format = new StringFormat();
+                format.Alignment = halignment;
+                format.LineAlignment = valign;
+
+                e.Graphics.DrawString(text, dgvList.ColumnHeadersDefaultCellStyle.Font, Brushes.Silver, mergedHeaderRect, format);
+
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         #endregion
 
         #region UpdateReturnedResults
@@ -983,7 +1023,8 @@ namespace AmigoPaperWorkProcessSystem.Core
             {
                 for (int i = 0; i < dgvList.Rows.Count; i++)
                 {
-                    string originalvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString();
+                    string mkvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
+                    string mkoriginvalue = dgvList.Rows[i].Cells["colMK_ORIGIN"].Value == null ? null : dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim();
                     string checkvalue = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim();
 
                     if (String.IsNullOrEmpty(checkvalue) ? false : true)
@@ -995,20 +1036,41 @@ namespace AmigoPaperWorkProcessSystem.Core
                                 i++;
                                 break;
                             case "M":
-                                if (originalvalue != "D" || String.IsNullOrEmpty(originalvalue == null ? null : originalvalue.Trim()) || originalvalue == "O" || originalvalue == "X")
+                                if (string.IsNullOrEmpty(mkvalue) || (mkvalue == "O" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C")))
                                 {
                                     dgvList.Rows[i].Cells["colMK"].Value = operation;
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = operation;
+
                                 }
-                                break;
-                            case "D":
-                                if (originalvalue == "I" || originalvalue == "C")
+                                else if (mkvalue == "X" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C" || mkoriginvalue == "D"))
                                 {
-                                    dtList.Rows[i].Delete(); //delete row
-                                    i--;
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+
                                 }
                                 else
                                 {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+                                }
+                                break;
+                            case "D":
+                                if (string.IsNullOrEmpty(mkvalue) || (mkvalue == "O" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C")))
+                                {
                                     dgvList.Rows[i].Cells["colMK"].Value = operation;
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = operation;
+
+                                }
+                                else if (mkvalue == "X" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C" || mkoriginvalue == "D"))
+                                {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+
+                                }
+                                else
+                                {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
                                 }
                                 break;
                             case "C":

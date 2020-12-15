@@ -12,7 +12,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.0.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -188,7 +188,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/opt_35.asmx/GetMatchInvoice?strFromDate=@FromDate&strToDate" +
-            "=@ToDate")]
+            "=@ToDate&strNoReserved=@NoReserved")]
         public string GetMatchInvoice {
             get {
                 return ((string)(this["GetMatchInvoice"]));
@@ -298,7 +298,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/opt_3B.asmx/do_ManualAllocation?COMPANY_NO_BOX=@COMPANY_NO_" +
-            "BOX")]
+            "BOX&YEAR_MONTH=@YEAR_MONTH")]
         public string ManualAllocation {
             get {
                 return ((string)(this["ManualAllocation"]));
@@ -809,7 +809,7 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFIle")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFile")]
         public string GetTempFile {
             get {
                 return ((string)(this["GetTempFile"]));
@@ -834,6 +834,18 @@ namespace AmigoPaperWorkProcessSystem.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_FileServices.asmx/DeleteTempFile")]
+        public string DeleteTempFile {
+            get {
+                return ((string)(this["DeleteTempFile"]));
+            }
+            set {
+                this["DeleteTempFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/MonthlySaleComparisonList.asmx/getMonthlySaleCompari" +
             "sonList?YEAR_MONTH1=@strYYYMM1&YEAR_MONTH2=@strYYMM2&OFFSET=@OFFSET&LIMIT=@LIMIT" +
             "\r\n")]
@@ -843,6 +855,45 @@ namespace AmigoPaperWorkProcessSystem.Properties {
             }
             set {
                 this["getMonthlySaleComparisonlist"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_InvoiceList.asmx/GetInvoiceList?BILLING_DATE=@BI" +
+            "LLING_DATE&OFFSET=@OFFSET&LIMIT=@LIMIT")]
+        public string GetInvoiceList {
+            get {
+                return ((string)(this["GetInvoiceList"]));
+            }
+            set {
+                this["GetInvoiceList"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_InvoiceList.asmx/CreateInvoiceData?YEAR_MONTH=@Y" +
+            "EAR_MONTH")]
+        public string CreateInvoiceData {
+            get {
+                return ((string)(this["CreateInvoiceData"]));
+            }
+            set {
+                this["CreateInvoiceData"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:6077/Jimugo/opt_InvoiceList.asmx/CreateCSVFile?YEAR_MONTH=@YEAR_" +
+            "MONTH")]
+        public string GetInvoiceListForCSVCreate {
+            get {
+                return ((string)(this["GetInvoiceListForCSVCreate"]));
+            }
+            set {
+                this["GetInvoiceListForCSVCreate"] = value;
             }
         }
     }

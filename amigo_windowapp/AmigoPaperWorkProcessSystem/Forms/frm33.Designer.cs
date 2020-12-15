@@ -50,7 +50,7 @@
             // 
             this.lblNoOfDeposit.AutoSize = true;
             this.lblNoOfDeposit.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblNoOfDeposit.Location = new System.Drawing.Point(497, 86);
+            this.lblNoOfDeposit.Location = new System.Drawing.Point(497, 79);
             this.lblNoOfDeposit.Name = "lblNoOfDeposit";
             this.lblNoOfDeposit.Size = new System.Drawing.Size(0, 0);
             this.lblNoOfDeposit.TabIndex = 15;
@@ -59,7 +59,7 @@
             // 
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(419, 86);
+            this.metroLabel5.Location = new System.Drawing.Point(419, 79);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(72, 19);
             this.metroLabel5.TabIndex = 14;
@@ -69,7 +69,7 @@
             // 
             this.lblTime.AutoSize = true;
             this.lblTime.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblTime.Location = new System.Drawing.Point(306, 86);
+            this.lblTime.Location = new System.Drawing.Point(306, 79);
             this.lblTime.Name = "lblTime";
             this.lblTime.Size = new System.Drawing.Size(0, 0);
             this.lblTime.TabIndex = 13;
@@ -78,7 +78,7 @@
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.Location = new System.Drawing.Point(228, 86);
+            this.metroLabel3.Location = new System.Drawing.Point(228, 79);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(72, 19);
             this.metroLabel3.TabIndex = 12;
@@ -88,7 +88,7 @@
             // 
             this.lblDate.AutoSize = true;
             this.lblDate.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblDate.Location = new System.Drawing.Point(99, 86);
+            this.lblDate.Location = new System.Drawing.Point(99, 79);
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(0, 0);
             this.lblDate.TabIndex = 11;
@@ -97,7 +97,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(35, 86);
+            this.metroLabel1.Location = new System.Drawing.Point(35, 79);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(58, 19);
             this.metroLabel1.TabIndex = 10;
@@ -106,9 +106,9 @@
             // btnBack
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1221, 40);
+            this.btnBack.Location = new System.Drawing.Point(1221, 37);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(61, 28);
+            this.btnBack.Size = new System.Drawing.Size(61, 26);
             this.btnBack.TabIndex = 606;
             this.btnBack.Text = "戻る";
             this.btnBack.UseSelectable = true;
@@ -117,9 +117,9 @@
             // btnCreateCustomer
             // 
             this.btnCreateCustomer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateCustomer.Location = new System.Drawing.Point(940, 82);
+            this.btnCreateCustomer.Location = new System.Drawing.Point(940, 76);
             this.btnCreateCustomer.Name = "btnCreateCustomer";
-            this.btnCreateCustomer.Size = new System.Drawing.Size(167, 28);
+            this.btnCreateCustomer.Size = new System.Drawing.Size(167, 26);
             this.btnCreateCustomer.TabIndex = 607;
             this.btnCreateCustomer.Text = "顧客マスタ口座登録";
             this.btnCreateCustomer.UseSelectable = true;
@@ -128,9 +128,9 @@
             // btnMoveToAmigo
             // 
             this.btnMoveToAmigo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoveToAmigo.Location = new System.Drawing.Point(1115, 82);
+            this.btnMoveToAmigo.Location = new System.Drawing.Point(1115, 76);
             this.btnMoveToAmigo.Name = "btnMoveToAmigo";
-            this.btnMoveToAmigo.Size = new System.Drawing.Size(167, 28);
+            this.btnMoveToAmigo.Size = new System.Drawing.Size(167, 26);
             this.btnMoveToAmigo.TabIndex = 608;
             this.btnMoveToAmigo.Text = "Amigoデータ移動";
             this.btnMoveToAmigo.UseSelectable = true;
@@ -152,12 +152,12 @@
             this.CUSTOMER_NAME,
             this.colAmt});
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(20, 129);
+            this.dgvList.Location = new System.Drawing.Point(20, 119);
             this.dgvList.Name = "dgvList";
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.RowHeadersWidth = 10;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvList.Size = new System.Drawing.Size(1262, 524);
+            this.dgvList.Size = new System.Drawing.Size(1262, 484);
             this.dgvList.TabIndex = 609;
             this.dgvList.TabStop = false;
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
@@ -175,6 +175,7 @@
             this.colNo.HeaderText = "Sequence No";
             this.colNo.Name = "colNo";
             this.colNo.ReadOnly = true;
+            this.colNo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colNo.Visible = false;
             // 
             // CUSTOMER_NAME
@@ -183,6 +184,7 @@
             this.CUSTOMER_NAME.HeaderText = "銀行口座名";
             this.CUSTOMER_NAME.Name = "CUSTOMER_NAME";
             this.CUSTOMER_NAME.ReadOnly = true;
+            this.CUSTOMER_NAME.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAmt
             // 
@@ -194,12 +196,13 @@
             this.colAmt.HeaderText = "振込金額";
             this.colAmt.Name = "colAmt";
             this.colAmt.ReadOnly = true;
+            this.colAmt.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frm33
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 670);
+            this.ClientSize = new System.Drawing.Size(1300, 618);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.btnMoveToAmigo);
             this.Controls.Add(this.btnCreateCustomer);
@@ -211,6 +214,7 @@
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.metroLabel1);
             this.Name = "frm33";
+            this.Padding = new System.Windows.Forms.Padding(20, 55, 20, 18);
             this.Resizable = false;
             this.Text = "3-3. Amigo外データ確認";
             this.Load += new System.EventHandler(this.Frm33_Load);

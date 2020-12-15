@@ -107,7 +107,7 @@
             this.btnPreview.Location = new System.Drawing.Point(15, 63);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(100, 30);
-            this.btnPreview.TabIndex = 3;
+            this.btnPreview.TabIndex = 1;
             this.btnPreview.Text = "プレビュー\r\n";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.BtnPreview_Click);
@@ -129,7 +129,7 @@
             this.txtCompanyNoBox.Location = new System.Drawing.Point(116, 108);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(130, 21);
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(130, 25);
             this.txtCompanyNoBox.TabIndex = 18;
             // 
             // lblEDIAccount
@@ -149,7 +149,7 @@
             this.txtEDIAccount.Location = new System.Drawing.Point(355, 109);
             this.txtEDIAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEDIAccount.Name = "txtEDIAccount";
-            this.txtEDIAccount.Size = new System.Drawing.Size(130, 21);
+            this.txtEDIAccount.Size = new System.Drawing.Size(130, 25);
             this.txtEDIAccount.TabIndex = 20;
             // 
             // lblCompanyName
@@ -169,7 +169,7 @@
             this.txtCompanyName.Location = new System.Drawing.Point(613, 109);
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(130, 21);
+            this.txtCompanyName.Size = new System.Drawing.Size(130, 25);
             this.txtCompanyName.TabIndex = 22;
             // 
             // lblIssueDate
@@ -189,7 +189,7 @@
             this.txtIssueDate.Location = new System.Drawing.Point(116, 148);
             this.txtIssueDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtIssueDate.Name = "txtIssueDate";
-            this.txtIssueDate.Size = new System.Drawing.Size(130, 21);
+            this.txtIssueDate.Size = new System.Drawing.Size(130, 25);
             this.txtIssueDate.TabIndex = 24;
             this.txtIssueDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -210,7 +210,7 @@
             this.txtOrderDate.Location = new System.Drawing.Point(355, 148);
             this.txtOrderDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtOrderDate.Name = "txtOrderDate";
-            this.txtOrderDate.Size = new System.Drawing.Size(130, 21);
+            this.txtOrderDate.Size = new System.Drawing.Size(130, 25);
             this.txtOrderDate.TabIndex = 26;
             this.txtOrderDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -231,7 +231,7 @@
             this.txtNotificationDate.Location = new System.Drawing.Point(613, 149);
             this.txtNotificationDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtNotificationDate.Name = "txtNotificationDate";
-            this.txtNotificationDate.Size = new System.Drawing.Size(130, 21);
+            this.txtNotificationDate.Size = new System.Drawing.Size(130, 25);
             this.txtNotificationDate.TabIndex = 28;
             this.txtNotificationDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -242,8 +242,8 @@
             this.chkInitialQuot.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkInitialQuot.Location = new System.Drawing.Point(16, 191);
             this.chkInitialQuot.Name = "chkInitialQuot";
-            this.chkInitialQuot.Size = new System.Drawing.Size(81, 18);
-            this.chkInitialQuot.TabIndex = 30;
+            this.chkInitialQuot.Size = new System.Drawing.Size(100, 22);
+            this.chkInitialQuot.TabIndex = 2;
             this.chkInitialQuot.Text = "初期見積書";
             this.chkInitialQuot.UseVisualStyleBackColor = true;
             // 
@@ -254,8 +254,8 @@
             this.chkMonthlyQuote.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkMonthlyQuote.Location = new System.Drawing.Point(136, 191);
             this.chkMonthlyQuote.Name = "chkMonthlyQuote";
-            this.chkMonthlyQuote.Size = new System.Drawing.Size(81, 18);
-            this.chkMonthlyQuote.TabIndex = 31;
+            this.chkMonthlyQuote.Size = new System.Drawing.Size(100, 22);
+            this.chkMonthlyQuote.TabIndex = 3;
             this.chkMonthlyQuote.Text = "月額見積書";
             this.chkMonthlyQuote.UseVisualStyleBackColor = true;
             // 
@@ -266,8 +266,8 @@
             this.chkProductionInfo.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkProductionInfo.Location = new System.Drawing.Point(255, 191);
             this.chkProductionInfo.Name = "chkProductionInfo";
-            this.chkProductionInfo.Size = new System.Drawing.Size(92, 18);
-            this.chkProductionInfo.TabIndex = 32;
+            this.chkProductionInfo.Size = new System.Drawing.Size(114, 22);
+            this.chkProductionInfo.TabIndex = 4;
             this.chkProductionInfo.Text = "生産情報閲覧";
             this.chkProductionInfo.UseVisualStyleBackColor = true;
             // 
@@ -278,8 +278,8 @@
             this.chkOrderForm.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkOrderForm.Location = new System.Drawing.Point(387, 191);
             this.chkOrderForm.Name = "chkOrderForm";
-            this.chkOrderForm.Size = new System.Drawing.Size(59, 18);
-            this.chkOrderForm.TabIndex = 33;
+            this.chkOrderForm.Size = new System.Drawing.Size(72, 22);
+            this.chkOrderForm.TabIndex = 5;
             this.chkOrderForm.Text = "注文書";
             this.chkOrderForm.UseVisualStyleBackColor = true;
             // 
@@ -299,8 +299,8 @@
             this.txtQuotationStartDate.Location = new System.Drawing.Point(871, 189);
             this.txtQuotationStartDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtQuotationStartDate.Name = "txtQuotationStartDate";
-            this.txtQuotationStartDate.Size = new System.Drawing.Size(130, 21);
-            this.txtQuotationStartDate.TabIndex = 34;
+            this.txtQuotationStartDate.Size = new System.Drawing.Size(130, 25);
+            this.txtQuotationStartDate.TabIndex = 6;
             this.txtQuotationStartDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // lblQuotationExpireDay
@@ -319,8 +319,8 @@
             this.txtQuotationExpireDay.Location = new System.Drawing.Point(1126, 189);
             this.txtQuotationExpireDay.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtQuotationExpireDay.Name = "txtQuotationExpireDay";
-            this.txtQuotationExpireDay.Size = new System.Drawing.Size(130, 21);
-            this.txtQuotationExpireDay.TabIndex = 36;
+            this.txtQuotationExpireDay.Size = new System.Drawing.Size(130, 25);
+            this.txtQuotationExpireDay.TabIndex = 7;
             this.txtQuotationExpireDay.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblInitialSpecialDiscount
@@ -339,8 +339,8 @@
             this.txtInitialSpecialDiscount.Location = new System.Drawing.Point(124, 231);
             this.txtInitialSpecialDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtInitialSpecialDiscount.Name = "txtInitialSpecialDiscount";
-            this.txtInitialSpecialDiscount.Size = new System.Drawing.Size(122, 21);
-            this.txtInitialSpecialDiscount.TabIndex = 38;
+            this.txtInitialSpecialDiscount.Size = new System.Drawing.Size(122, 25);
+            this.txtInitialSpecialDiscount.TabIndex = 8;
             this.txtInitialSpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblMonthlySpecialDiscount
@@ -359,8 +359,8 @@
             this.txtMonthlySpecialDiscount.Location = new System.Drawing.Point(383, 231);
             this.txtMonthlySpecialDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMonthlySpecialDiscount.Name = "txtMonthlySpecialDiscount";
-            this.txtMonthlySpecialDiscount.Size = new System.Drawing.Size(102, 21);
-            this.txtMonthlySpecialDiscount.TabIndex = 40;
+            this.txtMonthlySpecialDiscount.Size = new System.Drawing.Size(102, 25);
+            this.txtMonthlySpecialDiscount.TabIndex = 9;
             this.txtMonthlySpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblDestinationEmail
@@ -379,8 +379,8 @@
             this.txtDestinationMail.Location = new System.Drawing.Point(124, 273);
             this.txtDestinationMail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDestinationMail.Name = "txtDestinationMail";
-            this.txtDestinationMail.Size = new System.Drawing.Size(361, 21);
-            this.txtDestinationMail.TabIndex = 42;
+            this.txtDestinationMail.Size = new System.Drawing.Size(361, 25);
+            this.txtDestinationMail.TabIndex = 11;
             // 
             // lblPeriod
             // 
@@ -398,8 +398,8 @@
             this.txtPeriodFrom.Location = new System.Drawing.Point(145, 316);
             this.txtPeriodFrom.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPeriodFrom.Name = "txtPeriodFrom";
-            this.txtPeriodFrom.Size = new System.Drawing.Size(150, 21);
-            this.txtPeriodFrom.TabIndex = 44;
+            this.txtPeriodFrom.Size = new System.Drawing.Size(150, 25);
+            this.txtPeriodFrom.TabIndex = 13;
             this.txtPeriodFrom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtPeriodTo
@@ -407,8 +407,8 @@
             this.txtPeriodTo.Location = new System.Drawing.Point(335, 316);
             this.txtPeriodTo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPeriodTo.Name = "txtPeriodTo";
-            this.txtPeriodTo.Size = new System.Drawing.Size(150, 21);
-            this.txtPeriodTo.TabIndex = 46;
+            this.txtPeriodTo.Size = new System.Drawing.Size(150, 25);
+            this.txtPeriodTo.TabIndex = 14;
             this.txtPeriodTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label13
@@ -416,7 +416,7 @@
             this.label13.AutoSize = true;
             this.label13.Location = new System.Drawing.Point(307, 319);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(16, 14);
+            this.label13.Size = new System.Drawing.Size(19, 18);
             this.label13.TabIndex = 47;
             this.label13.Text = "~";
             // 
@@ -433,15 +433,15 @@
             this.tbParent.Name = "tbParent";
             this.tbParent.SelectedIndex = 0;
             this.tbParent.Size = new System.Drawing.Size(1259, 305);
-            this.tbParent.TabIndex = 48;
+            this.tbParent.TabIndex = 15;
             // 
             // tbInitialRemark
             // 
             this.tbInitialRemark.Controls.Add(this.txtInitialRemark);
-            this.tbInitialRemark.Location = new System.Drawing.Point(4, 23);
+            this.tbInitialRemark.Location = new System.Drawing.Point(4, 27);
             this.tbInitialRemark.Name = "tbInitialRemark";
             this.tbInitialRemark.Padding = new System.Windows.Forms.Padding(3);
-            this.tbInitialRemark.Size = new System.Drawing.Size(1251, 278);
+            this.tbInitialRemark.Size = new System.Drawing.Size(1251, 274);
             this.tbInitialRemark.TabIndex = 0;
             this.tbInitialRemark.Text = "初期見積書の備考";
             this.tbInitialRemark.UseVisualStyleBackColor = true;
@@ -452,16 +452,16 @@
             this.txtInitialRemark.Location = new System.Drawing.Point(3, 3);
             this.txtInitialRemark.Multiline = true;
             this.txtInitialRemark.Name = "txtInitialRemark";
-            this.txtInitialRemark.Size = new System.Drawing.Size(1245, 272);
-            this.txtInitialRemark.TabIndex = 0;
+            this.txtInitialRemark.Size = new System.Drawing.Size(1245, 268);
+            this.txtInitialRemark.TabIndex = 16;
             // 
             // tbMonthlyRemark
             // 
             this.tbMonthlyRemark.Controls.Add(this.txtMonthlyRemark);
-            this.tbMonthlyRemark.Location = new System.Drawing.Point(4, 23);
+            this.tbMonthlyRemark.Location = new System.Drawing.Point(4, 27);
             this.tbMonthlyRemark.Name = "tbMonthlyRemark";
             this.tbMonthlyRemark.Padding = new System.Windows.Forms.Padding(3);
-            this.tbMonthlyRemark.Size = new System.Drawing.Size(1251, 278);
+            this.tbMonthlyRemark.Size = new System.Drawing.Size(1251, 274);
             this.tbMonthlyRemark.TabIndex = 1;
             this.tbMonthlyRemark.Text = "月額見積書の備考";
             this.tbMonthlyRemark.UseVisualStyleBackColor = true;
@@ -472,16 +472,16 @@
             this.txtMonthlyRemark.Location = new System.Drawing.Point(3, 3);
             this.txtMonthlyRemark.Multiline = true;
             this.txtMonthlyRemark.Name = "txtMonthlyRemark";
-            this.txtMonthlyRemark.Size = new System.Drawing.Size(1245, 272);
+            this.txtMonthlyRemark.Size = new System.Drawing.Size(1245, 268);
             this.txtMonthlyRemark.TabIndex = 1;
             // 
             // tbProductionInfoRemark
             // 
             this.tbProductionInfoRemark.Controls.Add(this.txtOrderRemark);
-            this.tbProductionInfoRemark.Location = new System.Drawing.Point(4, 23);
+            this.tbProductionInfoRemark.Location = new System.Drawing.Point(4, 27);
             this.tbProductionInfoRemark.Name = "tbProductionInfoRemark";
             this.tbProductionInfoRemark.Padding = new System.Windows.Forms.Padding(3);
-            this.tbProductionInfoRemark.Size = new System.Drawing.Size(1251, 278);
+            this.tbProductionInfoRemark.Size = new System.Drawing.Size(1251, 274);
             this.tbProductionInfoRemark.TabIndex = 2;
             this.tbProductionInfoRemark.Text = "注文書の備考";
             this.tbProductionInfoRemark.UseVisualStyleBackColor = true;
@@ -492,16 +492,16 @@
             this.txtOrderRemark.Location = new System.Drawing.Point(3, 3);
             this.txtOrderRemark.Multiline = true;
             this.txtOrderRemark.Name = "txtOrderRemark";
-            this.txtOrderRemark.Size = new System.Drawing.Size(1245, 272);
+            this.txtOrderRemark.Size = new System.Drawing.Size(1245, 268);
             this.txtOrderRemark.TabIndex = 0;
             // 
             // tbOrderRemark
             // 
             this.tbOrderRemark.Controls.Add(this.txtProductionInfoRemark);
-            this.tbOrderRemark.Location = new System.Drawing.Point(4, 23);
+            this.tbOrderRemark.Location = new System.Drawing.Point(4, 27);
             this.tbOrderRemark.Name = "tbOrderRemark";
             this.tbOrderRemark.Padding = new System.Windows.Forms.Padding(3);
-            this.tbOrderRemark.Size = new System.Drawing.Size(1251, 278);
+            this.tbOrderRemark.Size = new System.Drawing.Size(1251, 274);
             this.tbOrderRemark.TabIndex = 3;
             this.tbOrderRemark.Text = "初期見積書(生産)の備考";
             this.tbOrderRemark.UseVisualStyleBackColor = true;
@@ -512,7 +512,7 @@
             this.txtProductionInfoRemark.Location = new System.Drawing.Point(3, 3);
             this.txtProductionInfoRemark.Multiline = true;
             this.txtProductionInfoRemark.Name = "txtProductionInfoRemark";
-            this.txtProductionInfoRemark.Size = new System.Drawing.Size(1245, 272);
+            this.txtProductionInfoRemark.Size = new System.Drawing.Size(1245, 268);
             this.txtProductionInfoRemark.TabIndex = 0;
             // 
             // lblTax
@@ -531,8 +531,8 @@
             this.txtTax.Location = new System.Drawing.Point(613, 189);
             this.txtTax.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTax.Name = "txtTax";
-            this.txtTax.Size = new System.Drawing.Size(130, 21);
-            this.txtTax.TabIndex = 49;
+            this.txtTax.Size = new System.Drawing.Size(130, 25);
+            this.txtTax.TabIndex = 16;
             this.txtTax.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lblYearlySpecialDiscount
@@ -551,13 +551,13 @@
             this.txtYearlySpecialDiscount.Location = new System.Drawing.Point(621, 231);
             this.txtYearlySpecialDiscount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtYearlySpecialDiscount.Name = "txtYearlySpecialDiscount";
-            this.txtYearlySpecialDiscount.Size = new System.Drawing.Size(102, 21);
-            this.txtYearlySpecialDiscount.TabIndex = 51;
+            this.txtYearlySpecialDiscount.Size = new System.Drawing.Size(102, 25);
+            this.txtYearlySpecialDiscount.TabIndex = 10;
             this.txtYearlySpecialDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // frmIssueQuotation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 681);
             this.Controls.Add(this.lblYearlySpecialDiscount);

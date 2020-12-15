@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomerMasterMaintenance));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -62,21 +61,22 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle33 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmCustomerMasterMaintenance));
             this.pTitle = new System.Windows.Forms.Panel();
             this.lblMenu = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnModify = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblCompanyName = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblCompanyNameReading = new System.Windows.Forms.Label();
             this.txtCompanyNameReading = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lblCompanyNoBox = new System.Windows.Forms.Label();
             this.txtCompanyNoBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblEDIAccount = new System.Windows.Forms.Label();
             this.txtEDIAccount = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lblEmailAddress = new System.Windows.Forms.Label();
             this.txtMailAddress = new System.Windows.Forms.TextBox();
             this.lblClear = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -85,19 +85,6 @@
             this.chkServiceDesk = new System.Windows.Forms.CheckBox();
             this.chkNotificationDestination = new System.Windows.Forms.CheckBox();
             this.dgvList = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.lblTotalRecords = new System.Windows.Forms.Label();
-            this.btnCheck = new System.Windows.Forms.Button();
-            this.btnUnCheck = new System.Windows.Forms.Button();
-            this.lblTotalPages = new System.Windows.Forms.Label();
-            this.lblcurrentPage = new System.Windows.Forms.Label();
-            this.btnLast = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnFirst = new System.Windows.Forms.Button();
-            this.btnPrev = new System.Windows.Forms.Button();
-            this.cboLimit = new System.Windows.Forms.ComboBox();
-            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.colNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCK = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colMK = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -188,6 +175,20 @@
             this.colREQ_SEQ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colORG_EFFECTIVE_DATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDISABLED_FLG = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMK_ORIGIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.lblTotalRecords = new System.Windows.Forms.Label();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.btnUnCheck = new System.Windows.Forms.Button();
+            this.lblTotalPages = new System.Windows.Forms.Label();
+            this.lblcurrentPage = new System.Windows.Forms.Label();
+            this.btnLast = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnFirst = new System.Windows.Forms.Button();
+            this.btnPrev = new System.Windows.Forms.Button();
+            this.cboLimit = new System.Windows.Forms.ComboBox();
+            this.displayItemLabel1 = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
@@ -256,99 +257,99 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
             // 
-            // label1
+            // lblCompanyName
             // 
-            this.label1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Location = new System.Drawing.Point(17, 118);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(77, 21);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "会社名";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyName.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyName.Location = new System.Drawing.Point(17, 118);
+            this.lblCompanyName.Name = "lblCompanyName";
+            this.lblCompanyName.Size = new System.Drawing.Size(77, 21);
+            this.lblCompanyName.TabIndex = 13;
+            this.lblCompanyName.Text = "会社名";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyName
             // 
             this.txtCompanyName.Location = new System.Drawing.Point(93, 118);
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(147, 25);
+            this.txtCompanyName.Size = new System.Drawing.Size(147, 21);
             this.txtCompanyName.TabIndex = 14;
             // 
-            // label2
+            // lblCompanyNameReading
             // 
-            this.label2.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label2.Location = new System.Drawing.Point(260, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 21);
-            this.label2.TabIndex = 15;
-            this.label2.Text = "会社名フリガナ";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyNameReading.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyNameReading.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyNameReading.Location = new System.Drawing.Point(260, 118);
+            this.lblCompanyNameReading.Name = "lblCompanyNameReading";
+            this.lblCompanyNameReading.Size = new System.Drawing.Size(89, 21);
+            this.lblCompanyNameReading.TabIndex = 15;
+            this.lblCompanyNameReading.Text = "会社名フリガナ";
+            this.lblCompanyNameReading.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyNameReading
             // 
             this.txtCompanyNameReading.Location = new System.Drawing.Point(348, 118);
             this.txtCompanyNameReading.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNameReading.Name = "txtCompanyNameReading";
-            this.txtCompanyNameReading.Size = new System.Drawing.Size(147, 25);
+            this.txtCompanyNameReading.Size = new System.Drawing.Size(147, 21);
             this.txtCompanyNameReading.TabIndex = 16;
             // 
-            // label3
+            // lblCompanyNoBox
             // 
-            this.label3.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label3.Location = new System.Drawing.Point(514, 118);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 21);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "会社番号＋BOX";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCompanyNoBox.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblCompanyNoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCompanyNoBox.Location = new System.Drawing.Point(514, 118);
+            this.lblCompanyNoBox.Name = "lblCompanyNoBox";
+            this.lblCompanyNoBox.Size = new System.Drawing.Size(97, 21);
+            this.lblCompanyNoBox.TabIndex = 17;
+            this.lblCompanyNoBox.Text = "会社番号＋BOX";
+            this.lblCompanyNoBox.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtCompanyNoBox
             // 
             this.txtCompanyNoBox.Location = new System.Drawing.Point(610, 118);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(147, 25);
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(147, 21);
             this.txtCompanyNoBox.TabIndex = 18;
             // 
-            // label4
+            // lblEDIAccount
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label4.Location = new System.Drawing.Point(774, 118);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 21);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "EDIアカウント";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEDIAccount.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblEDIAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEDIAccount.Location = new System.Drawing.Point(774, 118);
+            this.lblEDIAccount.Name = "lblEDIAccount";
+            this.lblEDIAccount.Size = new System.Drawing.Size(80, 21);
+            this.lblEDIAccount.TabIndex = 19;
+            this.lblEDIAccount.Text = "EDIアカウント";
+            this.lblEDIAccount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtEDIAccount
             // 
             this.txtEDIAccount.Location = new System.Drawing.Point(853, 118);
             this.txtEDIAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEDIAccount.Name = "txtEDIAccount";
-            this.txtEDIAccount.Size = new System.Drawing.Size(147, 25);
+            this.txtEDIAccount.Size = new System.Drawing.Size(147, 21);
             this.txtEDIAccount.TabIndex = 20;
             // 
-            // label5
+            // lblEmailAddress
             // 
-            this.label5.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.Location = new System.Drawing.Point(17, 160);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 21);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "メールアドレス";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEmailAddress.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.lblEmailAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblEmailAddress.Location = new System.Drawing.Point(17, 160);
+            this.lblEmailAddress.Name = "lblEmailAddress";
+            this.lblEmailAddress.Size = new System.Drawing.Size(112, 21);
+            this.lblEmailAddress.TabIndex = 21;
+            this.lblEmailAddress.Text = "メールアドレス";
+            this.lblEmailAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtMailAddress
             // 
             this.txtMailAddress.Location = new System.Drawing.Point(128, 160);
             this.txtMailAddress.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtMailAddress.Name = "txtMailAddress";
-            this.txtMailAddress.Size = new System.Drawing.Size(367, 25);
+            this.txtMailAddress.Size = new System.Drawing.Size(367, 21);
             this.txtMailAddress.TabIndex = 22;
             // 
             // lblClear
@@ -358,7 +359,7 @@
             this.lblClear.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblClear.Location = new System.Drawing.Point(258, 201);
             this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(104, 18);
+            this.lblClear.Size = new System.Drawing.Size(82, 14);
             this.lblClear.TabIndex = 26;
             this.lblClear.Text = "検索条件のクリア";
             this.lblClear.Click += new System.EventHandler(this.LblClear_Click);
@@ -368,7 +369,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(515, 163);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(121, 18);
+            this.label7.Size = new System.Drawing.Size(94, 14);
             this.label7.TabIndex = 27;
             this.label7.Text = "アドレス検索対象：";
             // 
@@ -379,7 +380,7 @@
             this.chkContractor.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkContractor.Location = new System.Drawing.Point(618, 162);
             this.chkContractor.Name = "chkContractor";
-            this.chkContractor.Size = new System.Drawing.Size(72, 22);
+            this.chkContractor.Size = new System.Drawing.Size(59, 18);
             this.chkContractor.TabIndex = 31;
             this.chkContractor.Text = "契約先";
             this.chkContractor.UseVisualStyleBackColor = true;
@@ -391,7 +392,7 @@
             this.chkInvoice.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkInvoice.Location = new System.Drawing.Point(697, 162);
             this.chkInvoice.Name = "chkInvoice";
-            this.chkInvoice.Size = new System.Drawing.Size(114, 22);
+            this.chkInvoice.Size = new System.Drawing.Size(92, 18);
             this.chkInvoice.TabIndex = 32;
             this.chkInvoice.Text = "請求書送付先";
             this.chkInvoice.UseVisualStyleBackColor = true;
@@ -403,7 +404,7 @@
             this.chkServiceDesk.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkServiceDesk.Location = new System.Drawing.Point(809, 161);
             this.chkServiceDesk.Name = "chkServiceDesk";
-            this.chkServiceDesk.Size = new System.Drawing.Size(105, 22);
+            this.chkServiceDesk.Size = new System.Drawing.Size(85, 18);
             this.chkServiceDesk.TabIndex = 33;
             this.chkServiceDesk.Text = "サービスデスク";
             this.chkServiceDesk.UseVisualStyleBackColor = true;
@@ -415,7 +416,7 @@
             this.chkNotificationDestination.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkNotificationDestination.Location = new System.Drawing.Point(916, 162);
             this.chkNotificationDestination.Name = "chkNotificationDestination";
-            this.chkNotificationDestination.Size = new System.Drawing.Size(104, 22);
+            this.chkNotificationDestination.Size = new System.Drawing.Size(84, 18);
             this.chkNotificationDestination.TabIndex = 34;
             this.chkNotificationDestination.Text = "エラー通知先";
             this.chkNotificationDestination.UseVisualStyleBackColor = true;
@@ -526,7 +527,8 @@
             this.ROW_ID,
             this.colREQ_SEQ,
             this.colORG_EFFECTIVE_DATE,
-            this.colDISABLED_FLG});
+            this.colDISABLED_FLG,
+            this.colMK_ORIGIN});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(16, 276);
             this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -537,173 +539,11 @@
             this.dgvList.Size = new System.Drawing.Size(1252, 312);
             this.dgvList.TabIndex = 36;
             this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellContentClick);
+            this.dgvList.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.DgvList_CellFormatting);
             this.dgvList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvList_CellValueChanged);
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
-            // 
-            // panel1
-            // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
-            this.panel1.Controls.Add(this.lblTotalRecords);
-            this.panel1.Controls.Add(this.btnCheck);
-            this.panel1.Controls.Add(this.btnUnCheck);
-            this.panel1.Controls.Add(this.lblTotalPages);
-            this.panel1.Controls.Add(this.lblcurrentPage);
-            this.panel1.Controls.Add(this.btnLast);
-            this.panel1.Controls.Add(this.label8);
-            this.panel1.Controls.Add(this.btnNext);
-            this.panel1.Controls.Add(this.btnFirst);
-            this.panel1.Controls.Add(this.btnPrev);
-            this.panel1.Location = new System.Drawing.Point(16, 233);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1252, 34);
-            this.panel1.TabIndex = 35;
-            // 
-            // lblTotalRecords
-            // 
-            this.lblTotalRecords.AutoSize = true;
-            this.lblTotalRecords.Location = new System.Drawing.Point(3, 11);
-            this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(0, 18);
-            this.lblTotalRecords.TabIndex = 36;
-            // 
-            // btnCheck
-            // 
-            this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCheck.BackgroundImage")));
-            this.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnCheck.FlatAppearance.BorderSize = 0;
-            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheck.Location = new System.Drawing.Point(824, 3);
-            this.btnCheck.Name = "btnCheck";
-            this.btnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnCheck.TabIndex = 33;
-            this.btnCheck.UseVisualStyleBackColor = true;
-            this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
-            // 
-            // btnUnCheck
-            // 
-            this.btnUnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnUnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnCheck.BackgroundImage")));
-            this.btnUnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnUnCheck.FlatAppearance.BorderSize = 0;
-            this.btnUnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUnCheck.Location = new System.Drawing.Point(862, 3);
-            this.btnUnCheck.Name = "btnUnCheck";
-            this.btnUnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnUnCheck.TabIndex = 32;
-            this.btnUnCheck.UseVisualStyleBackColor = true;
-            this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
-            // 
-            // lblTotalPages
-            // 
-            this.lblTotalPages.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblTotalPages.AutoSize = true;
-            this.lblTotalPages.Location = new System.Drawing.Point(1104, 10);
-            this.lblTotalPages.Name = "lblTotalPages";
-            this.lblTotalPages.Size = new System.Drawing.Size(17, 18);
-            this.lblTotalPages.TabIndex = 31;
-            this.lblTotalPages.Text = "0";
-            // 
-            // lblcurrentPage
-            // 
-            this.lblcurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblcurrentPage.AutoSize = true;
-            this.lblcurrentPage.Location = new System.Drawing.Point(1016, 10);
-            this.lblcurrentPage.Name = "lblcurrentPage";
-            this.lblcurrentPage.Size = new System.Drawing.Size(17, 18);
-            this.lblcurrentPage.TabIndex = 30;
-            this.lblcurrentPage.Text = "0";
-            // 
-            // btnLast
-            // 
-            this.btnLast.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnLast.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.next_icon;
-            this.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnLast.FlatAppearance.BorderSize = 0;
-            this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLast.Location = new System.Drawing.Point(1199, 3);
-            this.btnLast.Name = "btnLast";
-            this.btnLast.Size = new System.Drawing.Size(35, 28);
-            this.btnLast.TabIndex = 28;
-            this.btnLast.UseVisualStyleBackColor = true;
-            this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
-            // 
-            // label8
-            // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1063, 10);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(24, 18);
-            this.label8.TabIndex = 25;
-            this.label8.Text = "Of";
-            // 
-            // btnNext
-            // 
-            this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnNext.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.right_arrow;
-            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnNext.FlatAppearance.BorderSize = 0;
-            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnNext.Location = new System.Drawing.Point(1157, 3);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(35, 28);
-            this.btnNext.TabIndex = 26;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
-            // 
-            // btnFirst
-            // 
-            this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnFirst.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.previous_icon;
-            this.btnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnFirst.FlatAppearance.BorderSize = 0;
-            this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFirst.Location = new System.Drawing.Point(911, 3);
-            this.btnFirst.Name = "btnFirst";
-            this.btnFirst.Size = new System.Drawing.Size(35, 28);
-            this.btnFirst.TabIndex = 29;
-            this.btnFirst.UseVisualStyleBackColor = true;
-            this.btnFirst.Click += new System.EventHandler(this.BtnFirst_Click);
-            // 
-            // btnPrev
-            // 
-            this.btnPrev.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnPrev.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.left_arrow;
-            this.btnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPrev.FlatAppearance.BorderSize = 0;
-            this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPrev.Location = new System.Drawing.Point(953, 3);
-            this.btnPrev.Name = "btnPrev";
-            this.btnPrev.Size = new System.Drawing.Size(35, 28);
-            this.btnPrev.TabIndex = 27;
-            this.btnPrev.UseVisualStyleBackColor = true;
-            this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
-            // 
-            // cboLimit
-            // 
-            this.cboLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboLimit.FormattingEnabled = true;
-            this.cboLimit.Location = new System.Drawing.Point(84, 197);
-            this.cboLimit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.cboLimit.Name = "cboLimit";
-            this.cboLimit.Size = new System.Drawing.Size(156, 26);
-            this.cboLimit.TabIndex = 37;
-            // 
-            // displayItemLabel1
-            // 
-            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
-            this.displayItemLabel1.LabelText = " 表示件数";
-            this.displayItemLabel1.Location = new System.Drawing.Point(17, 197);
-            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.displayItemLabel1.Name = "displayItemLabel1";
-            this.displayItemLabel1.Size = new System.Drawing.Size(68, 22);
-            this.displayItemLabel1.TabIndex = 38;
             // 
             // colNo
             // 
@@ -1223,6 +1063,7 @@
             // 
             this.colBILL_TRANSFER_FEE.DataPropertyName = "BILL_TRANSFER_FEE";
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle13.Format = "N0";
             this.colBILL_TRANSFER_FEE.DefaultCellStyle = dataGridViewCellStyle13;
             this.colBILL_TRANSFER_FEE.HeaderText = "請求先_銀行振込手数料";
             this.colBILL_TRANSFER_FEE.Name = "colBILL_TRANSFER_FEE";
@@ -1234,6 +1075,7 @@
             // 
             this.colBILL_EXPENSES.DataPropertyName = "BILL_EXPENSES";
             dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle14.Format = "N0";
             this.colBILL_EXPENSES.DefaultCellStyle = dataGridViewCellStyle14;
             this.colBILL_EXPENSES.HeaderText = "請求先_諸経費";
             this.colBILL_EXPENSES.Name = "colBILL_EXPENSES";
@@ -1278,6 +1120,7 @@
             // 
             this.colINITIAL_COST.DataPropertyName = "INITIAL_COST";
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle18.Format = "N0";
             this.colINITIAL_COST.DefaultCellStyle = dataGridViewCellStyle18;
             this.colINITIAL_COST.HeaderText = "初期費用";
             this.colINITIAL_COST.Name = "colINITIAL_COST";
@@ -1289,6 +1132,7 @@
             // 
             this.colMONTHLY_COST.DataPropertyName = "MONTHLY_COST";
             dataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle19.Format = "N0";
             this.colMONTHLY_COST.DefaultCellStyle = dataGridViewCellStyle19;
             this.colMONTHLY_COST.HeaderText = "月額利用料";
             this.colMONTHLY_COST.Name = "colMONTHLY_COST";
@@ -1300,6 +1144,7 @@
             // 
             this.colYEAR_COST.DataPropertyName = "YEAR_COST";
             dataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle20.Format = "N0";
             this.colYEAR_COST.DefaultCellStyle = dataGridViewCellStyle20;
             this.colYEAR_COST.HeaderText = "年額利用料";
             this.colYEAR_COST.Name = "colYEAR_COST";
@@ -1592,9 +1437,179 @@
             this.colDISABLED_FLG.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colDISABLED_FLG.Visible = false;
             // 
+            // colMK_ORIGIN
+            // 
+            this.colMK_ORIGIN.DataPropertyName = "MK_ORIGIN";
+            this.colMK_ORIGIN.HeaderText = "MK_ORIGIN";
+            this.colMK_ORIGIN.Name = "colMK_ORIGIN";
+            this.colMK_ORIGIN.Visible = false;
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.lblTotalRecords);
+            this.panel1.Controls.Add(this.btnCheck);
+            this.panel1.Controls.Add(this.btnUnCheck);
+            this.panel1.Controls.Add(this.lblTotalPages);
+            this.panel1.Controls.Add(this.lblcurrentPage);
+            this.panel1.Controls.Add(this.btnLast);
+            this.panel1.Controls.Add(this.label8);
+            this.panel1.Controls.Add(this.btnNext);
+            this.panel1.Controls.Add(this.btnFirst);
+            this.panel1.Controls.Add(this.btnPrev);
+            this.panel1.Location = new System.Drawing.Point(16, 233);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1252, 34);
+            this.panel1.TabIndex = 35;
+            // 
+            // lblTotalRecords
+            // 
+            this.lblTotalRecords.AutoSize = true;
+            this.lblTotalRecords.Location = new System.Drawing.Point(3, 11);
+            this.lblTotalRecords.Name = "lblTotalRecords";
+            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalRecords.TabIndex = 36;
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnCheck.BackgroundImage")));
+            this.btnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnCheck.FlatAppearance.BorderSize = 0;
+            this.btnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCheck.Location = new System.Drawing.Point(824, 3);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(30, 28);
+            this.btnCheck.TabIndex = 33;
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
+            // 
+            // btnUnCheck
+            // 
+            this.btnUnCheck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnUnCheck.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnUnCheck.BackgroundImage")));
+            this.btnUnCheck.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnUnCheck.FlatAppearance.BorderSize = 0;
+            this.btnUnCheck.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUnCheck.Location = new System.Drawing.Point(862, 3);
+            this.btnUnCheck.Name = "btnUnCheck";
+            this.btnUnCheck.Size = new System.Drawing.Size(30, 28);
+            this.btnUnCheck.TabIndex = 32;
+            this.btnUnCheck.UseVisualStyleBackColor = true;
+            this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
+            // 
+            // lblTotalPages
+            // 
+            this.lblTotalPages.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTotalPages.AutoSize = true;
+            this.lblTotalPages.Location = new System.Drawing.Point(1104, 10);
+            this.lblTotalPages.Name = "lblTotalPages";
+            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
+            this.lblTotalPages.TabIndex = 31;
+            this.lblTotalPages.Text = "0";
+            // 
+            // lblcurrentPage
+            // 
+            this.lblcurrentPage.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblcurrentPage.AutoSize = true;
+            this.lblcurrentPage.Location = new System.Drawing.Point(1016, 10);
+            this.lblcurrentPage.Name = "lblcurrentPage";
+            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
+            this.lblcurrentPage.TabIndex = 30;
+            this.lblcurrentPage.Text = "0";
+            // 
+            // btnLast
+            // 
+            this.btnLast.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnLast.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.next_icon;
+            this.btnLast.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnLast.FlatAppearance.BorderSize = 0;
+            this.btnLast.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLast.Location = new System.Drawing.Point(1199, 3);
+            this.btnLast.Name = "btnLast";
+            this.btnLast.Size = new System.Drawing.Size(35, 28);
+            this.btnLast.TabIndex = 28;
+            this.btnLast.UseVisualStyleBackColor = true;
+            this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(1063, 10);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(19, 14);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Of";
+            // 
+            // btnNext
+            // 
+            this.btnNext.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnNext.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.right_arrow;
+            this.btnNext.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnNext.FlatAppearance.BorderSize = 0;
+            this.btnNext.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNext.Location = new System.Drawing.Point(1157, 3);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(35, 28);
+            this.btnNext.TabIndex = 26;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
+            // 
+            // btnFirst
+            // 
+            this.btnFirst.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnFirst.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.previous_icon;
+            this.btnFirst.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnFirst.FlatAppearance.BorderSize = 0;
+            this.btnFirst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFirst.Location = new System.Drawing.Point(911, 3);
+            this.btnFirst.Name = "btnFirst";
+            this.btnFirst.Size = new System.Drawing.Size(35, 28);
+            this.btnFirst.TabIndex = 29;
+            this.btnFirst.UseVisualStyleBackColor = true;
+            this.btnFirst.Click += new System.EventHandler(this.BtnFirst_Click);
+            // 
+            // btnPrev
+            // 
+            this.btnPrev.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.btnPrev.BackgroundImage = global::AmigoPaperWorkProcessSystem.Properties.Resources.left_arrow;
+            this.btnPrev.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPrev.FlatAppearance.BorderSize = 0;
+            this.btnPrev.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPrev.Location = new System.Drawing.Point(953, 3);
+            this.btnPrev.Name = "btnPrev";
+            this.btnPrev.Size = new System.Drawing.Size(35, 28);
+            this.btnPrev.TabIndex = 27;
+            this.btnPrev.UseVisualStyleBackColor = true;
+            this.btnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
+            // 
+            // cboLimit
+            // 
+            this.cboLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLimit.FormattingEnabled = true;
+            this.cboLimit.Location = new System.Drawing.Point(84, 197);
+            this.cboLimit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.cboLimit.Name = "cboLimit";
+            this.cboLimit.Size = new System.Drawing.Size(156, 22);
+            this.cboLimit.TabIndex = 37;
+            // 
+            // displayItemLabel1
+            // 
+            this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.displayItemLabel1.LabelText = " 表示件数";
+            this.displayItemLabel1.Location = new System.Drawing.Point(17, 197);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
+            this.displayItemLabel1.Name = "displayItemLabel1";
+            this.displayItemLabel1.Size = new System.Drawing.Size(68, 22);
+            this.displayItemLabel1.TabIndex = 38;
+            // 
             // frmCustomerMasterMaintenance
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.displayItemLabel1);
@@ -1607,15 +1622,15 @@
             this.Controls.Add(this.chkContractor);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblClear);
-            this.Controls.Add(this.label5);
+            this.Controls.Add(this.lblEmailAddress);
             this.Controls.Add(this.txtMailAddress);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.lblEDIAccount);
             this.Controls.Add(this.txtEDIAccount);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.lblCompanyNoBox);
             this.Controls.Add(this.txtCompanyNoBox);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblCompanyNameReading);
             this.Controls.Add(this.txtCompanyNameReading);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.txtCompanyName);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnCancel);
@@ -1645,15 +1660,15 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.TextBox txtCompanyName;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblCompanyNameReading;
         private System.Windows.Forms.TextBox txtCompanyNameReading;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblCompanyNoBox;
         private System.Windows.Forms.TextBox txtCompanyNoBox;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblEDIAccount;
         private System.Windows.Forms.TextBox txtEDIAccount;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.TextBox txtMailAddress;
         private System.Windows.Forms.Label lblClear;
         private System.Windows.Forms.Label label7;
@@ -1765,5 +1780,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colREQ_SEQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn colORG_EFFECTIVE_DATE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDISABLED_FLG;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMK_ORIGIN;
     }
 }

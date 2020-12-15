@@ -133,7 +133,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
 
             }
             //set email address
-            txtDestinationMail.Text = dr["EMAIL_ADDRESS"].ToString();
+            txtDestinationMail.Text = dr["INPUT_PERSON_EMAIL_ADDRESS"].ToString();
             //Tax
             txtTax.Text = dr["CONSUMPTION_TAX"].ToString(); 
 
@@ -416,12 +416,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     }
                     if (chkOrderForm.Checked)//Order Form
                     {
-                        if (CONTRACT_PLAN == "PRODUCT")
+                        if (CONTRACT_PLAN != "PRODUCT")
                         {
                             decimal.TryParse(txtInitialSpecialDiscount.Text, out decSpecialAmt);
                             decSpecialAmt = decSpecialAmt * -1;
                         }
-                        else if (CONTRACT_PLAN != "PRODUCT")
+                        else if (CONTRACT_PLAN == "PRODUCT")
                         {
                             decimal IntialDiscount = 0;
                             decimal.TryParse(txtInitialSpecialDiscount.Text, out IntialDiscount);
@@ -436,12 +436,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         dtExportInfo.Rows.Add(dr);
                     }
                    
-
                     decimal decTaxAmount = (decimal)0;
                     string strStartDate = "";
                     int ExpireDay = 0;
-                    string strFromCertificate = "";
-                    string strToCertificate = "";
+                    string strPeroidFrom = "";
+                    string strPeroidTo = "";
                     string strExpireDate = "";
                     int.TryParse(txtQuotationExpireDay.Text, out ExpireDay);
                     decimal.TryParse(txtTax.Text, out decTaxAmount);
@@ -457,23 +456,23 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
 
                     if (CheckUtility.SearchConditionCheck(this, lblPeriod.Text, txtPeriodFrom.Text, false, Utility.DataType.DATE, 255, 0))
                     {
-                        strFromCertificate = DateConverter(txtPeriodFrom.Text).ToString("yyyyMMdd");
+                        strPeroidFrom = DateConverter(txtPeriodFrom.Text).ToString("yyyyMMdd");
                     }
                     else
                     {
-                        strFromCertificate = DateTime.Now.ToString("yyyyMMdd");
+                        strPeroidFrom = DateTime.Now.ToString("yyyyMMdd");
                     }
 
                     if (CheckUtility.SearchConditionCheck(this, lblPeriod.Text, txtPeriodTo.Text, false, Utility.DataType.DATE, 255, 0))
                     {
-                        strToCertificate = DateConverter(txtPeriodTo.Text).ToString("yyyyMMdd");
+                        strPeroidTo = DateConverter(txtPeriodTo.Text).ToString("yyyyMMdd");
                     }
                     else
                     {
-                        strToCertificate = DateTime.Now.ToString("yyyyMMdd");
+                        strPeroidTo = DateTime.Now.ToString("yyyyMMdd");
                     }
                     string strExportInfo = Utility.DtToJSon(dtExportInfo,"ReqestPDF");
-                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, decTaxAmount, strStartDate, txtQuotationExpireDay.Text.Trim(), strFromCertificate, strToCertificate, strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
+                    DataTable result = oController.PreviewFunction(txtCompanyNoBox.Text, txtCompanyName.Text, REQ_SEQ, decTaxAmount, strStartDate, txtQuotationExpireDay.Text.Trim(), strPeroidFrom, strPeroidTo, strExportInfo, CONTRACT_PLAN, txtInitialRemark.Text.Trim(), txtMonthlyRemark.Text.Trim(),txtProductionInfoRemark.Text.Trim(), txtOrderRemark.Text.Trim());
                     string error_message = "";
                     for (int i = 0; i < result.Rows.Count; i++)
                     {
@@ -508,10 +507,11 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                     for (int i=0;i< result.Rows.Count;i++)
                     {
                         string filename = Convert.ToString(result.Rows[i]["FILENAME"]);
-                        success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + filename, destinationpath + @"\" + filename);
+                        string without_timestamp = Utility.RemoveTimpStampFromFileName(filename, ".pdf");
+                        success = await Core.WebUtility.Download(Properties.Settings.Default.GetTempFile + "?FILENAME=" + filename, destinationpath + @"\" + without_timestamp);
                         if (success)
                         {
-                            result.Rows[i]["LocalPath"] = destinationpath + @"\" + filename;
+                            result.Rows[i]["LocalPath"] = destinationpath + @"\" + without_timestamp;
                             result.Rows[i]["FileName"] =  filename;
                         }
                     }
@@ -557,13 +557,25 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
         #region AddToDataTable
         public DataTable DTParameter()
         {
+            string strPeroidFrom = "";
+            string strPeroidTo = "";
+            try
+            {
+                strPeroidFrom = DateConverter(txtPeriodFrom.Text).ToString("yyyyMMdd");
+                strPeroidTo = DateConverter(txtPeriodTo.Text).ToString("yyyyMMdd");
+            }
+            catch (Exception)
+            {
+
+            }
+            
             DataTable dt = new DataTable();
             dt.Columns.Add("EMAIL_ADDRESS");
             dt.Columns.Add("COMPANY_NO_BOX");
             dt.Columns.Add("REQ_SEQ");
             dt.Columns.Add("CONSUMPTION_TAX");
-            dt.Columns.Add("INITIAL_SPECIAL_DISCOUNTS");
-            dt.Columns.Add("MONTHLY_SPECIAL_DISCOUNTS");
+            dt.Columns.Add("INITIAL_SPECIAL_DISCOUNT");
+            dt.Columns.Add("MONTHLY_SPECIAL_DISCOUNT");
             dt.Columns.Add("YEARLY_SPECIAL_DISCOUNT");
             dt.Columns.Add("INPUT_PERSON");
             dt.Columns.Add("INITIAL_REMARK");
@@ -573,6 +585,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
             dt.Columns.Add("CONTRACT_PLAN");
             dt.Columns.Add("Created Time");
             dt.Columns.Add("COMPANY_NAME");
+            dt.Columns.Add("PERIOD_FROM");
+            dt.Columns.Add("PERIOD_TO");
             dt.Rows.Add(txtDestinationMail.Text.Trim(),
                         txtCompanyNoBox.Text.Trim(),
                         REQ_SEQ,
@@ -587,7 +601,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo.Issue_Quotation
                         txtProductionInfoRemark.Text.Trim(),
                         CONTRACT_PLAN,
                         CREATED_TIME,
-                        txtCompanyName.Text.Trim()
+                        txtCompanyName.Text.Trim(),
+                        strPeroidFrom,
+                        strPeroidTo
                         );
             return dt;
             

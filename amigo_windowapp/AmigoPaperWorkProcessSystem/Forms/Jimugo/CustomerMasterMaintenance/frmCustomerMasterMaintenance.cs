@@ -42,101 +42,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             new Validate{ Name = "colOBOEGAKI_DATE", Type = Utility.DataType.DATE, Edit = true, Require = false, Max = 10}
         };
 
-        #region cmt
-        //private string[] dummyColumns = {
-        //    "colNo",
-        //    "colCK",
-        //    "colMK",
-        //    "colCOMPANY_NO_BOX",
-        //    "colTRANSACTION_TYPE",
-        //    "colEFFECTIVE_DATE",
-        //    "colUPDATE_CONTENT",
-        //    "colCOMPANY_NAME",
-        //    "colCOMPANY_NAME_READING",
-        //    "colQUOTATION_DATE",
-        //    "colCONTRACT_DATE",
-        //    "colCOMPLETION_NOTIFICATION_DATE",
-        //    "colCONTRACTOR_COMPANY_NAME",
-        //    "colCONTRACTOR_DEPARTMENT_IN_CHARGE",
-        //    "colCONTRACTOR_CONTACT_NAME",
-        //    "colCONTRACTOR_CONTACT_NAME_READING",
-        //    "colCONTRACTOR_POSTAL_CODE",
-        //    "colCONTRACTOR_ADDRESS",
-        //    "colCONTRACTOR_ADDRESS_BUILDING",
-        //    "colCONTRACTOR_MAIL_ADDRESS",
-        //    "colCONTRACTOR_PHONE_NUMBER",
-        //    "colBILL_SUPPLIER_NAME",
-        //    "colBILL_SUPPLIER_NAME_READING",
-        //    "colBILL_COMPANY_NAME",
-        //    "colBILL_DEPARTMENT_IN_CHARGE",
-        //    "colBILL_CONTACT_NAME",
-        //    "colBILL_CONTACT_NAME_READING",
-        //    "colBILL_POSTAL_CODE",
-        //    "colBILL_ADDRESS",
-        //    "colBILL_ADDRESS_BUILDING",
-        //    "colBILL_MAIL_ADDRESS",
-        //    "colBILL_PHONE_NUMBER",
-        //    "colSPECIAL_NOTES_1",
-        //    "colSPECIAL_NOTES_2",
-        //    "colSPECIAL_NOTES_3",
-        //    "colSPECIAL_NOTES_4",
-        //    "colBILL_TYPE",
-        //    "colBILL_METHOD1",
-        //    "colBILL_METHOD2",
-        //    "colBILL_METHOD3",
-        //    "colBILL_METHOD5",
-        //    "colNCS_CUSTOMER_CODE",
-        //    "colBILL_BANK_ACCOUNT_NAME_1",
-        //    "colBILL_BANK_ACCOUNT_NUMBER_1",
-        //    "colBILL_BANK_ACCOUNT_NAME_2",
-        //    "colBILL_BANK_ACCOUNT_NUMBER_2",
-        //    "colBILL_BANK_ACCOUNT_NAME_3",
-        //    "colBILL_BANK_ACCOUNT_NUMBER_3",
-        //    "colBILL_BANK_ACCOUNT_NAME_4",
-        //    "colBILL_BANK_ACCOUNT_NUMBER_4",
-        //    "colBILL_BILLING_INTERVAL",
-        //    "colBILL_DEPOSIT_RULES",
-        //    "colBILL_TRANSFER_FEE",
-        //    "colBILL_EXPENSES",
-        //    "colPLAN_AMIGO_CAI",
-        //    "colPLAN_AMIGO_BIZ",
-        //    "colBOX_SIZE",
-        //    "colINITIAL_COST",
-        //    "colMONTHLY_COST",
-        //    "colYEAR_COST",
-        //    "colColumn1",
-        //    "colCONTRACT_PLAN",
-        //    "colOP_AMIGO_CAI",
-        //    "colOP_AMIGO_BIZ",
-        //    "colOP_BOX_SERVER",
-        //    "colOP_BOX_BROWSER",
-        //    "colOP_FLAT",
-        //    "colOP_CLIENT",
-        //    "colOP_BASIC_SERVICE",
-        //    "colOP_ADD_SERVICE",
-        //    "colSOCIOS_USER_FLG",
-        //    "colCOMPANY_NAME_CHANGED_DATE",
-        //    "colPREVIOUS_COMPANY_NAME",
-        //    "colNML_CODE_NISSAN",
-        //    "colNML_CODE_NS",
-        //    "colNML_CODE_JATCO",
-        //    "colNML_CODE_AK",
-        //    "colNML_CODE_NK",
-        //    "colOBOEGAKI_DATE",
-        //    "colEDI_ACCOUNT",
-        //    "colMAIL_ADDRESS",
-        //    "colREQ_MAIL_ADDRESS",
-        //    "colUPDATED_AT",
-        //    "colUPDATED_BY",
-        //    "colUPDATED_AT_RAW",
-        //    "colROW_ID",
-        //    "colUPDATE_MESSAGE",
-        //    "colREQ_SEQ",
-        //    "colORG_EFFECTIVE_DATE",
-        //    "colDISABLED_FLG",
-        // };
-        #endregion
-
         private string[] dummyColumns = {
             "No",
             "CK",
@@ -228,6 +133,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "REQ_SEQ",
             "ORG_EFFECTIVE_DATE",
             "DISABLED_FLG",
+            "MK_ORIGIN"
          };
 
         #endregion
@@ -315,7 +221,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             if (txtCompanyName.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, "会社名", txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblCompanyName.Text, txtCompanyName.Text, false, Utility.DataType.FULL_WIDTH, 80, 0))
                 {
                     return;
                 }
@@ -323,7 +229,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtCompanyNameReading.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, "会社名フリガナ", txtCompanyNameReading.Text, false, Utility.DataType.FULL_WIDTH, 60, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblCompanyNameReading.Text, txtCompanyNameReading.Text, false, Utility.DataType.FULL_WIDTH, 60, 0))
                 {
                     return;
                 }
@@ -331,7 +237,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtCompanyNoBox.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, "会社番号＋BOX", txtCompanyNoBox.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 60, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblCompanyNoBox.Text, txtCompanyNoBox.Text, false, Utility.DataType.HALF_ALPHA_NUMERIC, 60, 0))
                 {
                     return;
                 }
@@ -339,7 +245,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtEDIAccount.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, "EDIアカウント", txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, 4, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblEDIAccount.Text, txtEDIAccount.Text, false, Utility.DataType.EDI_ACCOUNT, 4, 0))
                 {
                     return;
                 }
@@ -347,7 +253,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             if (txtMailAddress.Text != "")
             {
-                if (!CheckUtility.SearchConditionCheck(this, "メールアドレス", txtMailAddress.Text, false, Utility.DataType.EMAIL, 255, 0))
+                if (!CheckUtility.SearchConditionCheck(this, lblEmailAddress.Text, txtMailAddress.Text, false, Utility.DataType.ASCII, 255, 0))
                 {
                     return;
                 }
@@ -975,5 +881,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             uIUtility.CancelChanges();
         }
         #endregion
+
+        private void DgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (e.ColumnIndex == dgvList.Columns["colBILL_TRANSFER_FEE"].Index || e.ColumnIndex == dgvList.Columns["colBILL_EXPENSES"].Index)
+            {
+                dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = Convert.ToDecimal(dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()).ToString("N0");
+            }
+        }
     }
 }

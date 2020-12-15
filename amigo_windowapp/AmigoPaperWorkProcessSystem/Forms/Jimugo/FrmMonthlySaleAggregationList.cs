@@ -20,12 +20,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
     {
 
         #region Declare
-
+        string YEAR_MONTH;
         private string strPrivious;
         private string strCurrent;
         private string strNext;
         private UIUtility uIUtility;
-
+   
         private string[] dummyColumns = {
             "TotalAmount",
             "ReduceSales",
@@ -75,6 +75,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.programName = programName;
         }
 
+        public FrmMonthlySaleAggregationList(string programId, string programName, string YEAR_MONTH) : this()
+        {
+            this.programID = programId;
+            this.programName = programName;
+            this.YEAR_MONTH = YEAR_MONTH;
+        }
+
         #endregion
 
         #region FormLoad
@@ -83,7 +90,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             //set title
             lblMenu.Text = programName;
             this.Text = "[" + programID + "] " + programName;
-            txtDate.Text = DateTime.Now.ToString("yyyy/MM");
+            if (string.IsNullOrEmpty(YEAR_MONTH))
+            {
+                txtDate.Text = DateTime.Now.ToString("yyyy/MM");
+            }
+            else
+            {
+                txtDate.Text = YEAR_MONTH;
+            }
 
             //utility
             uIUtility = new UIUtility(dgvList, null, null, null, dummyColumns);
@@ -111,13 +125,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Search
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            try
-            {
-                BindGrid();
-            }
-            catch (Exception)
-            {
-            }
+            BindGrid();
         }
         #endregion
 
@@ -128,7 +136,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 string strDate;
                 strDate = txtDate.Text.Trim();
-                if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+                if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 6))
                 {
                     return;
                 }
@@ -141,8 +149,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                     string strDateCurrent = dtDate.ToString(" M ");
                     string strDatePlus = dtDate.AddMonths(1).ToString(" M ");
                     strPrivious = strDateReduce.Trim() + "月";
-                    strCurrent = strDateCurrent + "月";
-                    strNext = strDatePlus + "月";
+                    strCurrent = strDateCurrent.Trim() + "月";
+                    strNext = strDatePlus.Trim() + "月";
                 }
                 FrmMonthlySaleAggregationController oController = new FrmMonthlySaleAggregationController();
                 Thread datathread = new Thread(new ThreadStart(ShowGridViewLoading));
@@ -163,7 +171,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 Thread.Sleep(1000);
                 //close mail dialog
                 datathread.Abort();
-
+                
             }
             catch (System.TimeoutException)
             {
@@ -256,9 +264,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         {
             try
             {
-                dgvList.Rows[4].DefaultCellStyle.BackColor = Color.DimGray;
+                if (e.RowIndex == 4)
+                {
+                    dgvList.Rows[4].DefaultCellStyle.BackColor = Color.FromArgb(219, 230, 241);
+                }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
             }
@@ -275,7 +286,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Previous Month
         private void btnPreMonthDiff_Click(object sender, EventArgs e)
         {
-            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 6))
             {
                 return;
             }
@@ -290,7 +301,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         #region Next Month
         private void btnNextMonthDiff_Click(object sender, EventArgs e)
         {
-            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 7))
+            if (!CheckUtility.SearchConditionCheck(this, lblDate.LabelText, txtDate.Text.Trim(), true, Utility.DataType.YEARMONTH, 7, 6))
             {
                 return;
             }

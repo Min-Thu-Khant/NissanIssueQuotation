@@ -41,7 +41,8 @@ namespace DAL_AmigoProcess.DAL
                                         COMPANY_BOX,
 										COMPANY_NO,
                                         ROW_NUMBER() OVER(ORDER BY COMPANY_NO_BOX ASC) AS ROW_ID,
-                                        UPDATED_AT AS UPDATED_AT_RAW
+                                        UPDATED_AT AS UPDATED_AT_RAW,
+                                        '' AS MK_ORIGIN
                                         FROM REQUEST_ID
                                         WHERE ISNULL(COMPANY_NO_BOX,'') LIKE '%' + @COMPANY_NO_BOX + '%'
                                         AND ISNULL(COMPANY_NAME,'') LIKE '%' + @COMPANY_NAME + '%'
@@ -122,6 +123,7 @@ namespace DAL_AmigoProcess.DAL
                                    [PASSWORD] = @PASSWORD,
                                    [PASSWORD_SET_DATE] = @PASSWORD_SET_DATE,
                                    [PASSWORD_EXPIRATION_DATE] = @PASSWORD_EXPIRATION_DATE,
+                                   [PASSWORD_HASHED] = @PASSWORD_HASHED,
                                    [EMAIL_ADDRESS] = @EMAIL_ADDRESS,
                                    [LOGIN_FAIL_COUNT] = @LOGIN_FAIL_COUNT,
                                    [GD] = @GD,
@@ -180,7 +182,8 @@ namespace DAL_AmigoProcess.DAL
                                                     EDI_ACCOUNT.UPDATED_BY,
                                                     '' AS UPDATE_MESSAGE,
                                                     EDI_ACCOUNT.UPDATED_AT AS UPDATED_AT_RAW,
-                                                    ROW_NUMBER() OVER(ORDER BY EDI_ACCOUNT.COMPANY_NO_BOX ASC) AS ROW_ID
+                                                    ROW_NUMBER() OVER(ORDER BY EDI_ACCOUNT.COMPANY_NO_BOX ASC) AS ROW_ID, SYSTEM_SETTING_STATUS,
+                                                    '' AS MK_ORIGIN
                                                     FROM REQUEST_ID
                                                     LEFT JOIN 
 	                                                    (SELECT REQUEST_DETAIL.* FROM REQUEST_DETAIL RIGHT JOIN (SELECT MAX(REQ_SEQ ) AS REQ_SEQ, COMPANY_NO_BOX 
@@ -240,10 +243,10 @@ namespace DAL_AmigoProcess.DAL
 	                                                            AND EDI_ACCOUNT.EDI_ACCOUNT LIKE '%' + @EDI_ACCOUNT + '%'
                                                             ORDER BY COMPANY_NO_BOX ASC";
 
-        string strScreenData = @"SELECT REQUEST_ID.COMPANY_NO_BOX,EDI_ACCOUNT.EDI_ACCOUNT,EMAIL_ADDRESS 
-                                FROM REQUEST_ID,EDI_ACCOUNT
-                                WHERE REQUEST_ID.COMPANY_NO_BOX=EDI_ACCOUNT.COMPANY_NO_BOX
-                                AND REQUEST_ID.COMPANY_NO_BOX=@COMPANY_NO_BOX";
+        string strScreenData = @"SELECT REQUEST_DETAIL.COMPANY_NO_BOX,EDI_ACCOUNT.EDI_ACCOUNT, REQUEST_DETAIL.INPUT_PERSON_EMAIL_ADDRESS
+                                FROM REQUEST_DETAIL,EDI_ACCOUNT
+                                WHERE REQUEST_DETAIL.COMPANY_NO_BOX=EDI_ACCOUNT.COMPANY_NO_BOX
+                                AND REQUEST_DETAIL.COMPANY_NO_BOX=@COMPANY_NO_BOX";
         string strGetMaxCompanyBox = @"SELECT MAX(COMPANY_BOX) +1 AS BOX FROM REQUEST_ID WHERE COMPANY_NO = @COMPANY_NO";
         #endregion
 
@@ -409,6 +412,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD", oREQUEST_ID.PASSWORD != null ? oREQUEST_ID.PASSWORD : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_SET_DATE", oREQUEST_ID.PASSWORD_SET_DATE != null ? Convert.ToDateTime(oREQUEST_ID.PASSWORD_SET_DATE) : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_EXPIRATION_DATE",oREQUEST_ID.PASSWORD_EXPIRATION_DATE != null ? Convert.ToDateTime(oREQUEST_ID.PASSWORD_EXPIRATION_DATE) : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@PASSWORD_HASHED", oREQUEST_ID.PASSWORD_HASHED));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@EMAIL_ADDRESS", oREQUEST_ID.EMAIL_ADDRESS !=null ? oREQUEST_ID.EMAIL_ADDRESS : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@LOGIN_FAIL_COUNT", oREQUEST_ID.LOGIN_FAIL_COUNT));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@GD", oREQUEST_ID.GD));

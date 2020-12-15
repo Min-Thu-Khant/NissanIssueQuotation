@@ -114,10 +114,10 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region ManualAlloaction
-        public DataTable ManualAlloaction(string COMPANY_NO_BOX)
+        public DataTable ManualAlloaction(string COMPANY_NO_BOX, string YEAR_MONTH)
         {
             string url = Properties.Settings.Default.ManualAllocation
-                .Replace("@COMPANY_NO_BOX", COMPANY_NO_BOX);    
+                .Replace("@COMPANY_NO_BOX", COMPANY_NO_BOX).Replace("@YEAR_MONTH", YEAR_MONTH);    
 
             return WebUtility.Get(url);
         }

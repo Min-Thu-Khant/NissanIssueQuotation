@@ -118,6 +118,7 @@ namespace AmigoProcessManagement.Utility
             return credential;
         }
         #endregion
+
         #region Compare YearMonth
         public static bool IsFirstYearMonthGreater(DateTime date1, DateTime date2)
         {
@@ -149,5 +150,20 @@ namespace AmigoProcessManagement.Utility
             return JsonConvert.SerializeObject(ds, Formatting.Indented);
         }
         #endregion
+
+        #region RoundedDown
+        public static decimal RoundedDown(decimal value)
+        {
+            try
+            {
+                return Math.Floor(value);
+            }
+            catch (Exception)
+            {
+                return (decimal)0;
+            }
+        }
+        #endregion
+
     }
 }

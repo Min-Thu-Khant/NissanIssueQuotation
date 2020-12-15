@@ -77,7 +77,7 @@
             this.btnPreview.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(100, 30);
-            this.btnPreview.TabIndex = 112;
+            this.btnPreview.TabIndex = 1;
             this.btnPreview.Text = "プレビュー";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.BtnPreview_Click);
@@ -88,7 +88,7 @@
             this.btnClientCertificate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClientCertificate.Name = "btnClientCertificate";
             this.btnClientCertificate.Size = new System.Drawing.Size(100, 30);
-            this.btnClientCertificate.TabIndex = 113;
+            this.btnClientCertificate.TabIndex = 2;
             this.btnClientCertificate.Text = "クライアント証明書";
             this.btnClientCertificate.UseVisualStyleBackColor = true;
             this.btnClientCertificate.Click += new System.EventHandler(this.BtnClientCertificate_Click);
@@ -121,8 +121,8 @@
             this.txtQuotationIssueDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtQuotationIssueDate.Name = "txtQuotationIssueDate";
             this.txtQuotationIssueDate.ReadOnly = true;
-            this.txtQuotationIssueDate.Size = new System.Drawing.Size(166, 21);
-            this.txtQuotationIssueDate.TabIndex = 123;
+            this.txtQuotationIssueDate.Size = new System.Drawing.Size(166, 25);
+            this.txtQuotationIssueDate.TabIndex = 7;
             // 
             // label5
             // 
@@ -162,8 +162,8 @@
             this.txtDestinationMailAddress.Location = new System.Drawing.Point(116, 209);
             this.txtDestinationMailAddress.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtDestinationMailAddress.Name = "txtDestinationMailAddress";
-            this.txtDestinationMailAddress.Size = new System.Drawing.Size(451, 21);
-            this.txtDestinationMailAddress.TabIndex = 131;
+            this.txtDestinationMailAddress.Size = new System.Drawing.Size(451, 25);
+            this.txtDestinationMailAddress.TabIndex = 3;
             // 
             // txtCompanyNoBox
             // 
@@ -171,8 +171,8 @@
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
             this.txtCompanyNoBox.ReadOnly = true;
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(166, 21);
-            this.txtCompanyNoBox.TabIndex = 134;
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(166, 25);
+            this.txtCompanyNoBox.TabIndex = 4;
             // 
             // txtEDIAccount
             // 
@@ -180,8 +180,8 @@
             this.txtEDIAccount.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtEDIAccount.Name = "txtEDIAccount";
             this.txtEDIAccount.ReadOnly = true;
-            this.txtEDIAccount.Size = new System.Drawing.Size(166, 21);
-            this.txtEDIAccount.TabIndex = 135;
+            this.txtEDIAccount.Size = new System.Drawing.Size(166, 25);
+            this.txtEDIAccount.TabIndex = 5;
             // 
             // txtOrderDate
             // 
@@ -189,8 +189,8 @@
             this.txtOrderDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOrderDate.Name = "txtOrderDate";
             this.txtOrderDate.ReadOnly = true;
-            this.txtOrderDate.Size = new System.Drawing.Size(166, 21);
-            this.txtOrderDate.TabIndex = 136;
+            this.txtOrderDate.Size = new System.Drawing.Size(166, 25);
+            this.txtOrderDate.TabIndex = 8;
             // 
             // txtCompanyName
             // 
@@ -198,8 +198,8 @@
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.ReadOnly = true;
-            this.txtCompanyName.Size = new System.Drawing.Size(166, 21);
-            this.txtCompanyName.TabIndex = 137;
+            this.txtCompanyName.Size = new System.Drawing.Size(166, 25);
+            this.txtCompanyName.TabIndex = 6;
             // 
             // txtRegisterCompleteNotificationDate
             // 
@@ -207,8 +207,8 @@
             this.txtRegisterCompleteNotificationDate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtRegisterCompleteNotificationDate.Name = "txtRegisterCompleteNotificationDate";
             this.txtRegisterCompleteNotificationDate.ReadOnly = true;
-            this.txtRegisterCompleteNotificationDate.Size = new System.Drawing.Size(166, 21);
-            this.txtRegisterCompleteNotificationDate.TabIndex = 138;
+            this.txtRegisterCompleteNotificationDate.Size = new System.Drawing.Size(166, 25);
+            this.txtRegisterCompleteNotificationDate.TabIndex = 9;
             // 
             // pTitle
             // 
@@ -232,7 +232,7 @@
             // 
             // frmRegisterCompleteNotification
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1282, 253);
             this.Controls.Add(this.pTitle);

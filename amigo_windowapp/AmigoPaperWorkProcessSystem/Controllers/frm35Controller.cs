@@ -20,9 +20,9 @@ namespace AmigoPaperWorkProcessSystem.Controllers
         #endregion
 
         #region GetMatchInvoice
-        public DataTable GetMatchInvoice(DateTime dtmFromDate, DateTime dtmToDate)
+        public DataTable GetMatchInvoice(DateTime dtmFromDate, DateTime dtmToDate, bool isNoReserved)
         {
-            string url = Properties.Settings.Default.GetMatchInvoice.Replace("@FromDate", dtmFromDate.ToString("yyyyMMdd")).Replace("@ToDate", dtmToDate.ToString("yyyyMMdd"));
+            string url = Properties.Settings.Default.GetMatchInvoice.Replace("@FromDate", dtmFromDate.ToString("yyyyMMdd")).Replace("@ToDate", dtmToDate.ToString("yyyyMMdd")).Replace("@NoReserved", isNoReserved.ToString());
 
             //Encode credentials
             var client = new HttpClient();

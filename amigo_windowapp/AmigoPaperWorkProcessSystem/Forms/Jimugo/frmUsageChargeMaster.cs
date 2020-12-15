@@ -85,7 +85,8 @@ namespace AmigoPaperWorkProcessSystem.Forms
             "UPDATED_BY",
             "UPDATE_MESSAGE",
             "UPDATED_AT_RAW",
-            "ROW_ID"
+            "ROW_ID",
+            "MK_ORIGIN"
         };
 
         private string[] alignBottoms = {

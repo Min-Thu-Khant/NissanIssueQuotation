@@ -122,6 +122,7 @@
             this.colUPDATE_MESSAGE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUPDATED_AT_RAW = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ROW_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colMK_ORIGIN = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pTitle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.panel1.SuspendLayout();
@@ -136,7 +137,7 @@
             this.cboGD.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboGD.Name = "cboGD";
             this.cboGD.Size = new System.Drawing.Size(87, 22);
-            this.cboGD.TabIndex = 148;
+            this.cboGD.TabIndex = 13;
             // 
             // rdoClose
             // 
@@ -145,7 +146,7 @@
             this.rdoClose.Margin = new System.Windows.Forms.Padding(2);
             this.rdoClose.Name = "rdoClose";
             this.rdoClose.Size = new System.Drawing.Size(59, 18);
-            this.rdoClose.TabIndex = 147;
+            this.rdoClose.TabIndex = 12;
             this.rdoClose.Text = "クローズ";
             this.rdoClose.UseVisualStyleBackColor = true;
             // 
@@ -157,7 +158,7 @@
             this.rdoProcessing.Margin = new System.Windows.Forms.Padding(2);
             this.rdoProcessing.Name = "rdoProcessing";
             this.rdoProcessing.Size = new System.Drawing.Size(62, 18);
-            this.rdoProcessing.TabIndex = 146;
+            this.rdoProcessing.TabIndex = 11;
             this.rdoProcessing.TabStop = true;
             this.rdoProcessing.Text = "処理中 ";
             this.rdoProcessing.UseVisualStyleBackColor = true;
@@ -169,7 +170,7 @@
             this.rdoAll.Margin = new System.Windows.Forms.Padding(2);
             this.rdoAll.Name = "rdoAll";
             this.rdoAll.Size = new System.Drawing.Size(45, 18);
-            this.rdoAll.TabIndex = 145;
+            this.rdoAll.TabIndex = 10;
             this.rdoAll.Text = "全て";
             this.rdoAll.UseVisualStyleBackColor = true;
             // 
@@ -179,7 +180,7 @@
             this.txtOrderDateFrom.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOrderDateFrom.Name = "txtOrderDateFrom";
             this.txtOrderDateFrom.Size = new System.Drawing.Size(87, 21);
-            this.txtOrderDateFrom.TabIndex = 140;
+            this.txtOrderDateFrom.TabIndex = 19;
             // 
             // txtQuotationIssueDateFrom
             // 
@@ -187,7 +188,7 @@
             this.txtQuotationIssueDateFrom.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtQuotationIssueDateFrom.Name = "txtQuotationIssueDateFrom";
             this.txtQuotationIssueDateFrom.Size = new System.Drawing.Size(87, 21);
-            this.txtQuotationIssueDateFrom.TabIndex = 138;
+            this.txtQuotationIssueDateFrom.TabIndex = 17;
             // 
             // txtApplicationDateFrom
             // 
@@ -195,7 +196,7 @@
             this.txtApplicationDateFrom.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtApplicationDateFrom.Name = "txtApplicationDateFrom";
             this.txtApplicationDateFrom.Size = new System.Drawing.Size(87, 21);
-            this.txtApplicationDateFrom.TabIndex = 136;
+            this.txtApplicationDateFrom.TabIndex = 15;
             // 
             // btnUpdate
             // 
@@ -203,7 +204,7 @@
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 30);
-            this.btnUpdate.TabIndex = 118;
+            this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.BtnUpdate_Click);
@@ -216,7 +217,7 @@
             this.cboLimit.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboLimit.Name = "cboLimit";
             this.cboLimit.Size = new System.Drawing.Size(124, 22);
-            this.cboLimit.TabIndex = 128;
+            this.cboLimit.TabIndex = 22;
             // 
             // btnGDConfirmationComplete
             // 
@@ -224,7 +225,7 @@
             this.btnGDConfirmationComplete.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnGDConfirmationComplete.Name = "btnGDConfirmationComplete";
             this.btnGDConfirmationComplete.Size = new System.Drawing.Size(100, 30);
-            this.btnGDConfirmationComplete.TabIndex = 121;
+            this.btnGDConfirmationComplete.TabIndex = 7;
             this.btnGDConfirmationComplete.Text = "GD確認完了";
             this.btnGDConfirmationComplete.UseVisualStyleBackColor = true;
             this.btnGDConfirmationComplete.Click += new System.EventHandler(this.BtnGDConfirmationComplete_Click);
@@ -246,7 +247,7 @@
             this.btnCancelApplication.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancelApplication.Name = "btnCancelApplication";
             this.btnCancelApplication.Size = new System.Drawing.Size(100, 30);
-            this.btnCancelApplication.TabIndex = 119;
+            this.btnCancelApplication.TabIndex = 5;
             this.btnCancelApplication.Text = "申請取消";
             this.btnCancelApplication.UseVisualStyleBackColor = true;
             this.btnCancelApplication.Click += new System.EventHandler(this.BtnCancelApplication_Click);
@@ -257,7 +258,7 @@
             this.btnGDConfirmationRequest.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnGDConfirmationRequest.Name = "btnGDConfirmationRequest";
             this.btnGDConfirmationRequest.Size = new System.Drawing.Size(100, 30);
-            this.btnGDConfirmationRequest.TabIndex = 120;
+            this.btnGDConfirmationRequest.TabIndex = 6;
             this.btnGDConfirmationRequest.Text = "GD確認依頼";
             this.btnGDConfirmationRequest.UseVisualStyleBackColor = true;
             this.btnGDConfirmationRequest.Click += new System.EventHandler(this.BtnGDConfirmationRequest_Click);
@@ -268,7 +269,7 @@
             this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
-            this.btnCancel.TabIndex = 117;
+            this.btnCancel.TabIndex = 3;
             this.btnCancel.Text = "取消";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
@@ -279,7 +280,7 @@
             this.btnModify.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnModify.Name = "btnModify";
             this.btnModify.Size = new System.Drawing.Size(100, 30);
-            this.btnModify.TabIndex = 116;
+            this.btnModify.TabIndex = 2;
             this.btnModify.Text = "修正";
             this.btnModify.UseVisualStyleBackColor = true;
             this.btnModify.Click += new System.EventHandler(this.BtnModify_Click);
@@ -290,7 +291,7 @@
             this.btnSearch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(100, 30);
-            this.btnSearch.TabIndex = 115;
+            this.btnSearch.TabIndex = 1;
             this.btnSearch.Text = "検索";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
@@ -314,7 +315,7 @@
             this.lblClear.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClear.Name = "lblClear";
             this.lblClear.Size = new System.Drawing.Size(82, 14);
-            this.lblClear.TabIndex = 131;
+            this.lblClear.TabIndex = 23;
             this.lblClear.Text = "検索条件のクリア";
             this.lblClear.Click += new System.EventHandler(this.LblClear_Click);
             // 
@@ -353,7 +354,8 @@
             this.colUPDATED_BY,
             this.colUPDATE_MESSAGE,
             this.colUPDATED_AT_RAW,
-            this.ROW_ID});
+            this.ROW_ID,
+            this.colMK_ORIGIN});
             this.dgvList.EnableHeadersVisualStyles = false;
             this.dgvList.Location = new System.Drawing.Point(17, 267);
             this.dgvList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
@@ -378,7 +380,7 @@
             this.cboApplicationStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboApplicationStatus.Name = "cboApplicationStatus";
             this.cboApplicationStatus.Size = new System.Drawing.Size(124, 22);
-            this.cboApplicationStatus.TabIndex = 149;
+            this.cboApplicationStatus.TabIndex = 14;
             // 
             // txtApplicationDateTo
             // 
@@ -386,7 +388,7 @@
             this.txtApplicationDateTo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtApplicationDateTo.Name = "txtApplicationDateTo";
             this.txtApplicationDateTo.Size = new System.Drawing.Size(87, 21);
-            this.txtApplicationDateTo.TabIndex = 150;
+            this.txtApplicationDateTo.TabIndex = 16;
             // 
             // txtQuotationIssueDateTo
             // 
@@ -394,7 +396,7 @@
             this.txtQuotationIssueDateTo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtQuotationIssueDateTo.Name = "txtQuotationIssueDateTo";
             this.txtQuotationIssueDateTo.Size = new System.Drawing.Size(87, 21);
-            this.txtQuotationIssueDateTo.TabIndex = 152;
+            this.txtQuotationIssueDateTo.TabIndex = 18;
             // 
             // txtOrderDateTo
             // 
@@ -402,7 +404,7 @@
             this.txtOrderDateTo.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtOrderDateTo.Name = "txtOrderDateTo";
             this.txtOrderDateTo.Size = new System.Drawing.Size(87, 21);
-            this.txtOrderDateTo.TabIndex = 154;
+            this.txtOrderDateTo.TabIndex = 20;
             // 
             // cboSystemSettingStatus
             // 
@@ -412,7 +414,7 @@
             this.cboSystemSettingStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.cboSystemSettingStatus.Name = "cboSystemSettingStatus";
             this.cboSystemSettingStatus.Size = new System.Drawing.Size(86, 22);
-            this.cboSystemSettingStatus.TabIndex = 156;
+            this.cboSystemSettingStatus.TabIndex = 21;
             // 
             // label3
             // 
@@ -472,7 +474,7 @@
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
             this.txtCompanyNoBox.Size = new System.Drawing.Size(112, 21);
-            this.txtCompanyNoBox.TabIndex = 169;
+            this.txtCompanyNoBox.TabIndex = 8;
             // 
             // lblCompanyName
             // 
@@ -491,7 +493,7 @@
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(196, 21);
-            this.txtCompanyName.TabIndex = 171;
+            this.txtCompanyName.TabIndex = 9;
             // 
             // label1
             // 
@@ -599,7 +601,7 @@
             this.btnCheck.Location = new System.Drawing.Point(823, 3);
             this.btnCheck.Name = "btnCheck";
             this.btnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnCheck.TabIndex = 33;
+            this.btnCheck.TabIndex = 24;
             this.btnCheck.UseVisualStyleBackColor = true;
             this.btnCheck.Click += new System.EventHandler(this.BtnCheck_Click);
             // 
@@ -613,7 +615,7 @@
             this.btnUnCheck.Location = new System.Drawing.Point(861, 3);
             this.btnUnCheck.Name = "btnUnCheck";
             this.btnUnCheck.Size = new System.Drawing.Size(30, 28);
-            this.btnUnCheck.TabIndex = 32;
+            this.btnUnCheck.TabIndex = 25;
             this.btnUnCheck.UseVisualStyleBackColor = true;
             this.btnUnCheck.Click += new System.EventHandler(this.BtnUnCheck_Click);
             // 
@@ -647,7 +649,7 @@
             this.btnLast.Location = new System.Drawing.Point(1196, 3);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(35, 28);
-            this.btnLast.TabIndex = 28;
+            this.btnLast.TabIndex = 29;
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.BtnLast_Click);
             // 
@@ -671,7 +673,7 @@
             this.btnNext.Location = new System.Drawing.Point(1154, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(35, 28);
-            this.btnNext.TabIndex = 26;
+            this.btnNext.TabIndex = 28;
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.BtnNext_Click);
             // 
@@ -685,7 +687,7 @@
             this.btnFirst.Location = new System.Drawing.Point(910, 3);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(35, 28);
-            this.btnFirst.TabIndex = 29;
+            this.btnFirst.TabIndex = 26;
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.BtnFirst_Click);
             // 
@@ -985,6 +987,13 @@
             this.ROW_ID.Name = "ROW_ID";
             this.ROW_ID.Visible = false;
             // 
+            // colMK_ORIGIN
+            // 
+            this.colMK_ORIGIN.DataPropertyName = "MK_ORIGIN";
+            this.colMK_ORIGIN.HeaderText = "MK_ORIGIN";
+            this.colMK_ORIGIN.Name = "colMK_ORIGIN";
+            this.colMK_ORIGIN.Visible = false;
+            // 
             // frmUsageApplicationList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -1125,5 +1134,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATE_MESSAGE;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUPDATED_AT_RAW;
         private System.Windows.Forms.DataGridViewTextBoxColumn ROW_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMK_ORIGIN;
     }
 }

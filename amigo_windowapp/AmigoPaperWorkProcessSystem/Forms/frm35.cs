@@ -228,7 +228,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
             try
             {
                 Controllers.frm35Controller oController = new Controllers.frm35Controller();
-                dtCheckResult = oController.GetMatchInvoice(fromDate, toDate);
+                dtCheckResult = oController.GetMatchInvoice(fromDate, toDate, chkNoReserved.Checked);
                 if (dtCheckResult.Rows.Count > 0)
                 {
                     dgvList.DataSource = dtCheckResult;

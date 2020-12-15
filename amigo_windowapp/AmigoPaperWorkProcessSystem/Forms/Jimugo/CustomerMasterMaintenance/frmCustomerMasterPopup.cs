@@ -148,9 +148,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             try
             {
                 frmCustomerMasterMaintenanceController oController = new frmCustomerMasterMaintenanceController();
-                DataSet ds = oController.GetPopupScreenData(COMPANY_NO_BOX, REQ_SEQ);
-                
-                
+
+                DataSet ds = oController.GetPopupScreenData(COMPANY_NO_BOX, REQ_SEQ, out uIUtility.MetaData);
+
+
                 DataTable dt1 = ds.Tables[0];
                 DataTable dt2 = ds.Tables[1];
 

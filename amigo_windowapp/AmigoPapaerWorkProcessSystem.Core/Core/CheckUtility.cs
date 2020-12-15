@@ -3,6 +3,7 @@ using AmigoPaperWorkProcessSystem.Core.Model;
 using MetroFramework;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -201,10 +202,10 @@ namespace AmigoPaperWorkProcessSystem.Core
                         }
                         break;
                     case Utility.DataType.EDI_ACCOUNT:
-                        EDIaccountCheck(value, out msg);
+                        EDIaccountCheck(field, value, out msg);
                         break;
                     case Utility.DataType.ASCII:
-                        ASCIICheck(value, out msg);
+                        ASCIICheck(field,value, out msg);
                         break;
                     case Utility.DataType.DATE_RANGE:
                         string strdate1, strdate2;
@@ -437,9 +438,15 @@ namespace AmigoPaperWorkProcessSystem.Core
                 }
                 catch (Exception)
                 {
-                    pass = false;
-                    //data type wrong
-                    msg = string.Format(JimugoMessages.E000ZZ002, field);
+                    try
+                    {
+                        Date = DateTime.ParseExact(value, "yyyy/M/d HH:mm", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                    }
+                    catch (Exception)
+                    {
+                        pass = false;
+                        msg = string.Format(JimugoMessages.E000ZZ002, field);
+                    }
                 }
             }
             return pass;
@@ -613,12 +620,12 @@ namespace AmigoPaperWorkProcessSystem.Core
             return true;
         }
 
-        public static bool EDIaccountCheck(string value, out string msg)
+        public static bool EDIaccountCheck(string field, string value, out string msg)
         {
             msg = "";
             if (!IsMatch(value, EDI_ACCOUNT))
             {
-                msg = "failed";
+                msg = string.Format(JimugoMessages.E000ZZ002, field);
                 return false;
             }
             return true;
@@ -635,16 +642,34 @@ namespace AmigoPaperWorkProcessSystem.Core
             return false;
         }
 
-        public static bool ASCIICheck(string value, out string msg)
+        public static bool ASCIICheck(string field,string value, out string msg)
         {
             msg = "";
-            if (IsMatch(value, ASCII))
+            if (!IsMatch(value, ASCII))
             {
-                msg = "failed";
-                return true;
+                msg = string.Format(JimugoMessages.E000ZZ002, field);
+                return false;
             }
-            return false;
+            return true;
         }
 
+        #region AreTablesSame
+        public static bool AreTablesTheSame(DataTable tbl1, DataTable tbl2)
+        {
+            if (tbl1.Rows.Count != tbl2.Rows.Count || tbl1.Columns.Count != tbl2.Columns.Count)
+                return false;
+
+
+            for (int i = 0; i < tbl1.Rows.Count; i++)
+            {
+                for (int c = 0; c < tbl1.Columns.Count; c++)
+                {
+                    if (!Equals(tbl1.Rows[i][c], tbl2.Rows[i][c]))
+                        return false;
+                }
+            }
+            return true;
+        }
+        #endregion
     }
 }

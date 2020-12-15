@@ -28,8 +28,11 @@ namespace AmigoProcessManagement.Utility
             row["MK"] = "O";
         }
 
-        public static void ReturnMailSuccessMessage(DataRow row)
+        public static void ReturnMailSuccessMessage(DataRow row, string UPDATED_AT_DATETIME, string CURRENT_DATETIME, string CURRENT_USER)
         {
+            row["UPDATED_AT"] = UPDATED_AT_DATETIME;
+            row["UPDATED_AT_RAW"] = CURRENT_DATETIME;
+            row["UPDATED_BY"] = CURRENT_USER;
             row["UPDATE_MESSAGE"] = Utility.Messages.Jimugo.I000ZZ015;
             row["MK"] = "O";
         }

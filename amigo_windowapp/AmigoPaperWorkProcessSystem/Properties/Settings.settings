@@ -42,7 +42,7 @@
       <Value Profile="(Default)">http://localhost:6077/opt_36.asmx/GetUnmatchInvoice?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
     </Setting>
     <Setting Name="GetMatchInvoice" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/GetMatchInvoice?strFromDate=@FromDate&amp;strToDate=@ToDate</Value>
+      <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/GetMatchInvoice?strFromDate=@FromDate&amp;strToDate=@ToDate&amp;strNoReserved=@NoReserved</Value>
     </Setting>
     <Setting Name="CancelAllocation" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/opt_35.asmx/CancelAllocation</Value>
@@ -69,7 +69,7 @@
       <Value Profile="(Default)">1300, 640</Value>
     </Setting>
     <Setting Name="ManualAllocation" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:6077/opt_3B.asmx/do_ManualAllocation?COMPANY_NO_BOX=@COMPANY_NO_BOX</Value>
+      <Value Profile="(Default)">http://localhost:6077/opt_3B.asmx/do_ManualAllocation?COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;YEAR_MONTH=@YEAR_MONTH</Value>
     </Setting>
     <Setting Name="ManualAllocationComplete" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/opt_37.asmx/AllocationManualCompletion?ALLOCATE=@ALLOCATE&amp;SEQ_NO=@SEQ_NO&amp;COMPANY_NO_BOX=@COMPANY_NO_BOX&amp;YEAR_MONTH=@YEAR_MONTH&amp;RECEIPT_ALLOCATION_DATE=@RECEIPT_ALLOCATION_DATE&amp;INVOICE_ALLOCATION_DATE=@INVOICE_ALLOCATION_DATE</Value>
@@ -193,14 +193,26 @@
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_ApplicationApproval.asmx/Approve</Value>
     </Setting>
     <Setting Name="GetTempFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFIle</Value>
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_FileServices.asmx/GetTempFile</Value>
     </Setting>
     <Setting Name="getMonthlySaleAggregationlist" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_MonthlySaleAggregationList.asmx/getMonthlySaleAggregationList</Value>
     </Setting>
+    <Setting Name="DeleteTempFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_FileServices.asmx/DeleteTempFile</Value>
+    </Setting>
     <Setting Name="getMonthlySaleComparisonlist" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:6077/Jimugo/MonthlySaleComparisonList.asmx/getMonthlySaleComparisonList?YEAR_MONTH1=@strYYYMM1&amp;YEAR_MONTH2=@strYYMM2&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT
 </Value>
+    </Setting>
+    <Setting Name="GetInvoiceList" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_InvoiceList.asmx/GetInvoiceList?BILLING_DATE=@BILLING_DATE&amp;OFFSET=@OFFSET&amp;LIMIT=@LIMIT</Value>
+    </Setting>
+    <Setting Name="CreateInvoiceData" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_InvoiceList.asmx/CreateInvoiceData?YEAR_MONTH=@YEAR_MONTH</Value>
+    </Setting>
+    <Setting Name="GetInvoiceListForCSVCreate" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:6077/Jimugo/opt_InvoiceList.asmx/CreateCSVFile?YEAR_MONTH=@YEAR_MONTH</Value>
     </Setting>
   </Settings>
 </SettingsFile>

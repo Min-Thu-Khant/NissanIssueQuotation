@@ -106,7 +106,7 @@ namespace AmigoProcessManagement.Jimugo
             else
             {
                 Controller.ControllerClientCertificateList clientCertificateList = new Controller.ControllerClientCertificateList(authHeader);
-                MetaResponse response = clientCertificateList.SendMail(List, authHeader);
+                MetaResponse response = clientCertificateList.SendMail(List);
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();

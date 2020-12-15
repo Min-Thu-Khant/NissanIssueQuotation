@@ -145,7 +145,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                         mailItem.Body = templateString;
                         mailItem.CC = emailAddressCC;
 
-                        mailItem.Importance = Outlook.OlImportance.olImportanceHigh;
+                        mailItem.Importance = Outlook.OlImportance.olImportanceNormal;
                         // make sure a filename was passed
                         if (string.IsNullOrEmpty(FIleAttachment) == false)
                         {
@@ -158,7 +158,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                             }
                         }
 
-                        mailItem.Display(true);
+                        mailItem.Display(false);
                         #endregion
                         Dialog = DialogResult.OK;
                         this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
@@ -202,12 +202,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
 
         private void BtnBack_Click(object sender, EventArgs e)
         {
-            Dialog = DialogResult.Cancel;
+            Dialog = DialogResult.Cancel; 
             this.Close();
         }
 
         private void FrmPreviewScreen_FormClosing(object sender, FormClosingEventArgs e)
         {
+            frmRegisterCompleteNotificationController oController = new frmRegisterCompleteNotificationController();
+            oController.DeleteTempFiles(FILENAME);
             pdfDocumentViewer.Dispose();
             this.DialogResult = Dialog;
         }

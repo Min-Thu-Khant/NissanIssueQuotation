@@ -165,8 +165,7 @@ namespace DAL_AmigoProcess.DAL
                                     FROM RECEIPT_DETAILS
                                     WHERE Run_Result = 1
                                     --FORMAT (RUN_DATE_TIME, 'yyyyMMddHHmm') = @DateTimeID
-                                    AND CONVERT(varchar(10),PAYMENT_DAY,112) >= CONVERT(varchar(10),@FromDate,112)
-                                    @ToCondition
+                                    @NoReserved
                                     )RD
                                     LEFT JOIN
                                     (SELECT *
@@ -176,6 +175,8 @@ namespace DAL_AmigoProcess.DAL
                                     LEFT JOIN INVOICE_INFO INV
                                     ON RS.BILLING_CODE = (INV.COMPANY_NO_BOX + INV.YEAR_MONTH)
                                     WHERE ISNULL(RS.SEQ_NO,0) <> 0 AND ISNULL(INV.COMPANY_NO_BOX,'') <> ''
+                                    AND CONVERT(varchar(10),RS.PAYMENT_DAY,112) >= CONVERT(varchar(10),@FromDate,112)
+                                    @ToCondition
                                     ORDER BY CUSTOMER_NAME,RESERVE_ID
                                     ";
 
@@ -403,15 +404,24 @@ namespace DAL_AmigoProcess.DAL
         #endregion
 
         #region GetDateFor35_Grid
-        public DataTable GetDateFor35_Grid(DateTime dtmFrom, DateTime dtmTo, out string strMsg)
+        public DataTable GetDateFor35_Grid(DateTime dtmFrom, DateTime dtmTo, bool isNoReserved, out string strMsg)
         {
             if (dtmTo != new DateTime())
             {
-                strGetMatchInv_35 = strGetMatchInv_35.Replace("@ToCondition", "AND CONVERT(varchar(10),PAYMENT_DAY,112) <= CONVERT(varchar(10),@TODate, 112) ").Replace("@ToVariable", ", @TODate DATETIME2 = '" + dtmTo.ToString() + "'").Replace("@ParaFrom", dtmFrom.ToString());
+                strGetMatchInv_35 = strGetMatchInv_35.Replace("@ToCondition", "AND CONVERT(varchar(10),RS.PAYMENT_DAY,112) <= CONVERT(varchar(10),@TODate, 112) ").Replace("@ToVariable", ", @TODate DATETIME2 = '" + dtmTo.ToString() + "'").Replace("@ParaFrom", dtmFrom.ToString());
             }
             else
             {
                 strGetMatchInv_35 = strGetMatchInv_35.Replace("@ToCondition", "").Replace("@ToVariable", "").Replace("@ParaFrom", dtmFrom.ToString());
+            }
+
+            if (isNoReserved)
+            {
+                strGetMatchInv_35 = strGetMatchInv_35.Replace("@NoReserved", "AND (PAYMENT_DAY IS NOT NULL AND ALLOCATED_COMPLETION_DATE IS NULL)");
+            }
+            else
+            {
+                strGetMatchInv_35 = strGetMatchInv_35.Replace("@NoReserved", "");
             }
 
             ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strGetMatchInv_35);

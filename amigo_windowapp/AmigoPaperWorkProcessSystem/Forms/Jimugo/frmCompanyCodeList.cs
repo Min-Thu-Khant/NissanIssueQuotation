@@ -92,9 +92,18 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "COMPANY_NO",
             "COMPANY_BOX",
             "UPDATED_AT_RAW",
-            "ROW_ID"
+            "ROW_ID",
+            "MK_ORIGIN"
         };
 
+        private string[] alignBottoms = {
+               "colPASSWORD_SET_DATE",
+               "colPASSWORD_EXPIRATION_DATE",
+               "colLOGIN_FAIL_COUNT",
+               "colSESSION_ID",
+               "colLAST_ACCESS_DATE",
+               "colLAST_FAIL_DATE"
+        };
         #endregion
 
         #region Properties
@@ -115,6 +124,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
+        #region AlignBottomHeaders
+        private void AlignBottomHeaders()
+        {
+            foreach (string item in alignBottoms)
+            {
+                dgvList.Columns[item].HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+            }
+        }
+        #endregion
+
         #region FormLoad
         private void FrmCustomerList_Load(object sender, EventArgs e)
         {
@@ -130,8 +149,9 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             uIUtility.DummyTable();// add dummy table to merge columns
             uIUtility.DisableAutoSort();//disable autosort
             PopulateDropdowns();
+            AlignBottomHeaders();//adjust column headers
 
-             //Theme
+            //Theme
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
             this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;
             try
@@ -435,7 +455,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             {
                 for (int i = 0; i < dgvList.Rows.Count; i++)
                 {
-                    string originalvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString();
+                    string mkvalue = dgvList.Rows[i].Cells["colMK"].Value == null ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
+                    string mkoriginvalue = dgvList.Rows[i].Cells["colMK_ORIGIN"].Value == null ? null : dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim();
                     string checkvalue = dgvList.Rows[i].Cells["colCK"].Value.ToString().Trim();
                     
                     if (String.IsNullOrEmpty(checkvalue) ? false : true)
@@ -447,20 +468,40 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                                 i++;
                                 break;
                             case "M":
-                                if (originalvalue != "D" || String.IsNullOrEmpty(originalvalue == null ? null : originalvalue.Trim()) || originalvalue =="O" || originalvalue =="X")
+                                if (string.IsNullOrEmpty(mkvalue) || (mkvalue == "O" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C")))
                                 {
                                     dgvList.Rows[i].Cells["colMK"].Value = operation;
-                                }
-                                break;
-                            case "D":
-                                if (originalvalue == "I" || originalvalue == "C")
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = operation;
+
+                                } else if (mkvalue == "X" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C" || mkoriginvalue == "D"))
                                 {
-                                    uIUtility.dtList.Rows[i].Delete(); //delete row
-                                    i--;
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+
                                 }
                                 else
                                 {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+                                }
+                                break;
+                            case "D":
+                                if (string.IsNullOrEmpty(mkvalue) || (mkvalue == "O" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C")))
+                                {
                                     dgvList.Rows[i].Cells["colMK"].Value = operation;
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = operation;
+
+                                }
+                                else if (mkvalue == "X" && (mkoriginvalue == "M" || mkoriginvalue == "I" || mkoriginvalue == "C" || mkoriginvalue == "D"))
+                                {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
+
+                                }
+                                else
+                                {
+                                    dgvList.Rows[i].Cells["colMK"].Value = "";
+                                    dgvList.Rows[i].Cells["colMK_ORIGIN"].Value = "";
                                 }
                                 break;
                             case "C":
@@ -480,7 +521,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                         }
                     }
 
-                    dgvList.Rows[i].Cells["colCK"].Value = " ";
+                    try
+                    {
+                        dgvList.Rows[i].Cells["colCK"].Value = " ";
+                    }
+                    catch (Exception)
+                    {
+                    }
                 }
             }
             else

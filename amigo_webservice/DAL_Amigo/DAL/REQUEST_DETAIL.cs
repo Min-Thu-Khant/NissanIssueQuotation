@@ -17,9 +17,9 @@ namespace DAL_AmigoProcess.DAL
                                     EDI_ACCOUNT.EDI_ACCOUNT,
                                     FORMAT(REQUEST_DETAIL.START_USE_DATE, 'yyyy/MM/dd') START_USE_DATE,
                                     REQUEST_DETAIL.INPUT_PERSON,
-                                    REQUEST_ID.EMAIL_ADDRESS, REQUEST_DETAIL.CONTRACT_PLAN,
+                                    REQUEST_DETAIL.INPUT_PERSON_EMAIL_ADDRESS, REQUEST_DETAIL.CONTRACT_PLAN,
 									(SELECT TOP 1 INTEGER_VALUE1 FROM CONFIG_TBL WHERE PROGRAM_ID='SYSTEM' AND CONFIG_KEY = 'consumptionTax') CONSUMPTION_TAX,
-									(SELECT TOP 1 INTEGER_VALUE1 FROM CONFIG_TBL WHERE PROGRAM_ID='SYSTEM' AND CONFIG_KEY = 'quotation.expirationDate') EXPIRATION_DATE
+									(SELECT TOP 1 INTEGER_VALUE1 FROM CONFIG_TBL WHERE PROGRAM_ID='CTS040' AND CONFIG_KEY = 'quotation.expirationDate') EXPIRATION_DATE
                                     FROM REQUEST_DETAIL
                                     LEFT JOIN EDI_ACCOUNT
                                     ON REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
@@ -54,6 +54,7 @@ namespace DAL_AmigoProcess.DAL
                                SET [ORDER_DATE] = @ORDER_DATE,
                                    [SYSTEM_EFFECTIVE_DATE] = @SYSTEM_EFFECTIVE_DATE,
                                    [SYSTEM_REGIST_DEADLINE] = @SYSTEM_REGIST_DEADLINE,
+                                   [SYSTEM_SETTING_STATUS] = @SYSTEM_SETTING_STATUS,
                                    [UPDATED_AT]=@CURRENT_DATETIME,
                                    [UPDATED_BY]=@CURRENT_USER
                              WHERE [COMPANY_NO_BOX] = @COMPANY_NO_BOX
@@ -67,7 +68,8 @@ namespace DAL_AmigoProcess.DAL
                             REQUEST_DETAIL.CONTRACT_PLAN,
                             EDI_ACCOUNT.EDI_ACCOUNT,
                             EDI_ACCOUNT.COMPANY_NO_BOX,
-                            REQUEST_DETAIL.REQ_SEQ
+                            REQUEST_DETAIL.REQ_SEQ,
+							FORMAT(REQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE, 'yyyy/MM/dd') SYSTEM_EFFECTIVE_DATE
                             FROM REQUEST_DETAIL LEFT JOIN EDI_ACCOUNT
                             ON REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
                             WHERE REQUEST_DETAIL.COMPANY_NO_BOX= @COMPANY_NO_BOX
@@ -116,10 +118,10 @@ namespace DAL_AmigoProcess.DAL
                                             REQUEST_DETAIL.COMPANY_NAME,
                                             CLOSE_FLG,
                                             CASE REQUEST_ID.GD 
-		                                        WHEN '0' THEN N'無し' 
+		                                        WHEN '0' THEN N'未確認'
 		                                        WHEN '1' THEN N'確認依頼中' 
 		                                        WHEN '2' THEN N'確認済み' 
-		                                        WHEN '9' THEN N'未確認' 
+		                                        WHEN '9' THEN N'無し'
                                             END GD,
                                             CASE REQUEST_DETAIL.REQ_TYPE
 		                                        WHEN 1 THEN N'新規'
@@ -151,7 +153,7 @@ namespace DAL_AmigoProcess.DAL
 													END
 												ELSE ''
 											END ORDER_DATE,
-                                            FORMAT(SYSTEM_EFFECTIVE_DATE,'yyyy/MM/dd HH:mm') SYSTEM_EFFECTIVE_DATE,
+                                            FORMAT(SYSTEM_EFFECTIVE_DATE,'yyyy/MM/dd') SYSTEM_EFFECTIVE_DATE,
 											CASE 
 												WHEN  REQUEST_DETAIL.REQ_STATUS = 2 OR REQUEST_DETAIL.REQ_STATUS = 9 THEN 
 												 CASE SYSTEM_SETTING_STATUS
@@ -179,7 +181,8 @@ namespace DAL_AmigoProcess.DAL
 	                                        REQUEST_DETAIL.UPDATED_BY,
                                             '' AS UPDATE_MESSAGE,
                                             REQUEST_DETAIL.UPDATED_AT UPDATED_AT_RAW,
-                                            ROW_NUMBER() OVER(ORDER BY REQUEST_DETAIL.CLOSE_FLG, REQUEST_DETAIL.REQ_DATE ASC) AS ROW_ID
+                                            ROW_NUMBER() OVER(ORDER BY REQUEST_DETAIL.CLOSE_FLG, REQUEST_DETAIL.REQ_DATE ASC) AS ROW_ID,
+                                            '' AS MK_ORIGIN
                                            FROM REQUEST_DETAIL,REQUEST_ID
                                            WHERE REQUEST_DETAIL.COMPANY_NO_BOX=REQUEST_ID.COMPANY_NO_BOX
                                            AND REQUEST_DETAIL.COMPANY_NO_BOX LIKE '%' + @COMPANY_NO_BOX + '%'
@@ -224,9 +227,9 @@ namespace DAL_AmigoProcess.DAL
                                                 AND [UPDATED_AT] @UPDATED_AT";
         string strGetSubProgramLists = @"SELECT PROGRAM_ID, PROGRAM_NAME FROM MENU_MASTER WHERE PROGRAM_ID IN ('CTS030', 'CTS040', 'CTS050', 'CTS070', 'CTS060');";
 
-        string strGetClientCertificateDiff = @"SELECT OP_CLIENT-CLIENT_CERTIFICATE.CLIENT_CERTIFICATE_COUNT AS CLIENT_CERTIFICATE_DIFF
+        string strGetClientCertificateDiff = @"SELECT OP_CLIENT-CLIENT_ISNULL(CLIENT_CERTIFICATE.CLIENT_CERTIFICATE_COUNT,0) AS CLIENT_CERTIFICATE_DIFF
                                                     FROM  REQUEST_DETAIL
-                                                JOIN 
+                                                LEFT JOIN 
                                                     (select count(CLIENT_CERTIFICATE.COMPANY_NO_BOX) as CLIENT_CERTIFICATE_COUNT,COMPANY_NO_BOX
                                                         from CLIENT_CERTIFICATE
                                                         where CLIENT_CERTIFICATE.FY=@FY
@@ -291,10 +294,10 @@ namespace DAL_AmigoProcess.DAL
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.support.mail' AND CONFIG_SEQ= 1) as I,
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.support.tel' AND CONFIG_SEQ= 1) as J
                                 FROM REQUEST_DETAIL
-                                JOIN
+                                LEFT JOIN
                                 EDI_ACCOUNT
-                                on REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
-                                JOIN
+                                ON REQUEST_DETAIL.COMPANY_NO_BOX = EDI_ACCOUNT.COMPANY_NO_BOX
+                                LEFT JOIN
                                 CLIENT_CERTIFICATE
                                 ON REQUEST_DETAIL.COMPANY_NO_BOX = CLIENT_CERTIFICATE.COMPANY_NO_BOX
                                 WHERE REQUEST_DETAIL.COMPANY_NO_BOX = @COMPANY_NO_BOX
@@ -314,26 +317,61 @@ namespace DAL_AmigoProcess.DAL
                                     AND REQ_SEQ=@REQ_SEQ
                                     AND UPDATED_AT < @FILE_CREATED";
 
-        string strGetQuotationData = @"SELECT REQ.COMPANY_NO_BOX,UM.CONTRACT_CODE,UM.FEE_STRUCTURE,UM.CONTRACT_NAME,UM.CONTRACT_QTY,UM.INITIAL_COST,UM.MONTHLY_COST,
-                                    ISNULL(REQ.QUANTITY,0) QUANTITY,Req.Type,
-                                    ISNULL(UM.INITIAL_COST,0) * ISNULL(REQ.QUANTITY,0) INITIAL_EXPENSE,
-                                    ISNULL(UM.MONTHLY_COST,0) * ISNULL(REQ.QUANTITY,0) MONTHLY_USAGE_FEE,
-                                    REQ.UPDATED_AT, UM.UPDATED_AT,REQ.CONTRACT_UNIT,REQ.UNIT_PRICE
-                                    FROM REQ_USAGE_FEE REQ 
+        string strGetQuotationData = @"SELECT
+                                        subQ1.CONTRACT_CODE,
+                                        subQ1.FEE_STRUCTURE,
+                                        subQ1.CONTRACT_NAME,
+                                        subQ1.CONTRACT_QTY,
+                                        subQ1.INITIAL_COST,
+                                        subQ1.MONTHLY_COST,
+                                        ISNULL(subQ2.QUANTITY,0) QUANTITY,subQ2.TYPE,
+                                        ISNULL(subQ1.INITIAL_COST,0) * ISNULL(subQ2.QUANTITY,0) INITIAL_EXPENSE,
+                                        ISNULL(subQ1.MONTHLY_COST,0) * ISNULL(subQ2.QUANTITY,0) MONTHLY_USAGE_FEE,
+                                        subQ2.UPDATED_AT REQ_USAGE_FEE_UPDATED_AT,
+                                        subQ1.UPDATED_AT USAGE_FEE_MASTER_UPDATED_AT ,
+                                        subQ2.CONTRACT_UNIT,
+                                        subQ2.UNIT_PRICE
+                                        FROM 
+	                                    ( SELECT* FROM
+                                          ( SELECT UM.CONTRACT_CODE
+                                              , UM.ADOPTION_DATE
+                                              , UM.FEE_STRUCTURE
+                                              , UM.CONTRACT_NAME
+                                              , UM.CONTRACT_QTY
+                                              , UM.CONTRACT_UNIT
+                                              , UM.INITIAL_COST
+                                              , UM.MONTHLY_COST
+                                              , UM.DISPLAY_ORDER
+                                              , UM.UPDATED_AT
+                                              , ROW_NUMBER() OVER ( 
+                                                PARTITION BY
+                                                  CONTRACT_CODE 
+                                                ORDER BY
+                                                  CONTRACT_CODE
+                                                  , ADOPTION_DATE DESC
+                                              ) num 
+                                            FROM
+                                              USAGE_FEE_MASTER UM 
+                                            WHERE
+                                              ADOPTION_DATE <= getdate() 
+                                              AND ( 
+                                                FEE_STRUCTURE = 'BASIC' 
+                                                AND CONTRACT_CODE = @CONTRACT_PLAN
+                                                OR (FEE_STRUCTURE <> 'BASIC')
+                                              ) 
+                                          ) tbl 
+                                        where
+                                          tbl.num = 1
+                                      ) subQ1 
                                     LEFT JOIN 
-                                    (SELECT CONTRACT_CODE,ADOPTION_DATE,FEE_STRUCTURE,CONTRACT_NAME,CONTRACT_QTY,CONTRACT_UNIT,INITIAL_COST,DISPLAY_ORDER,UPDATED_AT,
-                                    MONTHLY_COST,
-                                    ROW_NUMBER() OVER(PARTITION BY CONTRACT_CODE ORDER BY CONTRACT_CODE, ADOPTION_DATE DESC) num
-                                    FROM USAGE_FEE_MASTER
-                                    WHERE CONVERT(varchar(10),ADOPTION_DATE,112) <= CONVERT(varchar(10),GETDATE(),112)
-                                    AND (CONTRACT_CODE=@CONTRACT_PLAN AND FEE_STRUCTURE='BASIC') OR FEE_STRUCTURE <> 'BASIC'
-                                    ) UM 
-                                    ON UM.CONTRACT_CODE = REQ.CONTRACT_CODE
-                                    WHERE REQ.COMPANY_NO_BOX = @COMPANY_NO_BOX
-                                    AND REQ.REQ_SEQ = @REQ_SEQ
-                                    AND num = 1
-                                    @Extra_Condition
-                                    ORDER BY REQ.Type, UM.DISPLAY_ORDER";
+	                                    ( 
+		                                    SELECT * FROM REQ_USAGE_FEE RUF 
+		                                    WHERE RUF.COMPANY_NO_BOX = @COMPANY_NO_BOX
+	                                        AND RUF.REQ_SEQ = @REQ_SEQ
+	                                    ) subQ2 
+                                        ON subQ1.CONTRACT_CODE = subQ2.CONTRACT_CODE 
+	                                    @Extra_Condition
+                                    ORDER BY subQ1.DISPLAY_ORDER, subQ2.TYPE ASC";
 
         string strUpdateQuotation = @"UPDATE [REQUEST_DETAIL]
                            SET [INITIAL_COST] = @INITIAL_COST
@@ -433,14 +471,14 @@ namespace DAL_AmigoProcess.DAL
                                                 REQ_ADDRESS2.ADDRESS_BUILDING BILL_ADDRESS_BUILDING,
                                                 REQ_ADDRESS2.MAIL_ADDRESS BILL_MAIL_ADDRESS,
                                                 REQ_ADDRESS2.PHONE_NUMBER BILL_PHONE_NUMBER,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-1] BILL_BANK_ACCOUNT_NAME_1,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-1] BILL_BANK_ACCOUNT_NUMBER_1,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-2] BILL_BANK_ACCOUNT_NAME_2,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-2] BILL_BANK_ACCOUNT_NUMBER_2,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-3] BILL_BANK_ACCOUNT_NAME_3,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-3] BILL_BANK_ACCOUNT_NUMBER_3,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-4] BILL_BANK_ACCOUNT_NAME_4,
-                                                BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-4] BILL_BANK_ACCOUNT_NUMBER_4,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-1]) BILL_BANK_ACCOUNT_NAME_1,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-1]) BILL_BANK_ACCOUNT_NUMBER_1,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-2]) BILL_BANK_ACCOUNT_NAME_2,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-2]) BILL_BANK_ACCOUNT_NUMBER_2,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-3]) BILL_BANK_ACCOUNT_NAME_3,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-3]) BILL_BANK_ACCOUNT_NUMBER_3,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NAME-4]) BILL_BANK_ACCOUNT_NAME_4,
+                                                TRIM(BANK_ACCOUNT_MASTER.[BILL_BANK_ACCOUNT_NUMBER-4]) BILL_BANK_ACCOUNT_NUMBER_4,
                                                 REQUEST_DETAIL.INITIAL_COST,
                                                 REQUEST_DETAIL.MONTHLY_COST,
                                                 REQUEST_DETAIL.YEAR_COST,
@@ -484,7 +522,8 @@ namespace DAL_AmigoProcess.DAL
                                                 '' AS MAIL_SENDING_TARGET_FLG,
                                                 '' AS MAIL_DESTINATION,
                                                 REQUEST_DETAIL.UPDATED_AT AS UPDATED_AT_RAW,
-                                                REQUEST_DETAIL.REQ_SEQ
+                                                REQUEST_DETAIL.REQ_SEQ,
+                                                TRIM(REQUEST_DETAIL.CONTRACT_PLAN) CONTRACT_PLAN_RAW
                                                 FROM REQUEST_DETAIL
                                                 LEFT JOIN REQ_ADDRESS REQ_ADDRESS1
                                                 ON REQUEST_DETAIL.COMPANY_NO_BOX = REQ_ADDRESS1.COMPANY_NO_BOX
@@ -628,6 +667,7 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@ORDER_DATE", oREQUEST_DETAIL.ORDER_DATE != null ? oREQUEST_DETAIL.ORDER_DATE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_EFFECTIVE_DATE", oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE != null ? oREQUEST_DETAIL.SYSTEM_EFFECTIVE_DATE : (object)DBNull.Value));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_REGIST_DEADLINE", oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE != null ? oREQUEST_DETAIL.SYSTEM_REGIST_DEADLINE : (object)DBNull.Value));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@SYSTEM_SETTING_STATUS", oREQUEST_DETAIL.SYSTEM_SETTING_STATUS));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_DATETIME", CURRENT_TIME));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_USER", CURRENT_USER));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", oREQUEST_DETAIL.COMPANY_NO_BOX != null ? oREQUEST_DETAIL.COMPANY_NO_BOX : (object)DBNull.Value));

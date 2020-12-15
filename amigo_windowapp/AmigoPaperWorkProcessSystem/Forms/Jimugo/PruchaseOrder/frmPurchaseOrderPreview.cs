@@ -19,6 +19,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
         public DialogResult Dialog { get; set; }
         public string UPDATED_AT { get; set; }
         public string UPDATED_AT_RAW { get; set; }
+        public string SYSTEM_EFFECTIVE_DATE { get; set; }
         #endregion
 
         #region Constructor
@@ -122,6 +123,7 @@ namespace AmigoPaperWorkProcessSystem.Forms
                     {
                         Dialog = DialogResult.OK;
                         this.ORDER_DATE = txtOrderDate.Text.Trim();
+                        this.SYSTEM_EFFECTIVE_DATE = txtSystemEffectiveDate.Text.Trim();
                         this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
                         this.UPDATED_AT_RAW = result.Rows[0]["UPDATED_AT_RAW"].ToString();
                         MetroMessageBox.Show(this, "\n" + message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);

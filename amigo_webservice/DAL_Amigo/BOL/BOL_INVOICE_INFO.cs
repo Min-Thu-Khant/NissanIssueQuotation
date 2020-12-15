@@ -23,7 +23,7 @@ namespace DAL_AmigoProcess.BOL
         private DateTime? _STATUS_PRINT;
         private string _STATUS_MEMO;
         private DateTime? _STATUS_SEND;
-        private char _STATUS_MAIL_DATE;
+        private string _STATUS_MAIL_DATE;
         private DateTime? _STATUS_ACC_RECEIVABLE_DATE;
         private DateTime? _STATUS_INVOCE_COPY_DATE;
         private DateTime? _STATUS_ACTUAL_MDB_UPDATE;
@@ -39,7 +39,7 @@ namespace DAL_AmigoProcess.BOL
         private DateTime? _ANSWER_DATE;
         private DateTime? _PAYMENT_DUE_DATE;
         private string _ANSWER_MEMO;
-        private char _NCS_CUSTOMER_CODE;
+        private string _NCS_CUSTOMER_CODE;
         private string _BILL_SUPPLIER_NAME;
         private string _BILL_SUPPLIER_NAME_READING;
         private string _BILL_COMPANY_NAME;
@@ -82,7 +82,7 @@ namespace DAL_AmigoProcess.BOL
         public DateTime? STATUS_PRINT { get { return _STATUS_PRINT; } set { _STATUS_PRINT = value; } }
         public string STATUS_MEMO { get { return _STATUS_MEMO; } set { _STATUS_MEMO = value; } }
         public DateTime? STATUS_SEND { get { return _STATUS_SEND; } set { _STATUS_SEND = value; } }
-        public char STATUS_MAIL_DATE { get { return _STATUS_MAIL_DATE; } set { _STATUS_MAIL_DATE = value; } }
+        public string STATUS_MAIL_DATE { get { return _STATUS_MAIL_DATE; } set { _STATUS_MAIL_DATE = value; } }
         public DateTime? STATUS_ACC_RECEIVABLE_DATE { get { return _STATUS_ACC_RECEIVABLE_DATE; } set { _STATUS_ACC_RECEIVABLE_DATE = value; } }
         public DateTime? STATUS_INVOCE_COPY_DATE { get { return _STATUS_INVOCE_COPY_DATE; } set { _STATUS_INVOCE_COPY_DATE = value; } }
         public DateTime? STATUS_ACTUAL_MDB_UPDATE { get { return _STATUS_ACTUAL_MDB_UPDATE; } set { _STATUS_ACTUAL_MDB_UPDATE = value; } }
@@ -106,7 +106,7 @@ namespace DAL_AmigoProcess.BOL
         public string BILL_POSTAL_CODE { get { return _BILL_POSTAL_CODE; } set { _BILL_POSTAL_CODE = value; } }
         public string BILL_ADDRESS { get { return _BILL_ADDRESS; } set { _BILL_ADDRESS = value; } }
         public string BILL_ADDRESS_2 { get { return _BILL_ADDRESS_2; } set { _BILL_ADDRESS_2 = value; } }
-        public char NCS_CUSTOMER_CODE { get { return _NCS_CUSTOMER_CODE; } set { _NCS_CUSTOMER_CODE = value; } }
+        public string NCS_CUSTOMER_CODE { get { return _NCS_CUSTOMER_CODE; } set { _NCS_CUSTOMER_CODE = value; } }
         public string BILL_DEPOSIT_RULES { get { return _BILL_DEPOSIT_RULES; } set { _BILL_DEPOSIT_RULES = value; } }
         public decimal BILL_TRANSFER_FEE { get { return _BILL_TRANSFER_FEE; } set { _BILL_TRANSFER_FEE = value; } }
         public decimal BILL_EXPENSES { get { return _BILL_EXPENSES; } set { _BILL_EXPENSES = value; } }
@@ -136,7 +136,7 @@ namespace DAL_AmigoProcess.BOL
             _COMPANY_NO_BOX = "";
             _YEAR_MONTH = "";
             _INVOICE_DATE = null;
-            _NCS_CUSTOMER_CODE = '\0';
+            _NCS_CUSTOMER_CODE = "0";
             _BILL_SUPPLIER_NAME = "";
             _BILL_SUPPLIER_NAME_READING = "";
             _BILL_COMPANY_NAME = "";
@@ -169,7 +169,7 @@ namespace DAL_AmigoProcess.BOL
             _STATUS_PRINT = null;
             _STATUS_MEMO = "";
             _STATUS_SEND = null;
-            _STATUS_MAIL_DATE = '\0';
+            _STATUS_MAIL_DATE = "0";
             _STATUS_ACC_RECEIVABLE_DATE = null;
             _STATUS_INVOCE_COPY_DATE = null;
             _STATUS_ACTUAL_MDB_UPDATE = null;
@@ -189,6 +189,34 @@ namespace DAL_AmigoProcess.BOL
         }
 
         #endregion
+
+        private string _SPECIAL_NOTES_1;
+        public string SPECIAL_NOTES_1
+        {
+            get { return _SPECIAL_NOTES_1; }
+            set { _SPECIAL_NOTES_1 = value; }
+        }
+
+        private string _SPECIAL_NOTES_2;
+        public string SPECIAL_NOTES_2
+        {
+            get { return _SPECIAL_NOTES_2; }
+            set { _SPECIAL_NOTES_2 = value; }
+        }
+
+        private string _SPECIAL_NOTES_3;
+        public string SPECIAL_NOTES_3
+        {
+            get { return _SPECIAL_NOTES_3; }
+            set { _SPECIAL_NOTES_3 = value; }
+        }
+
+        private string _SPECIAL_NOTES_4;
+        public string SPECIAL_NOTES_4
+        {
+            get { return _SPECIAL_NOTES_4; }
+            set { _SPECIAL_NOTES_4 = value; }
+        }
     }
     #endregion
 }

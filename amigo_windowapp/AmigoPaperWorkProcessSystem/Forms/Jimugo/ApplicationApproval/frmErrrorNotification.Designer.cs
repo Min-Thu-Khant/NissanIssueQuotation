@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCurrent = new System.Windows.Forms.DataGridView();
@@ -61,8 +63,8 @@
             // NO
             // 
             this.NO.DataPropertyName = "NO";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.NO.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.NO.DefaultCellStyle = dataGridViewCellStyle1;
             this.NO.HeaderText = "No";
             this.NO.Name = "NO";
             this.NO.ReadOnly = true;
@@ -70,8 +72,8 @@
             // MAIL_ADDRESS
             // 
             this.MAIL_ADDRESS.DataPropertyName = "MAIL_ADDRESS";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.MAIL_ADDRESS.DefaultCellStyle = dataGridViewCellStyle2;
             this.MAIL_ADDRESS.HeaderText = "メールアドレス";
             this.MAIL_ADDRESS.Name = "MAIL_ADDRESS";
             this.MAIL_ADDRESS.ReadOnly = true;
@@ -125,6 +127,8 @@
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "NO";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.dataGridViewTextBoxColumn2.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewTextBoxColumn2.HeaderText = "No";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             this.dataGridViewTextBoxColumn2.ReadOnly = true;
@@ -132,6 +136,8 @@
             // dataGridViewTextBoxColumn4
             // 
             this.dataGridViewTextBoxColumn4.DataPropertyName = "MAIL_ADDRESS";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.dataGridViewTextBoxColumn4.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewTextBoxColumn4.HeaderText = "メールアドレス";
             this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
             this.dataGridViewTextBoxColumn4.ReadOnly = true;
@@ -147,7 +153,13 @@
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1000, 429);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1000, 429);
             this.Name = "frmErrrorNotification";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "エラー通知";
             this.Load += new System.EventHandler(this.FrmErrrorNotification_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrent)).EndInit();

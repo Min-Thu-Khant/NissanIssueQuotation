@@ -29,15 +29,6 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -49,6 +40,15 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -61,7 +61,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle31 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle32 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvCurrent = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
+            this.NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CONTRACT_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.INITIAL_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.INITIAL_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.INITIAL_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MONTHLY_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MONTHLY_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MONTHLY_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YEAR_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YEAR_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.YEAR_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.btnOK = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -74,17 +84,6 @@
             this.MONTHLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.YEARLY_USAGE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvChange = new System.Windows.Forms.DataGridView();
-            this.NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CONTRACT_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.INITIAL_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.INITIAL_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.INITIAL_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MONTHLY_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MONTHLY_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MONTHLY_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YEAR_UNIT_PRICE = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YEAR_QUANTITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.YEAR_AMOUNT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NO1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CONTRACT_NAME1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.INITIAL_UNIT_PRICE1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,15 +137,124 @@
             this.dgvCurrent.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvCurrent.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvCurrent_Paint);
             // 
-            // label3
+            // NO
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Meiryo UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(10, 11);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 17);
-            this.label3.TabIndex = 11;
-            this.label3.Text = "利用料金内訳";
+            this.NO.DataPropertyName = "NO";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.NO.DefaultCellStyle = dataGridViewCellStyle2;
+            this.NO.HeaderText = "No";
+            this.NO.Name = "NO";
+            this.NO.ReadOnly = true;
+            this.NO.Width = 35;
+            // 
+            // CONTRACT_NAME
+            // 
+            this.CONTRACT_NAME.DataPropertyName = "CONTRACT_NAME";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.CONTRACT_NAME.DefaultCellStyle = dataGridViewCellStyle3;
+            this.CONTRACT_NAME.HeaderText = "契約内容";
+            this.CONTRACT_NAME.Name = "CONTRACT_NAME";
+            this.CONTRACT_NAME.ReadOnly = true;
+            this.CONTRACT_NAME.Width = 155;
+            // 
+            // INITIAL_UNIT_PRICE
+            // 
+            this.INITIAL_UNIT_PRICE.DataPropertyName = "INITIAL_UNIT_PRICE";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N0";
+            this.INITIAL_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle4;
+            this.INITIAL_UNIT_PRICE.HeaderText = "単価";
+            this.INITIAL_UNIT_PRICE.Name = "INITIAL_UNIT_PRICE";
+            this.INITIAL_UNIT_PRICE.ReadOnly = true;
+            this.INITIAL_UNIT_PRICE.Width = 85;
+            // 
+            // INITIAL_QUANTITY
+            // 
+            this.INITIAL_QUANTITY.DataPropertyName = "INITIAL_QUANTITY";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N0";
+            this.INITIAL_QUANTITY.DefaultCellStyle = dataGridViewCellStyle5;
+            this.INITIAL_QUANTITY.HeaderText = "数量";
+            this.INITIAL_QUANTITY.Name = "INITIAL_QUANTITY";
+            this.INITIAL_QUANTITY.ReadOnly = true;
+            this.INITIAL_QUANTITY.Width = 60;
+            // 
+            // INITIAL_AMOUNT
+            // 
+            this.INITIAL_AMOUNT.DataPropertyName = "INITIAL_AMOUNT";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N0";
+            this.INITIAL_AMOUNT.DefaultCellStyle = dataGridViewCellStyle6;
+            this.INITIAL_AMOUNT.HeaderText = "合計";
+            this.INITIAL_AMOUNT.Name = "INITIAL_AMOUNT";
+            this.INITIAL_AMOUNT.ReadOnly = true;
+            this.INITIAL_AMOUNT.Width = 85;
+            // 
+            // MONTHLY_UNIT_PRICE
+            // 
+            this.MONTHLY_UNIT_PRICE.DataPropertyName = "MONTHLY_UNIT_PRICE";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N0";
+            this.MONTHLY_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle7;
+            this.MONTHLY_UNIT_PRICE.HeaderText = "単価";
+            this.MONTHLY_UNIT_PRICE.Name = "MONTHLY_UNIT_PRICE";
+            this.MONTHLY_UNIT_PRICE.ReadOnly = true;
+            this.MONTHLY_UNIT_PRICE.Width = 85;
+            // 
+            // MONTHLY_QUANTITY
+            // 
+            this.MONTHLY_QUANTITY.DataPropertyName = "MONTHLY_QUANTITY";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N0";
+            this.MONTHLY_QUANTITY.DefaultCellStyle = dataGridViewCellStyle8;
+            this.MONTHLY_QUANTITY.HeaderText = "数量";
+            this.MONTHLY_QUANTITY.Name = "MONTHLY_QUANTITY";
+            this.MONTHLY_QUANTITY.ReadOnly = true;
+            this.MONTHLY_QUANTITY.Width = 60;
+            // 
+            // MONTHLY_AMOUNT
+            // 
+            this.MONTHLY_AMOUNT.DataPropertyName = "MONTHLY_AMOUNT";
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle9.Format = "N0";
+            this.MONTHLY_AMOUNT.DefaultCellStyle = dataGridViewCellStyle9;
+            this.MONTHLY_AMOUNT.HeaderText = "合計";
+            this.MONTHLY_AMOUNT.Name = "MONTHLY_AMOUNT";
+            this.MONTHLY_AMOUNT.ReadOnly = true;
+            this.MONTHLY_AMOUNT.Width = 85;
+            // 
+            // YEAR_UNIT_PRICE
+            // 
+            this.YEAR_UNIT_PRICE.DataPropertyName = "YEAR_UNIT_PRICE";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle10.Format = "N0";
+            this.YEAR_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle10;
+            this.YEAR_UNIT_PRICE.HeaderText = "単価";
+            this.YEAR_UNIT_PRICE.Name = "YEAR_UNIT_PRICE";
+            this.YEAR_UNIT_PRICE.ReadOnly = true;
+            this.YEAR_UNIT_PRICE.Width = 85;
+            // 
+            // YEAR_QUANTITY
+            // 
+            this.YEAR_QUANTITY.DataPropertyName = "YEAR_QUANTITY";
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle11.Format = "N0";
+            this.YEAR_QUANTITY.DefaultCellStyle = dataGridViewCellStyle11;
+            this.YEAR_QUANTITY.HeaderText = "数量";
+            this.YEAR_QUANTITY.Name = "YEAR_QUANTITY";
+            this.YEAR_QUANTITY.ReadOnly = true;
+            this.YEAR_QUANTITY.Width = 60;
+            // 
+            // YEAR_AMOUNT
+            // 
+            this.YEAR_AMOUNT.DataPropertyName = "YEAR_AMOUNT";
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle12.Format = "N0";
+            this.YEAR_AMOUNT.DefaultCellStyle = dataGridViewCellStyle12;
+            this.YEAR_AMOUNT.HeaderText = "合計";
+            this.YEAR_AMOUNT.Name = "YEAR_AMOUNT";
+            this.YEAR_AMOUNT.ReadOnly = true;
+            this.YEAR_AMOUNT.Width = 85;
             // 
             // label2
             // 
@@ -314,125 +422,6 @@
             this.dgvChange.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvChange.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvCurrent_Paint);
             // 
-            // NO
-            // 
-            this.NO.DataPropertyName = "NO";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            this.NO.DefaultCellStyle = dataGridViewCellStyle2;
-            this.NO.HeaderText = "No";
-            this.NO.Name = "NO";
-            this.NO.ReadOnly = true;
-            this.NO.Width = 35;
-            // 
-            // CONTRACT_NAME
-            // 
-            this.CONTRACT_NAME.DataPropertyName = "CONTRACT_NAME";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.CONTRACT_NAME.DefaultCellStyle = dataGridViewCellStyle3;
-            this.CONTRACT_NAME.HeaderText = "契約内容";
-            this.CONTRACT_NAME.Name = "CONTRACT_NAME";
-            this.CONTRACT_NAME.ReadOnly = true;
-            this.CONTRACT_NAME.Width = 155;
-            // 
-            // INITIAL_UNIT_PRICE
-            // 
-            this.INITIAL_UNIT_PRICE.DataPropertyName = "INITIAL_UNIT_PRICE";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            this.INITIAL_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle4;
-            this.INITIAL_UNIT_PRICE.HeaderText = "単価";
-            this.INITIAL_UNIT_PRICE.Name = "INITIAL_UNIT_PRICE";
-            this.INITIAL_UNIT_PRICE.ReadOnly = true;
-            this.INITIAL_UNIT_PRICE.Width = 85;
-            // 
-            // INITIAL_QUANTITY
-            // 
-            this.INITIAL_QUANTITY.DataPropertyName = "INITIAL_QUANTITY";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            this.INITIAL_QUANTITY.DefaultCellStyle = dataGridViewCellStyle5;
-            this.INITIAL_QUANTITY.HeaderText = "数量";
-            this.INITIAL_QUANTITY.Name = "INITIAL_QUANTITY";
-            this.INITIAL_QUANTITY.ReadOnly = true;
-            this.INITIAL_QUANTITY.Width = 60;
-            // 
-            // INITIAL_AMOUNT
-            // 
-            this.INITIAL_AMOUNT.DataPropertyName = "INITIAL_AMOUNT";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N0";
-            this.INITIAL_AMOUNT.DefaultCellStyle = dataGridViewCellStyle6;
-            this.INITIAL_AMOUNT.HeaderText = "合計";
-            this.INITIAL_AMOUNT.Name = "INITIAL_AMOUNT";
-            this.INITIAL_AMOUNT.ReadOnly = true;
-            this.INITIAL_AMOUNT.Width = 85;
-            // 
-            // MONTHLY_UNIT_PRICE
-            // 
-            this.MONTHLY_UNIT_PRICE.DataPropertyName = "MONTHLY_UNIT_PRICE";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N0";
-            this.MONTHLY_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle7;
-            this.MONTHLY_UNIT_PRICE.HeaderText = "単価";
-            this.MONTHLY_UNIT_PRICE.Name = "MONTHLY_UNIT_PRICE";
-            this.MONTHLY_UNIT_PRICE.ReadOnly = true;
-            this.MONTHLY_UNIT_PRICE.Width = 85;
-            // 
-            // MONTHLY_QUANTITY
-            // 
-            this.MONTHLY_QUANTITY.DataPropertyName = "MONTHLY_QUANTITY";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N0";
-            this.MONTHLY_QUANTITY.DefaultCellStyle = dataGridViewCellStyle8;
-            this.MONTHLY_QUANTITY.HeaderText = "数量";
-            this.MONTHLY_QUANTITY.Name = "MONTHLY_QUANTITY";
-            this.MONTHLY_QUANTITY.ReadOnly = true;
-            this.MONTHLY_QUANTITY.Width = 60;
-            // 
-            // MONTHLY_AMOUNT
-            // 
-            this.MONTHLY_AMOUNT.DataPropertyName = "MONTHLY_AMOUNT";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            this.MONTHLY_AMOUNT.DefaultCellStyle = dataGridViewCellStyle9;
-            this.MONTHLY_AMOUNT.HeaderText = "合計";
-            this.MONTHLY_AMOUNT.Name = "MONTHLY_AMOUNT";
-            this.MONTHLY_AMOUNT.ReadOnly = true;
-            this.MONTHLY_AMOUNT.Width = 85;
-            // 
-            // YEAR_UNIT_PRICE
-            // 
-            this.YEAR_UNIT_PRICE.DataPropertyName = "YEAR_UNIT_PRICE";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.YEAR_UNIT_PRICE.DefaultCellStyle = dataGridViewCellStyle10;
-            this.YEAR_UNIT_PRICE.HeaderText = "単価";
-            this.YEAR_UNIT_PRICE.Name = "YEAR_UNIT_PRICE";
-            this.YEAR_UNIT_PRICE.ReadOnly = true;
-            this.YEAR_UNIT_PRICE.Width = 85;
-            // 
-            // YEAR_QUANTITY
-            // 
-            this.YEAR_QUANTITY.DataPropertyName = "YEAR_QUANTITY";
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle11.Format = "N0";
-            this.YEAR_QUANTITY.DefaultCellStyle = dataGridViewCellStyle11;
-            this.YEAR_QUANTITY.HeaderText = "数量";
-            this.YEAR_QUANTITY.Name = "YEAR_QUANTITY";
-            this.YEAR_QUANTITY.ReadOnly = true;
-            this.YEAR_QUANTITY.Width = 60;
-            // 
-            // YEAR_AMOUNT
-            // 
-            this.YEAR_AMOUNT.DataPropertyName = "YEAR_AMOUNT";
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle12.Format = "N0";
-            this.YEAR_AMOUNT.DefaultCellStyle = dataGridViewCellStyle12;
-            this.YEAR_AMOUNT.HeaderText = "合計";
-            this.YEAR_AMOUNT.Name = "YEAR_AMOUNT";
-            this.YEAR_AMOUNT.ReadOnly = true;
-            this.YEAR_AMOUNT.Width = 85;
-            // 
             // NO1
             // 
             this.NO1.DataPropertyName = "NO";
@@ -561,16 +550,18 @@
             this.Controls.Add(this.dgvChangeTotal);
             this.Controls.Add(this.dgvCurrentTotal);
             this.Controls.Add(this.dgvCurrent);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnOK);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1200, 423);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1200, 423);
             this.Name = "frmUsageChargeBreakDown";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "利用料金内訳";
             this.Load += new System.EventHandler(this.FrmUsageChargeBreakDown_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrent)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCurrentTotal)).EndInit();
@@ -584,7 +575,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dgvCurrent;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.Label label1;

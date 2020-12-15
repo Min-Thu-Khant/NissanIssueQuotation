@@ -247,6 +247,7 @@ namespace AmigoProcessManagement.Controller
                             //return message and MK value
                             if (String.IsNullOrEmpty(msg)) //success
                             {
+                                dgvList.Rows[i]["REQ_STATUS"] = "申請取消";
                                 ResponseUtility.ReturnSuccessMessage(dgvList.Rows[i], UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER, string.Format(Utility.Messages.Jimugo.I000ZZ016, "申請取消"));
                             }
                             else //failed

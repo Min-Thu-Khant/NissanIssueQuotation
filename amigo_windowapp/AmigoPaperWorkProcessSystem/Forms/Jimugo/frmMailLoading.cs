@@ -13,7 +13,7 @@ namespace AmigoPaperWorkProcessSystem.Jimugo
 {
     public partial class frmMailLoading : Form
     {
-        public frmMailLoading(string strMessage):this()
+        public frmMailLoading(string strMessage) : this()
         {
             lblMailMsg.Text = strMessage;
         }
@@ -31,7 +31,7 @@ namespace AmigoPaperWorkProcessSystem.Jimugo
 
         private void FrmMailLoading_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }

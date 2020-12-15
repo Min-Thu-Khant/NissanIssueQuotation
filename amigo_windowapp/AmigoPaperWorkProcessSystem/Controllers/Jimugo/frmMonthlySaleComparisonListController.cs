@@ -23,18 +23,6 @@ namespace AmigoPaperWorkProcessSystem.Controllers
                                                     .Replace("@strYYMM2", strDate2);
             return WebUtility.Get(url, out MetaData);
 
-            //string url = Properties.Settings.Default.getMonthlySaleComparisonlist;
-
-            ////convert list to json object
-            //String json = JsonConvert.SerializeObject(new
-            //{
-            //    strYYYMM1 = strDate1,
-            //    strYYMM2 = strDate2,
-            //    OFFSET = OFFSET,
-            //    LIMIT = LIMIT
-            //});
-
-            //return WebUtility.Post(url, json, out MetaData);
         }
         #endregion
     }

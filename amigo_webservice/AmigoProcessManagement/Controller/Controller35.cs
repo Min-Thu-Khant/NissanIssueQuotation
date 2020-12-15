@@ -25,7 +25,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region GetDataGridfor35
-        public Response GetDataGridfor35(string strFrom, string stringTo)
+        public Response GetDataGridfor35(string strFrom, string stringTo, bool isNoReserved)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace AmigoProcessManagement.Controller
                 string strMessage = "";
                 DateTime dtmFrom = DateTime.ParseExact(strFrom, "yyyyMMdd", CultureInfo.InvariantCulture);
                 DateTime dtmTo = DateTime.ParseExact(stringTo, "yyyyMMdd", CultureInfo.InvariantCulture);
-                DataTable dt = oRecpt.GetDateFor35_Grid(dtmFrom, dtmTo, out strMessage);
+                DataTable dt = oRecpt.GetDateFor35_Grid(dtmFrom, dtmTo, isNoReserved, out strMessage);
                 response.Data = Utility.Utility_Component.DtToJSon(dt, "35Result");
                 if (dt.Rows.Count > 0)
                 {

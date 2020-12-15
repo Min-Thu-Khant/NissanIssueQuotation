@@ -29,17 +29,25 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle21 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle25 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle26 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle27 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle28 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle29 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle30 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.lblMenu = new System.Windows.Forms.Label();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnNextMonthDiff = new System.Windows.Forms.Button();
+            this.btnPreMonthDiff = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.pTitle = new System.Windows.Forms.Panel();
+            this.txtDate = new System.Windows.Forms.TextBox();
+            this.lblDate = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             this.TotalAmount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.売上 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.入金予定 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,14 +58,6 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.売上3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.入金予定3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.入金実績3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lblMenu = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnNextMonthDiff = new System.Windows.Forms.Button();
-            this.btnPreMonthDiff = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.pTitle = new System.Windows.Forms.Panel();
-            this.txtDate = new System.Windows.Forms.TextBox();
-            this.lblDate = new AmigoPaperWorkProcessSystem.UserControls.DisplayItemLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.pTitle.SuspendLayout();
             this.SuspendLayout();
@@ -99,142 +99,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
             // 
-            // TotalAmount
-            // 
-            this.TotalAmount.DataPropertyName = "TotalAmount";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.TotalAmount.DefaultCellStyle = dataGridViewCellStyle1;
-            this.TotalAmount.HeaderText = "";
-            this.TotalAmount.MinimumWidth = 8;
-            this.TotalAmount.Name = "TotalAmount";
-            this.TotalAmount.ReadOnly = true;
-            this.TotalAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.TotalAmount.Width = 150;
-            // 
-            // 売上
-            // 
-            this.売上.DataPropertyName = "ReduceSales";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N0";
-            this.売上.DefaultCellStyle = dataGridViewCellStyle2;
-            this.売上.HeaderText = "売上";
-            this.売上.MinimumWidth = 8;
-            this.売上.Name = "売上";
-            this.売上.ReadOnly = true;
-            this.売上.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.売上.Width = 150;
-            // 
-            // 入金予定
-            // 
-            this.入金予定.DataPropertyName = "ReducePlanDeposit";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N0";
-            this.入金予定.DefaultCellStyle = dataGridViewCellStyle3;
-            this.入金予定.HeaderText = "入金予定";
-            this.入金予定.MinimumWidth = 8;
-            this.入金予定.Name = "入金予定";
-            this.入金予定.ReadOnly = true;
-            this.入金予定.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金予定.Width = 150;
-            // 
-            // 入金実績
-            // 
-            this.入金実績.DataPropertyName = "ReduceAcutualDeposit";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N0";
-            this.入金実績.DefaultCellStyle = dataGridViewCellStyle4;
-            this.入金実績.HeaderText = "入金実績";
-            this.入金実績.MinimumWidth = 8;
-            this.入金実績.Name = "入金実績";
-            this.入金実績.ReadOnly = true;
-            this.入金実績.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金実績.Width = 150;
-            // 
-            // 売上2
-            // 
-            this.売上2.DataPropertyName = "CurrentSales";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle5.Format = "N0";
-            this.売上2.DefaultCellStyle = dataGridViewCellStyle5;
-            this.売上2.HeaderText = "売上";
-            this.売上2.MinimumWidth = 8;
-            this.売上2.Name = "売上2";
-            this.売上2.ReadOnly = true;
-            this.売上2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.売上2.Width = 150;
-            // 
-            // 入金予定2
-            // 
-            this.入金予定2.DataPropertyName = "CureentPlanDeposit";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle6.Format = "N0";
-            this.入金予定2.DefaultCellStyle = dataGridViewCellStyle6;
-            this.入金予定2.HeaderText = "入金予定";
-            this.入金予定2.MinimumWidth = 8;
-            this.入金予定2.Name = "入金予定2";
-            this.入金予定2.ReadOnly = true;
-            this.入金予定2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金予定2.Width = 150;
-            // 
-            // 入金実績2
-            // 
-            this.入金実績2.DataPropertyName = "CurrentAcutualDeposit";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle7.Format = "N0";
-            this.入金実績2.DefaultCellStyle = dataGridViewCellStyle7;
-            this.入金実績2.HeaderText = "入金実績";
-            this.入金実績2.MinimumWidth = 8;
-            this.入金実績2.Name = "入金実績2";
-            this.入金実績2.ReadOnly = true;
-            this.入金実績2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金実績2.Width = 150;
-            // 
-            // 売上3
-            // 
-            this.売上3.DataPropertyName = "PlusSales";
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle8.Format = "N0";
-            this.売上3.DefaultCellStyle = dataGridViewCellStyle8;
-            this.売上3.HeaderText = "売上";
-            this.売上3.MinimumWidth = 8;
-            this.売上3.Name = "売上3";
-            this.売上3.ReadOnly = true;
-            this.売上3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.売上3.Width = 150;
-            // 
-            // 入金予定3
-            // 
-            this.入金予定3.DataPropertyName = "PlusPlanDeposit";
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle9.Format = "N0";
-            this.入金予定3.DefaultCellStyle = dataGridViewCellStyle9;
-            this.入金予定3.HeaderText = "入金予定";
-            this.入金予定3.MinimumWidth = 8;
-            this.入金予定3.Name = "入金予定3";
-            this.入金予定3.ReadOnly = true;
-            this.入金予定3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金予定3.Width = 150;
-            // 
-            // 入金実績3
-            // 
-            this.入金実績3.DataPropertyName = "PlusAcutualDeposit";
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle10.Format = "N0";
-            this.入金実績3.DefaultCellStyle = dataGridViewCellStyle10;
-            this.入金実績3.HeaderText = "入金実績";
-            this.入金実績3.MinimumWidth = 8;
-            this.入金実績3.Name = "入金実績3";
-            this.入金実績3.ReadOnly = true;
-            this.入金実績3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.入金実績3.Width = 150;
-            // 
             // lblMenu
             // 
             this.lblMenu.AutoSize = true;
             this.lblMenu.Font = new System.Drawing.Font("Segoe MDL2 Assets", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMenu.Location = new System.Drawing.Point(16, 11);
             this.lblMenu.Name = "lblMenu";
-            this.lblMenu.Size = new System.Drawing.Size(193, 32);
+            this.lblMenu.Size = new System.Drawing.Size(126, 21);
             this.lblMenu.TabIndex = 0;
             this.lblMenu.Text = "Jimugo - Menu";
             // 
@@ -297,8 +168,8 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.txtDate.Location = new System.Drawing.Point(76, 120);
             this.txtDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(77, 28);
-            this.txtDate.TabIndex = 45;
+            this.txtDate.Size = new System.Drawing.Size(77, 21);
+            this.txtDate.TabIndex = 6;
             // 
             // lblDate
             // 
@@ -309,10 +180,139 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.lblDate.Name = "lblDate";
             this.lblDate.Size = new System.Drawing.Size(60, 21);
             this.lblDate.TabIndex = 44;
+            this.lblDate.TabStop = false;
+            // 
+            // TotalAmount
+            // 
+            this.TotalAmount.DataPropertyName = "TotalAmount";
+            dataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.TotalAmount.DefaultCellStyle = dataGridViewCellStyle21;
+            this.TotalAmount.HeaderText = "";
+            this.TotalAmount.MinimumWidth = 8;
+            this.TotalAmount.Name = "TotalAmount";
+            this.TotalAmount.ReadOnly = true;
+            this.TotalAmount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // 売上
+            // 
+            this.売上.DataPropertyName = "ReduceSales";
+            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle22.Format = "N0";
+            this.売上.DefaultCellStyle = dataGridViewCellStyle22;
+            this.売上.HeaderText = "売上";
+            this.売上.MinimumWidth = 8;
+            this.売上.Name = "売上";
+            this.売上.ReadOnly = true;
+            this.売上.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.売上.Width = 150;
+            // 
+            // 入金予定
+            // 
+            this.入金予定.DataPropertyName = "ReducePlanDeposit";
+            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle23.Format = "N0";
+            this.入金予定.DefaultCellStyle = dataGridViewCellStyle23;
+            this.入金予定.HeaderText = "入金予定";
+            this.入金予定.MinimumWidth = 8;
+            this.入金予定.Name = "入金予定";
+            this.入金予定.ReadOnly = true;
+            this.入金予定.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金予定.Width = 150;
+            // 
+            // 入金実績
+            // 
+            this.入金実績.DataPropertyName = "ReduceAcutualDeposit";
+            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle24.Format = "N0";
+            this.入金実績.DefaultCellStyle = dataGridViewCellStyle24;
+            this.入金実績.HeaderText = "入金実績";
+            this.入金実績.MinimumWidth = 8;
+            this.入金実績.Name = "入金実績";
+            this.入金実績.ReadOnly = true;
+            this.入金実績.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金実績.Width = 150;
+            // 
+            // 売上2
+            // 
+            this.売上2.DataPropertyName = "CurrentSales";
+            dataGridViewCellStyle25.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle25.Format = "N0";
+            this.売上2.DefaultCellStyle = dataGridViewCellStyle25;
+            this.売上2.HeaderText = "売上";
+            this.売上2.MinimumWidth = 8;
+            this.売上2.Name = "売上2";
+            this.売上2.ReadOnly = true;
+            this.売上2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.売上2.Width = 150;
+            // 
+            // 入金予定2
+            // 
+            this.入金予定2.DataPropertyName = "CureentPlanDeposit";
+            dataGridViewCellStyle26.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle26.Format = "N0";
+            this.入金予定2.DefaultCellStyle = dataGridViewCellStyle26;
+            this.入金予定2.HeaderText = "入金予定";
+            this.入金予定2.MinimumWidth = 8;
+            this.入金予定2.Name = "入金予定2";
+            this.入金予定2.ReadOnly = true;
+            this.入金予定2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金予定2.Width = 150;
+            // 
+            // 入金実績2
+            // 
+            this.入金実績2.DataPropertyName = "CurrentAcutualDeposit";
+            dataGridViewCellStyle27.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle27.Format = "N0";
+            this.入金実績2.DefaultCellStyle = dataGridViewCellStyle27;
+            this.入金実績2.HeaderText = "入金実績";
+            this.入金実績2.MinimumWidth = 8;
+            this.入金実績2.Name = "入金実績2";
+            this.入金実績2.ReadOnly = true;
+            this.入金実績2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金実績2.Width = 150;
+            // 
+            // 売上3
+            // 
+            this.売上3.DataPropertyName = "PlusSales";
+            dataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle28.Format = "N0";
+            this.売上3.DefaultCellStyle = dataGridViewCellStyle28;
+            this.売上3.HeaderText = "売上";
+            this.売上3.MinimumWidth = 8;
+            this.売上3.Name = "売上3";
+            this.売上3.ReadOnly = true;
+            this.売上3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.売上3.Width = 150;
+            // 
+            // 入金予定3
+            // 
+            this.入金予定3.DataPropertyName = "PlusPlanDeposit";
+            dataGridViewCellStyle29.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle29.Format = "N0";
+            this.入金予定3.DefaultCellStyle = dataGridViewCellStyle29;
+            this.入金予定3.HeaderText = "入金予定";
+            this.入金予定3.MinimumWidth = 8;
+            this.入金予定3.Name = "入金予定3";
+            this.入金予定3.ReadOnly = true;
+            this.入金予定3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金予定3.Width = 150;
+            // 
+            // 入金実績3
+            // 
+            this.入金実績3.DataPropertyName = "PlusAcutualDeposit";
+            dataGridViewCellStyle30.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle30.Format = "N0";
+            this.入金実績3.DefaultCellStyle = dataGridViewCellStyle30;
+            this.入金実績3.HeaderText = "入金実績";
+            this.入金実績3.MinimumWidth = 8;
+            this.入金実績3.Name = "入金実績3";
+            this.入金実績3.ReadOnly = true;
+            this.入金実績3.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.入金実績3.Width = 150;
             // 
             // FrmMonthlySaleAggregationList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.txtDate);

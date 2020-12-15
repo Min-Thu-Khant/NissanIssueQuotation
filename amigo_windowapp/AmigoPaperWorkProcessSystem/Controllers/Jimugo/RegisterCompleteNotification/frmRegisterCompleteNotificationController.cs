@@ -1,5 +1,6 @@
 ﻿using AmigoPaperWorkProcessSystem.Core;
 using AmigoPaperWorkProcessSystem.Core.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,6 +27,24 @@ namespace AmigoPaperWorkProcessSystem.Controllers.RegisterCompleteNotification
         {
             string url = Properties.Settings.Default.PreviewNotification;
             return WebUtility.Post(url, COMPANY_NAME, COMPANY_NO_BOX, REQ_SEQ, EDI_ACCOUNT);
+
+        }
+        #endregion
+
+        #region DeleteTempFIles
+        public DataTable DeleteTempFiles(string FILENAME)
+        {
+            string url = Properties.Settings.Default.DeleteTempFile;
+            int last_index_of_underscore = FILENAME.LastIndexOf("_") + 1;
+            string zi_ = FILENAME.Substring(0, FILENAME.Length - (FILENAME.Length - last_index_of_underscore + 1)) + ".zi_";
+            //convert list to json object
+            Utility.DeleteTempFile(System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp\Zip\" + zi_);
+            Utility.DeleteTempFile(System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath) + @"\Temp\" + FILENAME);
+            String json = JsonConvert.SerializeObject(new
+            {
+                FILENAME = FILENAME + ";" + zi_
+            });
+            return WebUtility.Post(url, json);
 
         }
         #endregion

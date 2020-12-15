@@ -60,7 +60,6 @@
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel4 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.txtBillingDateTo = new MetroFramework.Controls.MetroTextBox();
             this.txtSchedulePaymentTo = new MetroFramework.Controls.MetroTextBox();
             this.txtDepositRecordDateTo = new MetroFramework.Controls.MetroTextBox();
@@ -171,6 +170,7 @@
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.DgvList_DataError);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
+            this.dgvList.Sorted += new System.EventHandler(this.DgvList_Sorted);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
             // 
             // txtDepositRecordDateFrom
@@ -179,16 +179,16 @@
             // 
             // 
             this.txtDepositRecordDateFrom.CustomButton.Image = null;
-            this.txtDepositRecordDateFrom.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtDepositRecordDateFrom.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtDepositRecordDateFrom.CustomButton.Name = "";
-            this.txtDepositRecordDateFrom.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtDepositRecordDateFrom.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtDepositRecordDateFrom.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtDepositRecordDateFrom.CustomButton.TabIndex = 1;
             this.txtDepositRecordDateFrom.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtDepositRecordDateFrom.CustomButton.UseSelectable = true;
             this.txtDepositRecordDateFrom.CustomButton.Visible = false;
             this.txtDepositRecordDateFrom.Lines = new string[0];
-            this.txtDepositRecordDateFrom.Location = new System.Drawing.Point(587, 123);
+            this.txtDepositRecordDateFrom.Location = new System.Drawing.Point(550, 94);
             this.txtDepositRecordDateFrom.MaxLength = 32767;
             this.txtDepositRecordDateFrom.Name = "txtDepositRecordDateFrom";
             this.txtDepositRecordDateFrom.PasswordChar = '\0';
@@ -197,7 +197,7 @@
             this.txtDepositRecordDateFrom.SelectionLength = 0;
             this.txtDepositRecordDateFrom.SelectionStart = 0;
             this.txtDepositRecordDateFrom.ShortcutsEnabled = true;
-            this.txtDepositRecordDateFrom.Size = new System.Drawing.Size(88, 23);
+            this.txtDepositRecordDateFrom.Size = new System.Drawing.Size(78, 23);
             this.txtDepositRecordDateFrom.TabIndex = 6;
             this.txtDepositRecordDateFrom.UseSelectable = true;
             this.txtDepositRecordDateFrom.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -209,16 +209,16 @@
             // 
             // 
             this.txtBillingDateFrom.CustomButton.Image = null;
-            this.txtBillingDateFrom.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtBillingDateFrom.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtBillingDateFrom.CustomButton.Name = "";
-            this.txtBillingDateFrom.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBillingDateFrom.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtBillingDateFrom.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBillingDateFrom.CustomButton.TabIndex = 1;
             this.txtBillingDateFrom.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtBillingDateFrom.CustomButton.UseSelectable = true;
             this.txtBillingDateFrom.CustomButton.Visible = false;
             this.txtBillingDateFrom.Lines = new string[0];
-            this.txtBillingDateFrom.Location = new System.Drawing.Point(167, 123);
+            this.txtBillingDateFrom.Location = new System.Drawing.Point(167, 94);
             this.txtBillingDateFrom.MaxLength = 32767;
             this.txtBillingDateFrom.Name = "txtBillingDateFrom";
             this.txtBillingDateFrom.PasswordChar = '\0';
@@ -227,7 +227,7 @@
             this.txtBillingDateFrom.SelectionLength = 0;
             this.txtBillingDateFrom.SelectionStart = 0;
             this.txtBillingDateFrom.ShortcutsEnabled = true;
-            this.txtBillingDateFrom.Size = new System.Drawing.Size(88, 23);
+            this.txtBillingDateFrom.Size = new System.Drawing.Size(78, 23);
             this.txtBillingDateFrom.TabIndex = 2;
             this.txtBillingDateFrom.UseSelectable = true;
             this.txtBillingDateFrom.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -239,16 +239,16 @@
             // 
             // 
             this.txtBillingCompanyName.CustomButton.Image = null;
-            this.txtBillingCompanyName.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtBillingCompanyName.CustomButton.Location = new System.Drawing.Point(78, 1);
             this.txtBillingCompanyName.CustomButton.Name = "";
-            this.txtBillingCompanyName.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBillingCompanyName.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtBillingCompanyName.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBillingCompanyName.CustomButton.TabIndex = 1;
             this.txtBillingCompanyName.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtBillingCompanyName.CustomButton.UseSelectable = true;
             this.txtBillingCompanyName.CustomButton.Visible = false;
             this.txtBillingCompanyName.Lines = new string[0];
-            this.txtBillingCompanyName.Location = new System.Drawing.Point(978, 123);
+            this.txtBillingCompanyName.Location = new System.Drawing.Point(942, 94);
             this.txtBillingCompanyName.MaxLength = 32767;
             this.txtBillingCompanyName.Name = "txtBillingCompanyName";
             this.txtBillingCompanyName.PasswordChar = '\0';
@@ -257,7 +257,7 @@
             this.txtBillingCompanyName.SelectionLength = 0;
             this.txtBillingCompanyName.SelectionStart = 0;
             this.txtBillingCompanyName.ShortcutsEnabled = true;
-            this.txtBillingCompanyName.Size = new System.Drawing.Size(88, 23);
+            this.txtBillingCompanyName.Size = new System.Drawing.Size(100, 23);
             this.txtBillingCompanyName.TabIndex = 10;
             this.txtBillingCompanyName.UseSelectable = true;
             this.txtBillingCompanyName.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -269,16 +269,16 @@
             // 
             // 
             this.txtSchedulePaymentFrom.CustomButton.Image = null;
-            this.txtSchedulePaymentFrom.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtSchedulePaymentFrom.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtSchedulePaymentFrom.CustomButton.Name = "";
-            this.txtSchedulePaymentFrom.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtSchedulePaymentFrom.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtSchedulePaymentFrom.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtSchedulePaymentFrom.CustomButton.TabIndex = 1;
             this.txtSchedulePaymentFrom.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtSchedulePaymentFrom.CustomButton.UseSelectable = true;
             this.txtSchedulePaymentFrom.CustomButton.Visible = false;
             this.txtSchedulePaymentFrom.Lines = new string[0];
-            this.txtSchedulePaymentFrom.Location = new System.Drawing.Point(375, 123);
+            this.txtSchedulePaymentFrom.Location = new System.Drawing.Point(356, 94);
             this.txtSchedulePaymentFrom.MaxLength = 32767;
             this.txtSchedulePaymentFrom.Name = "txtSchedulePaymentFrom";
             this.txtSchedulePaymentFrom.PasswordChar = '\0';
@@ -287,7 +287,7 @@
             this.txtSchedulePaymentFrom.SelectionLength = 0;
             this.txtSchedulePaymentFrom.SelectionStart = 0;
             this.txtSchedulePaymentFrom.ShortcutsEnabled = true;
-            this.txtSchedulePaymentFrom.Size = new System.Drawing.Size(88, 23);
+            this.txtSchedulePaymentFrom.Size = new System.Drawing.Size(78, 23);
             this.txtSchedulePaymentFrom.TabIndex = 4;
             this.txtSchedulePaymentFrom.UseSelectable = true;
             this.txtSchedulePaymentFrom.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -297,7 +297,7 @@
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnBack.CausesValidation = false;
-            this.btnBack.Location = new System.Drawing.Point(1216, 61);
+            this.btnBack.Location = new System.Drawing.Point(1210, 34);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(61, 28);
             this.btnBack.TabIndex = 13;
@@ -308,7 +308,7 @@
             // btnSearch
             // 
             this.btnSearch.CausesValidation = false;
-            this.btnSearch.Location = new System.Drawing.Point(1081, 120);
+            this.btnSearch.Location = new System.Drawing.Point(1060, 91);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(91, 28);
             this.btnSearch.TabIndex = 11;
@@ -318,7 +318,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(1186, 120);
+            this.btnRegister.Location = new System.Drawing.Point(1161, 91);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(91, 28);
             this.btnRegister.TabIndex = 12;
@@ -328,9 +328,9 @@
             // 
             // btnSechedulePaymentOutput
             // 
-            this.btnSechedulePaymentOutput.Location = new System.Drawing.Point(26, 161);
+            this.btnSechedulePaymentOutput.Location = new System.Drawing.Point(26, 124);
             this.btnSechedulePaymentOutput.Name = "btnSechedulePaymentOutput";
-            this.btnSechedulePaymentOutput.Size = new System.Drawing.Size(151, 28);
+            this.btnSechedulePaymentOutput.Size = new System.Drawing.Size(121, 28);
             this.btnSechedulePaymentOutput.TabIndex = 14;
             this.btnSechedulePaymentOutput.Text = "入金予定実績出力";
             this.btnSechedulePaymentOutput.UseSelectable = true;
@@ -338,9 +338,9 @@
             // 
             // btnAccountReceivableOutput
             // 
-            this.btnAccountReceivableOutput.Location = new System.Drawing.Point(364, 161);
+            this.btnAccountReceivableOutput.Location = new System.Drawing.Point(306, 124);
             this.btnAccountReceivableOutput.Name = "btnAccountReceivableOutput";
-            this.btnAccountReceivableOutput.Size = new System.Drawing.Size(151, 28);
+            this.btnAccountReceivableOutput.Size = new System.Drawing.Size(121, 28);
             this.btnAccountReceivableOutput.TabIndex = 16;
             this.btnAccountReceivableOutput.Text = "売掛金出力";
             this.btnAccountReceivableOutput.UseSelectable = true;
@@ -350,7 +350,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(26, 98);
+            this.metroLabel1.Location = new System.Drawing.Point(26, 68);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(65, 19);
             this.metroLabel1.TabIndex = 627;
@@ -360,7 +360,7 @@
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(167, 98);
+            this.metroLabel2.Location = new System.Drawing.Point(167, 68);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(65, 19);
             this.metroLabel2.TabIndex = 628;
@@ -370,7 +370,7 @@
             // 
             this.metroLabel3.AutoSize = true;
             this.metroLabel3.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel3.Location = new System.Drawing.Point(375, 98);
+            this.metroLabel3.Location = new System.Drawing.Point(356, 68);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(93, 19);
             this.metroLabel3.TabIndex = 629;
@@ -380,7 +380,7 @@
             // 
             this.metroLabel4.AutoSize = true;
             this.metroLabel4.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel4.Location = new System.Drawing.Point(586, 98);
+            this.metroLabel4.Location = new System.Drawing.Point(550, 68);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(107, 19);
             this.metroLabel4.TabIndex = 630;
@@ -390,23 +390,11 @@
             // 
             this.metroLabel5.AutoSize = true;
             this.metroLabel5.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel5.Location = new System.Drawing.Point(978, 98);
+            this.metroLabel5.Location = new System.Drawing.Point(942, 68);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(93, 19);
             this.metroLabel5.TabIndex = 631;
             this.metroLabel5.Text = "請求先会社名";
-            // 
-            // metroLabel6
-            // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel6.Location = new System.Drawing.Point(24, 69);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(283, 19);
-            this.metroLabel6.Style = MetroFramework.MetroColorStyle.Red;
-            this.metroLabel6.TabIndex = 632;
-            this.metroLabel6.Text = "※年月はYYYY/MM又はYYYYで入力してください";
-            this.metroLabel6.UseStyleColors = true;
             // 
             // txtBillingDateTo
             // 
@@ -414,16 +402,16 @@
             // 
             // 
             this.txtBillingDateTo.CustomButton.Image = null;
-            this.txtBillingDateTo.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtBillingDateTo.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtBillingDateTo.CustomButton.Name = "";
-            this.txtBillingDateTo.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtBillingDateTo.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtBillingDateTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtBillingDateTo.CustomButton.TabIndex = 1;
             this.txtBillingDateTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtBillingDateTo.CustomButton.UseSelectable = true;
             this.txtBillingDateTo.CustomButton.Visible = false;
             this.txtBillingDateTo.Lines = new string[0];
-            this.txtBillingDateTo.Location = new System.Drawing.Point(271, 123);
+            this.txtBillingDateTo.Location = new System.Drawing.Point(261, 94);
             this.txtBillingDateTo.MaxLength = 32767;
             this.txtBillingDateTo.Name = "txtBillingDateTo";
             this.txtBillingDateTo.PasswordChar = '\0';
@@ -432,7 +420,7 @@
             this.txtBillingDateTo.SelectionLength = 0;
             this.txtBillingDateTo.SelectionStart = 0;
             this.txtBillingDateTo.ShortcutsEnabled = true;
-            this.txtBillingDateTo.Size = new System.Drawing.Size(88, 23);
+            this.txtBillingDateTo.Size = new System.Drawing.Size(78, 23);
             this.txtBillingDateTo.TabIndex = 3;
             this.txtBillingDateTo.UseSelectable = true;
             this.txtBillingDateTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -444,16 +432,16 @@
             // 
             // 
             this.txtSchedulePaymentTo.CustomButton.Image = null;
-            this.txtSchedulePaymentTo.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtSchedulePaymentTo.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtSchedulePaymentTo.CustomButton.Name = "";
-            this.txtSchedulePaymentTo.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtSchedulePaymentTo.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtSchedulePaymentTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtSchedulePaymentTo.CustomButton.TabIndex = 1;
             this.txtSchedulePaymentTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtSchedulePaymentTo.CustomButton.UseSelectable = true;
             this.txtSchedulePaymentTo.CustomButton.Visible = false;
             this.txtSchedulePaymentTo.Lines = new string[0];
-            this.txtSchedulePaymentTo.Location = new System.Drawing.Point(480, 123);
+            this.txtSchedulePaymentTo.Location = new System.Drawing.Point(452, 94);
             this.txtSchedulePaymentTo.MaxLength = 32767;
             this.txtSchedulePaymentTo.Name = "txtSchedulePaymentTo";
             this.txtSchedulePaymentTo.PasswordChar = '\0';
@@ -462,7 +450,7 @@
             this.txtSchedulePaymentTo.SelectionLength = 0;
             this.txtSchedulePaymentTo.SelectionStart = 0;
             this.txtSchedulePaymentTo.ShortcutsEnabled = true;
-            this.txtSchedulePaymentTo.Size = new System.Drawing.Size(88, 23);
+            this.txtSchedulePaymentTo.Size = new System.Drawing.Size(78, 23);
             this.txtSchedulePaymentTo.TabIndex = 5;
             this.txtSchedulePaymentTo.UseSelectable = true;
             this.txtSchedulePaymentTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -474,16 +462,16 @@
             // 
             // 
             this.txtDepositRecordDateTo.CustomButton.Image = null;
-            this.txtDepositRecordDateTo.CustomButton.Location = new System.Drawing.Point(66, 1);
+            this.txtDepositRecordDateTo.CustomButton.Location = new System.Drawing.Point(56, 1);
             this.txtDepositRecordDateTo.CustomButton.Name = "";
-            this.txtDepositRecordDateTo.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtDepositRecordDateTo.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtDepositRecordDateTo.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtDepositRecordDateTo.CustomButton.TabIndex = 1;
             this.txtDepositRecordDateTo.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtDepositRecordDateTo.CustomButton.UseSelectable = true;
             this.txtDepositRecordDateTo.CustomButton.Visible = false;
             this.txtDepositRecordDateTo.Lines = new string[0];
-            this.txtDepositRecordDateTo.Location = new System.Drawing.Point(692, 123);
+            this.txtDepositRecordDateTo.Location = new System.Drawing.Point(646, 94);
             this.txtDepositRecordDateTo.MaxLength = 32767;
             this.txtDepositRecordDateTo.Name = "txtDepositRecordDateTo";
             this.txtDepositRecordDateTo.PasswordChar = '\0';
@@ -492,7 +480,7 @@
             this.txtDepositRecordDateTo.SelectionLength = 0;
             this.txtDepositRecordDateTo.SelectionStart = 0;
             this.txtDepositRecordDateTo.ShortcutsEnabled = true;
-            this.txtDepositRecordDateTo.Size = new System.Drawing.Size(88, 23);
+            this.txtDepositRecordDateTo.Size = new System.Drawing.Size(78, 23);
             this.txtDepositRecordDateTo.TabIndex = 7;
             this.txtDepositRecordDateTo.UseSelectable = true;
             this.txtDepositRecordDateTo.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -502,7 +490,7 @@
             // 
             this.cboBillingClassification.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboBillingClassification.FormattingEnabled = true;
-            this.cboBillingClassification.Location = new System.Drawing.Point(26, 124);
+            this.cboBillingClassification.Location = new System.Drawing.Point(26, 94);
             this.cboBillingClassification.Name = "cboBillingClassification";
             this.cboBillingClassification.Size = new System.Drawing.Size(121, 21);
             this.cboBillingClassification.TabIndex = 1;
@@ -511,7 +499,7 @@
             // 
             this.metroLabel7.AutoSize = true;
             this.metroLabel7.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel7.Location = new System.Drawing.Point(253, 123);
+            this.metroLabel7.Location = new System.Drawing.Point(243, 94);
             this.metroLabel7.Name = "metroLabel7";
             this.metroLabel7.Size = new System.Drawing.Size(19, 19);
             this.metroLabel7.TabIndex = 637;
@@ -521,7 +509,7 @@
             // 
             this.metroLabel8.AutoSize = true;
             this.metroLabel8.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel8.Location = new System.Drawing.Point(461, 123);
+            this.metroLabel8.Location = new System.Drawing.Point(432, 94);
             this.metroLabel8.Name = "metroLabel8";
             this.metroLabel8.Size = new System.Drawing.Size(19, 19);
             this.metroLabel8.TabIndex = 638;
@@ -531,7 +519,7 @@
             // 
             this.metroLabel9.AutoSize = true;
             this.metroLabel9.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel9.Location = new System.Drawing.Point(674, 123);
+            this.metroLabel9.Location = new System.Drawing.Point(628, 94);
             this.metroLabel9.Name = "metroLabel9";
             this.metroLabel9.Size = new System.Drawing.Size(19, 19);
             this.metroLabel9.TabIndex = 639;
@@ -541,7 +529,7 @@
             // 
             this.cboDepositRule.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDepositRule.FormattingEnabled = true;
-            this.cboDepositRule.Location = new System.Drawing.Point(795, 124);
+            this.cboDepositRule.Location = new System.Drawing.Point(742, 94);
             this.cboDepositRule.Name = "cboDepositRule";
             this.cboDepositRule.Size = new System.Drawing.Size(78, 21);
             this.cboDepositRule.TabIndex = 8;
@@ -550,7 +538,7 @@
             // 
             this.cboWithOrWithoutPayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboWithOrWithoutPayment.FormattingEnabled = true;
-            this.cboWithOrWithoutPayment.Location = new System.Drawing.Point(887, 124);
+            this.cboWithOrWithoutPayment.Location = new System.Drawing.Point(842, 94);
             this.cboWithOrWithoutPayment.Name = "cboWithOrWithoutPayment";
             this.cboWithOrWithoutPayment.Size = new System.Drawing.Size(78, 21);
             this.cboWithOrWithoutPayment.TabIndex = 9;
@@ -559,7 +547,7 @@
             // 
             this.metroLabel10.AutoSize = true;
             this.metroLabel10.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel10.Location = new System.Drawing.Point(795, 98);
+            this.metroLabel10.Location = new System.Drawing.Point(742, 68);
             this.metroLabel10.Name = "metroLabel10";
             this.metroLabel10.Size = new System.Drawing.Size(65, 19);
             this.metroLabel10.TabIndex = 642;
@@ -569,7 +557,7 @@
             // 
             this.metroLabel11.AutoSize = true;
             this.metroLabel11.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel11.Location = new System.Drawing.Point(887, 98);
+            this.metroLabel11.Location = new System.Drawing.Point(842, 68);
             this.metroLabel11.Name = "metroLabel11";
             this.metroLabel11.Size = new System.Drawing.Size(65, 19);
             this.metroLabel11.TabIndex = 643;
@@ -577,9 +565,9 @@
             // 
             // btnThisMonthDeposit
             // 
-            this.btnThisMonthDeposit.Location = new System.Drawing.Point(195, 161);
+            this.btnThisMonthDeposit.Location = new System.Drawing.Point(167, 124);
             this.btnThisMonthDeposit.Name = "btnThisMonthDeposit";
-            this.btnThisMonthDeposit.Size = new System.Drawing.Size(151, 28);
+            this.btnThisMonthDeposit.Size = new System.Drawing.Size(121, 28);
             this.btnThisMonthDeposit.TabIndex = 15;
             this.btnThisMonthDeposit.Text = "当月入金出力";
             this.btnThisMonthDeposit.UseSelectable = true;
@@ -587,34 +575,34 @@
             // 
             // txtTotalBillAmount
             // 
-            this.txtTotalBillAmount.AutoSize = true;
             this.txtTotalBillAmount.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.txtTotalBillAmount.Location = new System.Drawing.Point(453, 213);
+            this.txtTotalBillAmount.Location = new System.Drawing.Point(524, 211);
             this.txtTotalBillAmount.Name = "txtTotalBillAmount";
-            this.txtTotalBillAmount.Size = new System.Drawing.Size(17, 19);
+            this.txtTotalBillAmount.Size = new System.Drawing.Size(100, 21);
             this.txtTotalBillAmount.TabIndex = 647;
             this.txtTotalBillAmount.Text = "0";
+            this.txtTotalBillAmount.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtTotalBillPrice
             // 
-            this.txtTotalBillPrice.AutoSize = true;
             this.txtTotalBillPrice.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.txtTotalBillPrice.Location = new System.Drawing.Point(695, 213);
+            this.txtTotalBillPrice.Location = new System.Drawing.Point(762, 213);
             this.txtTotalBillPrice.Name = "txtTotalBillPrice";
-            this.txtTotalBillPrice.Size = new System.Drawing.Size(17, 19);
+            this.txtTotalBillPrice.Size = new System.Drawing.Size(100, 21);
             this.txtTotalBillPrice.TabIndex = 648;
             this.txtTotalBillPrice.Text = "0";
+            this.txtTotalBillPrice.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtToalResult
             // 
             this.txtToalResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtToalResult.AutoSize = true;
             this.txtToalResult.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.txtToalResult.Location = new System.Drawing.Point(1186, 210);
+            this.txtToalResult.Location = new System.Drawing.Point(1177, 211);
             this.txtToalResult.Name = "txtToalResult";
-            this.txtToalResult.Size = new System.Drawing.Size(17, 19);
+            this.txtToalResult.Size = new System.Drawing.Size(100, 21);
             this.txtToalResult.TabIndex = 649;
             this.txtToalResult.Text = "0";
+            this.txtToalResult.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // txtRegDate
             // 
@@ -622,16 +610,16 @@
             // 
             // 
             this.txtRegDate.CustomButton.Image = null;
-            this.txtRegDate.CustomButton.Location = new System.Drawing.Point(221, 1);
+            this.txtRegDate.CustomButton.Location = new System.Drawing.Point(99, 1);
             this.txtRegDate.CustomButton.Name = "";
-            this.txtRegDate.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtRegDate.CustomButton.Size = new System.Drawing.Size(21, 23);
             this.txtRegDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtRegDate.CustomButton.TabIndex = 1;
             this.txtRegDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtRegDate.CustomButton.UseSelectable = true;
             this.txtRegDate.CustomButton.Visible = false;
             this.txtRegDate.Lines = new string[0];
-            this.txtRegDate.Location = new System.Drawing.Point(929, 206);
+            this.txtRegDate.Location = new System.Drawing.Point(26, 160);
             this.txtRegDate.MaxLength = 32767;
             this.txtRegDate.Name = "txtRegDate";
             this.txtRegDate.PasswordChar = '\0';
@@ -640,7 +628,7 @@
             this.txtRegDate.SelectionLength = 0;
             this.txtRegDate.SelectionStart = 0;
             this.txtRegDate.ShortcutsEnabled = true;
-            this.txtRegDate.Size = new System.Drawing.Size(243, 23);
+            this.txtRegDate.Size = new System.Drawing.Size(121, 23);
             this.txtRegDate.TabIndex = 24;
             this.txtRegDate.UseSelectable = true;
             this.txtRegDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -649,20 +637,20 @@
             // btnDepositUpdate
             // 
             this.btnDepositUpdate.CausesValidation = false;
-            this.btnDepositUpdate.Location = new System.Drawing.Point(1027, 161);
+            this.btnDepositUpdate.Location = new System.Drawing.Point(167, 158);
             this.btnDepositUpdate.Name = "btnDepositUpdate";
-            this.btnDepositUpdate.Size = new System.Drawing.Size(91, 28);
+            this.btnDepositUpdate.Size = new System.Drawing.Size(121, 28);
             this.btnDepositUpdate.TabIndex = 20;
-            this.btnDepositUpdate.Text = "入金登録更";
+            this.btnDepositUpdate.Text = "入金登録更新";
             this.btnDepositUpdate.UseSelectable = true;
             this.btnDepositUpdate.Click += new System.EventHandler(this.BtnDepositUpdate_Click);
             // 
             // btnReceivableUpdate
             // 
             this.btnReceivableUpdate.CausesValidation = false;
-            this.btnReceivableUpdate.Location = new System.Drawing.Point(1131, 161);
+            this.btnReceivableUpdate.Location = new System.Drawing.Point(306, 158);
             this.btnReceivableUpdate.Name = "btnReceivableUpdate";
-            this.btnReceivableUpdate.Size = new System.Drawing.Size(91, 28);
+            this.btnReceivableUpdate.Size = new System.Drawing.Size(121, 28);
             this.btnReceivableUpdate.TabIndex = 21;
             this.btnReceivableUpdate.Text = "売掛金更新";
             this.btnReceivableUpdate.UseSelectable = true;
@@ -670,9 +658,9 @@
             // 
             // btnManualAllocation
             // 
-            this.btnManualAllocation.Location = new System.Drawing.Point(529, 161);
+            this.btnManualAllocation.Location = new System.Drawing.Point(550, 124);
             this.btnManualAllocation.Name = "btnManualAllocation";
-            this.btnManualAllocation.Size = new System.Drawing.Size(151, 28);
+            this.btnManualAllocation.Size = new System.Drawing.Size(121, 28);
             this.btnManualAllocation.TabIndex = 17;
             this.btnManualAllocation.Text = "手動引当";
             this.btnManualAllocation.UseSelectable = true;
@@ -680,21 +668,21 @@
             // 
             // btnManualAllocateComplete
             // 
-            this.btnManualAllocateComplete.Location = new System.Drawing.Point(692, 161);
+            this.btnManualAllocateComplete.Location = new System.Drawing.Point(550, 158);
             this.btnManualAllocateComplete.Name = "btnManualAllocateComplete";
-            this.btnManualAllocateComplete.Size = new System.Drawing.Size(151, 28);
+            this.btnManualAllocateComplete.Size = new System.Drawing.Size(121, 28);
             this.btnManualAllocateComplete.TabIndex = 18;
-            this.btnManualAllocateComplete.Text = "引当完了";
+            this.btnManualAllocateComplete.Text = "強制完了";
             this.btnManualAllocateComplete.UseSelectable = true;
             this.btnManualAllocateComplete.Click += new System.EventHandler(this.BtnManualAllocateComplete_Click);
             // 
             // btnManualCancelAllocate
             // 
-            this.btnManualCancelAllocate.Location = new System.Drawing.Point(858, 161);
+            this.btnManualCancelAllocate.Location = new System.Drawing.Point(689, 158);
             this.btnManualCancelAllocate.Name = "btnManualCancelAllocate";
-            this.btnManualCancelAllocate.Size = new System.Drawing.Size(151, 28);
+            this.btnManualCancelAllocate.Size = new System.Drawing.Size(121, 28);
             this.btnManualCancelAllocate.TabIndex = 19;
-            this.btnManualCancelAllocate.Text = "引当完了取消";
+            this.btnManualCancelAllocate.Text = "強制完了取消";
             this.btnManualCancelAllocate.UseSelectable = true;
             this.btnManualCancelAllocate.Click += new System.EventHandler(this.BtnManualCancelAllocate_Click);
             // 
@@ -702,32 +690,32 @@
             // 
             this.lblTotalBillAmount.AutoSize = true;
             this.lblTotalBillAmount.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblTotalBillAmount.Location = new System.Drawing.Point(451, 192);
+            this.lblTotalBillAmount.Location = new System.Drawing.Point(534, 191);
             this.lblTotalBillAmount.Name = "lblTotalBillAmount";
-            this.lblTotalBillAmount.Size = new System.Drawing.Size(65, 19);
+            this.lblTotalBillAmount.Size = new System.Drawing.Size(93, 19);
             this.lblTotalBillAmount.TabIndex = 656;
-            this.lblTotalBillAmount.Text = "合計請求";
+            this.lblTotalBillAmount.Text = "請求金額合計";
             // 
             // lblTotalBillPrice
             // 
             this.lblTotalBillPrice.AutoSize = true;
             this.lblTotalBillPrice.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblTotalBillPrice.Location = new System.Drawing.Point(693, 192);
+            this.lblTotalBillPrice.Location = new System.Drawing.Point(734, 191);
             this.lblTotalBillPrice.Name = "lblTotalBillPrice";
-            this.lblTotalBillPrice.Size = new System.Drawing.Size(79, 19);
+            this.lblTotalBillPrice.Size = new System.Drawing.Size(129, 19);
             this.lblTotalBillPrice.TabIndex = 657;
-            this.lblTotalBillPrice.Text = "合計請求額";
+            this.lblTotalBillPrice.Text = "請求金額合計(税込)";
             // 
             // lblTotalResult
             // 
             this.lblTotalResult.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTotalResult.AutoSize = true;
             this.lblTotalResult.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.lblTotalResult.Location = new System.Drawing.Point(1184, 192);
+            this.lblTotalResult.Location = new System.Drawing.Point(1240, 192);
             this.lblTotalResult.Name = "lblTotalResult";
-            this.lblTotalResult.Size = new System.Drawing.Size(65, 19);
+            this.lblTotalResult.Size = new System.Drawing.Size(37, 19);
             this.lblTotalResult.TabIndex = 658;
-            this.lblTotalResult.Text = "合計結果";
+            this.lblTotalResult.Text = "件数";
             // 
             // btnCheckAll
             // 
@@ -761,6 +749,7 @@
             // 
             this.colCheck.Frozen = true;
             this.colCheck.HeaderText = "";
+            this.colCheck.MinimumWidth = 8;
             this.colCheck.Name = "colCheck";
             this.colCheck.Width = 25;
             // 
@@ -769,6 +758,7 @@
             this.BILL_SUPPLIER_NAME.DataPropertyName = "BILL_SUPPLIER_NAME";
             this.BILL_SUPPLIER_NAME.Frozen = true;
             this.BILL_SUPPLIER_NAME.HeaderText = "請求先会社名";
+            this.BILL_SUPPLIER_NAME.MinimumWidth = 8;
             this.BILL_SUPPLIER_NAME.Name = "BILL_SUPPLIER_NAME";
             this.BILL_SUPPLIER_NAME.ReadOnly = true;
             this.BILL_SUPPLIER_NAME.Width = 150;
@@ -780,13 +770,16 @@
             this.YEAR_MONTH.DefaultCellStyle = dataGridViewCellStyle1;
             this.YEAR_MONTH.Frozen = true;
             this.YEAR_MONTH.HeaderText = "請求年月";
+            this.YEAR_MONTH.MinimumWidth = 8;
             this.YEAR_MONTH.Name = "YEAR_MONTH";
             this.YEAR_MONTH.ReadOnly = true;
+            this.YEAR_MONTH.Width = 150;
             // 
             // BillingCode
             // 
             this.BillingCode.DataPropertyName = "BILLING_CODE";
             this.BillingCode.HeaderText = "請求書番号";
+            this.BillingCode.MinimumWidth = 8;
             this.BillingCode.Name = "BillingCode";
             this.BillingCode.ReadOnly = true;
             this.BillingCode.Width = 150;
@@ -799,6 +792,7 @@
             dataGridViewCellStyle2.NullValue = null;
             this.BILL_AMOUNT.DefaultCellStyle = dataGridViewCellStyle2;
             this.BILL_AMOUNT.HeaderText = "請求金額";
+            this.BILL_AMOUNT.MinimumWidth = 8;
             this.BILL_AMOUNT.Name = "BILL_AMOUNT";
             this.BILL_AMOUNT.ReadOnly = true;
             this.BILL_AMOUNT.Width = 120;
@@ -811,6 +805,7 @@
             dataGridViewCellStyle3.NullValue = null;
             this.BILL_TAX.DefaultCellStyle = dataGridViewCellStyle3;
             this.BILL_TAX.HeaderText = "消費税";
+            this.BILL_TAX.MinimumWidth = 8;
             this.BILL_TAX.Name = "BILL_TAX";
             this.BILL_TAX.ReadOnly = true;
             this.BILL_TAX.Width = 120;
@@ -823,6 +818,7 @@
             dataGridViewCellStyle4.NullValue = null;
             this.BILL_PRICE.DefaultCellStyle = dataGridViewCellStyle4;
             this.BILL_PRICE.HeaderText = "合計";
+            this.BILL_PRICE.MinimumWidth = 8;
             this.BILL_PRICE.Name = "BILL_PRICE";
             this.BILL_PRICE.ReadOnly = true;
             this.BILL_PRICE.Width = 120;
@@ -833,6 +829,7 @@
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.BILL_PAYMENT_DATE.DefaultCellStyle = dataGridViewCellStyle5;
             this.BILL_PAYMENT_DATE.HeaderText = "請求期限";
+            this.BILL_PAYMENT_DATE.MinimumWidth = 8;
             this.BILL_PAYMENT_DATE.Name = "BILL_PAYMENT_DATE";
             this.BILL_PAYMENT_DATE.ReadOnly = true;
             this.BILL_PAYMENT_DATE.Width = 120;
@@ -843,6 +840,7 @@
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.STATUS_ACTUAL_MDB_UPDATE.DefaultCellStyle = dataGridViewCellStyle6;
             this.STATUS_ACTUAL_MDB_UPDATE.HeaderText = "入金登録";
+            this.STATUS_ACTUAL_MDB_UPDATE.MinimumWidth = 8;
             this.STATUS_ACTUAL_MDB_UPDATE.Name = "STATUS_ACTUAL_MDB_UPDATE";
             this.STATUS_ACTUAL_MDB_UPDATE.Width = 120;
             // 
@@ -852,6 +850,7 @@
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.STATUS_ACC_RECEIVABLE_DATE.DefaultCellStyle = dataGridViewCellStyle7;
             this.STATUS_ACC_RECEIVABLE_DATE.HeaderText = "売掛金登録";
+            this.STATUS_ACC_RECEIVABLE_DATE.MinimumWidth = 8;
             this.STATUS_ACC_RECEIVABLE_DATE.Name = "STATUS_ACC_RECEIVABLE_DATE";
             this.STATUS_ACC_RECEIVABLE_DATE.Width = 120;
             // 
@@ -861,7 +860,9 @@
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.STATUS_CASH_FORECAST_MM.DefaultCellStyle = dataGridViewCellStyle8;
             this.STATUS_CASH_FORECAST_MM.HeaderText = "資金予測";
+            this.STATUS_CASH_FORECAST_MM.MinimumWidth = 8;
             this.STATUS_CASH_FORECAST_MM.Name = "STATUS_CASH_FORECAST_MM";
+            this.STATUS_CASH_FORECAST_MM.Width = 150;
             // 
             // STATUS_PLAN_DEPOSIT_YYMM
             // 
@@ -869,7 +870,9 @@
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.STATUS_PLAN_DEPOSIT_YYMM.DefaultCellStyle = dataGridViewCellStyle9;
             this.STATUS_PLAN_DEPOSIT_YYMM.HeaderText = "入金予定";
+            this.STATUS_PLAN_DEPOSIT_YYMM.MinimumWidth = 8;
             this.STATUS_PLAN_DEPOSIT_YYMM.Name = "STATUS_PLAN_DEPOSIT_YYMM";
+            this.STATUS_PLAN_DEPOSIT_YYMM.Width = 150;
             // 
             // DEPOSIT_DATE
             // 
@@ -877,8 +880,10 @@
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DEPOSIT_DATE.DefaultCellStyle = dataGridViewCellStyle10;
             this.DEPOSIT_DATE.HeaderText = "振込日";
+            this.DEPOSIT_DATE.MinimumWidth = 8;
             this.DEPOSIT_DATE.Name = "DEPOSIT_DATE";
             this.DEPOSIT_DATE.ReadOnly = true;
+            this.DEPOSIT_DATE.Width = 150;
             // 
             // RESERVE_AMOUNT_1
             // 
@@ -888,8 +893,10 @@
             dataGridViewCellStyle11.NullValue = null;
             this.RESERVE_AMOUNT_1.DefaultCellStyle = dataGridViewCellStyle11;
             this.RESERVE_AMOUNT_1.HeaderText = "振込額";
+            this.RESERVE_AMOUNT_1.MinimumWidth = 8;
             this.RESERVE_AMOUNT_1.Name = "RESERVE_AMOUNT_1";
             this.RESERVE_AMOUNT_1.ReadOnly = true;
+            this.RESERVE_AMOUNT_1.Width = 150;
             // 
             // RESERVE_AMOUNT_2
             // 
@@ -899,8 +906,10 @@
             dataGridViewCellStyle12.NullValue = null;
             this.RESERVE_AMOUNT_2.DefaultCellStyle = dataGridViewCellStyle12;
             this.RESERVE_AMOUNT_2.HeaderText = "引当金額";
+            this.RESERVE_AMOUNT_2.MinimumWidth = 8;
             this.RESERVE_AMOUNT_2.Name = "RESERVE_AMOUNT_2";
             this.RESERVE_AMOUNT_2.ReadOnly = true;
+            this.RESERVE_AMOUNT_2.Width = 150;
             // 
             // INSUFFICIENT_AMOUNT_OF_RESERVE
             // 
@@ -910,6 +919,7 @@
             dataGridViewCellStyle13.NullValue = null;
             this.INSUFFICIENT_AMOUNT_OF_RESERVE.DefaultCellStyle = dataGridViewCellStyle13;
             this.INSUFFICIENT_AMOUNT_OF_RESERVE.HeaderText = "引当不足金額";
+            this.INSUFFICIENT_AMOUNT_OF_RESERVE.MinimumWidth = 8;
             this.INSUFFICIENT_AMOUNT_OF_RESERVE.Name = "INSUFFICIENT_AMOUNT_OF_RESERVE";
             this.INSUFFICIENT_AMOUNT_OF_RESERVE.ReadOnly = true;
             this.INSUFFICIENT_AMOUNT_OF_RESERVE.Width = 120;
@@ -922,8 +932,10 @@
             dataGridViewCellStyle14.NullValue = null;
             this.DUNNING_COUNT.DefaultCellStyle = dataGridViewCellStyle14;
             this.DUNNING_COUNT.HeaderText = "回数";
+            this.DUNNING_COUNT.MinimumWidth = 8;
             this.DUNNING_COUNT.Name = "DUNNING_COUNT";
             this.DUNNING_COUNT.ReadOnly = true;
+            this.DUNNING_COUNT.Width = 150;
             // 
             // DUNNING_DATE
             // 
@@ -931,7 +943,9 @@
             dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.DUNNING_DATE.DefaultCellStyle = dataGridViewCellStyle15;
             this.DUNNING_DATE.HeaderText = "督促日";
+            this.DUNNING_DATE.MinimumWidth = 8;
             this.DUNNING_DATE.Name = "DUNNING_DATE";
+            this.DUNNING_DATE.Width = 150;
             // 
             // ANSWER_DATE
             // 
@@ -939,7 +953,9 @@
             dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.ANSWER_DATE.DefaultCellStyle = dataGridViewCellStyle16;
             this.ANSWER_DATE.HeaderText = "回答日";
+            this.ANSWER_DATE.MinimumWidth = 8;
             this.ANSWER_DATE.Name = "ANSWER_DATE";
+            this.ANSWER_DATE.Width = 150;
             // 
             // PAYMENT_DUE_DATE
             // 
@@ -947,64 +963,82 @@
             dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.PAYMENT_DUE_DATE.DefaultCellStyle = dataGridViewCellStyle17;
             this.PAYMENT_DUE_DATE.HeaderText = "支払予定日";
+            this.PAYMENT_DUE_DATE.MinimumWidth = 8;
             this.PAYMENT_DUE_DATE.Name = "PAYMENT_DUE_DATE";
+            this.PAYMENT_DUE_DATE.Width = 150;
             // 
             // ANSWER_MEMO
             // 
             this.ANSWER_MEMO.DataPropertyName = "ANSWER_MEMO";
             this.ANSWER_MEMO.HeaderText = "備考";
+            this.ANSWER_MEMO.MinimumWidth = 8;
             this.ANSWER_MEMO.Name = "ANSWER_MEMO";
+            this.ANSWER_MEMO.Width = 150;
             // 
             // COMPANY_NO_BOX
             // 
             this.COMPANY_NO_BOX.DataPropertyName = "COMPANY_NO_BOX";
             this.COMPANY_NO_BOX.HeaderText = "COMPANY_NO_BOX";
+            this.COMPANY_NO_BOX.MinimumWidth = 8;
             this.COMPANY_NO_BOX.Name = "COMPANY_NO_BOX";
             this.COMPANY_NO_BOX.ReadOnly = true;
             this.COMPANY_NO_BOX.Visible = false;
+            this.COMPANY_NO_BOX.Width = 150;
             // 
             // RESERVE_ID
             // 
             this.RESERVE_ID.HeaderText = "RESERVE_ID";
+            this.RESERVE_ID.MinimumWidth = 8;
             this.RESERVE_ID.Name = "RESERVE_ID";
             this.RESERVE_ID.ReadOnly = true;
             this.RESERVE_ID.Visible = false;
+            this.RESERVE_ID.Width = 150;
             // 
             // INVOICE_ALLOCATED_COMPLETION_DATE
             // 
             this.INVOICE_ALLOCATED_COMPLETION_DATE.DataPropertyName = "INVOICE_ALLOCATED_COMPLETION_DATE";
             this.INVOICE_ALLOCATED_COMPLETION_DATE.HeaderText = "INVOICE_ALLOCATED_COMPLETION_DATE";
+            this.INVOICE_ALLOCATED_COMPLETION_DATE.MinimumWidth = 8;
             this.INVOICE_ALLOCATED_COMPLETION_DATE.Name = "INVOICE_ALLOCATED_COMPLETION_DATE";
             this.INVOICE_ALLOCATED_COMPLETION_DATE.ReadOnly = true;
             this.INVOICE_ALLOCATED_COMPLETION_DATE.Visible = false;
+            this.INVOICE_ALLOCATED_COMPLETION_DATE.Width = 150;
             // 
             // RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE
             // 
             this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.DataPropertyName = "RECEIPT_ALLOCATED_COMPLETION_DATE";
             this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.HeaderText = "RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE";
+            this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.MinimumWidth = 8;
             this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.Name = "RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE";
             this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.Visible = false;
+            this.RECEIPT_DETAILS_ALLOCATED_COMPLETION_DATE.Width = 150;
             // 
             // SEQ_NO
             // 
             this.SEQ_NO.DataPropertyName = "SEQ_NO";
             this.SEQ_NO.HeaderText = "SEQ_NO";
+            this.SEQ_NO.MinimumWidth = 8;
             this.SEQ_NO.Name = "SEQ_NO";
             this.SEQ_NO.Visible = false;
+            this.SEQ_NO.Width = 150;
             // 
             // RECEIPT_TYPE_OF_ALLOCATION
             // 
             this.RECEIPT_TYPE_OF_ALLOCATION.DataPropertyName = "RECEIPT_TYPE_OF_ALLOCATION";
             this.RECEIPT_TYPE_OF_ALLOCATION.HeaderText = "RECEIPT_TYPE_OF_ALLOCATION";
+            this.RECEIPT_TYPE_OF_ALLOCATION.MinimumWidth = 8;
             this.RECEIPT_TYPE_OF_ALLOCATION.Name = "RECEIPT_TYPE_OF_ALLOCATION";
             this.RECEIPT_TYPE_OF_ALLOCATION.Visible = false;
+            this.RECEIPT_TYPE_OF_ALLOCATION.Width = 150;
             // 
             // INVOICE_TYPE_OF_ALLOCATION
             // 
             this.INVOICE_TYPE_OF_ALLOCATION.DataPropertyName = "INVOICE_TYPE_OF_ALLOCATION";
             this.INVOICE_TYPE_OF_ALLOCATION.HeaderText = "INVOICE_TYPE_OF_ALLOCATION";
+            this.INVOICE_TYPE_OF_ALLOCATION.MinimumWidth = 8;
             this.INVOICE_TYPE_OF_ALLOCATION.Name = "INVOICE_TYPE_OF_ALLOCATION";
             this.INVOICE_TYPE_OF_ALLOCATION.Visible = false;
+            this.INVOICE_TYPE_OF_ALLOCATION.Width = 150;
             // 
             // frm37
             // 
@@ -1034,7 +1068,6 @@
             this.Controls.Add(this.txtDepositRecordDateTo);
             this.Controls.Add(this.txtSchedulePaymentTo);
             this.Controls.Add(this.txtBillingDateTo);
-            this.Controls.Add(this.metroLabel6);
             this.Controls.Add(this.metroLabel5);
             this.Controls.Add(this.metroLabel4);
             this.Controls.Add(this.metroLabel3);
@@ -1054,6 +1087,7 @@
             this.Controls.Add(this.metroLabel8);
             this.Controls.Add(this.metroLabel9);
             this.Name = "frm37";
+            this.Padding = new System.Windows.Forms.Padding(20, 65, 20, 20);
             this.Resizable = false;
             this.Text = "3-7. 入金予定実績画面";
             this.Load += new System.EventHandler(this.Frm37_Load);
@@ -1080,7 +1114,6 @@
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroLabel metroLabel4;
         private MetroFramework.Controls.MetroLabel metroLabel5;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroTextBox txtBillingDateTo;
         private MetroFramework.Controls.MetroTextBox txtSchedulePaymentTo;
         private MetroFramework.Controls.MetroTextBox txtDepositRecordDateTo;

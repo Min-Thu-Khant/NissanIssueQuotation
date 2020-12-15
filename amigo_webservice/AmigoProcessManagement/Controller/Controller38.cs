@@ -77,6 +77,7 @@ namespace AmigoProcessManagement.Controller
                             B_Customer.BILL_DEPOSIT_RULES = Utility.Utility_Component.dtColumnToInt((dgvList.Rows[i]["BILL_DEPOSIT_RULES"] != null ? dgvList.Rows[i]["BILL_DEPOSIT_RULES"].ToString() : ""));
                             B_Customer.BILL_TRANSFER_FEE = Utility.Utility_Component.dtColumnToDecimal((dgvList.Rows[i]["BILL_TRANSFER_FEE"] != null ? dgvList.Rows[i]["BILL_TRANSFER_FEE"].ToString() : ""));
                             B_Customer.BILL_EXPENSES = Utility.Utility_Component.dtColumnToDecimal(dgvList.Rows[i]["BILL_EXPENSES"] != null ? dgvList.Rows[i]["BILL_EXPENSES"].ToString() : "");
+                            B_Customer.REQ_SEQ = Utility.Utility_Component.dtColumnToInt((dgvList.Rows[i]["REQ_SEQ"] != null ? dgvList.Rows[i]["REQ_SEQ"].ToString() : ""));
                             B_Customer.UPDATED_AT = CURRENT_DATETIME;
                             B_Customer.UPDATED_BY = CURRENT_USER;
                             CUSTOMER_MASTER DAL_Customer = new CUSTOMER_MASTER(con);
@@ -89,6 +90,7 @@ namespace AmigoProcessManagement.Controller
 
                             BOL_BANK_ACCOUNT_MASTER B_BankAccounts = new BOL_BANK_ACCOUNT_MASTER();
                             B_BankAccounts.COMPANY_NO_BOX = B_Customer.COMPANY_NO_BOX;
+                            B_BankAccounts.REQ_SEQ = B_Customer.REQ_SEQ;
                             B_BankAccounts.BILL_BANK_ACCOUNT_NAME_1 = (dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-1"] != null ? dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-1"].ToString() : "");
                             B_BankAccounts.BILL_BANK_ACCOUNT_NAME_2 = (dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-2"] != null ? dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-2"].ToString() : "");
                             B_BankAccounts.BILL_BANK_ACCOUNT_NAME_3 = (dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-3"] != null ? dgvList.Rows[i]["BILL_BANK_ACCOUNT_NAME-3"].ToString() : "");

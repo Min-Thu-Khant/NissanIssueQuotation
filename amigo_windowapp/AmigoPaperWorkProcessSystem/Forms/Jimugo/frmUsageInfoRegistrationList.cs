@@ -123,20 +123,59 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             "UPDATED_BY",
             "UPDATE_MESSAGE",
             "UPDATED_AT_RAW",
-            "ROW_ID"
+            "ROW_ID",
+            "SYSTEM_SETTING_STATUS",
+            "MK_ORIGIN"
         };
 
+        private string[] alignBottoms = {
+               "colMAKER1",
+               "colMAKER2",
+               "colMAKER3",
+               "colMAKER4",
+               "colMAKER5",
+               "colMAKER6",
+               "colMAKER7",
+               "colMAKER8",
+               "colMAKER9",
+               "colMAKER10",
+               "colADM_USER_ID",
+               "colADM_PASSWORD",
+               "colATDL_USER_ID",
+               "colATDL_PASSWORD",
+               "colSSHGW_USER_ID",
+               "colSSHGW_PUBLIC_KEY",
+
+        };
         #endregion
 
         #region Properties
         public string programID { get; set; }
         public string programName { get; set; }
 
-        public string SYSTEM_SETTING_STATUS { get; set; }
+        private string _SYSTEM_SETTING_STATUS;
 
+        public string SYSTEM_SETTING_STATUS
+        {
+            get { return _SYSTEM_SETTING_STATUS; }
+            set {
+                switch (value)
+                {
+                    case "1":
+                        _SYSTEM_SETTING_STATUS = "設定依頼中";
+                        break;
+                    case "2":
+                        _SYSTEM_SETTING_STATUS = "設定済";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        public DialogResult Dialog { get; set; }
         public string UPDATED_AT { get; set; }
         public string UPDATED_AT_RAW { get; set; }
-
         public bool SEARCH { get; set; }
         #endregion
 
@@ -165,6 +204,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
         #endregion
 
+        #region AlignBottomHeaders
+        private void AlignBottomHeaders()
+        {
+            foreach (string item in alignBottoms)
+            {
+                dgvList.Columns[item].HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+            }
+        }
+        #endregion
+
         #region FormLoad
         private void FrmUsageInfoRegistrationList_Load(object sender, EventArgs e)
         {
@@ -186,11 +235,13 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             uIUtility.DisableAutoSort();//disable autosort
             uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
             PopulateDropdowns();
+            AlignBottomHeaders();//adjust column headers
 
             if (this.SEARCH)
             {
                 btnSearch.PerformClick();
             }
+            Dialog = DialogResult.Cancel;
         }
 
         #endregion
@@ -427,6 +478,14 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                             //close mail dialog
                             mailthread.Abort();
 
+                            if (result.Rows.Count > 0)
+                            {
+                                Dialog = DialogResult.OK;
+                                this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
+                                this.UPDATED_AT_RAW = result.Rows[0]["UPDATED_AT_RAW"].ToString();
+                                this.SYSTEM_SETTING_STATUS = result.Rows[0]["SYSTEM_SETTING_STATUS"].ToString();
+                            }
+
                             //update data grid view
                             uIUtility.UpdateReturnedresults(result);
                         }
@@ -566,16 +625,16 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             dgvList.Rows[index].Cells["colMAKER1"].Value = EDIDetail["CONTRACT_MAKER1"] == null ? "" : EDIDetail["CONTRACT_MAKER1"].ToString().Trim();
 
             //ADMIN ID
-            dgvList.Rows[index].Cells["colADM_USER_ID"].Value = EDIAccount.Substring(0,2) + "ADM01";
+            dgvList.Rows[index].Cells["colADM_USER_ID"].Value = EDIAccount.Substring(0,3) + "ADM01";
 
             //ADMIN INITIAL PASSWORD
-            dgvList.Rows[index].Cells["colADM_USER_ID"].Value = Crypto.Generate8DigitPassword();
+            dgvList.Rows[index].Cells["colADM_PASSWORD"].Value = Crypto.Generate8DigitPassword();
 
             string SERVER_CONNECTION = EDIDetail["SERVER_CONNECTION_TYPE"].ToString();
             //AUTO PASSWORD ID
             if (SERVER_CONNECTION == "C")
             {
-                dgvList.Rows[index].Cells["colATDL_USER_ID"].Value = EDIAccount.Substring(0, 2) + "ADM01";
+                dgvList.Rows[index].Cells["colATDL_USER_ID"].Value = EDIAccount.Substring(0, 3) + "ATDL01";
             }
             else
             {
@@ -684,5 +743,10 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
 
         #endregion
+
+        private void FrmUsageInfoRegistrationList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.DialogResult = Dialog;
+        }
     }
 }

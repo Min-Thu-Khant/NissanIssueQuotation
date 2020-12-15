@@ -142,20 +142,22 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 string strYYYYMM1, strYYYYMM2;
                 DateTime dtDate = Convert.ToDateTime(txtDate.Text.Trim());
                 string strDifference = "";
-
+                string strDiffLable = "";
                 if (checkState == "Previous")
                 {
                     strYYYYMM1 = dtDate.ToString("yyMM");
                     strYYYYMM2 = dtDate.AddMonths(-1).ToString("yyMM");
                     strDifference = dtDate.AddMonths(-1).ToString("yyyy/MM");
+                    strDiffLable = "前月売上比較";
                 }
                 else
                 {
                     strYYYYMM1 = dtDate.AddMonths(1).ToString("yyMM");
                     strYYYYMM2 = dtDate.ToString("yyMM");
                     strDifference = dtDate.AddMonths(1).ToString("yyyy/MM");
+                    strDiffLable = "次月売上比較";
                 }
-                lbldifference.Text = "次月売上比較：" + strDifference + "分差異";
+                lbldifference.Text = strDiffLable + "：" + strDifference + "分差異";
 
                 frmMonthlySaleComparisonListController oController = new frmMonthlySaleComparisonListController();
 
@@ -168,7 +170,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                     dgvList.DataSource = uIUtility.dtList;
 
                     //pagination
-                    uIUtility.CalculatePaginationNew(lblcurrentPage, lblTotalPages, lblTotalRecords);
+                    uIUtility.CalculatePagination(lblcurrentPage, lblTotalPages, lblTotalRecords);
                 }
                 else
                 {
@@ -180,7 +182,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
                     //clear data except headers
                     uIUtility.ClearDataGrid();
-                    uIUtility.CalculatePaginationNew(lblcurrentPage, lblTotalPages, lblTotalRecords);
+                    uIUtility.CalculatePagination(lblcurrentPage, lblTotalPages, lblTotalRecords);
                 }
 
                 uIUtility.CheckPagination(btnFirst, btnPrev, btnNext, btnLast, lblcurrentPage.Text, lblTotalPages.Text);
@@ -219,7 +221,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                 e.PaintBackground(e.CellBounds, true);
                 e.Graphics.TranslateTransform(e.CellBounds.Left, e.CellBounds.Bottom);
                 e.Graphics.RotateTransform(270);
-                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Gray, 2, 12);
+                e.Graphics.DrawString(e.FormattedValue.ToString(), e.CellStyle.Font, Brushes.Silver, 2, 12);
                 e.Graphics.ResetTransform();
                 e.Handled = true;
 
@@ -254,7 +256,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
                         {
                             if (row.Cells[item].Value.ToString() == "初期費" || row.Cells[item].Value.ToString() == "生産情報閲覧(初期費)")
                             {
-                                row.DefaultCellStyle.BackColor = Color.LightGray;
+                                row.DefaultCellStyle.BackColor = Color.FromArgb(219, 230, 241);
                             }
                         }
                         else

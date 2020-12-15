@@ -12,6 +12,10 @@ namespace AmigoPaperWorkProcessSystem.UserControls
 {
     public partial class DisplayItemLabel : UserControl
     {
+        public DisplayItemLabel()
+        {
+            InitializeComponent();
+        }
 
         private string labelValue;
 
@@ -19,11 +23,6 @@ namespace AmigoPaperWorkProcessSystem.UserControls
         {
             get { return labelValue; }
             set { labelValue = value; lbl.Text = value; }
-        }
-
-        public DisplayItemLabel()
-        {
-            InitializeComponent();
         }
 
     }

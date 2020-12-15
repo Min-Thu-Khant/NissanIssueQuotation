@@ -23,7 +23,7 @@ namespace AmigoProcessManagement
         #region GetMatchInvoices
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void GetMatchInvoice(string strFromDate, string strToDate)
+        public void GetMatchInvoice(string strFromDate, string strToDate, string strNoReserved)
         {
             //get Authorization header
             HttpContext httpContext = HttpContext.Current;
@@ -42,7 +42,7 @@ namespace AmigoProcessManagement
             else
             {
                 Controller.Controller35 o35 = new Controller.Controller35();
-                Response response = o35.GetDataGridfor35(strFromDate, strToDate);
+                Response response = o35.GetDataGridfor35(strFromDate, strToDate, Convert.ToBoolean(strNoReserved));
                 Context.Response.Clear();
                 Context.Response.ContentType = "application/json";
                 Context.Response.Flush();

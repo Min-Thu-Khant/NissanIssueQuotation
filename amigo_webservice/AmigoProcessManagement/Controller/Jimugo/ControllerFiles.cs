@@ -1,4 +1,5 @@
-﻿using DAL_AmigoProcess.BOL;
+﻿using AmigoProcessManagement.Utility;
+using DAL_AmigoProcess.BOL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +34,30 @@ namespace AmigoProcessManagement.Controller.Jimugo
             BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
             String tempStorageFolder = config.getStringValue("temp.dir");
             return GetFile(tempStorageFolder, FILENAME);
+        }
+        #endregion
+
+        #region DeleteTempFile
+        public Response DeleteTempFile(string FILENAME)
+        {
+            BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
+            String tempStorageFolder = config.getStringValue("temp.dir");
+            Response response = new Response();
+            string[] filenames = FILENAME.Split(';');
+            response.Status = 1;
+            for (int i = 0; i < filenames.Length; i++)
+            {
+                try
+                {
+                    System.IO.File.Delete(tempStorageFolder + "/" + filenames[i]);
+                }
+                catch (Exception)
+                {
+                    response.Status = 0;
+                }
+            }
+           
+            return response;
         }
         #endregion
     }

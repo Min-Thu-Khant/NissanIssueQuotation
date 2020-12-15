@@ -270,18 +270,12 @@ namespace AmigoProcessManagement.Controller
             BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
             oREQUEST_DETAIL.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS = row["CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS"].ToString();
             oREQUEST_DETAIL.COMPANY_NAME = row["COMPANY_NAME"].ToString();
-            //oCLIENT_CERTIFICATE.CREATED_AT = row["CREATED_AT"].ToString().Length >= 1 ? row["CREATED_AT"].ToString() : null;//check error
-            //oCLIENT_CERTIFICATE.CREATED_BY = row["CREATED_BY"].ToString().Length >= 1 ? row["CREATED_BY"].ToString() : null;
-            //oCLIENT_CERTIFICATE.UPDATED_AT = row["UPDATED_AT"].ToString().Length >= 1 ? row["UPDATED_AT"].ToString() : null;
-            //oCLIENT_CERTIFICATE.UPDATED_BY = row["UPDATED_BY"].ToString().Length >= 1 ? row["UPDATED_BY"].ToString() : null;
-
             return oREQUEST_DETAIL;
         }
         #endregion
 
-
         #region Send_Mail
-        public MetaResponse SendMail(string ClientCertificateList, string authHeader)
+        public MetaResponse SendMail(string ClientCertificateList)
         {
             try
             {
@@ -290,15 +284,13 @@ namespace AmigoProcessManagement.Controller
 
                 DataTable dgvList = Utility.Utility_Component.JsonToDt(ClientCertificateList);
 
-                
-
                 List<string> l_SentMail = new List<string>();
 
                 for (int i = 0; i < dgvList.Rows.Count; i++)
                 {
                     DataRow dr = dgvList.Rows[i];
                     string l_COMPANY_NO_BOX = dr["COMPANY_NO_BOX"].ToString();
-                    if (l_SentMail.Where(x => x == l_COMPANY_NO_BOX).ToList().Count <= 0)
+                    if (l_SentMail.Where(x => x == l_COMPANY_NO_BOX).ToList().Count <= 0 && !string.IsNullOrEmpty(dgvList.Rows[i]["DISTRIBUTION_DATE"].ToString()))
                     {
                         l_SentMail.Add(l_COMPANY_NO_BOX);
 
@@ -323,8 +315,8 @@ namespace AmigoProcessManagement.Controller
 
                             if (String.IsNullOrEmpty(strMsg))
                             {
-                                //already use in another process
-                                ResponseUtility.ReturnMailSuccessMessage(dr);
+                                //success
+                                ResponseUtility.ReturnMailSuccessMessage(dr,UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
                             }
                             else
                             {
@@ -360,15 +352,27 @@ namespace AmigoProcessManagement.Controller
 
             string documentFilePath = config.getStringValue("email.attached.doc.filePath");
             string path = config.getStringValue("email.attached.client.filePath");
-            string clientFilePath = path + FY.ToString();
+            string clientFilePath = path + @"\" + FY.ToString();
 
-            string[] filePaths = { documentFilePath, clientFilePath };
+            Dictionary<string, string> filePaths = new Dictionary<string, string>() {
+                { "Document", documentFilePath },
+                { "Certificate", clientFilePath}
+            };
 
-            foreach (DataRow row in companyNoBoxData.Rows)
+            List<string> CERTIFICATES = new List<string>();
+
+            foreach (DataRow item in companyNoBoxData.Rows)
             {
-                CLIENT_CERTIFICATE_NO += row["CLIENT_CERTIFICATE_NO"].ToString() + "\n";
+                if (string.IsNullOrEmpty(CLIENT_CERTIFICATE_NO))
+                {
+                    CLIENT_CERTIFICATE_NO += item["CLIENT_CERTIFICATE_NO"].ToString();
+                }
+                else
+                {
+                    CLIENT_CERTIFICATE_NO += "\n" + item["CLIENT_CERTIFICATE_NO"].ToString();
+                }
+                CERTIFICATES.Add(item["CLIENT_CERTIFICATE_NO"].ToString());
             }
-
 
             Dictionary<string, string> map = new Dictionary<string, string>() {
                         { "${companyName}", COMPANY_NAME },
@@ -395,7 +399,7 @@ namespace AmigoProcessManagement.Controller
             }
 
             //send mail
-            return Utility.Mail.sendMail(CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, distributionAddressCC, subject, body, map, filePaths);//NEED TO FILL CLIENT CERTIFICATE SEND MAIL ADDRESS
+            return Utility.Mail.sendClientCertificateMail(CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, distributionAddressCC, subject, body, map, filePaths, CERTIFICATES);
         }
         #endregion
 

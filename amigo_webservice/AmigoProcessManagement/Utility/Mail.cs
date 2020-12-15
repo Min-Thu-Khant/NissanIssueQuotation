@@ -51,7 +51,7 @@ namespace AmigoProcessManagement.Utility
             }
         }
 
-        public static bool sendMail(string toAddress, string CC, string subject, string template, Dictionary<string, string> map, string[] filePaths)
+        public static bool sendClientCertificateMail(string toAddress, string CC, string subject, string template, Dictionary<string, string> map, Dictionary<string, string> filePaths, List<string> CERTIFICATES)
         {
             try
             {
@@ -65,7 +65,7 @@ namespace AmigoProcessManagement.Utility
                     SmtpServer.Credentials = new System.Net.NetworkCredential(map["${aventailUserName}"], map["${aventailPassword}"]);
 
                     //create mail
-                    MailMessage mail = CreateMiMeMail(config.From, CC, toAddress, subject, template, map, filePaths);
+                    MailMessage mail = CreateClientMiMeMail(config.From, CC, toAddress, subject, template, map, filePaths, CERTIFICATES);
 
                     SmtpServer.Send(mail);
 
@@ -77,7 +77,7 @@ namespace AmigoProcessManagement.Utility
                     SmtpClient SmtpServer = new SmtpClient(config.Host);
 
                     //create mail
-                    MailMessage mail = CreateMiMeMail(config.From, CC, toAddress, subject, template, map, filePaths);
+                    MailMessage mail = CreateClientMiMeMail(config.From, CC, toAddress, subject, template, map, filePaths, CERTIFICATES);
 
                     //smtp cred 
                     SmtpServer.Credentials = new System.Net.NetworkCredential(config.User, config.Password);
@@ -88,7 +88,7 @@ namespace AmigoProcessManagement.Utility
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return false;
             }
@@ -136,7 +136,7 @@ namespace AmigoProcessManagement.Utility
 
         }
 
-        private static MailMessage CreateMiMeMail(string from, string cc, string to, string subject, string template, Dictionary<String, String> map, string[] filePaths)
+        private static MailMessage CreateClientMiMeMail(string from, string cc, string to, string subject, string template, Dictionary<String, String> map, Dictionary<String, String> filePaths, List<string> CERTIFICATES)
         {
             MailMessage mail = new MailMessage();
 
@@ -156,30 +156,56 @@ namespace AmigoProcessManagement.Utility
                 mail.CC.Add(address.Trim());
             }
 
-            for (int i = 0; i < filePaths.Length; i++)
+            foreach (KeyValuePair<string, string> fileType in filePaths)
             {
-
-                string path = HttpContext.Current.Server.MapPath("~/" +filePaths[i]);
-
-                try
-                {
-                    foreach (string file in Directory.GetFiles(path))
-                    {
-                        mail.Attachments.Add(new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet));
-                    }
-                }
-                catch (Exception)
+                if (fileType.Key == "Document")
                 {
                     try
                     {
-                        mail.Attachments.Add(new Attachment(path, System.Net.Mime.MediaTypeNames.Application.Octet));
+                        foreach (string file in Directory.GetFiles(fileType.Value))
+                        {
+                            mail.Attachments.Add(new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet));
+                        }
                     }
                     catch (Exception)
                     {
+                        try
+                        {
+                            mail.Attachments.Add(new Attachment(fileType.Value, System.Net.Mime.MediaTypeNames.Application.Octet));
+                        }
+                        catch (Exception)
+                        {
+                        }
                     }
                 }
-
+                else
+                {
+                    try
+                    {
+                        foreach (string file in Directory.GetFiles(fileType.Value))
+                        {
+                            foreach (string certifacate in CERTIFICATES)
+                            {
+                                if (certifacate == Path.GetFileNameWithoutExtension(file))
+                                {
+                                    mail.Attachments.Add(new Attachment(file, System.Net.Mime.MediaTypeNames.Application.Octet));
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        try
+                        {
+                            mail.Attachments.Add(new Attachment(fileType.Value, System.Net.Mime.MediaTypeNames.Application.Octet));
+                        }
+                        catch (Exception)
+                        {
+                        }
+                    }
+                }
             }
+            
             mail.Subject = subject;
             //map placeholders with values
             mail.Body = MapMailPlaceHolders(template, map);

@@ -45,6 +45,8 @@
             this.btnComparisnResultDetail = new MetroFramework.Controls.MetroButton();
             this.btnCheckUnmatchedInvoice = new MetroFramework.Controls.MetroButton();
             this.dgvList = new System.Windows.Forms.DataGridView();
+            this.btn3B = new MetroFramework.Controls.MetroButton();
+            this.tmr3B = new System.Windows.Forms.Timer(this.components);
             this.colDateTimeID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransferDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colTransferTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,8 +54,6 @@
             this.colAllocationTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMismatch = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn3B = new MetroFramework.Controls.MetroButton();
-            this.tmr3B = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,16 +63,16 @@
             // 
             // 
             this.txtFromDate.CustomButton.Image = null;
-            this.txtFromDate.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.txtFromDate.CustomButton.Location = new System.Drawing.Point(165, 1);
             this.txtFromDate.CustomButton.Name = "";
-            this.txtFromDate.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtFromDate.CustomButton.Size = new System.Drawing.Size(19, 18);
             this.txtFromDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtFromDate.CustomButton.TabIndex = 1;
             this.txtFromDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtFromDate.CustomButton.UseSelectable = true;
             this.txtFromDate.CustomButton.Visible = false;
             this.txtFromDate.Lines = new string[0];
-            this.txtFromDate.Location = new System.Drawing.Point(30, 101);
+            this.txtFromDate.Location = new System.Drawing.Point(30, 93);
             this.txtFromDate.MaxLength = 32767;
             this.txtFromDate.Name = "txtFromDate";
             this.txtFromDate.PasswordChar = '\0';
@@ -81,7 +81,7 @@
             this.txtFromDate.SelectionLength = 0;
             this.txtFromDate.SelectionStart = 0;
             this.txtFromDate.ShortcutsEnabled = true;
-            this.txtFromDate.Size = new System.Drawing.Size(185, 23);
+            this.txtFromDate.Size = new System.Drawing.Size(185, 21);
             this.txtFromDate.TabIndex = 3;
             this.txtFromDate.UseSelectable = true;
             this.txtFromDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -93,16 +93,16 @@
             // 
             // 
             this.txtToDate.CustomButton.Image = null;
-            this.txtToDate.CustomButton.Location = new System.Drawing.Point(163, 1);
+            this.txtToDate.CustomButton.Location = new System.Drawing.Point(165, 1);
             this.txtToDate.CustomButton.Name = "";
-            this.txtToDate.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.txtToDate.CustomButton.Size = new System.Drawing.Size(19, 18);
             this.txtToDate.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.txtToDate.CustomButton.TabIndex = 1;
             this.txtToDate.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.txtToDate.CustomButton.UseSelectable = true;
             this.txtToDate.CustomButton.Visible = false;
             this.txtToDate.Lines = new string[0];
-            this.txtToDate.Location = new System.Drawing.Point(245, 101);
+            this.txtToDate.Location = new System.Drawing.Point(245, 93);
             this.txtToDate.MaxLength = 32767;
             this.txtToDate.Name = "txtToDate";
             this.txtToDate.PasswordChar = '\0';
@@ -111,7 +111,7 @@
             this.txtToDate.SelectionLength = 0;
             this.txtToDate.SelectionStart = 0;
             this.txtToDate.ShortcutsEnabled = true;
-            this.txtToDate.Size = new System.Drawing.Size(185, 23);
+            this.txtToDate.Size = new System.Drawing.Size(185, 21);
             this.txtToDate.TabIndex = 4;
             this.txtToDate.UseSelectable = true;
             this.txtToDate.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
@@ -121,7 +121,7 @@
             // 
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel1.Location = new System.Drawing.Point(30, 79);
+            this.metroLabel1.Location = new System.Drawing.Point(30, 73);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(98, 19);
             this.metroLabel1.TabIndex = 5;
@@ -131,7 +131,7 @@
             // 
             this.metroLabel2.AutoSize = true;
             this.metroLabel2.FontWeight = MetroFramework.MetroLabelWeight.Regular;
-            this.metroLabel2.Location = new System.Drawing.Point(245, 79);
+            this.metroLabel2.Location = new System.Drawing.Point(245, 73);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(76, 19);
             this.metroLabel2.TabIndex = 6;
@@ -140,7 +140,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(221, 103);
+            this.metroLabel3.Location = new System.Drawing.Point(221, 95);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(18, 19);
             this.metroLabel3.TabIndex = 7;
@@ -149,9 +149,9 @@
             // btnBack
             // 
             this.btnBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBack.Location = new System.Drawing.Point(1222, 53);
+            this.btnBack.Location = new System.Drawing.Point(1222, 49);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(61, 28);
+            this.btnBack.Size = new System.Drawing.Size(61, 26);
             this.btnBack.TabIndex = 10;
             this.btnBack.Text = "戻る";
             this.btnBack.UseSelectable = true;
@@ -159,9 +159,9 @@
             // 
             // btnCheckTheResult
             // 
-            this.btnCheckTheResult.Location = new System.Drawing.Point(454, 98);
+            this.btnCheckTheResult.Location = new System.Drawing.Point(454, 90);
             this.btnCheckTheResult.Name = "btnCheckTheResult";
-            this.btnCheckTheResult.Size = new System.Drawing.Size(143, 28);
+            this.btnCheckTheResult.Size = new System.Drawing.Size(143, 26);
             this.btnCheckTheResult.TabIndex = 5;
             this.btnCheckTheResult.Text = "結果確認";
             this.btnCheckTheResult.UseSelectable = true;
@@ -170,9 +170,9 @@
             // btnComparisnResultDetail
             // 
             this.btnComparisnResultDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnComparisnResultDetail.Location = new System.Drawing.Point(816, 98);
+            this.btnComparisnResultDetail.Location = new System.Drawing.Point(816, 90);
             this.btnComparisnResultDetail.Name = "btnComparisnResultDetail";
-            this.btnComparisnResultDetail.Size = new System.Drawing.Size(143, 28);
+            this.btnComparisnResultDetail.Size = new System.Drawing.Size(143, 26);
             this.btnComparisnResultDetail.TabIndex = 6;
             this.btnComparisnResultDetail.Text = "照合結果明細";
             this.btnComparisnResultDetail.UseSelectable = true;
@@ -181,9 +181,9 @@
             // btnCheckUnmatchedInvoice
             // 
             this.btnCheckUnmatchedInvoice.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCheckUnmatchedInvoice.Location = new System.Drawing.Point(979, 98);
+            this.btnCheckUnmatchedInvoice.Location = new System.Drawing.Point(979, 90);
             this.btnCheckUnmatchedInvoice.Name = "btnCheckUnmatchedInvoice";
-            this.btnCheckUnmatchedInvoice.Size = new System.Drawing.Size(143, 28);
+            this.btnCheckUnmatchedInvoice.Size = new System.Drawing.Size(143, 26);
             this.btnCheckUnmatchedInvoice.TabIndex = 7;
             this.btnCheckUnmatchedInvoice.Text = "請求不一致明細";
             this.btnCheckUnmatchedInvoice.UseSelectable = true;
@@ -208,24 +208,41 @@
             this.colMatch,
             this.colMismatch});
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(17, 145);
+            this.dgvList.Location = new System.Drawing.Point(17, 134);
             this.dgvList.Name = "dgvList";
             this.dgvList.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgvList.RowHeadersVisible = false;
             this.dgvList.RowHeadersWidth = 10;
             this.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvList.Size = new System.Drawing.Size(1266, 508);
+            this.dgvList.Size = new System.Drawing.Size(1266, 469);
             this.dgvList.TabIndex = 9;
             this.dgvList.TabStop = false;
             this.dgvList.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.DgvList_ColumnWidthChanged);
             this.dgvList.Scroll += new System.Windows.Forms.ScrollEventHandler(this.DgvList_Scroll);
             this.dgvList.Paint += new System.Windows.Forms.PaintEventHandler(this.DgvList_Paint);
             // 
+            // btn3B
+            // 
+            this.btn3B.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btn3B.Location = new System.Drawing.Point(1140, 90);
+            this.btn3B.Name = "btn3B";
+            this.btn3B.Size = new System.Drawing.Size(143, 26);
+            this.btn3B.TabIndex = 8;
+            this.btn3B.Text = "3-B. 突合せ処理起動";
+            this.btn3B.UseSelectable = true;
+            this.btn3B.Click += new System.EventHandler(this.Btn3B_Click);
+            // 
+            // tmr3B
+            // 
+            this.tmr3B.Interval = 10000;
+            this.tmr3B.Tick += new System.EventHandler(this.Tmr3B_Tick);
+            // 
             // colDateTimeID
             // 
             this.colDateTimeID.DataPropertyName = "DateTimeID";
             this.colDateTimeID.HeaderText = "DateTimeID";
             this.colDateTimeID.Name = "colDateTimeID";
+            this.colDateTimeID.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.colDateTimeID.Visible = false;
             // 
             // colTransferDate
@@ -238,6 +255,7 @@
             this.colTransferDate.HeaderText = "振替処理日";
             this.colTransferDate.Name = "colTransferDate";
             this.colTransferDate.ReadOnly = true;
+            this.colTransferDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colTransferTime
             // 
@@ -247,6 +265,7 @@
             this.colTransferTime.HeaderText = "転送処理時間";
             this.colTransferTime.Name = "colTransferTime";
             this.colTransferTime.ReadOnly = true;
+            this.colTransferTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAllocationDate
             // 
@@ -258,6 +277,7 @@
             this.colAllocationDate.HeaderText = "配分処理日";
             this.colAllocationDate.Name = "colAllocationDate";
             this.colAllocationDate.ReadOnly = true;
+            this.colAllocationDate.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colAllocationTime
             // 
@@ -267,6 +287,7 @@
             this.colAllocationTime.HeaderText = "割り振り処理時間";
             this.colAllocationTime.Name = "colAllocationTime";
             this.colAllocationTime.ReadOnly = true;
+            this.colAllocationTime.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colMatch
             // 
@@ -278,6 +299,7 @@
             this.colMatch.HeaderText = "請求書一致件数";
             this.colMatch.Name = "colMatch";
             this.colMatch.ReadOnly = true;
+            this.colMatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // colMismatch
             // 
@@ -290,28 +312,13 @@
             this.colMismatch.HeaderText = "請求書不一致件数";
             this.colMismatch.Name = "colMismatch";
             this.colMismatch.ReadOnly = true;
-            // 
-            // btn3B
-            // 
-            this.btn3B.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn3B.Location = new System.Drawing.Point(1140, 98);
-            this.btn3B.Name = "btn3B";
-            this.btn3B.Size = new System.Drawing.Size(143, 28);
-            this.btn3B.TabIndex = 8;
-            this.btn3B.Text = "3-B. 突合せ処理起動";
-            this.btn3B.UseSelectable = true;
-            this.btn3B.Click += new System.EventHandler(this.Btn3B_Click);
-            // 
-            // tmr3B
-            // 
-            this.tmr3B.Interval = 10000;
-            this.tmr3B.Tick += new System.EventHandler(this.Tmr3B_Tick);
+            this.colMismatch.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // frm34
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1300, 670);
+            this.ClientSize = new System.Drawing.Size(1300, 618);
             this.Controls.Add(this.btn3B);
             this.Controls.Add(this.dgvList);
             this.Controls.Add(this.btnCheckUnmatchedInvoice);
@@ -324,6 +331,7 @@
             this.Controls.Add(this.txtToDate);
             this.Controls.Add(this.txtFromDate);
             this.Name = "frm34";
+            this.Padding = new System.Windows.Forms.Padding(20, 55, 20, 18);
             this.Resizable = false;
             this.Text = "3-4. 照合結果確認";
             this.Load += new System.EventHandler(this.Frm34_Load);

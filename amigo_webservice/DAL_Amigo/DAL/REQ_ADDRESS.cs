@@ -28,7 +28,7 @@ namespace DAL_AmigoProcess.DAL
                                   AND TYPE=4";
         #region Application Approval
         string strGetServiceDeskPopUp = @"SELECT 
-                                        REQ_ADDRESS_SEQ NO,
+                                        ROW_NUMBER() OVER (ORDER BY CONTACT_NAME, MAIL_ADDRESS,PHONE_NUMBER) NO,
                                         CONTACT_NAME,
                                         MAIL_ADDRESS,
                                         PHONE_NUMBER
@@ -38,7 +38,7 @@ namespace DAL_AmigoProcess.DAL
                                         AND TYPE = 3
                                         ORDER BY CONTACT_NAME, MAIL_ADDRESS,PHONE_NUMBER";
         string strGetErrorNotiPopUp = @"SELECT
-                                    REQ_ADDRESS_SEQ NO,
+                                    ROW_NUMBER() OVER (ORDER BY MAIL_ADDRESS) NO,
                                     MAIL_ADDRESS
                                     FROM REQ_ADDRESS
                                     WHERE COMPANY_NO_BOX = @COMPANY_NO_BOX
