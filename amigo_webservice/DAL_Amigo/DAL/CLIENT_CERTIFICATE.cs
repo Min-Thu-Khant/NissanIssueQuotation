@@ -142,14 +142,9 @@ namespace DAL_AmigoProcess.DAL
                                         WHERE [CLIENT_CERTIFICATE_NO] = @CLIENT_CERTIFICATE_NO
                                         AND [UPDATED_AT] @UPDATED_AT";
 
-        string strCompanyNoBoxData = @"SELECT COMPANY_NO_BOX,CLIENT_CERTIFICATE_NO,EXPIRATION_DATE
-                                       FROM CLIENT_CERTIFICATE 
-                                       WHERE COMPANY_NO_BOX= @COMPANY_NO_BOX
-                                       GROUP BY COMPANY_NO_BOX,CLIENT_CERTIFICATE_NO,EXPIRATION_DATE";
-
         string strGetClientCertificateNo = @"SELECT TOP 1 CLIENT_CERTIFICATE_NO
                                                 FROM CLIENT_CERTIFICATE
-                                                WHERE COMPANY_NO_BOX is null
+                                                WHERE ISNULL(COMPANY_NO_BOX,'') = ''
                                                 AND FY = @FY
                                                 ORDER BY CLIENT_CERTIFICATE_NO ASC";
 
@@ -319,17 +314,6 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@UPDATED_AT", oCLIENT_CERTIFICATE.UPDATED_AT_RAW != null ? oCLIENT_CERTIFICATE.UPDATED_AT_RAW : (object)DBNull.Value));
 
             oMaster.ExcuteQuery(3, out strMsg);
-        }
-        #endregion
-
-        #region GetClientCertificateList
-        public System.Data.DataTable GetCompanyNoBoxData(string COMPANY_NO_BOX, out string strMsg)
-        {
-            //total
-            ConnectionMaster oMaster = new ConnectionMaster(strConnectionString, strCompanyNoBoxData);
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@COMPANY_NO_BOX", COMPANY_NO_BOX));
-            oMaster.ExcuteQuery(4, out strMsg);
-            return oMaster.dtExcuted;
         }
         #endregion
 

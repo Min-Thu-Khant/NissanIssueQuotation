@@ -101,7 +101,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
 
             //utility
             uIUtility = new UIUtility(dgvList, null, null, null, dummyColumns);
-            uIUtility.DummyTable();// add dummy table to merge columns
+            uIUtility.DummyTable(55);// add dummy table to merge columns
             AlignBottomHeaders();
             this.pTitle.BackColor = Properties.Settings.Default.JimugoBgColor;
             this.lblMenu.ForeColor = Properties.Settings.Default.jimugoForeColor;

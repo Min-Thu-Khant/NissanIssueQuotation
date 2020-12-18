@@ -882,12 +882,5 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
         }
         #endregion
 
-        private void DgvList_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.ColumnIndex == dgvList.Columns["colBILL_TRANSFER_FEE"].Index || e.ColumnIndex == dgvList.Columns["colBILL_EXPENSES"].Index)
-            {
-                dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = Convert.ToDecimal(dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString()).ToString("N0");
-            }
-        }
     }
 }

@@ -61,7 +61,7 @@
             this.trvMenu.Location = new System.Drawing.Point(9, 116);
             this.trvMenu.Name = "trvMenu";
             this.trvMenu.Size = new System.Drawing.Size(486, 383);
-            this.trvMenu.TabIndex = 9;
+            this.trvMenu.TabIndex = 14;
             this.trvMenu.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.TrvMenu_NodeMouseDoubleClick);
             // 
             // txtID
@@ -70,7 +70,7 @@
             // 
             // 
             this.txtID.CustomButton.Image = null;
-            this.txtID.CustomButton.Location = new System.Drawing.Point(72, 2);
+            this.txtID.CustomButton.Location = new System.Drawing.Point(42, 2);
             this.txtID.CustomButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtID.CustomButton.Name = "";
             this.txtID.CustomButton.Size = new System.Drawing.Size(25, 25);
@@ -104,7 +104,7 @@
             // 
             // 
             this.txtPwd.CustomButton.Image = null;
-            this.txtPwd.CustomButton.Location = new System.Drawing.Point(172, 2);
+            this.txtPwd.CustomButton.Location = new System.Drawing.Point(122, 2);
             this.txtPwd.CustomButton.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.txtPwd.CustomButton.Name = "";
             this.txtPwd.CustomButton.Size = new System.Drawing.Size(25, 25);

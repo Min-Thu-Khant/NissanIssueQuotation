@@ -161,8 +161,8 @@ namespace DAL_AmigoProcess.DAL
                                         WHEN 1 THEN N'当月' 
                                         WHEN 2 THEN N'翌々月月頭' 
                                         END) BILL_DEPOSIT_RULES,
-                                        CONVERT(VARCHAR, CUSTOMER_MASTER_VIEW.BILL_TRANSFER_FEE) BILL_TRANSFER_FEE,
-                                        CONVERT(VARCHAR, CUSTOMER_MASTER_VIEW.BILL_EXPENSES) BILL_EXPENSES,
+                                        CONVERT(VARCHAR,FORMAT( CUSTOMER_MASTER_VIEW.BILL_TRANSFER_FEE, '#,0')) BILL_TRANSFER_FEE,
+										CONVERT(VARCHAR,FORMAT( CUSTOMER_MASTER_VIEW.BILL_EXPENSES, '#,0')) BILL_EXPENSES,
                                         CUSTOMER_MASTER_VIEW.PLAN_AMIGO_CAI,
                                         CUSTOMER_MASTER_VIEW.PLAN_AMIGO_BIZ,
                                         CUSTOMER_MASTER_VIEW.BOX_SIZE,

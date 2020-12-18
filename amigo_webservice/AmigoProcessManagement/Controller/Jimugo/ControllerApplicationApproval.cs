@@ -454,7 +454,7 @@ namespace AmigoProcessManagement.Controller
                 CUSTOMER_MASTER DAL_CUSTOMER_MASTER = new CUSTOMER_MASTER(con);
                 BOL_CUSTOMER_MASTER oCUSTOMER_MASTER = new BOL_CUSTOMER_MASTER();
                 oCUSTOMER_MASTER.COMPANY_NO_BOX = COMPANY_NO_BOX;
-                oCUSTOMER_MASTER.REQ_SEQ = REQ_TYPE;
+                oCUSTOMER_MASTER.REQ_SEQ = oREQUEST_DETAIL.REQ_SEQ;
                 DAL_CUSTOMER_MASTER.Delete(oCUSTOMER_MASTER, out msg);
                 
                 if (string.IsNullOrEmpty(msg))

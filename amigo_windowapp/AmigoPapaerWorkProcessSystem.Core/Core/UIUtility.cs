@@ -718,7 +718,7 @@ namespace AmigoPaperWorkProcessSystem.Core
 
             if (checkSelectedRow())
             {
-
+                ResetReadOnlyProperty();
                 for (int i = 0; i < dgvList.Rows.Count; i++)
                 {
 
@@ -729,8 +729,9 @@ namespace AmigoPaperWorkProcessSystem.Core
                         {
                             string currentMK = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK"].Value.ToString().Trim();
                             string operation_origin = String.IsNullOrEmpty(dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim()) ? null : dgvList.Rows[i].Cells["colMK_ORIGIN"].Value.ToString().Trim();
-                           
-                            switch (operation_origin)
+
+                            string OPERATION = string.IsNullOrEmpty(operation_origin) ? currentMK : operation_origin;
+                            switch (OPERATION)
                             {
                                 case "M":
 
@@ -739,6 +740,9 @@ namespace AmigoPaperWorkProcessSystem.Core
 
                                     //replace modified datarow with original datarow
                                     dtList.Rows[i].ItemArray = dtOrigin.Rows[index].ItemArray;
+
+                                    //temp value to trigger value change
+                                    dgvList.Rows[i].Cells["colMK"].Value = "temp";
 
                                     break;
                                 default:
@@ -753,13 +757,12 @@ namespace AmigoPaperWorkProcessSystem.Core
                             {
                                 dgvList.Rows[i].Cells["colMK"].Value = " ";
                             }
-                            ResetReadOnlyProperty();
+                           
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
 
                         }
-
                     }
                     try
                     {
@@ -768,7 +771,7 @@ namespace AmigoPaperWorkProcessSystem.Core
                     catch (Exception)
                     {
                     }
-
+                   
                 }
             }
             else

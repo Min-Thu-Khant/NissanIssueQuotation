@@ -257,6 +257,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // cboLimit
             // 
             this.cboLimit.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLimit.Enabled = false;
             this.cboLimit.FormattingEnabled = true;
             this.cboLimit.Location = new System.Drawing.Point(94, 186);
             this.cboLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -328,7 +329,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             // No
             // 
             this.No.DataPropertyName = "No";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
             this.No.DefaultCellStyle = dataGridViewCellStyle1;
             this.No.Frozen = true;
             this.No.HeaderText = "No";
@@ -376,6 +377,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.Jimugo
             this.UPDATE_CONTENT.Name = "UPDATE_CONTENT";
             this.UPDATE_CONTENT.ReadOnly = true;
             this.UPDATE_CONTENT.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.UPDATE_CONTENT.Width = 150;
             // 
             // DIFF
             // 

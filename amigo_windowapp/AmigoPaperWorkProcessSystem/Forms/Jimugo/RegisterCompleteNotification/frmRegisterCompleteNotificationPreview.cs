@@ -29,11 +29,12 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         string REQ_SEQ = "";
         string QUOTATION_DATE = "";
         string ORDER_DATE = "";
-        string COMPLETION_NOTIFICATION_DATE = "";
+        //string COMPLETION_NOTIFICATION_DATE = "";
         string COMPANY_NAME = "";
         string EMAIL_ADDRESS = "";
         string EDI_ACCOUNT = "";
         string FILENAME = "";
+
         #endregion
 
         #region Constructors
@@ -65,6 +66,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
         #region Properties
         public DialogResult Dialog { get; set; }
         public string UPDATED_AT { get; set; }
+        public string COMPLETION_NOTIFICATION_DATE { get; set; }
         public string UPDATED_AT_RAW { get; set; }
         #endregion
 
@@ -161,6 +163,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                         mailItem.Display(false);
                         #endregion
                         Dialog = DialogResult.OK;
+                        this.COMPLETION_NOTIFICATION_DATE = result.Rows[0]["COMPLETE_NOTIFICATION_DATE"].ToString();
                         this.UPDATED_AT = result.Rows[0]["UPDATED_AT"].ToString();
                         this.UPDATED_AT_RAW = result.Rows[0]["UPDATED_AT_RAW"].ToString();
                     }

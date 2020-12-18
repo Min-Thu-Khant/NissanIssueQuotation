@@ -139,15 +139,21 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                     {
                         return_message = result.Rows[0]["Message"].ToString();
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
                     }
                     string FILENAME = "";
+                    string status = "";
                     if (string.IsNullOrEmpty(return_message))
                     {
                         FILENAME = result.Rows[0]["FILENAME"].ToString();
-                        MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB001, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        status = result.Rows[0]["MessageCode"].ToString();
+                        if (status == "2")
+                        {
+                            MetroMessageBox.Show(this, "\n" + JimugoMessages.I000WB001, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        }
                         DataTable dt = DTParameter(txtCompanyNoBox.Text, REQ_SEQ, QUOTATION_DATE, ORDER_DATE, COMPLETION_NOTIFICATION_DATE, COMPANY_NAME, txtDestinationMailAddress.Text, txtEDIAccount.Text, FILENAME);
 
                         #region CallPreviewScreen
@@ -171,7 +177,7 @@ namespace AmigoPaperWorkProcessSystem.Forms.RegisterCompleteNotification
                             this.Show();
                             UPDATED_AT = frm.UPDATED_AT;
                             UPDATED_AT_RAW = frm.UPDATED_AT_RAW;
-                            COMPLETION_NOTIFICATION_DATE = txtRegisterCompleteNotificationDate.Text.Trim();
+                            COMPLETION_NOTIFICATION_DATE = frm.COMPLETION_NOTIFICATION_DATE;
                             Dialog = DialogResult.OK;
                             this.BringToFront();
                         }

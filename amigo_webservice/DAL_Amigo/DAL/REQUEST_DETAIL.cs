@@ -227,12 +227,12 @@ namespace DAL_AmigoProcess.DAL
                                                 AND [UPDATED_AT] @UPDATED_AT";
         string strGetSubProgramLists = @"SELECT PROGRAM_ID, PROGRAM_NAME FROM MENU_MASTER WHERE PROGRAM_ID IN ('CTS030', 'CTS040', 'CTS050', 'CTS070', 'CTS060');";
 
-        string strGetClientCertificateDiff = @"SELECT OP_CLIENT-CLIENT_ISNULL(CLIENT_CERTIFICATE.CLIENT_CERTIFICATE_COUNT,0) AS CLIENT_CERTIFICATE_DIFF
+        string strGetClientCertificateDiff = @"SELECT OP_CLIENT-ISNULL(CLIENT_CERTIFICATE.CLIENT_CERTIFICATE_COUNT,0) AS CLIENT_CERTIFICATE_DIFF
                                                     FROM  REQUEST_DETAIL
                                                 LEFT JOIN 
-                                                    (select count(CLIENT_CERTIFICATE.COMPANY_NO_BOX) as CLIENT_CERTIFICATE_COUNT,COMPANY_NO_BOX
-                                                        from CLIENT_CERTIFICATE
-                                                        where CLIENT_CERTIFICATE.FY=@FY
+                                                    (SELECT COUNT(CLIENT_CERTIFICATE.COMPANY_NO_BOX) AS CLIENT_CERTIFICATE_COUNT,COMPANY_NO_BOX
+                                                        FROM CLIENT_CERTIFICATE
+                                                        WHERE CLIENT_CERTIFICATE.FY=@FY
                                                         GROUP BY COMPANY_NO_BOX
                                                         ) AS CLIENT_CERTIFICATE
                                                 ON REQUEST_DETAIL.COMPANY_NO_BOX = CLIENT_CERTIFICATE.COMPANY_NO_BOX
@@ -259,7 +259,7 @@ namespace DAL_AmigoProcess.DAL
                                         WHEN 3 THEN N'ﾄﾖﾀﾃﾞｼﾞﾀﾙｸﾙｰｽﾞ' 
                                         WHEN null THEN N'無し' 
                                         END) CONTRACT_CSP,
-                                (case when REQUEST_DETAIL.OP_CLIENT= '0' then N'無し'  else REQUEST_DETAIL.OP_CLIENT end) OP_CLIENT,
+                                (case when REQUEST_DETAIL.OP_CLIENT= '0' then N'無し'  else CONVERT(varchar(10),REQUEST_DETAIL.OP_CLIENT) end) OP_CLIENT,
                                 OP_BASIC_SERVICE+OP_ADD_SERVICE AS OP_SERVICE,
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.sftp' AND CONFIG_SEQ= 1) as A,
                                 (select STRING_VALUE1 from CONFIG_TBL where PROGRAM_ID='SYSTEM' AND CONFIG_KEY='amigo.https' AND CONFIG_SEQ= 1) as B,

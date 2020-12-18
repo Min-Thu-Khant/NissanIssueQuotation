@@ -280,6 +280,7 @@ namespace AmigoProcessManagement.Controller
             try
             {
                 string strMsg = "";
+                bool mailSuccess = false;
                 ArrayList company_no_boxs = new ArrayList();
 
                 DataTable dgvList = Utility.Utility_Component.JsonToDt(ClientCertificateList);
@@ -290,23 +291,25 @@ namespace AmigoProcessManagement.Controller
                 {
                     DataRow dr = dgvList.Rows[i];
                     string l_COMPANY_NO_BOX = dr["COMPANY_NO_BOX"].ToString();
-                    if (l_SentMail.Where(x => x == l_COMPANY_NO_BOX).ToList().Count <= 0 && !string.IsNullOrEmpty(dgvList.Rows[i]["DISTRIBUTION_DATE"].ToString()))
+                   
+                    var certificate_list = dgvList.AsEnumerable().Where(row => row.Field<string>("COMPANY_NO_BOX") == l_COMPANY_NO_BOX).Select(s => s.Field<string>("CLIENT_CERTIFICATE_NO")).ToArray();
+
+
+                    BOL_CLIENT_CERTIFICATE oCLIENT_CERTIFICATE = new BOL_CLIENT_CERTIFICATE();
+
+                    oCLIENT_CERTIFICATE = Cast_CLIENT_CERTIFICATE(dr);  //check method
+                    BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
+                    oREQUEST_DETAIL = Cast_REQUEST_DETAIL(dr);
+
+
+                    CLIENT_CERTIFICATE DAL_CLIENT_CERTIFICATE = new CLIENT_CERTIFICATE(con);
+
+                    if (l_SentMail.Where(x => x == l_COMPANY_NO_BOX).ToList().Count <= 0)
                     {
+
                         l_SentMail.Add(l_COMPANY_NO_BOX);
 
-                        BOL_CLIENT_CERTIFICATE oCLIENT_CERTIFICATE = new BOL_CLIENT_CERTIFICATE();
-
-                        oCLIENT_CERTIFICATE = Cast_CLIENT_CERTIFICATE(dr);  //check method
-                        BOL_REQUEST_DETAIL oREQUEST_DETAIL = new BOL_REQUEST_DETAIL();
-                        oREQUEST_DETAIL = Cast_REQUEST_DETAIL(dr);
-
-
-                        CLIENT_CERTIFICATE DAL_CLIENT_CERTIFICATE = new CLIENT_CERTIFICATE(con);
-
-                        DataTable dt = DAL_CLIENT_CERTIFICATE.GetCompanyNoBoxData(oCLIENT_CERTIFICATE.COMPANY_NO_BOX, out strMsg);
-
-
-                        bool mailSuccess = PrepareAndSendMail(dt, oCLIENT_CERTIFICATE.COMPANY_NO_BOX, oREQUEST_DETAIL.COMPANY_NAME, oCLIENT_CERTIFICATE.CLIENT_CERTIFICATE_NO, oREQUEST_DETAIL.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, oCLIENT_CERTIFICATE.EXPIRATION_DATE, oCLIENT_CERTIFICATE.PASSWORD, oCLIENT_CERTIFICATE.FY);
+                        mailSuccess = PrepareAndSendMail(certificate_list, oREQUEST_DETAIL.COMPANY_NAME, oREQUEST_DETAIL.CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, oCLIENT_CERTIFICATE.EXPIRATION_DATE, oCLIENT_CERTIFICATE.PASSWORD, oCLIENT_CERTIFICATE.FY);
 
                         if (mailSuccess)
                         {
@@ -316,7 +319,8 @@ namespace AmigoProcessManagement.Controller
                             if (String.IsNullOrEmpty(strMsg))
                             {
                                 //success
-                                ResponseUtility.ReturnMailSuccessMessage(dr,UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
+                                dr["DISTRIBUTION_DATE"] = UPDATED_AT_DATETIME;
+                                ResponseUtility.ReturnMailSuccessMessage(dr, UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
                             }
                             else
                             {
@@ -330,6 +334,24 @@ namespace AmigoProcessManagement.Controller
                             ResponseUtility.MailSendingFail(dr);
                         }
                     }
+                    else
+                    {
+                        //update email sent date
+                        DAL_CLIENT_CERTIFICATE.EmailButtonUpdate(oCLIENT_CERTIFICATE, UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER, out strMsg);
+
+                        if (String.IsNullOrEmpty(strMsg))
+                        {
+                            //success
+                            dr["DISTRIBUTION_DATE"] = UPDATED_AT_DATETIME;
+                            ResponseUtility.ReturnMailSuccessMessage(dr, UPDATED_AT_DATETIME, CURRENT_DATETIME, CURRENT_USER);
+                        }
+                        else
+                        {
+                            //already use in another process
+                            ResponseUtility.ReturnFailMessage(dr);
+                        }
+
+                    }
                 }
 
                 response.Data = Utility.Utility_Component.DtToJSon(dgvList, "Mail status"); ;
@@ -339,13 +361,13 @@ namespace AmigoProcessManagement.Controller
             }
             catch (Exception ex)
             {
-               return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
+                return ResponseUtility.GetUnexpectedResponse(response, timer, ex);
             }
         }
         #endregion
 
         #region PrepareAndSendMail
-        private bool PrepareAndSendMail(DataTable companyNoBoxData, string COMPANY_NO_BOX, string COMPANY_NAME, string CLIENT_CERTIFICATE_NO, string CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, DateTime? EXPIRATION_DATE, string PASSWORD, int FY)
+        private bool PrepareAndSendMail(string[] certificateNo, string COMPANY_NAME, string CLIENT_CERTIFICATE_SEND_EMAIL_ADDRESS, DateTime? EXPIRATION_DATE, string PASSWORD, int FY)
         {
             //get config object for CTS010
             BOL_CONFIG config = new BOL_CONFIG("CTS080", con);
@@ -360,18 +382,18 @@ namespace AmigoProcessManagement.Controller
             };
 
             List<string> CERTIFICATES = new List<string>();
-
-            foreach (DataRow item in companyNoBoxData.Rows)
+            string CLIENT_CERTIFICATE_NO = "";
+            foreach (string item in certificateNo)
             {
                 if (string.IsNullOrEmpty(CLIENT_CERTIFICATE_NO))
                 {
-                    CLIENT_CERTIFICATE_NO += item["CLIENT_CERTIFICATE_NO"].ToString();
+                    CLIENT_CERTIFICATE_NO += item;
                 }
                 else
                 {
-                    CLIENT_CERTIFICATE_NO += "\n" + item["CLIENT_CERTIFICATE_NO"].ToString();
+                    CLIENT_CERTIFICATE_NO += "\n" + item;
                 }
-                CERTIFICATES.Add(item["CLIENT_CERTIFICATE_NO"].ToString());
+                CERTIFICATES.Add(item);
             }
 
             Dictionary<string, string> map = new Dictionary<string, string>() {

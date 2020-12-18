@@ -19,7 +19,8 @@ namespace DAL_AmigoProcess.DAL
                                   from REQ_ADDRESS
                                   where COMPANY_NO_BOX= @COMPANY_NO_BOX
                                   AND REQ_SEQ= @REQ_SEQ
-                                  AND TYPE=3";
+                                  AND TYPE=3
+                                  ORDER BY SERVICE_CONTACT_NAME,SERVICE_MAIL_ADDRESS,SERVICE_PHONE_NUMBER ASC";
 
         string strGetPDFData2 = @"select MAIL_ADDRESS AS ERROR_MAIL_ADDRESS
                                   from REQ_ADDRESS

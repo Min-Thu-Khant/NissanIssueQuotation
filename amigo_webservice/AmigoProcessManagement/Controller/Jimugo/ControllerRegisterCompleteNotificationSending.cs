@@ -126,34 +126,50 @@ namespace AmigoProcessManagement.Controller
                 //get config object for CTS060
                 BOL_CONFIG config = new BOL_CONFIG("SYSTEM", con);
                 int FY = config.getIntValue("client.certificate.FY");
-
+                status = 1;
                 int clientCertificateDiff = DAL_REQUEST_DETAIL.GetClientCertificateDiff(COMPANY_NO_BOX, REQ_SEQ, FY.ToString(), out strMessage);
 
-                if (clientCertificateDiff != 0)
+                using (TransactionScope dbTxn = new TransactionScope())
                 {
-                    #region SearchClientCertificateNo
-                    string clientCertificateNo = DAL_CLIENT_CERTIFICATE.GetClientCertificateNo(FY.ToString(), out strMessage);
-                    if (!string.IsNullOrEmpty(clientCertificateNo))
+                    for (int i = 1; i <= clientCertificateDiff; i++)
                     {
-                        #region UpdateWithClientCertificateNo
-                        status = UpdateWithClientCertificateNO(clientCertificateNo, COMPANY_NO_BOX, CURRENT_USER, strMessage);
+                        #region SearchClientCertificateNo
+                        string clientCertificateNo = DAL_CLIENT_CERTIFICATE.GetClientCertificateNo(FY.ToString(), out strMessage);
+                        if (!string.IsNullOrEmpty(clientCertificateNo))
+                        {
+                            #region UpdateWithClientCertificateNo
+                            status = UpdateWithClientCertificateNO(clientCertificateNo, COMPANY_NO_BOX, CURRENT_USER, strMessage);
+                            #endregion
+                            if (status == 0)
+                            {
+                                dbTxn.Dispose();
+                                response.Status = 0;
+                                response.Message = Utility.Messages.Jimugo.E000WB005;
+                                dr["Message"] = Utility.Messages.Jimugo.E000WB005;
+                                messagecode.Rows.Add(dr);
+                                response.Data = Utility_Component.DtToJSon(messagecode, "Message");
+                                return response;
+                            }
+
+                        }
+                        else
+                        {
+                            response.Status = 0;
+                            response.Message = Utility.Messages.Jimugo.E000WB004;
+                            dr["Message"] = Utility.Messages.Jimugo.E000WB004;
+                            messagecode.Rows.Add(dr);
+                            response.Data = Utility_Component.DtToJSon(messagecode, "Message");
+                            return response;
+                        }
                         #endregion
                     }
-                    else
+                    if (status == 2)
                     {
-                        response.Status = 0;
-                        response.Message = Utility.Messages.Jimugo.E000WB004;
-                        dr["Message"] = Utility.Messages.Jimugo.E000WB004;
-                        messagecode.Rows.Add(dr);
-                        response.Data = Utility_Component.DtToJSon(messagecode, "Message");
-                        return response;
+                        dbTxn.Complete();
                     }
-                    #endregion
                 }
-                status = 1;
 
-
-                if (status == 1) 
+                if (status == 1 || status == 2) 
                 {
                     #region GetPDFData
 
@@ -167,7 +183,7 @@ namespace AmigoProcessManagement.Controller
 
                     string saveFileName = COMPANY_NO_BOX + "-" + "3" + "-" + req_seq + "_完了通知書(" + EDI_ACCOUNT.Replace("@","") + ")_" + COMPANY_NAME + "様_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".pdf";
 
-                    response = getPDF(COMPANY_NO_BOX,COMPANY_NAME, dtPDFData, dtPDFData1, dtPDFData2, saveFileName);
+                    response = getPDF(COMPANY_NO_BOX,COMPANY_NAME, dtPDFData, dtPDFData1, dtPDFData2, saveFileName, status);
 
                     #endregion
                 }
@@ -195,16 +211,12 @@ namespace AmigoProcessManagement.Controller
         #region ModifyWithClientCertificateNo
         private int UpdateWithClientCertificateNO(string CLIENT_CERTIFICATE_NO, string COMPANY_NO_BOX, string LoginID,string strMsg)
         {
-            int status;
-            //string strMsg = "";
-            using (TransactionScope dbTxn = new TransactionScope())
-            {
+                int status;
                 DAL_CLIENT_CERTIFICATE.UpdateWithClientCertificateNO(CLIENT_CERTIFICATE_NO, COMPANY_NO_BOX, LoginID, out strMsg);
-                dbTxn.Complete();
                 //return message and MK value
                 if (String.IsNullOrEmpty(strMsg)) //success
                 {   
-                    status = 1;
+                    status = 2;
                     response.Message = Utility.Messages.Jimugo.I000WB001;
                 }
                 else //failed
@@ -212,7 +224,6 @@ namespace AmigoProcessManagement.Controller
                     status = 0;
                     response.Message = Utility.Messages.Jimugo.E000WB005;
                 }
-            }
             return status;
         }
         #endregion
@@ -244,7 +255,7 @@ namespace AmigoProcessManagement.Controller
                 {
 
                     #region Update RequestDetail For CompleteNotificationSending
-                    DAL_REQUEST_DETAIL.SendMailUpdate(DateTime.Now.ToString("yyyy/MM/dd"), COMPANY_NO_BOX, REQ_SEQ, CURRENT_DATETIME, CURRENT_USER, out msg);
+                    DAL_REQUEST_DETAIL.SendMailUpdate(TEMP.ToString("yyyy/MM/dd"), COMPANY_NO_BOX, REQ_SEQ, CURRENT_DATETIME, CURRENT_USER, out msg);
                     #endregion
 
                     if (String.IsNullOrEmpty(msg))
@@ -301,6 +312,7 @@ namespace AmigoProcessManagement.Controller
                                             result.Columns.Add("EmailAddressCC");
                                             result.Columns.Add("TemplateString");
                                             result.Columns.Add("SubjectString");
+                                            result.Columns.Add("COMPLETE_NOTIFICATION_DATE");
                                             result.Columns.Add("UPDATED_AT");
                                             result.Columns.Add("UPDATED_AT_RAW");
 
@@ -309,6 +321,7 @@ namespace AmigoProcessManagement.Controller
                                             dtRow["EmailAddressCC"] = emailAddressCC;
                                             dtRow["TemplateString"] = tempString;
                                             dtRow["SubjectString"] = subjectString.Replace("${companyName}", COMPANY_NAME);
+                                            dtRow["COMPLETE_NOTIFICATION_DATE"] = TEMP.ToString("yyyy/MM/dd");
                                             dtRow["UPDATED_AT"] = UPDATED_AT_DATETIME;
                                             dtRow["UPDATED_AT_RAW"] = CURRENT_DATETIME;
 
@@ -362,7 +375,7 @@ namespace AmigoProcessManagement.Controller
         #endregion
 
         #region PDF Create
-        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME,DataTable dt,DataTable dt1,DataTable dt2, String fileName)
+        public MetaResponse getPDF(string COMPANY_NO_BOX, String COMPANY_NAME,DataTable dt,DataTable dt1,DataTable dt2, String fileName, int status)
         {
             #region Declare
             int i = 10;
@@ -570,7 +583,7 @@ namespace AmigoProcessManagement.Controller
             result.Columns.Add("MessageCode");
             DataRow dr = result.NewRow();
             dr["FILENAME"] = fileName;
-            dr["MessageCode"] = "I000WB001";
+            dr["MessageCode"] = status;
             result.Rows.Add(dr);
 
             response.Data = Utility.Utility_Component.DtToJSon(result, "pdfData");

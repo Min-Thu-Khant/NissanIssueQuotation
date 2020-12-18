@@ -24,4 +24,4 @@ Amigo利用申請システムでは、セキュリティの関係より２段階
    Amigoサービスデスク　：　amigo_servicedesk@ncs-net.co.jp
 
 日産車体コンピュータサービス株式会社
-Amigo営業担当：${updUserId}
+Amigo営業担当

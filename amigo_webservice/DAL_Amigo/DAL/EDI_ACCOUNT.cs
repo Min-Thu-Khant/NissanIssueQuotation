@@ -135,10 +135,10 @@ namespace DAL_AmigoProcess.DAL
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@MAKER10", oEDI_ACCOUNT.MAKER10));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@ADM_USER_ID", oEDI_ACCOUNT.ADM_USER_ID));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@ADM_PASSWORD", oEDI_ACCOUNT.ADM_PASSWORD));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ADM_PASSWORD_HASHED", oEDI_ACCOUNT.ADM_PASSWORD_HASHED));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ADM_PASSWORD_HASHED", string.IsNullOrEmpty(oEDI_ACCOUNT.ADM_PASSWORD) ? (object)DBNull.Value : oEDI_ACCOUNT.ADM_PASSWORD_HASHED));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@ATDL_USER_ID", oEDI_ACCOUNT.ATDL_USER_ID));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@ATDL_PASSWORD", oEDI_ACCOUNT.ATDL_PASSWORD));
-            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ATDL_PASSWORD_HASHED", oEDI_ACCOUNT.ATDL_PASSWORD_HASHED));
+            oMaster.crudCommand.Parameters.Add(new SqlParameter("@ATDL_PASSWORD_HASHED", string.IsNullOrEmpty(oEDI_ACCOUNT.ATDL_PASSWORD) ? (object)DBNull.Value : oEDI_ACCOUNT.ATDL_PASSWORD_HASHED));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SSHGW_USER_ID", oEDI_ACCOUNT.SSHGW_USER_ID));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@SSHGW_PUBLIC_KEY", oEDI_ACCOUNT.SSHGW_PUBLIC_KEY));
             oMaster.crudCommand.Parameters.Add(new SqlParameter("@CURRENT_TIME", CURRENT_TIME));

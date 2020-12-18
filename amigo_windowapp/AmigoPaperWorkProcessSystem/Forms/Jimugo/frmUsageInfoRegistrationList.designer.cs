@@ -267,7 +267,7 @@
             this.lblClear.ForeColor = System.Drawing.SystemColors.Highlight;
             this.lblClear.Location = new System.Drawing.Point(275, 166);
             this.lblClear.Name = "lblClear";
-            this.lblClear.Size = new System.Drawing.Size(82, 14);
+            this.lblClear.Size = new System.Drawing.Size(104, 18);
             this.lblClear.TabIndex = 32;
             this.lblClear.Text = "検索条件のクリア";
             this.lblClear.Click += new System.EventHandler(this.LblClear_Click);
@@ -279,7 +279,7 @@
             this.cboLimit.Location = new System.Drawing.Point(99, 160);
             this.cboLimit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboLimit.Name = "cboLimit";
-            this.cboLimit.Size = new System.Drawing.Size(164, 22);
+            this.cboLimit.Size = new System.Drawing.Size(164, 26);
             this.cboLimit.TabIndex = 31;
             // 
             // lblEDIAccount
@@ -298,7 +298,7 @@
             this.txtEDIAccount.Location = new System.Drawing.Point(625, 118);
             this.txtEDIAccount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtEDIAccount.Name = "txtEDIAccount";
-            this.txtEDIAccount.Size = new System.Drawing.Size(160, 21);
+            this.txtEDIAccount.Size = new System.Drawing.Size(160, 25);
             this.txtEDIAccount.TabIndex = 28;
             // 
             // lblCompanyName
@@ -317,7 +317,7 @@
             this.txtCompanyName.Location = new System.Drawing.Point(357, 118);
             this.txtCompanyName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(170, 21);
+            this.txtCompanyName.Size = new System.Drawing.Size(170, 25);
             this.txtCompanyName.TabIndex = 26;
             // 
             // lblCompanyNoBox
@@ -336,7 +336,7 @@
             this.txtCompanyNoBox.Location = new System.Drawing.Point(134, 118);
             this.txtCompanyNoBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtCompanyNoBox.Name = "txtCompanyNoBox";
-            this.txtCompanyNoBox.Size = new System.Drawing.Size(129, 21);
+            this.txtCompanyNoBox.Size = new System.Drawing.Size(129, 25);
             this.txtCompanyNoBox.TabIndex = 24;
             // 
             // dgvList
@@ -428,7 +428,7 @@
             this.lblTotalRecords.Font = new System.Drawing.Font("Meiryo UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTotalRecords.Location = new System.Drawing.Point(3, 12);
             this.lblTotalRecords.Name = "lblTotalRecords";
-            this.lblTotalRecords.Size = new System.Drawing.Size(0, 14);
+            this.lblTotalRecords.Size = new System.Drawing.Size(0, 18);
             this.lblTotalRecords.TabIndex = 36;
             // 
             // btnCheck
@@ -465,7 +465,7 @@
             this.lblTotalPages.AutoSize = true;
             this.lblTotalPages.Location = new System.Drawing.Point(1066, 11);
             this.lblTotalPages.Name = "lblTotalPages";
-            this.lblTotalPages.Size = new System.Drawing.Size(14, 14);
+            this.lblTotalPages.Size = new System.Drawing.Size(17, 18);
             this.lblTotalPages.TabIndex = 31;
             this.lblTotalPages.Text = "0";
             // 
@@ -475,7 +475,7 @@
             this.lblcurrentPage.AutoSize = true;
             this.lblcurrentPage.Location = new System.Drawing.Point(962, 11);
             this.lblcurrentPage.Name = "lblcurrentPage";
-            this.lblcurrentPage.Size = new System.Drawing.Size(14, 14);
+            this.lblcurrentPage.Size = new System.Drawing.Size(17, 18);
             this.lblcurrentPage.TabIndex = 30;
             this.lblcurrentPage.Text = "0";
             // 
@@ -499,7 +499,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(1018, 11);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(19, 14);
+            this.label6.Size = new System.Drawing.Size(24, 18);
             this.label6.TabIndex = 25;
             this.label6.Text = "Of";
             // 
@@ -549,7 +549,7 @@
             this.displayItemLabel1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.displayItemLabel1.LabelText = " 表示件数";
             this.displayItemLabel1.Location = new System.Drawing.Point(23, 160);
-            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4);
+            this.displayItemLabel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.displayItemLabel1.Name = "displayItemLabel1";
             this.displayItemLabel1.Size = new System.Drawing.Size(79, 22);
             this.displayItemLabel1.TabIndex = 35;
@@ -896,7 +896,7 @@
             // colUPDATED_BY
             // 
             this.colUPDATED_BY.DataPropertyName = "UPDATED_BY";
-            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle34.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             this.colUPDATED_BY.DefaultCellStyle = dataGridViewCellStyle34;
             this.colUPDATED_BY.HeaderText = "更新ユーザーID";
             this.colUPDATED_BY.Name = "colUPDATED_BY";
@@ -943,7 +943,7 @@
             // 
             // frmUsageInfoRegistrationList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 601);
             this.Controls.Add(this.panel1);
